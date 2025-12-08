@@ -1,0 +1,220 @@
+
+
+   /* Footer styling */
+.footer-section {
+    background: #fff;
+    color: #000;
+}
+
+.footer-logo {
+    height: 64px;
+    width: 314px;
+}
+
+.footer-heading h2 {
+    font-size: 44px;
+    line-height: 58px;
+    font-weight: 600;
+    color: #131313;
+    font-family: "Montserrat", sans-serif;
+    width: 590px;
+}
+
+.top-footer,
+.middle-footer {
+    margin-bottom: 100px;
+    justify-content: space-between;
+}
+
+.contact-section {
+    background-color: #F5F5F5;
+    padding: 3rem 5rem !important;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    margin-bottom: 1rem;
+        margin-top: 5rem;
+
+}
+
+/* Custom styles to achieve the specific line-input form look */
+.form-control-custom {
+    /* Override Bootstrap defaults for the line-style input */
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.25rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: #1f2937;
+    background-color: transparent;
+    /* Crucial: Makes the input area invisible */
+    border: none;
+    /* Remove all default borders */
+    border-bottom: 1px solid #c0c0c0;
+    /* The required subtle bottom line */
+    border-radius: 0;
+    /* No radius on this line-style input */
+    transition: border-color 0.15s ease-in-out;
+    height: auto;
+}
+
+.form-control-custom:focus {
+    color: #1f2937;
+    background-color: transparent;
+    border-color: #4b5563;
+    /* Line darkens on focus */
+    outline: 0;
+    box-shadow: none;
+}
+
+/* PLACEHOLDER STYLING */
+.form-control-custom::placeholder {
+    color: #343131;
+    /* Light gray placeholder text */
+    opacity: 1;
+}
+
+textarea.form-control-custom {
+    min-height: 50px;
+    resize: vertical;
+}
+
+.form-label {
+    /* Custom label styling to be subtle and sit above the line input */
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: #4b5563;
+    /* Darker gray for label */
+    display: block;
+    text-align: left;
+    padding-left: 0.25rem;
+}
+
+/* Specific styling for the buttons */
+button.btn-verify-custom {
+    background-color: #4C4C4C;
+    /* Dark gray background for Verify button */
+    color: white;
+    padding: 0 3rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    height: 40px;
+    border-radius: 0.5rem;
+}
+
+button.btn-verify-custom:hover {
+    background-color: #000000;
+    color: white;
+
+}
+
+button.btn-submit {
+    background-color: #001654;
+    /* Deep blue for Get in touch button */
+    color: white;
+    padding: 0.5rem 2rem;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: background-color 0.2s;
+}
+
+button.btn-submit:hover {
+    background-color: #001654ac;
+    color: white;
+
+}
+
+
+.section-headings  {
+   margin-top: 3rem;
+}
+.section-headings h2 {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.section-headings p {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: rgba(132, 132, 132, 1);
+}
+.company-info div{
+    width: 80%;
+}
+
+.footer h6, li a {
+   font-size: 16px;
+}
+.footer ul li a:hover {
+    font-weight: 600;
+    color: #E41346 !important;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1367px) {
+
+
+    .quick-links h6,
+    ul li a,
+    p {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 350px) and (max-width: 600px) {
+   .quick-links h6, li a {
+    font-size: 12px;
+}
+
+.company-info div {
+    width: 100%;
+}
+
+
+    .features-slider-wrapper {
+        background: #F5F5F5;
+        padding: 1rem 1.5rem !important;
+    }
+
+    .tab-link {
+
+        padding: 7px 10px !important;
+        font-size: 14px !important;
+    }
+
+    .text-content {
+        flex: 1;
+        min-width: 100%;
+        width: 100%;
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    button.btn-verify-custom {
+        padding: 0 1.5rem;
+        height: 30px;
+    }
+
+    .small,
+    small {
+        font-size: 1rem;
+    }
+
+    .partner-label {
+
+        margin-right: 10px !important;
+        min-width: 155px !important;
+        font-size: 1rem !important;
+        padding: 1.2rem 1rem !important;
+                text-align: left;
+
+    }
+
+    .contact-swiper img {
+        height: 30px;
+    }
+    .partner-section {
+    padding: 2rem 0rem 1rem 0rem !important;
+}
+}
