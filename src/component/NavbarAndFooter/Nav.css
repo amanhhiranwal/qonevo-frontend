@@ -1,0 +1,110 @@
+.navbar {
+  height: 80px;
+}
+
+.navbar-brand img {
+  height: 29px;
+  width: auto;
+}
+
+.navbar .nav-link {
+  font-weight: 400;
+  color: #131313 !important;
+  font-family: "Inter", sans-serif;
+  transition: color 0.3s, font-weight 0.3s;
+}
+
+.navbar .nav-link:hover {
+  font-weight: 600;
+  color: #e41346 !important;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/* Grey out other nav items on hover */
+.navbar-nav:hover .nav-link:not(:hover) {
+  color: rgba(128, 128, 128, 0.5) !important;
+}
+
+/* ==== Mega Menu ==== */
+.mega-menu-content {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  background: #f8f9fa;
+  border-top: 1px solid #e5e5e5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.35s ease-in-out;
+}
+
+.mega-menu-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  background: #f5f5f5;
+}
+#navbarContent{
+    background: #f5f5f5;
+}
+.megamenu h5 {
+  font-size: 28px;
+  color: #131313;
+}
+
+.menu-card-head {
+  width: 152px !important;
+  height: 156px;
+  background: #ffffff;
+  margin: 1rem;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-card img {
+  width: 72px;
+  transition: transform 0.3s ease;
+}
+
+.menu-card-head:hover img {
+  transform: scale(1.08);
+}
+
+.menu-card p {
+  font-size: 14px;
+  line-height: 22px;
+  color: #4c4c4c;
+}
+
+.btn-submit {
+    background-color: #001654;
+    /* Deep blue for Get in touch button */
+    color: white;
+    padding: 0.5rem 2rem;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #001654ac;
+    color: white;
+
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    height: 70px;
+    padding: 1rem;
+  }
+}
