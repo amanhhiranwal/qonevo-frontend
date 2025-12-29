@@ -18,8 +18,8 @@ const HomePage = () => {
       <ProductSlider/>
       {/* {{-- Interactive Flat Panel --}} */}
 <section class="info-section">
-    <div class="container-fluid text-center p -2">
-        <div class="section-headings py -5">
+    <div class="container-fluid text-center p-2 mobile-product-card">
+        <div class="section-headings py-5">
             <h2 class="section-title">Interactive Flat Panel</h2>
             <p class="section-subtitle">
                 Smarter. Sharper. Seamlessly connected.
@@ -37,17 +37,24 @@ const HomePage = () => {
            
             <div class="col-md-6 p-3 mobile-product-card">
                 <div class="product-card text-center">
-                    <div class="section-headings py -5 product-card-head">
+                    <div class="section-headings  product-card-head">
+                        <h2 class="section-title">Advertising Display & Signage</h2>
+                        <p class="section-subtitle">
+                           Stand tall. Stay visible.
+                        </p>
+                        <a href="/" class="btn-discover">Discover</a>
+                    </div>
+                    {/* <div class="section-headings py-5 product-card-head">
                         <h2 class="section-title">Advertising Display & Signage</h2>
                         <p class="section-subtitle">
                             Stand tall. Stay visible.
                         </p>
                         <a href="/" class="btn-discover">Discover</a>
-                    </div>
+                    </div> */}
                     <img src={adsdisplay} alt="Product Showcase"
                         class="info-section-image"/>
                    
-                    <div class="marker display-marker-left">
+                    {/* <div class="marker display-marker-left">
                         <span class="marker-line"></span>
                         <span class="marker-label">A-Type</span>
                     </div>
@@ -60,7 +67,7 @@ const HomePage = () => {
                     <div class="marker display-marker-right">
                         <span class="marker-label">Floor Stand</span>
                         <span class="marker-line"></span>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
@@ -68,7 +75,7 @@ const HomePage = () => {
            
             <div class="col-md-6 p-3 mobile-product-card">
                 <div class="product-card text-center">
-                    <div class="section-headings py - 5  product-card-head">
+                    <div class="section-headings product-card-head">
                         <h2 class="section-title">Kiosk & Smart Display</h2>
                         <p class="section-subtitle">
                             Smarter self-service, reimagined.
@@ -95,8 +102,8 @@ const HomePage = () => {
 
 {/* {{-- Active LED --}} */}
 <section class="info-section">
-    <div class="container-fluid text-center p- 2">
-        <div class="section-headings py -5">
+    <div class="container-fluid text-center p-3 mobile-product-card">
+        <div class="section-headings py-5">
             <h2 class="section-title">Active LED Display</h2>
             <p class="section-subtitle">
                 Brilliance that breaks through daylight.
@@ -115,7 +122,7 @@ const HomePage = () => {
             {/* <!-- Left Card --> */}
             <div class="col-md-6 p-3 position-relative mobile-product-card">
                 <div class="product-card text-center">
-                    <div class="section-headings p y-5 product-card-head">
+                    <div class="section-headings product-card-head">
                         <h2 class="section-title">All-In-One PC & OPS</h2>
                         <p class="section-subtitle">Power that drives every display.</p>
                         <a href="/" class="btn-discover">Discover</a>
@@ -136,9 +143,9 @@ const HomePage = () => {
             </div>
 
             {/* <!-- Right Card --> */}
-            <div class="col-md-6 p-3 position-relative">
+            <div class="col-md-6 p-3 position-relative mobile-product-card">
                 <div class="product-card text-center">
-                    <div class="section-headings p y-5 product-card-head">
+                    <div class="section-headings product-card-head">
                         <h2 class="section-title">Accessories & Add-ons</h2>
                         <p class="section-subtitle">Smart pens, stands, cameras - made for perfection.</p>
                         <a href="/" class="btn-discover">Discover</a>
@@ -164,8 +171,9 @@ const HomePage = () => {
 {/* smarter portion */}
 {/* 
 <TabImageSlide/> */}
-
+<contact id="contact">
 <ContactPage/>
+</contact>
 {/* <ClientSlider/> */}
       </>
   )

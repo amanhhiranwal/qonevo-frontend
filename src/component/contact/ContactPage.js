@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../NavbarAndFooter/Navbar&Footer.css";
 import axios from "axios";
+import "./toast.css"; // 👈 Create this file
 
 const ContactPage = () => {
   const [name, setName] = useState("");
@@ -10,149 +11,162 @@ const ContactPage = () => {
   const [website, setWebsite] = useState("");
   const [message, setMessage] = useState("");
 
-  const formdata = {
-    name: name,
-    email: email,
-    phone: phone, 
-    company: company,
-    website: website,
-    message: message
-  }
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
+
+  const showToast = (message, type) => {
+    setToast({ show: true, message, type });
+
+    setTimeout(() => {
+      setToast({ show: false, message: "", type: "" });
+    }, 3000);
+  };
 
   const resetForm = () => {
-  setName("");
-  setEmail("");
-  setPhone("");
-  setCompany("");
-  setWebsite("");
-  setMessage("");
-};
+    setName("");
+    setEmail("");
+    setPhone("");
+    setCompany("");
+    setWebsite("");
+    setMessage("");
+  };
 
-
-  const handlesubit = (e) =>{
+  const handlesubit = async (e) => {
     e.preventDefault();
-    
-  console.log("Sending form data:", formdata); 
-    axios.post("https://api.example.com/contact", formdata)
-    .then((response) => {
-      console.log("Form submitted successfully:", response.data);
+
+    const payload = {
+      fullName: name,
+      email,
+      phoneNumber: phone,
+      companyName: company,
+      websiteUrl: website,
+      helpMessage: message,
+    };
+
+    try {
+      await axios.post(
+        "https://api.qonevo.co.in/api/v1/contact/create-contact",
+        payload
+      );
+
+      showToast("Message sent successfully!", "success");
       resetForm();
-  
-    })
-    .catch((error) => {
-      console.error("Error submitting form:", error);
-       resetForm();
-      
-    });
-  }
+    } catch (error) {
+      showToast("Failed to send message!", "error");
+    }
+  };
 
   return (
-    <section class="contact-section container " id="contact-section">
-      <div class="contact-wrapper  col-12 mx-auto">
-        <div class="text-center contact-text mb-4">
-          <div class="section-headings py-2 mt-2">
-            <h2 class="section-title">Let’s Connect</h2>
-            <p class="section-subtitle">
-              Have a question, project, or partnership in mind? We’re here to
-              make your next display smarter.
-            </p>
-          </div>
-        </div>
-      </div>
+    <>
+      {/* 🔔 Toast Component */}
+      {toast.show && (
+        <div className={`toast-box ${toast.type}`}>{toast.message}</div>
+      )}
 
-      <form class="row g-5" onSubmit={handlesubit}>
-        <div class="col-md-6 col-12">
-          <input
-            type="text"
-            class="form-control-custom"
-            id="fullName"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div class="col-md-6 col-12">
-          <input
-            type="email"
-            class="form-control-custom"
-            id="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div class="col-12 mt-4">
-          <div class="row gx-4 align-items-end">
-            <div class="col-10">
-              <input
-                type="tel"
-                class="form-control-custom"
-                id="phone"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-            <div class="col-2 d-flex align-items-end">
-              <button type="button" class="btn btn-verify-custom w- 100">
-                Verify
-              </button>
+      <section className="contact-section container" id="contact-section">
+        <div className="contact-wrapper col-12 mx-auto">
+          <div className="text-center contact-text mb-4">
+            <div className="section-headings py-2 mt-2">
+              <h2 className="section-title">Let’s Connect</h2>
+              <p className="section-subtitle">
+                Have a question, project, or partnership in mind? We’re here to
+                make your next display smarter.
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-12 mt-4">
-          <input
-            type="text"
-            class="form-control-custom"
-            id="company"
-            placeholder="Company Name"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
-        </div>
-        <div class="col-md-6 col-12 mt-4">
-          <input
-            type="url"
-            class="form-control-custom"
-            id="website"
-            placeholder="Website URL"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-          />
-        </div>
+        <form className="row g-5" onSubmit={handlesubit}>
+          <div className="col-md-6 col-12">
+            <input
+              type="text"
+              className="form-control-custom"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-        <div class="col-12 mt-4">
-          <textarea
-            class="form-control-custom"
-            id="message"
-            rows="1"
-            placeholder="How Can We Help?"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-        </div>
+          <div className="col-md-6 col-12">
+            <input
+              type="email"
+              className="form-control-custom"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div class="col-12 text-center pt-2 mt-5">
-          <button type="submit" class="btn btn-submit">
-            Get in touch
-          </button>
-        </div>
+          <div className="col-12 mt-4">
+            <input
+              type="tel"
+              className="form-control-custom"
+              placeholder="Phone Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
 
-        <div class="col-12 text-center pt-1 mt-4">
-          <small class="text-secondary">
-            Prefer direct contact? Reach us at{" "}
+          <div className="col-md-6 col-12 mt-4">
+            <input
+              type="text"
+              className="form-control-custom"
+              placeholder="Company Name"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+          </div>
+
+          <div className="col-md-6 col-12 mt-4">
+            <input
+              type="url"
+              className="form-control-custom"
+              placeholder="Website URL"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
+
+          <div className="col-12 mt-4">
+            <textarea
+              className="form-control-custom"
+              rows="2"
+              placeholder="How Can We Help?"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            ></textarea>
+          </div>
+
+          <div className="col-12 text-center pt-2 mt-5 gap-3 d-flex justify-content-center">
+            <button type="submit" className="btn btn-submit px-4 py-2">
+              Get in touch
+            </button>
             <a
-              class="text-secondary text-decoration-none "
-              href="mailto:info@qonevo.in"
+              href="/Qonevo Brochure.pdf"
+              download
+              className="btn btn-submit px-4 py-2"
             >
-              info@qonevo.in
+              Download Brochure
             </a>
-          </small>
-        </div>
-      </form>
-    </section>
+          </div>
+
+          <div className="col-12 text-center pt-1 mt-4">
+            <small className="text-secondary">
+              Prefer direct contact? Reach us at{" "}
+              <a
+                className="text-secondary text-decoration-none"
+                href="mailto:business@qonevo.in"
+              >
+                business@qonevo.in
+              </a>
+            </small>
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 

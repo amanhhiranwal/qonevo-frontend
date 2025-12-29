@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
 import logo from "../../Assets/logo.svg";
@@ -11,7 +10,7 @@ import ald from "../../Assets/ald.png";
 
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
-//   const menuRef = useRef(null);
+  //   const menuRef = useRef(null);
 
   const handleMouseEnter = (menu) => {
     if (window.innerWidth > 991) setOpenMenu(menu);
@@ -40,11 +39,7 @@ export default function MegaMenuNavbar() {
         <div className="container">
           {/* Logo */}
           <a className="navbar-brand" href="">
-            <img
-              src={logo}
-              alt="Logo"
-              className="navbar-logo me-2"
-            />
+            <img src={logo} alt="Logo" className="navbar-logo me-2" />
           </a>
 
           {/* Mobile Toggle */}
@@ -116,7 +111,12 @@ export default function MegaMenuNavbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <button className="btn btn-submit" id="contactButton">
+                <button
+                  className="btn btn-submit"
+                  onClick={() => {
+                    document.getElementById("contact").scrollIntoView();
+                  }}
+                >
                   Contact Us
                 </button>
               </li>

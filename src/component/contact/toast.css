@@ -1,0 +1,39 @@
+.toast-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 9999;
+  animation: fadeInOut 3s ease forwards;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toast-box.success {
+  background-color: #28a745; /* Green */
+}
+
+.toast-box.error {
+  background-color: #dc3545; /* Red */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
