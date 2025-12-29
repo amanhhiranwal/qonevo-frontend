@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
-import logo from "../../Assets/Logo.png";
+import logo from "../../Assets/logo.svg";
 import ifp from "../../Assets/ifp.png";
 import ads from "../../Assets/ads.png";
 import ksd from "../../Assets/ksd.png";
