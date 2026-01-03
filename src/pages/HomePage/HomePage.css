@@ -16,6 +16,9 @@
     padding-top: 4rem;
     margin-top: 0rem;
 }
+.meta {
+    display: none;
+}
 
 .btn-discover {
     display: inline-block;
