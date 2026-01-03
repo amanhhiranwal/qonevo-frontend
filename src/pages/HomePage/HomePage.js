@@ -20,6 +20,7 @@ const HomePage = () => {
 <section class="info-section">
     <div class="container-fluid text-center p-2 mobile-product-card">
         <div class="section-headings py-5">
+            <h1  className='meta'>Qonevo</h1>
             <h2 class="section-title">Interactive Flat Panel</h2>
             <p class="section-subtitle">
                 Smarter. Sharper. Seamlessly connected.

@@ -13,6 +13,11 @@ const ContactPage = () => {
 
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
+  // 🔐 Extra states (ADDED safely)
+  const [errors, setErrors] = useState({});
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const showToast = (message, type) => {
     setToast({ show: true, message, type });
 
@@ -28,10 +33,45 @@ const ContactPage = () => {
     setCompany("");
     setWebsite("");
     setMessage("");
+    setErrors({});
+    setEmailTouched(false);
+  };
+
+  // ✅ Live email validation
+  const validateEmail = (value) => {
+    if (!value.includes("@")) {
+      return "Email must contain @";
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      return "Enter a valid email address";
+    }
+    return "";
+  };
+
+  // ✅ Final validation before submit
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!name.trim()) newErrors.name = "Full name is required";
+    if (!email.trim()) newErrors.email = "Email is required";
+    else {
+      const emailError = validateEmail(email);
+      if (emailError) newErrors.email = emailError;
+    }
+
+    if (!/^\d{10}$/.test(phone))
+      newErrors.phone = "Phone number must be exactly 10 digits";
+
+    if (!message.trim()) newErrors.message = "Message is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handlesubit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return;
 
     const payload = {
       fullName: name,
@@ -48,11 +88,25 @@ const ContactPage = () => {
         payload
       );
 
-      showToast("Message sent successfully!", "success");
+      showToast(
+        "Message sent successfully! You can now download the brochure.",
+        "success"
+      );
+
+      setIsSubmitted(true);
       resetForm();
     } catch (error) {
       showToast("Failed to send message!", "error");
     }
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/Qonevo Brochure.pdf";
+    link.download = "Qonevo Brochure.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -76,6 +130,7 @@ const ContactPage = () => {
         </div>
 
         <form className="row g-5" onSubmit={handlesubit}>
+          {/* NAME */}
           <div className="col-md-6 col-12">
             <input
               type="text"
@@ -83,32 +138,57 @@ const ContactPage = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             />
+            {errors.name && <small className="text-danger">{errors.name}</small>}
           </div>
 
+          {/* EMAIL */}
           <div className="col-md-6 col-12">
             <input
               type="email"
               className="form-control-custom"
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (emailTouched) {
+                  setErrors({
+                    ...errors,
+                    email: validateEmail(e.target.value),
+                  });
+                }
+              }}
+              onBlur={() => {
+                setEmailTouched(true);
+                setErrors({
+                  ...errors,
+                  email: validateEmail(email),
+                });
+              }}
             />
+            {errors.email && emailTouched && (
+              <small className="text-danger">{errors.email}</small>
+            )}
           </div>
 
+          {/* PHONE */}
           <div className="col-12 mt-4">
             <input
               type="tel"
               className="form-control-custom"
               placeholder="Phone Number"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
+              maxLength="10"
+              onChange={(e) =>
+                setPhone(e.target.value.replace(/\D/g, ""))
+              }
             />
+            {errors.phone && (
+              <small className="text-danger">{errors.phone}</small>
+            )}
           </div>
 
+          {/* COMPANY */}
           <div className="col-md-6 col-12 mt-4">
             <input
               type="text"
@@ -119,6 +199,7 @@ const ContactPage = () => {
             />
           </div>
 
+          {/* WEBSITE */}
           <div className="col-md-6 col-12 mt-4">
             <input
               type="url"
@@ -129,6 +210,7 @@ const ContactPage = () => {
             />
           </div>
 
+          {/* MESSAGE */}
           <div className="col-12 mt-4">
             <textarea
               className="form-control-custom"
@@ -136,21 +218,30 @@ const ContactPage = () => {
               placeholder="How Can We Help?"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              required
             ></textarea>
+            {errors.message && (
+              <small className="text-danger">{errors.message}</small>
+            )}
           </div>
 
+          {/* BUTTONS */}
           <div className="col-12 text-center pt-2 mt-5 gap-3 d-flex justify-content-center">
             <button type="submit" className="btn btn-submit px-4 py-2">
               Get in touch
             </button>
-            <a
-              href="/Qonevo Brochure.pdf"
-              download
+
+            <button
+              type="button"
               className="btn btn-submit px-4 py-2"
+              disabled={!isSubmitted}
+              onClick={handleDownload}
+              style={{
+                opacity: isSubmitted ? 1 : 0.5,
+                cursor: isSubmitted ? "pointer" : "not-allowed",
+              }}
             >
               Download Brochure
-            </a>
+            </button>
           </div>
 
           <div className="col-12 text-center pt-1 mt-4">

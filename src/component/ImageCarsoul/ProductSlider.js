@@ -7,10 +7,10 @@ import "swiper/css/scrollbar";
 import "animate.css";
 
 import "./ProductSlider.css"; // your CSS
-import banner1 from "../../Assets/ProductSliderImage/banner1.png";
-import banner2 from "../../Assets/ProductSliderImage/banner2.png";
-import banner3 from "../../Assets/ProductSliderImage/banner3.png";
-import banner4 from "../../Assets/ProductSliderImage/banner4.png";
+import banner1 from "../../Assets/ProductSliderImage/hero1.svg";
+import banner2 from "../../Assets/ProductSliderImage/hero2.svg";
+import banner3 from "../../Assets/ProductSliderImage/hero3.svg";
+import banner4 from "../../Assets/ProductSliderImage/hero4.svg";
 const slideData = [
   {
     title: "Seamless Class Collaboration",

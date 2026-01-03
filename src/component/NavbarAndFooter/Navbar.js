@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
 import logo from "../../Assets/logo.svg";
-import ifp from "../../Assets/ifp.png";
+import ifp from "../../Assets/ifp.svg";
 import ads from "../../Assets/ads.png";
 import ksd from "../../Assets/ksd.png";
 import pc from "../../Assets/pc.png";
