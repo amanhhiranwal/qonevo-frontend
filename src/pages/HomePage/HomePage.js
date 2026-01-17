@@ -10,27 +10,26 @@ import adson from '../../Assets/ProductSliderImage/add-ons.png'
 import TabImageSlide from '../../component/ImageCarsoul/TabImageSlider';
 import ContactPage from '../../component/contact/ContactPage';
 import ClientSlider from '../../component/ClientSlider/ClientSlider';
-import { Helmet } from 'react-helmet-async';
 
 
 const HomePage = () => {
   return (
       <>
-      <Helmet>
-        <title>Qonevo Technologies | Interactive Displays & Computing</title>
-        <meta
-            name="description"
-            content="Premium display and computing by Qonevo. AI-powered interactive flat panels, LED video walls, kiosks, and connected screen ecosystems."
-        />
-      </Helmet>
-
       <ProductSlider/>
       {/* {{-- Interactive Flat Panel --}} */}
 <section class="info-section">
     <div class="container-fluid text-center p-2 mobile-product-card">
         <div class="section-headings py-5">
-            <h1  className='meta'>Qonevo Technologies</h1>
-            <h2 class="section-title">Interactive Flat Panel</h2>
+            {/* <h1  className='meta'>Qonevo Technologies</h1>
+            <h2 class="section-title">Interactive Flat Panel</h2> */}
+            <h1 className="meta">
+            Interactive Flat Panel Solutions by Qonevo
+            </h1>
+
+            <h2 className="section-title">
+            Interactive Flat Panels
+            </h2>
+
             <p class="section-subtitle">
                 Smarter. Sharper. Seamlessly connected.
             </p>
