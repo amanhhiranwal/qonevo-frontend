@@ -101,7 +101,12 @@
   color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .container:has(.navbar-collapse.collapsing),
+.container:has(.navbar-collapse.show) {
+  background-color: white;
+}
+
   .navbar {
     height: 70px;
     padding: 1rem;
