@@ -165,12 +165,12 @@ const HomePage = () => {
                 {/* <!-- RIGHT Vertical Marker --> */}
                 <div class="dual-marker dual-marker-right vertical">
                     <div class="dual-marker-line"></div>
-                    <div class="dual-marker-label">Mobile Stand</div>
+                    <div class="dual-marker-label">Smart Pen</div>
                 </div>
                 {/* <!-- RIGHT Horizontal Marker --> */}
                 <div class="dual-marker dual-marker-right horizontal">
                     <div class="dual-marker-line"></div>
-                    <div class="dual-marker-label">Smart Pen</div>
+                    <div class="dual-marker-label">Mobile Stand</div>
                 </div>
             </div>
 

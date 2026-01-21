@@ -25,6 +25,32 @@ export default function MegaMenuNavbar() {
       setOpenMenu((prev) => (prev === menu ? null : menu));
     }
   };
+  const scrollToContact = () => {
+  const el = document.getElementById("contact-section");
+  if (!el) return;
+
+  const isMobile = window.innerWidth < 768; // adjust for your mobile breakpoint
+  let top;
+
+  if (isMobile) {
+    // mobile: below navbar
+    const navbarOffset = 80; // height of your mobile navbar
+    top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+  } else {
+    // desktop: center of viewport
+    top =
+      el.getBoundingClientRect().top +
+      window.pageYOffset -
+      window.innerHeight / 2 +
+      el.offsetHeight / 2;
+  }
+
+  window.scrollTo({
+    top,
+    behavior: "smooth",
+  });
+};
+
 
   // Fix body padding to match fixed navbar
   useEffect(() => {
@@ -111,14 +137,18 @@ export default function MegaMenuNavbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <button
+                {/* <button
                   className="btn btn-submit"
                   onClick={() => {
-                    document.getElementById("contact").scrollIntoView();
+                    document
+                      .getElementById("contact-section")
+                      .scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
                 >
                   Contact Us
-                </button>
+                </button> */}
+                <button className="btn btn-submit" onClick={scrollToContact}>Contact Us</button>
+
               </li>
             </ul>
           </div>
