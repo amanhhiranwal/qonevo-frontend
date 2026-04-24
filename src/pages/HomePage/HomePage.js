@@ -9,7 +9,8 @@ import pcops from '../../Assets/pc-ops.png';
 import adson from '../../Assets/ProductSliderImage/add-ons.png'
 import TabImageSlide from '../../component/ImageCarsoul/TabImageSlider';
 import ContactPage from '../../component/contact/ContactPage';
-import ClientSlider from '../../component/ClientSlider/ClientSlider';
+import ClientCarousel from '../../component/ClientCarsoul/ClientCarsoul';
+
 
 
 const HomePage = () => {
@@ -177,9 +178,15 @@ const HomePage = () => {
         </div>
     </div>
 </section>
+<section className='client-carousel mb-8'>
+  <h2 className="montserrat text-center mt-8">Clients who believe in us</h2>
+  <p className="montserrat text-center mb-4">We're proud to have worked with companies that share our passion for great products.</p>
+  <ClientCarousel/>
+</section>
 {/* smarter portion */}
 {/* 
 <TabImageSlide/> */}
+
 <contact id="contact">
 <ContactPage/>
 </contact>
