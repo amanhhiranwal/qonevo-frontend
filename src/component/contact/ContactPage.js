@@ -120,7 +120,7 @@ const ContactPage = () => {
         <div className="contact-wrapper col-12 mx-auto">
           <div className="text-center contact-text mb-4">
             <div className="section-headings py-2 mt-2">
-              <h2 className="section-title">Let’s Connect</h2>
+              <h2 className="section-title">Let’s connect</h2>
               <p className="section-subtitle">
                 Have a question, project, or partnership in mind? We’re here to
                 make your next display smarter.
