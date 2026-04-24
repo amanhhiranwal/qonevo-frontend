@@ -7,6 +7,7 @@ import ksd from "../../Assets/ksd.png";
 import pc from "../../Assets/pc.png";
 import addons from "../../Assets/addons.png";
 import ald from "../../Assets/ald.png";
+import pdfImg from "../../Assets/pdf.png";
 
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -26,30 +27,30 @@ export default function MegaMenuNavbar() {
     }
   };
   const scrollToContact = () => {
-  const el = document.getElementById("contact-section");
-  if (!el) return;
+    const el = document.getElementById("contact-section");
+    if (!el) return;
 
-  const isMobile = window.innerWidth < 768; // adjust for your mobile breakpoint
-  let top;
+    const isMobile = window.innerWidth < 768; // adjust for your mobile breakpoint
+    let top;
 
-  if (isMobile) {
-    // mobile: below navbar
-    const navbarOffset = 80; // height of your mobile navbar
-    top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
-  } else {
-    // desktop: center of viewport
-    top =
-      el.getBoundingClientRect().top +
-      window.pageYOffset -
-      window.innerHeight / 2 +
-      el.offsetHeight / 2;
-  }
+    if (isMobile) {
+      // mobile: below navbar
+      const navbarOffset = 80; // height of your mobile navbar
+      top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+    } else {
+      // desktop: center of viewport
+      top =
+        el.getBoundingClientRect().top +
+        window.pageYOffset -
+        window.innerHeight / 2 +
+        el.offsetHeight / 2;
+    }
 
-  window.scrollTo({
-    top,
-    behavior: "smooth",
-  });
-};
+    window.scrollTo({
+      top,
+      behavior: "smooth",
+    });
+  };
 
 
   // Fix body padding to match fixed navbar
@@ -127,6 +128,22 @@ export default function MegaMenuNavbar() {
                   Support
                 </a>
               </li>
+              <li
+                className="nav-item"
+                onMouseEnter={() => handleMouseEnter("technical")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <a
+                  href="#"
+                  className="nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMobileToggle("technical");
+                  }}
+                >
+                  Technical Specification
+                </a>
+              </li>
             </ul>
 
             {/* Right */}
@@ -156,6 +173,45 @@ export default function MegaMenuNavbar() {
       </nav>
 
       {/* Mega Menu */}
+      {/* Technical Specification Mega Menu */}
+      <div
+        className={`mega-menu-content ${openMenu === "technical" ? "show" : ""}`}
+        onMouseEnter={() => handleMouseEnter("technical")}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="container megamenu py-5">
+          <h5 className="mb-4">Technical Specification</h5>
+
+          <div className="row g-3">
+            {[
+              {
+                img: pdfImg, // or use pdf icon
+                text: "75 inch - Qonevo Neo Series",
+                pdf: "/IFP.pdf",
+              },
+              {
+                img: pdfImg, // change icon if needed
+                text: "Qonevo Brochure",
+                pdf: "/QonevoBrochure.pdf",
+              },
+            ].map((item, i) => (
+              <div key={i} className="col-md-2 col-6 menu-card-head">
+                <a
+                  href={item.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-decoration-none text-dark"
+                >
+                  <div className="menu-card text-center p-1">
+                    <img src={item.img} className="img-fluid mb-2" alt="" />
+                    <p className="mb-0">{item.text}</p>
+                  </div>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       <div
         className={`mega-menu-content ${openMenu === "display" ? "show" : ""}`}
         onMouseEnter={() => handleMouseEnter("display")}
