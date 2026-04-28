@@ -1,0 +1,213 @@
+
+
+  .btp-section {
+    background: #efefef;
+    width: 100%;
+    padding: 60px 0;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .btp-content-col {
+    padding: 20px 40px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .btp-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.2rem;
+    color: #1a2b4a;
+    line-height: 1.15;
+    font-weight: 400;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .btp-subtext {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    line-height: 1.55;
+    max-width: 320px;
+    margin-bottom: 44px;
+  }
+
+  .btp-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .btp-feature-item {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  .btp-feature-bar {
+    width: 3px;
+    border-radius: 2px;
+    background: #c5c8ce;
+    min-height: 52px;
+    margin-right: 18px;
+    flex-shrink: 0;
+    transition: background 0.4s ease;
+  }
+
+  .btp-feature-bar.active {
+    background: #1a2b4a;
+  }
+
+  .btp-feature-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 4px;
+    transition: color 0.4s ease;
+  }
+
+  .btp-feature-item.active .btp-feature-title {
+    color: #1a2b4a;
+    font-weight: 700;
+  }
+
+  .btp-feature-desc {
+    font-size: 0.875rem;
+    color: #999;
+    line-height: 1.5;
+    max-width: 280px;
+    margin: 0;
+    transition: color 0.4s ease;
+  }
+
+  .btp-feature-item.active .btp-feature-desc {
+    color: #666;
+  }
+
+  .btp-images-col {
+    padding: 20px 0 20px 20px;
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .btp-monitor-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+    background: #222;
+  }
+
+  .btp-bezel {
+    height: 16px;
+    background: #222;
+    position: relative;
+  }
+
+  .btp-camera {
+    width: 6px;
+    height: 6px;
+    background: #444;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Screen container — clips overflow so fadeInUp starts from bottom edge */
+  .btp-screen-container {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: #1a1a2e;
+    overflow: hidden;
+  }
+
+  /* Both images sit absolutely stacked */
+  .btp-screen-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom layer: previous image — stays still */
+  .btp-img-bottom {
+    z-index: 1;
+  }
+
+  /* Top layer: new image — animates in on top */
+  .btp-img-top {
+    z-index: 2;
+    --animate-duration: 0.65s;
+  }
+
+  .btp-taskbar {
+    background: #2a2a2a;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 6px;
+  }
+
+  .btp-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4a6fa5;
+  }
+
+  .btp-square {
+    width: 12px;
+    height: 9px;
+    border: 1px solid #555;
+    border-radius: 2px;
+    margin-left: 6px;
+  }
+
+  .btp-brand {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btp-brand-icon {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #888;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+  }
+
+  .btp-progress-track {
+    width: 100%;
+    height: 2px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  @keyframes btpProgress {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+
+ 
