@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./intelligentWorkspace.css";
-import leftImg  from "../../Assets/active-led-ols.png";
-import rightImg from "../../Assets/banner1.png";
+import leftImg  from "../../Assets/ifp/Property 1=Image01.png";
+import rightImg from "../../Assets/ifp/Property 1=Image02.png";
 
 export default function IntelligentWorkspaces() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -72,9 +72,7 @@ export default function IntelligentWorkspaces() {
             </svg>
           </div>
 
-          {/* Corner labels */}
-          <span className="iw-label iw-label-left">Intelligent Workspaces</span>
-          <span className="iw-label iw-label-right">Smart Classroom</span>
+        
         </div>
       </div>
     </>
