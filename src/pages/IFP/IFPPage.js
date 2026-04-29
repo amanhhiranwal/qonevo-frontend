@@ -10,38 +10,38 @@ import BuiltToPerform from "../../component/Builttoperform/Builttoperform";
 const products = [
   {
     img: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=300&h=200&fit=crop",
-    name: "Gonevo IFP 55\" — Core — i5/128",
-    specs: "55\" | 4K UHD | Core i5 | 128GB",
-    info: "55 WIFI | 4GB RAM | Camera: 1 | 4K UHD | 1",
-    price: "₹1,00,999 | ₹86,199",
+    name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
+    specs: "Standard performance for everyday teaching and presentations",
+    info: "4K UHD | 400 nits | 200W * 2",
+    // price: "₹1,00,999 | ₹86,199",
   },
   {
     img: "https://images.unsplash.com/photo-1593642632632-9eb77a8278a0?w=300&h=200&fit=crop",
-    name: "Gonevo IFP 65\" — Plus — i5/256",
-    specs: "65\" | 4K UHD | Core i5 | 256GB",
-    info: "65 WIFI | 8GB RAM | Camera: 1 | 4K UHD | 1",
-    price: "₹1,29,999 | ₹1,10,199",
+    name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
+    specs: "Faster interaction with enhanced processing power",
+    info: "4K UHD | 400 nits | 200W * 2",
+    // price: "₹1,29,999 | ₹1,10,199",
   },
   {
     img: "https://images.unsplash.com/photo-1593642634624-e8fac7d5b37b?w=300&h=200&fit=crop",
-    name: "Gonevo IFP 55\" — Pro — i5/256 M12",
-    specs: "55\" | 4K UHD | Core i5 | 256GB",
-    info: "55 WIFI | 8GB RAM | Camera: 1 | 4K UHD | 1",
-    price: "₹1,22,999 | ₹1,05,199",
+    name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
+    specs: "Standard performance for everyday teaching and presentations",
+    info: "4K UHD | 400 nits | 200W * 2",
+    // price: "₹1,22,999 | ₹1,05,199",
   },
   {
     img: "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=300&h=200&fit=crop",
-    name: "Gonevo IFP 55\" — i5/128 M12",
-    specs: "55\" | 4K UHD | Core i5 | 128GB",
-    info: "55 WIFI | 4GB RAM | Camera: 1 | 4K UHD | 1",
-    price: "₹1,05,999 | ₹89,199",
+    name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
+    specs: "Standard performance for everyday teaching and presentations",
+    info: "4K UHD | 400 nits | 200W * 2",
+    // price: "₹1,05,999 | ₹89,199",
   },
 ];
 
 const IFPPage = () => {
-    const sizeFilters = ["43\"", "TV", "55\"", "65\"", "75\"", "110\""];
+    const sizeFilters = ["65", "75", "86", "98", "110"];
 
-    const [activeSize, setActiveSize] = useState('43"');
+    const [activeSize, setActiveSize] = useState('65');
 
 
   return (
@@ -67,7 +67,7 @@ const IFPPage = () => {
         </p>
 
         {/* IFP Monitor Image */}
-        <div className="hero-monitor-wrap mx-auto w-100">
+        <div className="hero-monitor-wrap mx-auto ">
           <img
             src={ifpImage}
             alt="Qonevo Interactive Flat Panel"

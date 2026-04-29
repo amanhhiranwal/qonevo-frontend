@@ -3,7 +3,7 @@
   .btp-section {
     background: #efefef;
     width: 100%;
-    padding: 60px 0;
+    padding: 60px 0px 0px 50px;
     overflow: hidden;
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
@@ -19,22 +19,29 @@
   }
 
   .btp-headline {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3.2rem;
-    color: #1a2b4a;
-    line-height: 1.15;
-    font-weight: 400;
-    margin-bottom: 16px;
-    letter-spacing: -0.5px;
+     font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  text-align: left;
+  color: #001654;
+
+  margin-bottom: 10px;
   }
 
   .btp-subtext {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-    line-height: 1.55;
-    max-width: 320px;
-    margin-bottom: 44px;
+         font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: left;
+  color: #4c4c4c;
+
+  margin-bottom: 36px;
   }
 
   .btp-feature-list {

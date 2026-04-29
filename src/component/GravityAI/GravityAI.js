@@ -1,25 +1,30 @@
 import "./GravityAI.css";
+import gravityanimation from "../../Assets/ifp/b64897755a8daec10f3c7e328f30969d5e997537.gif"
+import image1 from "../../Assets/gravity/Image.png"
+import image2 from "../../Assets/gravity/Image 2.png"
+import image3 from "../../Assets/gravity/Image 3.png"
+import image4 from "../../Assets/gravity/Image 4.png"
 
 const features = [
   {
     title: "Chat With Documents:",
     desc: "Upload documents and ask questions about their content.",
-    img: "https://placehold.co/340x180/2d2d2d/ffffff?text=Chat+With+Docs",
+    img: image4,
   },
   {
     title: "Create Shapes:",
     desc: "Convert drawings into accurate shapes for better teaching.",
-    img: "https://placehold.co/340x180/2d2d2d/ffffff?text=Create+Shapes",
+    img: image3,
   },
   {
     title: "Magic Pen:",
     desc: "Recognizes and interprets hand drawn doodles.",
-    img: "https://placehold.co/340x180/2d2d2d/ffffff?text=Magic+Pen",
+    img: image2,
   },
   {
     title: "Mind Map:",
     desc: "Generate complex mind maps with the click of a button.",
-    img: "https://placehold.co/340x180/2d2d2d/ffffff?text=Mind+Map",
+    img: image1,
   },
 ];
 
@@ -39,17 +44,16 @@ export default function GravityAI() {
 
           {/* ── White screen container ── */}
           <div className="gravity-screen-wrap">
-            <div className="gravity-monitor">
-              {/* Monitor top bar */}
-             
-
-              {/* "Video" area — swap <div> for <video src="..." autoPlay loop muted /> */}
-              <div className="gravity-video" />
-
-              
-              
-            </div>
-          </div>
+  <div className="gravity-monitorss">
+    {/* <div className="gravity-video"> */}
+      <img
+        src={gravityanimation}
+        alt="Gravity animation"
+        className="gravity-gif"
+      />
+    {/* </div> */}
+  </div>
+</div>
 
           {/* ── Feature cards ── */}
           <div className="d-flex gravity-cards-row">

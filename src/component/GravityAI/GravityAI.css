@@ -8,22 +8,86 @@
 
         /* ── Heading ── */
         .gravity-title {
-          font-family: 'DM Serif Display', serif;
-          font-size: clamp(2rem, 4vw, 2.8rem);
-          color: #1a2340;
-          font-weight: 400;
-          margin-bottom: 10px;
+         
+          font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #001654;
+
+  margin-bottom: 10px;
         }
 
         .gravity-subtitle {
-          font-size: 0.97rem;
-          color: #555;
-          font-weight: 300;
-          letter-spacing: 0.01em;
+         
+            font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #4c4c4c;
+
+  margin-bottom: 36px;
         }
 
         /* ── White video container ── */
+
+
         .gravity-screen-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 80px 60px 0;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.gravity-monitor {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  /* background: #ffffff; */
+  box-shadow: 0 8px 48px rgba(0,0,0,0.22);
+}
+
+.gravity-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* background: #000; */
+}
+
+
+.gravity-monitorss {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: -30px auto;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+}
+
+.gravity-gif {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+        /* .gravity-screen-wrap {
           background: #fff;
           border-radius: 20px;
           padding: 40px 60px 0;
@@ -43,22 +107,9 @@
           box-shadow: 0 8px 48px rgba(0,0,0,0.22);
         }
 
-        /* thin top bar like a real monitor bezel */
-        .gravity-monitor-bar {
-          background: #1a1a1a;
-          height: 22px;
-          display: flex;
-          align-items: center;
-          padding: 0 12px;
-          gap: 6px;
-        }
-        .gravity-monitor-bar span {
-          width: 9px; height: 9px; border-radius: 50%;
-          display: inline-block;
-        }
-        .dot-r { background: #ff5f57; }
-        .dot-y { background: #febc2e; }
-        .dot-g { background: #28c840; }
+        
+    
+        
 
         .gravity-video {
           width: 100%;
@@ -66,47 +117,13 @@
           display: block;
           object-fit: cover;
           background: linear-gradient(135deg, #c8a4f8 0%, #f0a0e0 35%, #9bb8f8 70%, #d0a0ff 100%);
-        }
+        } */
 
         /* app icons row inside the screen */
-        .gravity-icons-row {
-          background: linear-gradient(135deg, #c8a4f8 0%, #f0a0e0 40%, #9bb8f8 100%);
-          display: flex;
-          justify-content: center;
-          gap: 32px;
-          padding: 18px 0 22px;
-        }
-
-        .gravity-app-icon {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 6px;
-          color: #fff;
-          font-size: 0.68rem;
-          font-weight: 500;
-          text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-        }
-
-        .gravity-app-icon .icon-box {
-          width: 54px;
-          height: 54px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .icon-gravity { background: linear-gradient(135deg, #e8e8e8, #c8c8c8); color: #333; font-size: 0.7rem; font-weight: 700; }
-        .icon-files   { background: linear-gradient(135deg, #f5c842, #e8a820); }
-        .icon-wps     { background: linear-gradient(135deg, #e84040, #c82020); color: #fff; font-weight: 700; font-size: 1rem; }
-        .icon-more    { background: rgba(255,255,255,0.25); backdrop-filter: blur(4px); }
-
+        
         /* ── Feature cards ── */
         .gravity-cards-row {
-          margin-top: 28px;
+          margin-top: 15px;
           gap: 18px;
         }
 
