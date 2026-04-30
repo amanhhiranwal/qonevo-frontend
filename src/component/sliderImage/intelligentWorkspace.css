@@ -2,7 +2,7 @@
         .iw-hero {
           position: relative;
           width: 100%;
-          min-height: 500px;
+          height: 100vh;
           overflow: hidden;
           font-family: 'Montserrat', sans-serif;
           user-select: none;

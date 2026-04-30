@@ -11,6 +11,18 @@
     align-items: center;
   }
 
+  .btp-section-made-for-creation{
+     background: #efefef;
+    width: 100%;
+    padding: 60px 0px 0px 0px;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+
+  }
+
   .btp-content-col {
     padding: 20px 40px 20px 60px;
     display: flex;
@@ -107,10 +119,10 @@
 
   .btp-monitor-wrapper {
     width: 100%;
-    border-radius: 12px;
+    /* border-radius: 12px; */
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.18);
-    background: #222;
+    /* box-shadow: 0 30px 80px rgba(0,0,0,0.18); */
+    /* background: #222; */
   }
 
   .btp-bezel {
@@ -134,8 +146,8 @@
   .btp-screen-container {
     position: relative;
     width: 100%;
-    height: 340px;
-    background: #1a1a2e;
+    height: 500px;
+    /* background: #1a1a2e; */
     overflow: hidden;
   }
 
@@ -154,10 +166,18 @@
   }
 
   /* Top layer: new image — animates in on top */
-  .btp-img-top {
+  /* .btp-img-top {
     z-index: 2;
     --animate-duration: 0.65s;
-  }
+  } */
+.btp-img-top {
+  z-index: 2;
+  bottom: -100%;
+  top: auto;       /* override inset — let bottom control position */
+  left: 0;
+  right: 0;
+  height: 100%;
+}
 
   .btp-taskbar {
     background: #2a2a2a;
