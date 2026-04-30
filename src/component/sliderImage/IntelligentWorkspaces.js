@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./intelligentWorkspace.css";
-import leftImg  from "../../Assets/ifp/Property 1=Image01.png";
-import rightImg from "../../Assets/ifp/Property 1=Image02.png";
+import leftImg  from "../../Assets/ifp/Property 1=Image01 (1).png";
+import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
 
 export default function IntelligentWorkspaces() {
   const [sliderPos, setSliderPos] = useState(50);

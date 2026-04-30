@@ -1,32 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./BuiltToPerform.css";
+import image1 from "../../Assets/buildtomove/Image01.png";
+import image2 from "../../Assets/buildtomove/Image02.png";
+import image3 from "../../Assets/buildtomove/Image03.png";
 
 const INTERVAL = 2000;
 
-const styles = `
-  .btp-progress-fill {
-    height: 100%;
-    background: #1a2b4a;
-    border-radius: 2px;
-    animation: btpProgress ${INTERVAL}ms linear forwards;
-  }
-`;
+// const styles = `
+//   .btp-progress-fill {
+//     height: 100%;
+//     background: #1a2b4a;
+//     border-radius: 2px;
+//     animation: btpProgress ${INTERVAL}ms linear forwards;
+//   }
+// `;
 
 const features = [
   {
     title: "4K UHD Display",
     desc: "Clear visuals and vibrant detail for better visibility and engagement",
-    image: "https://images.unsplash.com/photo-1527443224154-c4a573d93f19?w=900&q=80",
+    image: image1,
   },
   {
     title: "Anti-Glare Screen",
     desc: "Reduced reflections for uninterrupted visibility",
-    image: "https://images.unsplash.com/photo-1585298723682-7115561c51b7?w=900&q=80",
+    image: image2,
   },
   {
     title: "Built-in Camera & Mic",
     desc: "Clear video and voice without external devices",
-    image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=900&q=80",
+    image: image3,
   },
 ];
 
@@ -38,29 +41,113 @@ export default function BuiltToPerform() {
   // nextSrc = new image animating in on top layer
   // animKey = forces remount of top layer to replay animate.css
   const [prevSrc, setPrevSrc] = useState(features[0].image);
-  const [nextSrc, setNextSrc] = useState(null);
-  const [animKey, setAnimKey] = useState(0);
+  // const [nextSrc, setNextSrc] = useState(null);
+  // const [animKey, setAnimKey] = useState(0);
 
   const timerRef = useRef(null);
   const animEndRef = useRef(null);
+  const imgTopRef  = useRef(null);
 
-  const switchTo = (index) => {
+  // const switchTo = (index) => {
     
 
-    const incoming = features[index].image;
+  //   const incoming = features[index].image;
 
-    // Put new image on top with fadeInUp
-    setNextSrc(incoming);
-    setAnimKey((k) => k + 1);
+  //   // Put new image on top with fadeInUp
+  //   setNextSrc(incoming);
+  //   setAnimKey((k) => k + 1);
 
-    // After animation ends, promote top to bottom and clear top
-    clearTimeout(animEndRef.current);
-    animEndRef.current = setTimeout(() => {
-      setPrevSrc(incoming);
-      setNextSrc(null);
-    }, 700); // matches --animate-duration 0.65s + small buffer
-  };
+  //   // After animation ends, promote top to bottom and clear top
+  //   clearTimeout(animEndRef.current);
+  //   animEndRef.current = setTimeout(() => {
+  //     setPrevSrc(incoming);
+  //     setNextSrc(null);
+  //   }, 700); // matches --animate-duration 0.65s + small buffer
+  // };
 
+
+
+//   const switchTo = (index) => {
+//   const incoming = features[index].image;
+//     const imgTop = imgTopRef.current;
+//     if (!imgTop) return;
+
+//   // 1. instantly reset top image below screen (no transition)
+//   imgTop.style.transition = 'none';
+//   imgTop.style.bottom = '-100%';
+//   imgTop.src = incoming;
+
+//   // 2. next frame: slide it up
+//   requestAnimationFrame(() => {
+//     requestAnimationFrame(() => {
+//       imgTop.style.transition = 'bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
+//       imgTop.style.bottom = '0%';
+//     });
+//   });
+
+//   // 3. after animation: swap bottom layer and hide top again
+
+  
+//   // setTimeout(() => {
+//   //   setPrevSrc(incoming);
+//   //   imgTop.style.transition = 'none';
+//   //   imgTop.style.bottom = '-100%';
+//   // }, 1150);
+//    clearTimeout(animEndRef.current);
+//     animEndRef.current = setTimeout(() => {
+//       setPrevSrc(incoming);
+//       if (imgTopRef.current) {
+//         imgTopRef.current.style.transition = 'none';
+//         imgTopRef.current.style.bottom = '-100%';
+//       }
+//     }, 1150);
+// };
+
+const slideCountRef = useRef(0);
+
+const switchTo = (index) => {
+  const incoming = features[index].image;
+  const imgTop = imgTopRef.current;
+  if (!imgTop) return;
+
+  // alternate direction every transition
+  const slideUp = slideCountRef.current % 2 === 0;
+  slideCountRef.current++;
+
+  // 1. reset instantly — position above or below screen
+  imgTop.style.transition = 'none';
+  if (slideUp) {
+    imgTop.style.top = 'auto';
+    imgTop.style.bottom = '-100%';  // start below
+  } else {
+    imgTop.style.bottom = 'auto';
+    imgTop.style.top = '-100%';     // start above
+  }
+  imgTop.src = incoming;
+
+  // 2. slide into view
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      imgTop.style.transition = 'top 1.1s cubic-bezier(0.76, 0, 0.24, 1), bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
+      if (slideUp) {
+        imgTop.style.bottom = '0%';
+      } else {
+        imgTop.style.top = '0%';
+      }
+    });
+  });
+
+  // 3. after animation: swap bottom, reset top off screen
+  clearTimeout(animEndRef.current);
+  animEndRef.current = setTimeout(() => {
+    setPrevSrc(incoming);
+    if (imgTopRef.current) {
+      imgTopRef.current.style.transition = 'none';
+      imgTopRef.current.style.top = 'auto';
+      imgTopRef.current.style.bottom = '-100%';
+    }
+  }, 1150);
+};
   const startTimer = () => {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -90,7 +177,7 @@ export default function BuiltToPerform() {
 
   return (
     <>
-      <style>{styles}</style>
+      {/* <style>{styles}</style> */}
       <section className="btp-section">
         <div className="container-fluid px-0">
           <div className="row g-0 align-items-center">
@@ -125,7 +212,7 @@ export default function BuiltToPerform() {
               <div className="btp-monitor-wrapper">
               
 
-                <div className="btp-screen-container-">
+                <div className="btp-screen-container">
 
                   {/* Bottom layer: previous image — sits still while new one comes in over it */}
                   <img
@@ -135,14 +222,14 @@ export default function BuiltToPerform() {
                   />
 
                   {/* Top layer: new image — slides up over the old one with fadeInUp */}
-                  {nextSrc && (
+                  
                     <img
-                      key={animKey}
-                      src={nextSrc}
+                      ref={imgTopRef}
+                      src=""
                       alt="next feature"
-                      className="btp-screen-img btp-img-top animate__animated animate__fadeInUp"
+                      className="btp-screen-img btp-img-top"
                     />
-                  )}
+                
 
                 </div>
 

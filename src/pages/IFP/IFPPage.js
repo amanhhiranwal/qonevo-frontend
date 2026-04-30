@@ -4,8 +4,16 @@ import ifpImage from "../../Assets/ifp/IFP.png";
 import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces";
 import GravityAI from "../../component/GravityAI/GravityAI";
 import BuiltToPerform from "../../component/Builttoperform/Builttoperform";
-
-
+import MadeForCreation from "../../component/MadeForCreation/MadeForCreation";
+import logo1 from "../../Assets/testimonial/Google apps_01(2) 1.png";
+import logo2 from "../../Assets/testimonial/Mask group 2.png";
+import logo3 from "../../Assets/testimonial/Mask group.png";
+import logo4 from "../../Assets/testimonial/image 17.png";
+import logo5 from "../../Assets/testimonial/image 18.png";
+import logo6 from "../../Assets/testimonial/image 43.png";
+import logo7 from "../../Assets/testimonial/image 19.png";
+import ContactPage from "../../component/contact/ContactPage";
+import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
 
 const products = [
   {
@@ -39,60 +47,72 @@ const products = [
 ];
 
 const IFPPage = () => {
-    const sizeFilters = ["65", "75", "86", "98", "110"];
+  const sizeFilters = ["65", "75", "86", "98", "110"];
 
-    const [activeSize, setActiveSize] = useState('65');
-
+  const [activeSize, setActiveSize] = useState("65");
 
   return (
     <>
-    <section className="hero">
+      <section className="hero">
+        {/* White curved stage */}
+        <div className="hero-curve" />
 
-      {/* White curved stage */}
-      <div className="hero-curve" />
+        {/* ── Content ── */}
+        <div className="hero-content w-100 d-flex flex-column align-items-center">
+          {/* Heading */}
+          <h1 className="hero-title display-3 fw-bold text-white text-center">
+            The Smart Classroom. Reimagined.
+          </h1>
 
-      {/* ── Content ── */}
-      <div className="hero-content w-100 d-flex flex-column align-items-center">
+          {/* Sub-heading */}
+          <p className="hero-sub d-flex align-items-center justify-content-center gap-3 text-center mb-4">
+            <span>Qonevo Interactive Flat Panel</span>
+            <span className="hero-sub-divider" />
+            <span>Limitless Interactive</span>
+          </p>
 
-        {/* Heading */}
-        <h1 className="hero-title display-3 fw-bold text-white text-center">
-          The Smart Classroom. Reimagined.
-        </h1>
-
-        {/* Sub-heading */}
-        <p className="hero-sub d-flex align-items-center justify-content-center gap-3 text-center mb-4">
-          <span>Qonevo Interactive Flat Panel</span>
-          <span className="hero-sub-divider" />
-          <span>Limitless Interactive</span>
-        </p>
-
-        {/* IFP Monitor Image */}
-        <div className="hero-monitor-wrap mx-auto ">
-          <img
-            src={ifpImage}
-            alt="Qonevo Interactive Flat Panel"
-            className="hero-ifp-image img-fluid d-block"
-          />
+          {/* IFP Monitor Image */}
+          <div className="hero-monitor-wrap mx-auto ">
+            <img
+              src={ifpImage}
+              alt="Qonevo Interactive Flat Panel"
+              className="hero-ifp-image img-fluid d-block"
+            />
+          </div>
         </div>
-
-      </div>
-    </section>
-     <section className="scale-section">
+      </section>
+      <section className="scale-section">
         <h2 className="section-title">Scale Without Limits</h2>
-        <p className="section-sub">Multiple sizes. Same powerful core. Choose your perfect fit.</p>
+        <p className="section-sub">
+          Multiple sizes. Same powerful core. Choose your perfect fit.
+        </p>
         <div className="size-filters">
-          {sizeFilters.map(s => (
-            <button key={s} className={`size-btn${activeSize === s ? " active" : ""}`} onClick={() => setActiveSize(s)}>{s}</button>
+          {sizeFilters.map((s) => (
+            <button
+              key={s}
+              className={`size-btn${activeSize === s ? " active" : ""}`}
+              onClick={() => setActiveSize(s)}
+            >
+              {s}
+            </button>
           ))}
         </div>
         <div className="product-grid">
           {products.map((p, i) => (
             <div className="product-card_ifp" key={i}>
-              <div className="abstract-art" style={{ aspectRatio: "16/10", background: `linear-gradient(${135 + i * 40}deg, #${["ff6b6b","feca57","ff9ff3","54a0ff"][i]}88 0%, #5f27cd88 100%)` }} />
+              <div
+                className="abstract-art"
+                style={{
+                  aspectRatio: "16/10",
+                  background: `linear-gradient(${135 + i * 40}deg, #${["ff6b6b", "feca57", "ff9ff3", "54a0ff"][i]}88 0%, #5f27cd88 100%)`,
+                }}
+              />
               <div className="product-info">
                 <div className="product-name">{p.name}</div>
                 <div className="product-spec">{p.specs}</div>
-                <div className="product-spec" style={{ color: "#aaa" }}>{p.info}</div>
+                <div className="product-spec" style={{ color: "#aaa" }}>
+                  {p.info}
+                </div>
                 <div className="product-price">{p.price}</div>
                 <button className="btn-view">View Details</button>
               </div>
@@ -104,15 +124,45 @@ const IFPPage = () => {
         </div>
       </section>
       <section>
-        <IntelligentWorkspaces/>
+        <IntelligentWorkspaces />
       </section>
       <section>
-        <GravityAI/>
+        <GravityAI />
       </section>
       <section>
-        <BuiltToPerform/>
+        <ScrollVideo/>
       </section>
-      </>
+      <section>
+        <BuiltToPerform />
+      </section>
+      <section>
+        <MadeForCreation />
+      </section>
+      <section className="scale-section">
+        <h2 className="section-title">Trusted. Recognized. Certified.</h2>
+        <p className="section-sub">
+          Aligned with national standards and innovation-driven initiatives
+        </p>
+        <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
+          <img src={logo1} alt="Google EDLA Certified" className="cert-img" />
+          <img src={logo2} alt="MSME Ministry" className="cert-img" />
+          <img src={logo3} alt="Startup India" className="cert-img" />
+          <img src={logo4} alt="Make in India" className="cert-img" />
+          <img src={logo5} alt="ISO Certified" className="cert-img" />
+          <img src={logo7} alt="Google EDLA Certified" className="cert-img" />
+          <img
+            src={logo6}
+            alt="GeM Government e-Marketplace"
+            className="cert-img"
+          />
+        </div>
+      </section>
+      <section>
+        <contact id="contact">
+          <ContactPage />
+        </contact>
+      </section>
+    </>
   );
 };
 

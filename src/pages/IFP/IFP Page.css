@@ -144,6 +144,7 @@
   margin: 0 auto 30px;
 }
 .product-card_ifp {
+  padding: 20px;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -152,6 +153,7 @@
     transform 0.2s,
     box-shadow 0.2s;
 }
+
 .product-card_ifp:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -165,9 +167,9 @@
   align-items: center;
   justify-content: center;
 }
-.product-info {
+/* .product-info {
   padding: 14px;
-}
+} */
 .product-name {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -737,4 +739,13 @@
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Cellipse cx='200' cy='112' rx='150' ry='90' fill='rgba(255,255,255,0.1)'/%3E%3Cellipse cx='150' cy='80' rx='100' ry='70' fill='rgba(255,100,150,0.3)' transform='rotate(-20 150 80)'/%3E%3Cellipse cx='250' cy='140' rx='120' ry='60' fill='rgba(100,150,255,0.25)' transform='rotate(15 250 140)'/%3E%3C/svg%3E")
     center/cover no-repeat;
+}
+
+
+.cert-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s;
 }
