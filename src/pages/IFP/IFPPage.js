@@ -14,31 +14,36 @@ import logo6 from "../../Assets/testimonial/image 43.png";
 import logo7 from "../../Assets/testimonial/image 19.png";
 import ContactPage from "../../component/contact/ContactPage";
 import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
+import image1Hover1 from "../../Assets/Frame 48665.png";
+import image1 from "../../Assets/Frame 48665 (1).png";
 
 const products = [
   {
-    img: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=300&h=200&fit=crop",
+    img: image1,
+    imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
     specs: "Standard performance for everyday teaching and presentations",
     info: "4K UHD | 400 nits | 200W * 2",
-    // price: "₹1,00,999 | ₹86,199",
   },
   {
-    img: "https://images.unsplash.com/photo-1593642632632-9eb77a8278a0?w=300&h=200&fit=crop",
+     img: image1,
+    imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
     specs: "Faster interaction with enhanced processing power",
     info: "4K UHD | 400 nits | 200W * 2",
     // price: "₹1,29,999 | ₹1,10,199",
   },
   {
-    img: "https://images.unsplash.com/photo-1593642634624-e8fac7d5b37b?w=300&h=200&fit=crop",
+     img: image1,
+    imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
     specs: "Standard performance for everyday teaching and presentations",
     info: "4K UHD | 400 nits | 200W * 2",
     // price: "₹1,22,999 | ₹1,05,199",
   },
   {
-    img: "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=300&h=200&fit=crop",
+ img: image1,
+    imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
     specs: "Standard performance for everyday teaching and presentations",
     info: "4K UHD | 400 nits | 200W * 2",
@@ -100,20 +105,22 @@ const IFPPage = () => {
         <div className="product-grid">
           {products.map((p, i) => (
             <div className="product-card_ifp" key={i}>
-              <div
-                className="abstract-art"
-                style={{
-                  aspectRatio: "16/10",
-                  background: `linear-gradient(${135 + i * 40}deg, #${["ff6b6b", "feca57", "ff9ff3", "54a0ff"][i]}88 0%, #5f27cd88 100%)`,
-                }}
-              />
-              <div className="product-info">
+              <div className="abstract-art">
+                <img className="img-default" src={p.img} alt={p.name} />
+                {p.imgHover && (
+                  <img className="img-hover" src={p.imgHover} alt={p.name} />
+                )}
+              </div>
+              <div className="product-info mt-6">
                 <div className="product-name">{p.name}</div>
                 <div className="product-spec">{p.specs}</div>
-                <div className="product-spec" style={{ color: "#aaa" }}>
+                <div
+                  className="product-spec mt-4 mb-4"
+                  style={{ color: "#aaa" }}
+                >
                   {p.info}
                 </div>
-                <div className="product-price">{p.price}</div>
+
                 <button className="btn-view">View Details</button>
               </div>
             </div>
@@ -130,7 +137,7 @@ const IFPPage = () => {
         <GravityAI />
       </section>
       <section>
-        <ScrollVideo/>
+        <ScrollVideo />
       </section>
       <section>
         <BuiltToPerform />
