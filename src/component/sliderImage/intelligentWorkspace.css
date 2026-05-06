@@ -1,0 +1,110 @@
+ 
+        .iw-hero {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+          font-family: 'Montserrat', sans-serif;
+          user-select: none;
+          background: #0e1628;
+        }
+
+        .iw-compare {
+          position: absolute;
+          inset: 0;
+          cursor: col-resize;
+        }
+
+        /* RIGHT image — always full width behind */
+        .iw-img-right {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+          display: block;
+        }
+
+        /* LEFT image — clipped to slider position */
+        .iw-img-left {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+          display: block;
+          clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+        }
+
+        /* Divider line */
+        .iw-divider {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: rgba(255,255,255,0.95);
+          box-shadow: 0 0 16px 3px rgba(255,255,255,0.55);
+          z-index: 15;
+          transform: translateX(-50%);
+          pointer-events: none;
+        }
+
+        /* Handle */
+        .iw-handle {
+          position: absolute;
+          top: 50%;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: #fff;
+          border: 3px solid #1a2340;
+          transform: translate(-50%, -50%);
+          z-index: 16;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+          cursor: col-resize;
+          transition: box-shadow 0.15s, transform 0.15s;
+        }
+
+        .iw-handle:hover,
+        .iw-handle.dragging {
+          transform: translate(-50%, -50%) scale(1.1);
+          box-shadow: 0 6px 32px rgba(0,0,0,0.45);
+        }
+
+        .iw-handle svg {
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
+        }
+
+        /* Labels */
+        .iw-label {
+          position: absolute;
+          bottom: 28px;
+          z-index: 18;
+          color: #fff;
+          font-size: 0.68rem;
+          letter-spacing: 0.3em;
+          font-weight: 500;
+          text-transform: uppercase;
+          text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+          pointer-events: none;
+          background: rgba(0,0,0,0.28);
+          padding: 5px 12px;
+          border-radius: 20px;
+          backdrop-filter: blur(4px);
+        }
+        .iw-label-left  { left:  28px; }
+        .iw-label-right { right: 28px; }
+
+        @keyframes pulse-hint {
+          0%,100% { transform: translate(-50%,-50%) scale(1); }
+          50%      { transform: translate(-50%,-50%) scale(1.18); box-shadow: 0 6px 32px rgba(255,255,255,0.3); }
+        }
+        .iw-handle.hint { animation: pulse-hint 1.5s ease-in-out 3; }
+  

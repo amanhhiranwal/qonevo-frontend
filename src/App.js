@@ -1,18 +1,23 @@
 
 import './App.css';
 import Footer from './component/NavbarAndFooter/Footer';
-
+import { Routes, Route } from "react-router-dom";
 import Navbar from './component/NavbarAndFooter/Navbar';
 import HomePage from './pages/HomePage/HomePage';
+import IFPPage from './pages/IFP/IFPPage';
 
 
 function App() {
   return (
     <div className="App">
-     
-      <Navbar/>
-      <HomePage/>
-      <Footer/>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/IFP" element={<IFPPage />} />
+      </Routes>
+
+      <Footer />
     </div>
   );
 }
