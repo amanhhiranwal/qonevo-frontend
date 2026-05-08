@@ -145,9 +145,9 @@ const IFPPage = () => {
       <section>
         <GravityAI />
       </section>
-  <section style={{ background: "#fff" }}>
+  {/* <section style={{ background: "#fff" }}>
   <ScrollVideo />
-</section>
+</section> */}
       <section>
         <BuiltToPerform />
       </section>
