@@ -16,6 +16,7 @@ import ContactPage from "../../component/contact/ContactPage";
 import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
 import image1Hover1 from "../../Assets/Frame 48665.png";
 import image1 from "../../Assets/Frame 48665 (1).png";
+import ProductModal from "../../component/modal/ProductModal";
 
 const products = [
   {
@@ -55,6 +56,7 @@ const IFPPage = () => {
   const sizeFilters = ["65", "75", "86", "98", "110"];
 
   const [activeSize, setActiveSize] = useState("65");
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <>
@@ -121,24 +123,31 @@ const IFPPage = () => {
                   {p.info}
                 </div>
 
-                <button className="btn-view">View Details</button>
+                <button
+                className="btn-view"
+                onClick={() => setSelectedProduct(p)}
+              >
+                View Details
+              </button>
               </div>
             </div>
           ))}
         </div>
+        
         <div className="view-all-wrap">
           <button className="btn-view-all">View All</button>
         </div>
       </section>
+      
       <section>
         <IntelligentWorkspaces />
       </section>
       <section>
         <GravityAI />
       </section>
-      <section>
-        <ScrollVideo />
-      </section>
+  <section style={{ background: "#fff" }}>
+  <ScrollVideo />
+</section>
       <section>
         <BuiltToPerform />
       </section>
@@ -169,6 +178,10 @@ const IFPPage = () => {
           <ContactPage />
         </contact>
       </section>
+       <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </>
   );
 };

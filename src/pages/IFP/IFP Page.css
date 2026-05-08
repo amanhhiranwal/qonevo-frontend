@@ -755,3 +755,12 @@
   opacity: 0.85;
   transition: opacity 0.2s;
 }
+
+
+section:has(.scroll-video-wrapper) {
+  background: #ffffff !important;
+}
+
+.scroll-video-wrapper {
+  background: #ffffff !important;
+}

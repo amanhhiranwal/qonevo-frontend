@@ -1,3 +1,112 @@
+// import { useEffect, useRef } from "react";
+// import videoSrc from "../../Assets/your-video.mp4";
+
+// export default function ScrollVideo() {
+//   const videoRef = useRef(null);
+//   const scrollRef = useRef(null);
+//   const progressRef = useRef(null);
+//   const percentRef = useRef(null);
+
+//   useEffect(() => {
+//     const scrollBox = scrollRef.current;
+//     const video = videoRef.current;
+
+//     const handleScroll = () => {
+//       const scrollTop = scrollBox.scrollTop;
+//       const scrollHeight = scrollBox.scrollHeight - scrollBox.clientHeight;
+
+//       const progress = scrollTop / scrollHeight;
+
+//       // update video time
+//       if (video.duration) {
+//         video.currentTime = video.duration * progress;
+//       }
+
+//       // update progress bar
+//       if (progressRef.current) {
+//         progressRef.current.style.width = `${progress * 100}%`;
+//       }
+
+//       // update percentage text
+//       if (percentRef.current) {
+//         percentRef.current.innerText = `${Math.round(progress * 100)}%`;
+//       }
+//     };
+
+//     scrollBox.addEventListener("scroll", handleScroll);
+//     return () => scrollBox.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   return (
+//     // <div
+//     //   ref={scrollRef}
+//     //   style={{
+//     //     height: "100vh",
+//     //     overflowY: "scroll",
+//     //     background: "#fff",
+//     //     color: "#fff",
+//     //     fontFamily: "Courier New, monospace",
+//     //   }}
+//     // >
+
+//     <div
+//   ref={scrollRef}
+//   style={{
+//     height: "100vh",
+//     overflowY: "scroll",
+//     background: "transparent", // ✅ or remove this line entirely
+//     color: "#fff",
+//     fontFamily: "Courier New, monospace",
+//   }}
+// >
+//       <div style={{ height: "400vh" }}>
+//         {/* <div
+//           style={{
+//             position: "sticky",
+//             top: 0,
+//             height: "100vh",
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             overflow: "hidden",
+//           }}
+//         > */}
+//         <div
+//   style={{
+//     position: "sticky",
+//     top: 0,
+//     height: "100vh",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     overflow: "hidden",
+//     background: "#000", // ✅ only the video area is black
+//   }}
+// >
+//           <video
+//             ref={videoRef}
+//             muted
+//             playsInline
+//             preload="auto"
+//             style={{
+//               width: "100%",
+//               height: "100%",
+//               objectFit: "cover",
+//             }}
+//           >
+//             <source src={videoSrc} type="video/mp4" />
+//           </video>
+
+//           {/* HUD */}
+          
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
 import { useEffect, useRef } from "react";
 import videoSrc from "../../Assets/your-video.mp4";
 
@@ -10,17 +119,15 @@ export default function ScrollVideo() {
   useEffect(() => {
     const scrollBox = scrollRef.current;
     const video = videoRef.current;
+    let currentTime = 0;
+    let rafId;
 
     const handleScroll = () => {
       const scrollTop = scrollBox.scrollTop;
       const scrollHeight = scrollBox.scrollHeight - scrollBox.clientHeight;
-
       const progress = scrollTop / scrollHeight;
 
-      // update video time
-      if (video.duration) {
-        video.currentTime = video.duration * progress;
-      }
+      const targetTime = video.duration ? video.duration * progress : 0;
 
       // update progress bar
       if (progressRef.current) {
@@ -31,121 +138,68 @@ export default function ScrollVideo() {
       if (percentRef.current) {
         percentRef.current.innerText = `${Math.round(progress * 100)}%`;
       }
+
+      const animate = () => {
+        currentTime += (targetTime - currentTime) * 0.1;
+        if (video.readyState >= 2) {
+          video.currentTime = currentTime;
+        }
+        if (Math.abs(targetTime - currentTime) > 0.01) {
+          rafId = requestAnimationFrame(animate);
+        }
+      };
+
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(animate);
     };
 
     scrollBox.addEventListener("scroll", handleScroll);
-    return () => scrollBox.removeEventListener("scroll", handleScroll);
+    return () => {
+      scrollBox.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
+     <div className="scroll-video-wrapper" style={{ background: "#fff", minHeight: "100vh" }}>
     <div
       ref={scrollRef}
       style={{
         height: "100vh",
         overflowY: "scroll",
-        background: "#000",
+        background: "#fff",  // ✅ NOT transparent
         color: "#fff",
         fontFamily: "Courier New, monospace",
       }}
     >
-      <div style={{ height: "400vh" }}>
-        <div
-          style={{
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-          }}
-        >
-          <video
-            ref={videoRef}
-            muted
-            playsInline
-            preload="auto"
+        <div style={{ height: "400vh", background: "#fff" }}>
+          <div
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "hidden",
+              background: "#000",
             }}
           >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-
-          {/* HUD */}
-          <div style={{ position: "absolute", inset: 0 }}>
-            {/* Top Bar */}
-            <div
+            <video
+              ref={videoRef}
+              muted
+              playsInline
+              preload="auto"
               style={{
-                position: "absolute",
-                top: 0,
-                left: 24,
-                right: 24,
-                display: "flex",
-                justifyContent: "space-between",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
               }}
             >
-              <span style={{ fontSize: 11, opacity: 0.5 }}>
-                YOUR BRAND
-              </span>
+              <source src={videoSrc} type="video/mp4" />
+            </video>
 
-              <span
-                style={{
-                  fontSize: 12,
-                  padding: "5px 14px",
-                  borderRadius: 20,
-                  background: "rgba(0,0,0,0.45)",
-                }}
-              >
-                <span ref={percentRef}>0%</span>
-              </span>
-            </div>
-
-            {/* Bottom HUD */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: "20px 24px",
-                background:
-                  "linear-gradient(transparent, rgba(0,0,0,0.8))",
-              }}
-            >
-              <div
-                style={{
-                  height: 3,
-                  background: "rgba(255,255,255,0.2)",
-                  borderRadius: 2,
-                  overflow: "hidden",
-                  marginBottom: 12,
-                }}
-              >
-                <div
-                  ref={progressRef}
-                  style={{
-                    height: "100%",
-                    width: "0%",
-                    background: "#fff",
-                  }}
-                />
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: 11,
-                  opacity: 0.5,
-                }}
-              >
-                <span>Scroll to scrub</span>
-                <span ref={percentRef}>0%</span>
-              </div>
-            </div>
+            {/* HUD */}
           </div>
         </div>
       </div>
