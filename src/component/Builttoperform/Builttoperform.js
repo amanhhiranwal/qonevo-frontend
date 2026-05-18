@@ -103,51 +103,103 @@ export default function BuiltToPerform() {
 //     }, 1150);
 // };
 
+// const slideCountRef = useRef(0);
+
+// const switchTo = (index) => {
+//   const incoming = features[index].image;
+//   const imgTop = imgTopRef.current;
+//   if (!imgTop) return;
+
+//   // alternate direction every transition
+//   const slideUp = slideCountRef.current % 2 === 0;
+//   slideCountRef.current++;
+
+//   // 1. reset instantly — position above or below screen
+//   imgTop.style.transition = 'none';
+//   if (slideUp) {
+//     imgTop.style.top = 'auto';
+//     imgTop.style.bottom = '-100%';  // start below
+//   } else {
+//     imgTop.style.bottom = 'auto';
+//     imgTop.style.top = '-100%';     // start above
+//   }
+//   imgTop.src = incoming;
+
+//   // 2. slide into view
+//   requestAnimationFrame(() => {
+//     requestAnimationFrame(() => {
+//       imgTop.style.transition = 'top 1.1s cubic-bezier(0.76, 0, 0.24, 1), bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
+//       if (slideUp) {
+//         imgTop.style.bottom = '0%';
+//       } else {
+//         imgTop.style.top = '0%';
+//       }
+//     });
+//   });
+
+//   // 3. after animation: swap bottom, reset top off screen
+//   clearTimeout(animEndRef.current);
+//   animEndRef.current = setTimeout(() => {
+//     setPrevSrc(incoming);
+//     if (imgTopRef.current) {
+//       imgTopRef.current.style.transition = 'none';
+//       imgTopRef.current.style.top = 'auto';
+//       imgTopRef.current.style.bottom = '-100%';
+//     }
+//   }, 1150);
+// };
+
+
 const slideCountRef = useRef(0);
 
 const switchTo = (index) => {
   const incoming = features[index].image;
   const imgTop = imgTopRef.current;
+
   if (!imgTop) return;
 
-  // alternate direction every transition
   const slideUp = slideCountRef.current % 2 === 0;
   slideCountRef.current++;
 
-  // 1. reset instantly — position above or below screen
-  imgTop.style.transition = 'none';
-  if (slideUp) {
-    imgTop.style.top = 'auto';
-    imgTop.style.bottom = '-100%';  // start below
-  } else {
-    imgTop.style.bottom = 'auto';
-    imgTop.style.top = '-100%';     // start above
-  }
+  // stop current animation
+  imgTop.style.transition = "none";
+
+  // set new image
   imgTop.src = incoming;
 
-  // 2. slide into view
+  // initial position
+  imgTop.style.transform = slideUp
+    ? "translate3d(0, 100%, 0)"
+    : "translate3d(0, -100%, 0)";
+
+  // force browser reflow
+  imgTop.getBoundingClientRect();
+
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      imgTop.style.transition = 'top 1.1s cubic-bezier(0.76, 0, 0.24, 1), bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
-      if (slideUp) {
-        imgTop.style.bottom = '0%';
-      } else {
-        imgTop.style.top = '0%';
-      }
-    });
+    imgTop.style.transition =
+      "transform 1100ms cubic-bezier(0.16, 1, 0.3, 1)";
+    // imgTop.style.transform = "translate3d(0, 0, 0)";
+    imgTopRef.current.style.transform =
+  "translate3d(0,100%,0) scale(1)";
   });
 
-  // 3. after animation: swap bottom, reset top off screen
   clearTimeout(animEndRef.current);
+
   animEndRef.current = setTimeout(() => {
     setPrevSrc(incoming);
+
     if (imgTopRef.current) {
-      imgTopRef.current.style.transition = 'none';
-      imgTopRef.current.style.top = 'auto';
-      imgTopRef.current.style.bottom = '-100%';
+      imgTopRef.current.style.transition = "none";
+
+      imgTopRef.current.style.transform =
+        slideUp
+          ? "translate3d(0, 100%, 0)"
+          : "translate3d(0, -100%, 0)";
     }
   }, 1150);
 };
+
+
   const startTimer = () => {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -160,7 +212,7 @@ const switchTo = (index) => {
   };
 
   useEffect(() => {
-    startTimer();
+    // startTimer();
     return () => {
       clearInterval(timerRef.current);
       clearTimeout(animEndRef.current);

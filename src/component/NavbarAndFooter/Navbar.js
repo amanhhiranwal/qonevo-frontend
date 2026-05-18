@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
+
 import logo from "../../Assets/logo.svg";
 import ifp from "../../Assets/ifp.svg";
 import ads from "../../Assets/ads.png";
@@ -9,16 +10,21 @@ import addons from "../../Assets/addons.png";
 import ald from "../../Assets/ald.png";
 import pdfImg from "../../Assets/pdf.png";
 
+import { Link } from "react-router-dom";
+
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
-  //   const menuRef = useRef(null);
 
   const handleMouseEnter = (menu) => {
-    if (window.innerWidth > 991) setOpenMenu(menu);
+    if (window.innerWidth > 991) {
+      setOpenMenu(menu);
+    }
   };
 
   const handleMouseLeave = () => {
-    if (window.innerWidth > 991) setOpenMenu(null);
+    if (window.innerWidth > 991) {
+      setOpenMenu(null);
+    }
   };
 
   const handleMobileToggle = (menu) => {
@@ -26,19 +32,24 @@ export default function MegaMenuNavbar() {
       setOpenMenu((prev) => (prev === menu ? null : menu));
     }
   };
+
   const scrollToContact = () => {
     const el = document.getElementById("contact-section");
+
     if (!el) return;
 
-    const isMobile = window.innerWidth < 768; // adjust for your mobile breakpoint
+    const isMobile = window.innerWidth < 768;
+
     let top;
 
     if (isMobile) {
-      // mobile: below navbar
-      const navbarOffset = 80; // height of your mobile navbar
-      top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+      const navbarOffset = 80;
+
+      top =
+        el.getBoundingClientRect().top +
+        window.pageYOffset -
+        navbarOffset;
     } else {
-      // desktop: center of viewport
       top =
         el.getBoundingClientRect().top +
         window.pageYOffset -
@@ -52,22 +63,73 @@ export default function MegaMenuNavbar() {
     });
   };
 
-
-  // Fix body padding to match fixed navbar
   useEffect(() => {
     const navbar = document.querySelector(".navbar.fixed-top");
-    const height = navbar.offsetHeight;
-    document.body.style.paddingTop = `${height}px`;
+
+    if (navbar) {
+      const height = navbar.offsetHeight;
+      document.body.style.paddingTop = `${height}px`;
+    }
   }, []);
+
+  const technicalItems = [
+    {
+      img: pdfImg,
+      text: "75 inch - Qonevo Neo Series",
+      pdf: "/IFP.pdf",
+    },
+    {
+      img: pdfImg,
+      text: "Qonevo Brochure",
+      pdf: "/QonevoBrochure.pdf",
+    },
+  ];
+
+  const displayItems = [
+    {
+      img: ifp,
+      text: "Interactive Flat Panel",
+      link: "/ifp",
+    },
+    {
+      img: ads,
+      text: "Advertising Display & Signage",
+      link: "/advertising-display",
+    },
+    {
+      img: ksd,
+      text: "Kiosk & Smart Display",
+      link: "/kiosk-display",
+    },
+    {
+      img: ald,
+      text: "Active LED Display",
+      link: "/active-led",
+    },
+    {
+      img: pc,
+      text: "All-In-One PC & OPS",
+      link: "/all-in-one-pc",
+    },
+    {
+      img: addons,
+      text: "Accessories & Add-ons",
+      link: "/accessories",
+    },
+  ];
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div className="container">
           {/* Logo */}
-          <a className="navbar-brand" href="">
-            <img src={logo} alt="Logo" className="navbar-logo me-2" />
-          </a>
+          <Link to="/" className="navbar-brand">
+            <img
+              src={logo}
+              alt="Logo"
+              className="navbar-logo me-2"
+            />
+          </Link>
 
           {/* Mobile Toggle */}
           <button
@@ -75,107 +137,132 @@ export default function MegaMenuNavbar() {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Center Navigation */}
+          {/* Navbar Content */}
           <div
             className="collapse navbar-collapse justify-content-center"
             id="navbarContent"
           >
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              {/* Mega Menu Trigger */}
+              {/* Display */}
               <li
                 className="nav-item"
                 onMouseEnter={() => handleMouseEnter("display")}
                 onMouseLeave={handleMouseLeave}
               >
-                <a
-                  href="#"
-                  className="nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleMobileToggle("display");
-                  }}
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                  onClick={() => handleMobileToggle("display")}
                 >
                   Display
-                </a>
+                </button>
               </li>
 
+              {/* Solutions */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
                   Solutions
-                </a>
+                </button>
               </li>
+
+              {/* Services */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
                   Services
-                </a>
+                </button>
               </li>
+
+              {/* Government Business */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
                   Government Business
-                </a>
+                </button>
               </li>
+
+              {/* About */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
                   About
-                </a>
+                </button>
               </li>
+
+              {/* Support */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
                   Support
-                </a>
+                </button>
               </li>
+
+              {/* Technical Specification */}
               <li
                 className="nav-item"
                 onMouseEnter={() => handleMouseEnter("technical")}
                 onMouseLeave={handleMouseLeave}
               >
-                <a
-                  href="#"
-                  className="nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleMobileToggle("technical");
-                  }}
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                  onClick={() => handleMobileToggle("technical")}
                 >
                   Technical Specification
-                </a>
+                </button>
               </li>
             </ul>
 
-            {/* Right */}
+            {/* Right Side */}
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              {/* Search */}
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                  aria-label="Search"
+                >
                   <i className="bi bi-search"></i>
-                </a>
+                </button>
               </li>
+
+              {/* Contact */}
               <li className="nav-item">
-                {/* <button
+                <button
                   className="btn btn-submit"
-                  onClick={() => {
-                    document
-                      .getElementById("contact-section")
-                      .scrollIntoView({ behavior: "smooth", block: "center" });
-                  }}
+                  onClick={scrollToContact}
                 >
                   Contact Us
-                </button> */}
-                <button className="btn btn-submit" onClick={scrollToContact}>Contact Us</button>
-
+                </button>
               </li>
             </ul>
           </div>
         </div>
       </nav>
 
-      {/* Mega Menu */}
       {/* Technical Specification Mega Menu */}
       <div
-        className={`mega-menu-content ${openMenu === "technical" ? "show" : ""}`}
+        className={`mega-menu-content ${
+          openMenu === "technical" ? "show" : ""
+        }`}
         onMouseEnter={() => handleMouseEnter("technical")}
         onMouseLeave={handleMouseLeave}
       >
@@ -183,27 +270,24 @@ export default function MegaMenuNavbar() {
           <h5 className="mb-4">Technical Specification</h5>
 
           <div className="row g-3">
-            {[
-              {
-                img: pdfImg, // or use pdf icon
-                text: "75 inch - Qonevo Neo Series",
-                pdf: "/IFP.pdf",
-              },
-              {
-                img: pdfImg, // change icon if needed
-                text: "Qonevo Brochure",
-                pdf: "/QonevoBrochure.pdf",
-              },
-            ].map((item, i) => (
-              <div key={i} className="col-md-2 col-6 menu-card-head">
+            {technicalItems.map((item, i) => (
+              <div
+                key={i}
+                className="col-md-2 col-6 menu-card-head"
+              >
                 <a
-                  href={item.pdf}
+                  href={item.pdf || "/"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-decoration-none text-dark"
                 >
                   <div className="menu-card text-center p-1">
-                    <img src={item.img} className="img-fluid mb-2" alt="" />
+                    <img
+                      src={item.img}
+                      className="img-fluid mb-2"
+                      alt={item.text}
+                    />
+
                     <p className="mb-0">{item.text}</p>
                   </div>
                 </a>
@@ -212,8 +296,12 @@ export default function MegaMenuNavbar() {
           </div>
         </div>
       </div>
+
+      {/* Display Mega Menu */}
       <div
-        className={`mega-menu-content ${openMenu === "display" ? "show" : ""}`}
+        className={`mega-menu-content ${
+          openMenu === "display" ? "show" : ""
+        }`}
         onMouseEnter={() => handleMouseEnter("display")}
         onMouseLeave={handleMouseLeave}
       >
@@ -221,25 +309,25 @@ export default function MegaMenuNavbar() {
           <h5 className="mb-4">Display</h5>
 
           <div className="row g-3">
-            {[
-              { img: ifp, text: "Interactive Flat Panel" },
-              {
-                img: ads,
-                text: "Advertising Display & Signage",
-              },
-              { img: ksd, text: "Kiosk & Smart Display" },
-              { img: ald, text: "Active LED Display" },
-              { img: pc, text: "All-In-One PC & OPS" },
-              {
-                img: addons,
-                text: "Accessories & Add-ons",
-              },
-            ].map((item, i) => (
-              <div key={i} className="col-md-2 col-6 menu-card-head">
-                <div className="menu-card text-center p-1">
-                  <img src={item.img} className="img-fluid mb-2" alt="" />
-                  <p className="mb-0">{item.text}</p>
-                </div>
+            {displayItems.map((item, i) => (
+              <div
+                key={i}
+                className="col-md-2 col-6 menu-card-head"
+              >
+                <Link
+                  to={item.link || "/"}
+                  className="menu-card text-center p-1 d-block text-decoration-none"
+                >
+                  <img
+                    src={item.img}
+                    className="img-fluid mb-2"
+                    alt={item.text}
+                  />
+
+                  <p className="mb-0 text-dark">
+                    {item.text}
+                  </p>
+                </Link>
               </div>
             ))}
           </div>

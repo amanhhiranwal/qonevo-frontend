@@ -54,12 +54,13 @@
         /* Handle */
         .iw-handle {
           position: absolute;
+          font-size: small;
           top: 50%;
-          width: 52px;
-          height: 52px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
           background: #fff;
-          border: 3px solid #1a2340;
+          /* border: 3px solid #1a2340; */
           transform: translate(-50%, -50%);
           z-index: 16;
           display: flex;

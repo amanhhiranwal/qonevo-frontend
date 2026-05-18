@@ -113,4 +113,4 @@ const  TabImageSlide =()=> {
   );
 }
 
-export default TabImageSlide
+export default TabImageSlide;
