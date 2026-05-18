@@ -112,6 +112,12 @@ const DetailModal = ({ isOpen, product, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
 
       <div className="modal-container"  onClick={(e) => e.stopPropagation()}>
+         <button
+    className="modal-close-btn"
+    onClick={onClose}
+  >
+    ×
+  </button>
 
         {/* LEFT SIDE */}
         <div className="left-gallery">

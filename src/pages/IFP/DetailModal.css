@@ -12,6 +12,45 @@
    z-index:999;
 }
 
+.modal-close-btn{
+   position:absolute;
+
+   top:20px;
+   right:20px;
+ cursor: pointer;
+   width:42px;
+   height:42px;
+
+   border:none;
+   border-radius:50%;
+
+   background:#ffffff;
+
+   color:#001654;
+
+   font-size:28px;
+   line-height:1;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   cursor:pointer;
+
+   box-shadow:0 4px 14px rgba(0,0,0,0.12);
+
+   transition:0.3s ease;
+
+   z-index:10;
+}
+
+.modal-close-btn:hover{
+   background:#001654;
+   color:#ffffff;
+
+   transform:scale(1.05);
+}
+
 .modal-container{
    width:75%;
    max-width:1450px;
@@ -270,10 +309,12 @@
   border-radius: 12px;
   transition: background-color 0.2s;
   border: none;
+  cursor:pointer;
 }
 .get-quote-btn:hover {
   background-color: #001654ac;
   color: white;
+  cursor: pointer;
 }
 
 
