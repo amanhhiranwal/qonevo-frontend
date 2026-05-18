@@ -308,5 +308,6 @@ body {
 .btn-submit:hover {
     background-color: #001654ac;
     color: white;
+    cursor:pointer;
 
 }

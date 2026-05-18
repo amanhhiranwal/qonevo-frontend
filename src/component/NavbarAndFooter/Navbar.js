@@ -146,10 +146,10 @@ export default function MegaMenuNavbar() {
 
           {/* Navbar Content */}
           <div
-            className="collapse navbar-collapse justify-content-center"
+            className="collapse navbar-collapse"
             id="navbarContent"
           >
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {/* Display */}
               <li
                 className="nav-item"
@@ -186,14 +186,14 @@ export default function MegaMenuNavbar() {
               </li>
 
               {/* Government Business */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <button
                   type="button"
                   className="nav-link btn btn-link nav-btn"
                 >
                   Government Business
                 </button>
-              </li>
+              </li> */}
 
               {/* About */}
               <li className="nav-item">
@@ -215,8 +215,18 @@ export default function MegaMenuNavbar() {
                 </button>
               </li>
 
+               {/* Contact Us */}
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link nav-btn"
+                >
+                  Contact Us
+                </button>
+              </li>
+
               {/* Technical Specification */}
-              <li
+              {/* <li
                 className="nav-item"
                 onMouseEnter={() => handleMouseEnter("technical")}
                 onMouseLeave={handleMouseLeave}
@@ -228,13 +238,13 @@ export default function MegaMenuNavbar() {
                 >
                   Technical Specification
                 </button>
-              </li>
+              </li> */}
             </ul>
 
             {/* Right Side */}
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            {/* <ul className="navbar-nav ms-auto mb-2 mb-lg-0"> */}
               {/* Search */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <button
                   type="button"
                   className="nav-link btn btn-link nav-btn"
@@ -242,18 +252,18 @@ export default function MegaMenuNavbar() {
                 >
                   <i className="bi bi-search"></i>
                 </button>
-              </li>
+              </li> */}
 
               {/* Contact */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <button
                   className="btn btn-submit"
                   onClick={scrollToContact}
                 >
                   Contact Us
                 </button>
-              </li>
-            </ul>
+              </li> */}
+            {/* </ul> */}
           </div>
         </div>
       </nav>

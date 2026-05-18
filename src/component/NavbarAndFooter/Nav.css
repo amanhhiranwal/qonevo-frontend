@@ -101,10 +101,20 @@
   color: white;
 }
 
+.navbar .container{
+   max-width:100%;
+
+   padding-left:100px;
+   padding-right:100px;
+}
+
+
 @media (max-width: 768px) {
   .container:has(.navbar-collapse.collapsing),
 .container:has(.navbar-collapse.show) {
   background-color: white;
+
+  
 }
 
   .navbar {
