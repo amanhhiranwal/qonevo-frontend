@@ -13,9 +13,10 @@ import logo5 from "../../Assets/testimonial/image 18.png";
 import logo6 from "../../Assets/testimonial/image 43.png";
 import logo7 from "../../Assets/testimonial/image 19.png";
 import ContactPage from "../../component/contact/ContactPage";
-import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
+// import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
 import image1Hover1 from "../../Assets/Frame 48665.png";
-import image1 from "../../Assets/Frame 48665 (1).png";
+import image1 from "../../Assets/Frame48665_1.png";
+import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas";
 
 const products = [
   {
@@ -26,7 +27,7 @@ const products = [
     info: "4K UHD | 400 nits | 200W * 2",
   },
   {
-     img: image1,
+    img: image1,
     imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
     specs: "Faster interaction with enhanced processing power",
@@ -34,7 +35,7 @@ const products = [
     // price: "₹1,29,999 | ₹1,10,199",
   },
   {
-     img: image1,
+    img: image1,
     imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
     specs: "Standard performance for everyday teaching and presentations",
@@ -42,7 +43,7 @@ const products = [
     // price: "₹1,22,999 | ₹1,05,199",
   },
   {
- img: image1,
+    img: image1,
     imgHover: image1Hover1,
     name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
     specs: "Standard performance for everyday teaching and presentations",
@@ -65,7 +66,7 @@ const IFPPage = () => {
         {/* ── Content ── */}
         <div className="hero-content w-100 d-flex flex-column align-items-center">
           {/* Heading */}
-          <h1 className="hero-title display-3 fw-bold text-white text-center">
+          <h1 className="hero-title text-white text-center">
             The Smart Classroom. Reimagined.
           </h1>
 
@@ -95,10 +96,10 @@ const IFPPage = () => {
           {sizeFilters.map((s) => (
             <button
               key={s}
-              className={`size-btn${activeSize === s ? " active" : ""}`}
+              className={`size-btn${activeSize === s ? " active" : ""} sizeButton`}
               onClick={() => setActiveSize(s)}
             >
-              {s}
+              {s}"
             </button>
           ))}
         </div>
@@ -111,7 +112,7 @@ const IFPPage = () => {
                   <img className="img-hover" src={p.imgHover} alt={p.name} />
                 )}
               </div>
-              <div className="product-info mt-6">
+              <div className="product-info mt-4">
                 <div className="product-name">{p.name}</div>
                 <div className="product-spec">{p.specs}</div>
                 <div
@@ -137,7 +138,8 @@ const IFPPage = () => {
         <GravityAI />
       </section>
       <section>
-        <ScrollVideo />
+        {/* <ScrollVideo /> */}
+        <ScrollCanvas />
       </section>
       <section>
         <BuiltToPerform />
@@ -145,7 +147,7 @@ const IFPPage = () => {
       <section>
         <MadeForCreation />
       </section>
-      <section className="scale-section">
+      <section className="scale-section trusted-section">
         <h2 className="section-title">Trusted. Recognized. Certified.</h2>
         <p className="section-sub">
           Aligned with national standards and innovation-driven initiatives

@@ -7,7 +7,12 @@
 
 /* ── Section wrapper ── */
 .hero {
-  background: #1e3a6e;
+  /* background: #1e3a6e; */
+  background: linear-gradient(
+  to top right,
+  #14234c 0%,
+  #3d4c75 100%
+);
   min-height: 100vh;
   padding-top: 56px;
   position: relative;
@@ -23,16 +28,17 @@
   transform: translateX(-50%);
   width: 145%;
   height: 62%;
-  background: #ffffff;
+  background: #f5f5f5;
   border-radius: 60%;
   z-index: 0;
 }
+
 
 /* ── Keep content above curve ── */
 /* .hero-content { position: relative; z-index: 2; } */
 
 /* ── Heading — font & size (Bootstrap display-3 sets size; we add font-family) ── */
-.hero-title {
+/* .hero-title {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -40,6 +46,30 @@
   line-height: 52px;
   letter-spacing: 0;
   text-align: center;
+} */
+
+.hero-title {
+  width: 938px;
+  height: 52px;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+
+  text-align: center;
+
+  opacity: 1;
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 32px;
+    line-height: 40px;
+    padding: 0 20px;
+  }
 }
 
 /* ── Sub-heading (Bootstrap text-white-50 handles color; we tweak size) ── */
@@ -61,7 +91,7 @@
   display: inline-block;
   width: 1px;
   height: 15px;
-  background: #ffffff;
+  background: #f5f5f5;
   flex-shrink: 0;
 }
 
@@ -78,7 +108,12 @@
 }
 
 .scale-section {
-  padding: 80px 40px;
+  background:#f5f5f5;
+  padding: 40px 40px;
+}
+
+.trusted-section {
+  background: #efefef;
 }
 .section-title {
   font-family: "Inter", sans-serif;
@@ -116,31 +151,29 @@
   height: 56px;
   padding: 16px 0;
   border-radius: 8px;
-  border: 1.5px solid #dde1e9;
-  background: #fff;
-  color: #555;
+  border: none;
+
+  background: #e9e9e9;
+  color: #001654;
 
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-style: normal;
   font-size: 16px;
   line-height: 24px;
-  letter-spacing: 0;
-  text-align: center;
 
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
+
 .size-btn.active {
-  background: #1a3a8f;
-  color: #fff;
-  border-color: #1a3a8f;
+  background: #001654;
+  color: #f5f5f5;
 }
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
   margin: 0 auto 30px;
 }
 
@@ -153,23 +186,28 @@
 } */
 
 .product-name {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
+
   font-weight: 500;
   font-style: normal;
+
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
+
   color: #131313;
 
   margin-bottom: 4px;
 }
 .product-spec {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
+
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0;
+
   color: #888;
 
   margin-bottom: 8px;
@@ -183,7 +221,7 @@
   display: block;
   text-align: center;
   padding: 8px;
-  border: 1.5px solid #1a3a8f;
+  border: 1.5px solid #001654;
   border-radius: 6px;
   color: #ffff;
   font-size: 12px;
@@ -193,7 +231,7 @@
   background: transparent;
   transition: all 0.2s;
   width: 100%;
-  background: #1a3a8f;
+  background: #001654;
 }
 
 .view-all-wrap {
@@ -201,7 +239,7 @@
 }
 .btn-view-all {
   padding: 11px 36px;
-  background: #1a3a8f;
+  background: #001654;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -269,7 +307,7 @@
 @media (max-width: 768px) {
   .hero {
     padding-top: 44px;
-    background: linear-gradient(180deg, #1a2f5e 0%, #1e3a6e 54%, #ffffff 54%);
+    background: linear-gradient(180deg, #1a2f5e 0%, #1e3a6e 54%, #f5f5f5 54%);
   }
   .hero-curve {
     width: 200%;

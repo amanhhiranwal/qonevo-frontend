@@ -137,7 +137,7 @@ export default function ProductSlider() {
               alt={slide.title}
               className="slide-image"
               loading={index === 0 ? "eager" : "lazy"}
-              fetchpriority={index === 0 ? "high" : "auto"}
+              fetchPriority={index === 0 ? "high" : "auto"}
               decoding={index === 0 ? "sync" : "async"}
             />
 
