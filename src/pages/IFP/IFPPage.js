@@ -17,6 +17,7 @@ import ContactPage from "../../component/contact/ContactPage";
 import image1Hover1 from "../../Assets/Frame 48665.png";
 import image1 from "../../Assets/Frame48665_1.png";
 import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas";
+import DetailModal from "./DetailModal";
 
 const products = [
   {
@@ -56,6 +57,7 @@ const IFPPage = () => {
   const sizeFilters = ["65", "75", "86", "98", "110"];
 
   const [activeSize, setActiveSize] = useState("65");
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <>
@@ -122,7 +124,7 @@ const IFPPage = () => {
                   {p.info}
                 </div>
 
-                <button className="btn-view">View Details</button>
+                <button className="btn-view" onClick={() => setSelectedProduct(p)}>View Details</button>
               </div>
             </div>
           ))}
@@ -131,6 +133,9 @@ const IFPPage = () => {
           <button className="btn-view-all">View All</button>
         </div>
       </section>
+      <DetailModal isOpen={!!selectedProduct}
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)} />
       <section>
         <IntelligentWorkspaces />
       </section>
