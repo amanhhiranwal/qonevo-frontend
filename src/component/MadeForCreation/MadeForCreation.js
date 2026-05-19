@@ -346,9 +346,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import "../../component/Builttoperform/BuiltToPerform.css";
-import image1 from "../../Assets/madeforcreation/Image04 (2).png";
-import image2 from "../../Assets/madeforcreation/Image05.png";
-import image3 from "../../Assets/madeforcreation/Image06.png";
+import image1 from "../../Assets/madeforcreation/Image04.jpg";
+import image2 from "../../Assets/madeforcreation/Image05.jpg";
+import image3 from "../../Assets/madeforcreation/Image06.jpg";
 
 const INTERVAL = 2000;
 

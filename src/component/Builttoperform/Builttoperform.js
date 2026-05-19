@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./BuiltToPerform.css";
-import image1 from "../../Assets/buildtomove/Image01.png";
-import image2 from "../../Assets/buildtomove/Image02.png";
-import image3 from "../../Assets/buildtomove/Image03.png";
+import image1 from "../../Assets/buildtomove/image01.jpg";
+import image2 from "../../Assets/buildtomove/image02.jpg";
+import image3 from "../../Assets/buildtomove/image03.jpg";
 
 const INTERVAL = 2000;
-
-// const styles = `
-//   .btp-progress-fill {
-//     height: 100%;
-//     background: #1a2b4a;
-//     border-radius: 2px;
-//     animation: btpProgress ${INTERVAL}ms linear forwards;
-//   }
-// `;
 
 const features = [
   {
@@ -35,170 +26,71 @@ const features = [
 
 export default function BuiltToPerform() {
   const [activeFeature, setActiveFeature] = useState(0);
-  
-
-  // prevSrc = old image sitting still on bottom layer
-  // nextSrc = new image animating in on top layer
-  // animKey = forces remount of top layer to replay animate.css
-  const [prevSrc, setPrevSrc] = useState(features[0].image);
-  // const [nextSrc, setNextSrc] = useState(null);
-  // const [animKey, setAnimKey] = useState(0);
 
   const timerRef = useRef(null);
-  const animEndRef = useRef(null);
-  const imgTopRef  = useRef(null);
+  const slideCountRef = useRef(0);
+  const isAnimatingRef = useRef(false);
 
-  // const switchTo = (index) => {
-    
+  // Two slots alternating — same pattern as MadeForCreation
+  const slotARef = useRef(null); // starts visible with image[0]
+  const slotBRef = useRef(null); // starts hidden below
+  const activeSlotRef = useRef("A");
 
-  //   const incoming = features[index].image;
+  const switchTo = (index) => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
 
-  //   // Put new image on top with fadeInUp
-  //   setNextSrc(incoming);
-  //   setAnimKey((k) => k + 1);
+    const slideUp = slideCountRef.current % 2 === 0;
+    slideCountRef.current++;
 
-  //   // After animation ends, promote top to bottom and clear top
-  //   clearTimeout(animEndRef.current);
-  //   animEndRef.current = setTimeout(() => {
-  //     setPrevSrc(incoming);
-  //     setNextSrc(null);
-  //   }, 700); // matches --animate-duration 0.65s + small buffer
-  // };
+    const incoming = features[index].image;
+    const activeSlot = activeSlotRef.current;
 
+    const outEl = activeSlot === "A" ? slotARef.current : slotBRef.current;
+    const inEl  = activeSlot === "A" ? slotBRef.current : slotARef.current;
 
+    if (!outEl || !inEl) return;
 
-//   const switchTo = (index) => {
-//   const incoming = features[index].image;
-//     const imgTop = imgTopRef.current;
-//     if (!imgTop) return;
+    // Position incoming slot off-screen
+    inEl.src = incoming;
+    inEl.style.transition = "none";
+    inEl.style.transform = slideUp
+      ? "translate3d(0, 100%, 0)"
+      : "translate3d(0, -100%, 0)";
+    inEl.style.zIndex = "2";
+    outEl.style.zIndex = "1";
 
-//   // 1. instantly reset top image below screen (no transition)
-//   imgTop.style.transition = 'none';
-//   imgTop.style.bottom = '-100%';
-//   imgTop.src = incoming;
+    // Force reflow
+    inEl.getBoundingClientRect();
 
-//   // 2. next frame: slide it up
-//   requestAnimationFrame(() => {
-//     requestAnimationFrame(() => {
-//       imgTop.style.transition = 'bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
-//       imgTop.style.bottom = '0%';
-//     });
-//   });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const easing = "cubic-bezier(0.16, 1, 0.3, 1)";
+        const duration = "1100ms";
 
-//   // 3. after animation: swap bottom layer and hide top again
+        // Slide new image IN
+        inEl.style.transition = `transform ${duration} ${easing}`;
+        inEl.style.transform = "translate3d(0, 0, 0)";
 
-  
-//   // setTimeout(() => {
-//   //   setPrevSrc(incoming);
-//   //   imgTop.style.transition = 'none';
-//   //   imgTop.style.bottom = '-100%';
-//   // }, 1150);
-//    clearTimeout(animEndRef.current);
-//     animEndRef.current = setTimeout(() => {
-//       setPrevSrc(incoming);
-//       if (imgTopRef.current) {
-//         imgTopRef.current.style.transition = 'none';
-//         imgTopRef.current.style.bottom = '-100%';
-//       }
-//     }, 1150);
-// };
+        // Slide old image OUT simultaneously
+        outEl.style.transition = `transform ${duration} ${easing}`;
+        outEl.style.transform = slideUp
+          ? "translate3d(0, -100%, 0)"
+          : "translate3d(0, 100%, 0)";
+      });
+    });
 
-// const slideCountRef = useRef(0);
+    setTimeout(() => {
+      // Reset outgoing slot silently off-screen
+      outEl.style.transition = "none";
+      outEl.style.transform = slideUp
+        ? "translate3d(0, -100%, 0)"
+        : "translate3d(0, 100%, 0)";
 
-// const switchTo = (index) => {
-//   const incoming = features[index].image;
-//   const imgTop = imgTopRef.current;
-//   if (!imgTop) return;
-
-//   // alternate direction every transition
-//   const slideUp = slideCountRef.current % 2 === 0;
-//   slideCountRef.current++;
-
-//   // 1. reset instantly — position above or below screen
-//   imgTop.style.transition = 'none';
-//   if (slideUp) {
-//     imgTop.style.top = 'auto';
-//     imgTop.style.bottom = '-100%';  // start below
-//   } else {
-//     imgTop.style.bottom = 'auto';
-//     imgTop.style.top = '-100%';     // start above
-//   }
-//   imgTop.src = incoming;
-
-//   // 2. slide into view
-//   requestAnimationFrame(() => {
-//     requestAnimationFrame(() => {
-//       imgTop.style.transition = 'top 1.1s cubic-bezier(0.76, 0, 0.24, 1), bottom 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
-//       if (slideUp) {
-//         imgTop.style.bottom = '0%';
-//       } else {
-//         imgTop.style.top = '0%';
-//       }
-//     });
-//   });
-
-//   // 3. after animation: swap bottom, reset top off screen
-//   clearTimeout(animEndRef.current);
-//   animEndRef.current = setTimeout(() => {
-//     setPrevSrc(incoming);
-//     if (imgTopRef.current) {
-//       imgTopRef.current.style.transition = 'none';
-//       imgTopRef.current.style.top = 'auto';
-//       imgTopRef.current.style.bottom = '-100%';
-//     }
-//   }, 1150);
-// };
-
-
-const slideCountRef = useRef(0);
-
-const switchTo = (index) => {
-  const incoming = features[index].image;
-  const imgTop = imgTopRef.current;
-
-  if (!imgTop) return;
-
-  const slideUp = slideCountRef.current % 2 === 0;
-  slideCountRef.current++;
-
-  // stop current animation
-  imgTop.style.transition = "none";
-
-  // set new image
-  imgTop.src = incoming;
-
-  // initial position
-  imgTop.style.transform = slideUp
-    ? "translate3d(0, 100%, 0)"
-    : "translate3d(0, -100%, 0)";
-
-  // force browser reflow
-  imgTop.getBoundingClientRect();
-
-  requestAnimationFrame(() => {
-    imgTop.style.transition =
-      "transform 1100ms cubic-bezier(0.16, 1, 0.3, 1)";
-    // imgTop.style.transform = "translate3d(0, 0, 0)";
-    imgTopRef.current.style.transform =
-  "translate3d(0,100%,0) scale(1)";
-  });
-
-  clearTimeout(animEndRef.current);
-
-  animEndRef.current = setTimeout(() => {
-    setPrevSrc(incoming);
-
-    if (imgTopRef.current) {
-      imgTopRef.current.style.transition = "none";
-
-      imgTopRef.current.style.transform =
-        slideUp
-          ? "translate3d(0, 100%, 0)"
-          : "translate3d(0, -100%, 0)";
-    }
-  }, 1150);
-};
-
+      activeSlotRef.current = activeSlot === "A" ? "B" : "A";
+      isAnimatingRef.current = false;
+    }, 1150);
+  };
 
   const startTimer = () => {
     clearInterval(timerRef.current);
@@ -212,15 +104,23 @@ const switchTo = (index) => {
   };
 
   useEffect(() => {
-    // startTimer();
+    // Initialize slot positions
+    if (slotARef.current) {
+      slotARef.current.style.transform = "translate3d(0, 0, 0)";
+      slotARef.current.style.zIndex = "1";
+    }
+    if (slotBRef.current) {
+      slotBRef.current.style.transform = "translate3d(0, 100%, 0)";
+      slotBRef.current.style.zIndex = "2";
+    }
+    startTimer();
     return () => {
       clearInterval(timerRef.current);
-      clearTimeout(animEndRef.current);
     };
   }, []);
 
   const handleFeatureClick = (fi) => {
-    if (fi === activeFeature) return;
+    if (fi === activeFeature || isAnimatingRef.current) return;
     clearInterval(timerRef.current);
     setActiveFeature(fi);
     switchTo(fi);
@@ -228,70 +128,57 @@ const switchTo = (index) => {
   };
 
   return (
-    <>
-      {/* <style>{styles}</style> */}
-      <section className="btp-section">
-        <div className="container-fluid px-0">
-          <div className="row g-0 align-items-center">
+    <section className="btp-section">
+      <div className="container-fluid px-0">
+        <div className="row g-0 align-items-center">
 
-            {/* LEFT: Content */}
-            <div className="col-lg-5 col-md-6 btp-content-col">
-              <h2 className="btp-headline">Built to Perform</h2>
-              <p className="btp-subtext">
-                Designed for smooth multitasking and fast, consistent performance.
-              </p>
+          {/* LEFT: Content */}
+          <div className="col-lg-5 col-md-6 btp-content-col">
+            <h2 className="btp-headline">Built to Perform</h2>
+            <p className="btp-subtext">
+              Designed for smooth multitasking and fast, consistent performance.
+            </p>
 
-              <div className="btp-feature-list">
-                {features.map((f, i) => (
-                  <div
-                    key={i}
-                    className={`btp-feature-item${activeFeature === i ? " active" : ""}`}
-                    onClick={() => handleFeatureClick(i)}
-                  >
-                    <div className={`btp-feature-bar${activeFeature === i ? " active" : ""}`} />
-                    <div style={{ width: "100%" }}>
-                      <div className="btp-feature-title">{f.title}</div>
-                      <p className="btp-feature-desc">{f.desc}</p>
-                      
-                    </div>
+            <div className="btp-feature-list">
+              {features.map((f, i) => (
+                <div
+                  key={i}
+                  className={`btp-feature-item${activeFeature === i ? " active" : ""}`}
+                  onClick={() => handleFeatureClick(i)}
+                >
+                  <div style={{ width: "100%" }}>
+                    <div className="btp-feature-title">{f.title}</div>
+                    <p className="btp-feature-desc">{f.desc}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* RIGHT: Monitor */}
-            <div className="col-lg-7 col-md-6 btp-images-col">
-              <div className="btp-monitor-wrapper">
-              
-
-                <div className="btp-screen-container">
-
-                  {/* Bottom layer: previous image — sits still while new one comes in over it */}
-                  <img
-                    src={prevSrc}
-                    alt="previous feature"
-                    className="btp-screen-img btp-img-bottom"
-                  />
-
-                  {/* Top layer: new image — slides up over the old one with fadeInUp */}
-                  
-                    <img
-                      ref={imgTopRef}
-                      src=""
-                      alt="next feature"
-                      className="btp-screen-img btp-img-top"
-                    />
-                
-
                 </div>
+              ))}
+            </div>
+          </div>
 
-                
+          {/* RIGHT: Image */}
+          <div className="col-lg-7 col-md-6 btp-images-col">
+            <div className="btp-monitor-wrapper">
+              <div className="btp-screen-container">
+
+                <img
+                  ref={slotARef}
+                  src={features[0].image}
+                  alt="feature A"
+                  className="btp-screen-img"
+                />
+                <img
+                  ref={slotBRef}
+                  src=""
+                  alt="feature B"
+                  className="btp-screen-img"
+                />
+
               </div>
             </div>
-
           </div>
+
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
