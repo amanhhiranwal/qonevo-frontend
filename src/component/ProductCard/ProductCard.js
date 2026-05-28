@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import "./ProductCard.css";
 import DetailModal from '../../pages/IFP/DetailModal';
 
 const ProductCard = ({ products }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (

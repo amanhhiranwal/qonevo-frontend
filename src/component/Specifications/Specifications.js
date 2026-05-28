@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Specifications.css";
 
-import thumb110 from "../../Assets/product-page/screen-specification.png";
+// import thumb110 from "../../Assets/product-page/screen-specification.png";
 
 import smallImg from "../../Assets/product-page/specifications/small-screen.png"
 

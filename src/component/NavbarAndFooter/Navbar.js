@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
 
 import logo from "../../Assets/logo.svg";
-import ifp from "../../Assets/ifp.svg";
-import ads from "../../Assets/ads.png";
-import ksd from "../../Assets/ksd.png";
-import pc from "../../Assets/pc.png";
+// import ifp from "../../Assets/ifp.svg";
+// import ads from "../../Assets/ads.png";
+// import ksd from "../../Assets/ksd.png";
+// import pc from "../../Assets/pc.png";
 
 
 import img1 from "../../Assets/DisplayNav/image1.png"
@@ -19,8 +19,8 @@ import icon from "../../Assets/DisplayNav/icon.png"
 
 
 
-import addons from "../../Assets/addons.png";
-import ald from "../../Assets/ald.png";
+// import addons from "../../Assets/addons.png";
+// import ald from "../../Assets/ald.png";
 import pdfImg from "../../Assets/pdf.png";
 import "../NavBarAnimation/NavBarAnimation.css"
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const showTimeoutRef = useRef(null); 
 
-    const [visibleMenu, setVisibleMenu] = useState(null); // controls "show" class
+    // const [visibleMenu, setVisibleMenu] = useState(null); // controls "show" class
 
   const timeOutRef = useRef(null)
 
@@ -68,35 +68,35 @@ export default function MegaMenuNavbar() {
     }
   };
 
-  const scrollToContact = () => {
-    const el = document.getElementById("contact-section");
+  // const scrollToContact = () => {
+  //   const el = document.getElementById("contact-section");
 
-    if (!el) return;
+  //   if (!el) return;
 
-    const isMobile = window.innerWidth < 768;
+  //   const isMobile = window.innerWidth < 768;
 
-    let top;
+  //   let top;
 
-    if (isMobile) {
-      const navbarOffset = 80;
+  //   if (isMobile) {
+  //     const navbarOffset = 80;
 
-      top =
-        el.getBoundingClientRect().top +
-        window.pageYOffset -
-        navbarOffset;
-    } else {
-      top =
-        el.getBoundingClientRect().top +
-        window.pageYOffset -
-        window.innerHeight / 2 +
-        el.offsetHeight / 2;
-    }
+  //     top =
+  //       el.getBoundingClientRect().top +
+  //       window.pageYOffset -
+  //       navbarOffset;
+  //   } else {
+  //     top =
+  //       el.getBoundingClientRect().top +
+  //       window.pageYOffset -
+  //       window.innerHeight / 2 +
+  //       el.offsetHeight / 2;
+  //   }
 
-    window.scrollTo({
-      top,
-      behavior: "smooth",
-    });
-  };
+  //   window.scrollTo({
+  //     top,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   useEffect(() => {
     const navbar = document.querySelector(".navbar.fixed-top");

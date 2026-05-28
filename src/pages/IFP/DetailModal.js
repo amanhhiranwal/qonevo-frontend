@@ -1,8 +1,8 @@
 import React, { useState , useEffect} from "react";
 
-import img1 from "../../Assets/ifp/thumbnail-img.png";
-import img2 from "../../Assets/ifp/thumbnail-img2.png";
-import img3 from "../../Assets/ifp/thumbnail-img3.png";
+// import img1 from "../../Assets/ifp/thumbnail-img.png";
+// import img2 from "../../Assets/ifp/thumbnail-img2.png";
+// import img3 from "../../Assets/ifp/thumbnail-img3.png";
 
 import "./DetailModal.css";
 
