@@ -7,6 +7,8 @@
           font-family: 'Montserrat', sans-serif;
           user-select: none;
           background: #0e1628;
+           /* min-height: 500px;
+          max-height: 900px; */
         }
 
         .iw-compare {
@@ -109,3 +111,18 @@
         }
         .iw-handle.hint { animation: pulse-hint 1.5s ease-in-out 3; }
   
+
+
+        @media (max-width: 991px) {
+
+          .iw-hero {
+            height: 400px;
+
+          }
+        }
+
+        @media (max-width: 768) {
+          .iw-hero{
+            height: 300px;
+          }
+        }

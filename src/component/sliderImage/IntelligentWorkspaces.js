@@ -1,9 +1,9 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./intelligentWorkspace.css";
-import leftImg  from "../../Assets/ifp/Property 1=Image01 (1).png";
-import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
 
-export default function IntelligentWorkspaces() {
+
+export default function IntelligentWorkspaces({image1,
+  image2}) {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef(null);
@@ -44,7 +44,7 @@ export default function IntelligentWorkspaces() {
           {/* RIGHT — Smart Classroom (Image 2) */}
           <img
             className="iw-img-right"
-            src={rightImg}
+            src={image1}
             alt="The Smart Classroom – Reimagined"
             draggable={false}
           />
@@ -52,7 +52,7 @@ export default function IntelligentWorkspaces() {
           {/* LEFT — Intelligent Workspaces (Image 1) */}
           <img
             className="iw-img-left"
-            src={leftImg}
+            src={image2}
             alt="Intelligent Workspaces"
             draggable={false}
           />

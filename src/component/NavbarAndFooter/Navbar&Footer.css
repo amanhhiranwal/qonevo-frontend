@@ -25,7 +25,9 @@
 }
 
 .contact-section {
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
+
+  background-color: #efefef;
   padding: 3rem 5rem !important;
   border-bottom-right-radius: 22px;
   border-bottom-left-radius: 22px;

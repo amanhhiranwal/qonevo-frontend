@@ -1,21 +1,31 @@
 .btp-section {
   background: #efefef;
   width: 100%;
-  padding: 60px 0px 0px 50px;
+  /* padding: 60px 0px 0px 50px; */
+
+/* padding: 60px 0 0 100px; */
+padding: 60px 0 0 clamp(20px, 6vw, 100px);
   overflow: hidden;
   font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
+  /* height: 531px; */
+  min-height: 70vh;
+  /* max-width: 1440px;
+  height: 531px; */
   display: flex;
   align-items: center;
 }
 
 .btp-section-made-for-creation {
+  
   background: #efefef;
   width: 100%;
-  padding: 10px 0px 0px 0px;
-  overflow: hidden;
+/* padding: 10px 100px 0 0; */
+padding: 10px clamp(20px, 6vw, 100px) 0 0; 
+overflow: hidden;
   font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
+  min-height: 70vh;
+ 
+ 
   display: flex;
   align-items: center;
 }
@@ -89,7 +99,7 @@
 }
 
 .btp-feature-item.active::after {
-  animation: btp-fill-bar 2s linear forwards;
+  animation: btp-fill-bar 4s linear forwards;
 }
 
 @keyframes btp-fill-bar {
@@ -102,7 +112,7 @@
 }
 
 .btp-feature-title {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #888;
   margin-bottom: 0;
@@ -116,11 +126,13 @@
 }
 
 .btp-feature-desc {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #999;
   line-height: 1.5;
+  /* max-width: 280px; */
   max-width: 280px;
   overflow: hidden;
+  height: 48px;
   max-height: 0;
   opacity: 0;
   margin-top: 0;
@@ -133,7 +145,6 @@
   margin-top: 5px;
 }
 
-/* ── Image column ── */
 .btp-images-col {
   padding: 20px 0 20px 20px;
   position: relative;
@@ -148,19 +159,42 @@
   overflow: hidden;
 }
 
+/* ✅ no transform, no will-change */
 .btp-screen-container {
   position: relative;
   width: 100%;
   height: 500px;
   overflow: hidden;
-  border-radius: 24px;
+  isolation: isolate;
+  background: #efefef;
 }
 
-/* ── Single rule for both image slots ── */
-.btp-screen-img {
+/* ✅ slot div — clipped, solid bg */
+.btp-slot {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background: #efefef;
+  will-change: clip-path;
+}
+
+/* ✅ img inside slot — no transform */
+.btp-slot .btp-screen-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  /* object-fit: contain; */
+}
+
+@media (max-width: 768px) {
+  .btp-screen-container {
+    height: 300px;
+  }
+
+  .btp-section, .btp-section-made-for-creation {
+    padding: 5px 20px;
+  }
 }
