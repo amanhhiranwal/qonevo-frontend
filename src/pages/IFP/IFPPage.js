@@ -12,11 +12,7 @@ import logo4 from "../../Assets/testimonial/image 17.png";
 import logo5 from "../../Assets/testimonial/image 18.png";
 import logo6 from "../../Assets/testimonial/image 43.png";
 import logo7 from "../../Assets/testimonial/image 19.png";
-
 import ContactPage from "../../component/contact/ContactPage";
-// import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
-import image1Hover1 from "../../Assets/Frame 48665.png";
-import image1 from "../../Assets/Frame48665_1.png";
 import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas";
 import DetailModal from "./DetailModal";
 import leftImg from "../../Assets/ifp/Property 1=Image01 (1).png";
@@ -25,56 +21,24 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../../component/ProductCard/ProductCard";
 
-// const products = [
-//   {
-//     img: image1,
-//     imgHover: image1Hover1,
-//     name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//   },
-//   {
-//     img: image1,
-//     imgHover: image1Hover1,
-//     name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
-//     specs: "Faster interaction with enhanced processing power",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,29,999 | ₹1,10,199",
-//   },
-//   {
-//     img: image1,
-//     imgHover: image1Hover1,
-//     name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,22,999 | ₹1,05,199",
-//   },
-//   {
-//     img: image1,
-//     imgHover: image1Hover1,
-//     name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,05,999 | ₹89,199",
-//   },
-// ];
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const LIMIT = 4;
 
 const IFPPage = () => {
   const sizeFilters = ["65", "75", "86", "98", "110"];
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [activeSize, setActiveSize] = useState("65");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const limit = 4;
   const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/api/v1/products?limit=${limit}`,
+          `${BASE_URL}/api/v1/products?limit=${LIMIT}`,
           {
             timeout: 5000,
           },
@@ -89,7 +53,7 @@ const IFPPage = () => {
     };
 
     getProducts();
-  }, [limit]);
+  }, []);
 
   return (
     <>
@@ -142,65 +106,9 @@ const IFPPage = () => {
           <div className="products-loader">
             <div className="loader"></div>
           </div>
-        ) : products.length === 0 ? ( // ← empty state
+        ) : products.length === 0 ? ( 
           <p className="no-data">No Data Found...</p>
         ) : (
-          // <div className="product-grid">
-
-          //   {products.map((p) => (
-          //     <div className="product-card_ifp" key={p.id ?? p.name}>
-
-          //       <div className="abstract-art">
-
-          //         <img
-          //           className="img-default"
-          //           src={p.thumbnail}
-          //           alt={p.name}
-          //           loading="lazy"
-          //         />
-
-          //         {p.images?.[1]?.image_url && (
-          //           <img
-          //             className="img-hover"
-          //             src={p.images[1].image_url}
-          //             alt={p.name}
-          //             loading="lazy"
-          //           />
-          //         )}
-
-          //       </div>
-
-          //       <div className="product-info mt-4">
-
-          //         <div className="product-name">
-          //          {`${p.name} ${p.size}"`}
-          //         </div>
-
-          //         <div className="product-spec">
-          //           {p?.subheading}
-          //         </div>
-
-          //         <div
-          //           className="product-spec mt-4 mb-4"
-          //           style={{ color: "#aaa" }}
-          //         >
-          //           {p?.size | p?.chipset | p?.storage | p?.resolution || "Default : 4K UHD | 400 nits | 200W * 2"}
-          //         </div>
-
-          //         <button
-          //           className="btn-view"
-          //           onClick={() => setSelectedProduct(p)}
-          //         >
-          //           View Details
-          //         </button>
-
-          //       </div>
-
-          //     </div>
-          //   ))}
-
-          // </div>
-
           <>
             <ProductCard products={products} />
             <div className="view-all-wrap">
