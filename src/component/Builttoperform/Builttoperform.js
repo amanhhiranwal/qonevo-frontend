@@ -1,47 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./BuiltToPerform.css";
-import image1 from "../../Assets/buildtomove/image01.jpg";
-import image2 from "../../Assets/buildtomove/image02.jpg";
-import image3 from "../../Assets/buildtomove/image03.jpg";
+import image1 from "../../Assets/buildtomove/Image01.png";
+import image2 from "../../Assets/buildtomove/Image02.png";
+import image3 from "../../Assets/buildtomove/Image03.png";
 
-const INTERVAL = 2000;
+// const INTERVAL = 2000;
+const INTERVAL = 4000;
 
 const features = [
-  {
-    title: "4K UHD Display",
-    desc: "Clear visuals and vibrant detail for better visibility and engagement",
-    image: image1,
-  },
-  {
-    title: "Anti-Glare Screen",
-    desc: "Reduced reflections for uninterrupted visibility",
-    image: image2,
-  },
-  {
-    title: "Built-in Camera & Mic",
-    desc: "Clear video and voice without external devices",
-    image: image3,
-  },
+  { title: "4K UHD Display", desc: "Clear visuals and vibrant detail for better visibility and engagement", image: image1 },
+  { title: "Anti-Glare Screen", desc: "Reduced reflections for uninterrupted visibility", image: image2 },
+  { title: "Built-in Camera & Mic", desc: "Clear video and voice without external devices", image: image3 },
 ];
 
 export default function BuiltToPerform() {
   const [activeFeature, setActiveFeature] = useState(0);
-
   const timerRef = useRef(null);
-  const slideCountRef = useRef(0);
   const isAnimatingRef = useRef(false);
-
-  // Two slots alternating — same pattern as MadeForCreation
-  const slotARef = useRef(null); // starts visible with image[0]
-  const slotBRef = useRef(null); // starts hidden below
   const activeSlotRef = useRef("A");
+  const cycleRef = useRef(0);
+  const slotARef = useRef(null);
+  const slotBRef = useRef(null);
 
   const switchTo = (index) => {
     if (isAnimatingRef.current) return;
     isAnimatingRef.current = true;
-
-    const slideUp = slideCountRef.current % 2 === 0;
-    slideCountRef.current++;
 
     const incoming = features[index].image;
     const activeSlot = activeSlotRef.current;
@@ -51,45 +34,29 @@ export default function BuiltToPerform() {
 
     if (!outEl || !inEl) return;
 
-    // Position incoming slot off-screen
-    inEl.src = incoming;
+    const isBottomUp = cycleRef.current < 2;
+    cycleRef.current = (cycleRef.current + 1) % 3;
+
+    inEl.querySelector("img").src = incoming;
     inEl.style.transition = "none";
-    inEl.style.transform = slideUp
-      ? "translate3d(0, 100%, 0)"
-      : "translate3d(0, -100%, 0)";
+    inEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
     inEl.style.zIndex = "2";
     outEl.style.zIndex = "1";
 
-    // Force reflow
-    inEl.getBoundingClientRect();
-
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        const easing = "cubic-bezier(0.16, 1, 0.3, 1)";
-        const duration = "1100ms";
-
-        // Slide new image IN
-        inEl.style.transition = `transform ${duration} ${easing}`;
-        inEl.style.transform = "translate3d(0, 0, 0)";
-
-        // Slide old image OUT simultaneously
-        outEl.style.transition = `transform ${duration} ${easing}`;
-        outEl.style.transform = slideUp
-          ? "translate3d(0, -100%, 0)"
-          : "translate3d(0, 100%, 0)";
+        // inEl.style.transition = "clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1)";
+        inEl.style.transition = "clip-path 1600ms cubic-bezier(0.76, 0, 0.24, 1)";
+        inEl.style.clipPath = "inset(0% 0 0% 0)";
       });
     });
 
     setTimeout(() => {
-      // Reset outgoing slot silently off-screen
       outEl.style.transition = "none";
-      outEl.style.transform = slideUp
-        ? "translate3d(0, -100%, 0)"
-        : "translate3d(0, 100%, 0)";
-
+      outEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
       activeSlotRef.current = activeSlot === "A" ? "B" : "A";
       isAnimatingRef.current = false;
-    }, 1150);
+    }, 1650);
   };
 
   const startTimer = () => {
@@ -104,19 +71,16 @@ export default function BuiltToPerform() {
   };
 
   useEffect(() => {
-    // Initialize slot positions
     if (slotARef.current) {
-      slotARef.current.style.transform = "translate3d(0, 0, 0)";
+      slotARef.current.style.clipPath = "inset(0% 0 0 0)";
       slotARef.current.style.zIndex = "1";
     }
     if (slotBRef.current) {
-      slotBRef.current.style.transform = "translate3d(0, 100%, 0)";
+      slotBRef.current.style.clipPath = "inset(100% 0 0 0)";
       slotBRef.current.style.zIndex = "2";
     }
     startTimer();
-    return () => {
-      clearInterval(timerRef.current);
-    };
+    return () => clearInterval(timerRef.current);
   }, []);
 
   const handleFeatureClick = (fi) => {
@@ -132,13 +96,10 @@ export default function BuiltToPerform() {
       <div className="container-fluid px-0">
         <div className="row g-0 align-items-center">
 
-          {/* LEFT: Content */}
-          <div className="col-lg-5 col-md-6 btp-content-col">
-            <h2 className="btp-headline">Built to Perform</h2>
+<div className="col-lg-4 col-md-5 btp-content-col">            <h2 className="btp-headline">Built to Perform</h2>
             <p className="btp-subtext">
               Designed for smooth multitasking and fast, consistent performance.
             </p>
-
             <div className="btp-feature-list">
               {features.map((f, i) => (
                 <div
@@ -155,24 +116,14 @@ export default function BuiltToPerform() {
             </div>
           </div>
 
-          {/* RIGHT: Image */}
-          <div className="col-lg-7 col-md-6 btp-images-col">
-            <div className="btp-monitor-wrapper">
+<div className="col-lg-8 col-md-7 btp-images-col">            <div className="btp-monitor-wrapper">
               <div className="btp-screen-container">
-
-                <img
-                  ref={slotARef}
-                  src={features[0].image}
-                  alt="feature A"
-                  className="btp-screen-img"
-                />
-                <img
-                  ref={slotBRef}
-                  src=""
-                  alt="feature B"
-                  className="btp-screen-img"
-                />
-
+                <div ref={slotARef} className="btp-slot">
+                  <img src={features[0].image} alt="feature A" className="btp-screen-img" />
+                </div>
+                <div ref={slotBRef} className="btp-slot">
+                  <img src="" alt="feature B" className="btp-screen-img" />
+                </div>
               </div>
             </div>
           </div>

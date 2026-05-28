@@ -1,15 +1,13 @@
- 
-        .gravity-section {
-          background: #f0f0ed;
-          min-height: 100vh;
-          padding: 72px 0 80px;
-          font-family: 'DM Sans', sans-serif;
-        }
+.gravity-section {
+  background: #f0f0ed;
+  min-height: 100vh;
+  padding: 72px 0 80px;
+  font-family: "DM Sans", sans-serif;
+}
 
-        /* ── Heading ── */
-        .gravity-title {
-         
-          font-family: "Inter", sans-serif;
+/* ── Heading ── */
+.gravity-title {
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 44px;
@@ -19,11 +17,10 @@
   color: #001654;
 
   margin-bottom: 10px;
-        }
+}
 
-        .gravity-subtitle {
-         
-            font-family: "Inter", sans-serif;
+.gravity-subtitle {
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 16px;
@@ -33,16 +30,16 @@
   color: #4c4c4c;
 
   margin-bottom: 36px;
-        }
+}
 
-        /* ── White video container ── */
+/* ── White video container ── */
 
-
-        .gravity-screen-wrap {
+.gravity-screen-wrap {
   background: #fff;
+  background: transparent;
   border-radius: 20px;
-  padding: 80px 60px 0;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+  padding: 0 60px 0;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   margin-top: 40px;
 }
@@ -54,8 +51,8 @@
   margin: 0 auto;
   border-radius: 14px 14px 0 0;
   overflow: hidden;
-  /* background: #ffffff; */
-  box-shadow: 0 8px 48px rgba(0,0,0,0.22);
+  background: #ffffff;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.22);
 }
 
 .gravity-video {
@@ -68,26 +65,62 @@
   /* background: #000; */
 }
 
-
 .gravity-monitorss {
-  display: block;
-  width: 100%;
-  max-width: 700px;
-  margin: -30px auto;
-  border-radius: 14px 14px 0 0;
+   width: 100%;
+  max-width: 1230px;
+
+  aspect-ratio: 1230 / 428;
+
+  min-height: 428px;
+
+  margin: 0 auto;
+
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .gravity-gif {
   width: 100%;
   height: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-        /* .gravity-screen-wrap {
+/* newly added css  start*/
+.gravity-screen-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 0 40px 0;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+/* .gravity-monitorss { */
+  /* max-width: 100%; */
+  /* max-width: 900px; */
+   /* margin: 0 auto; */
+  /* border-radius: 18px 18px 0 0; */
+  /*overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+*/
+  /* aspect-ratio: 16 / 9; */
+  /* background: #000;  */
+/* } */
+
+.gravity-gif {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+}
+
+
+/* newly added css end */
+
+/* .gravity-screen-wrap {
           background: #fff;
           border-radius: 20px;
           padding: 40px 60px 0;
@@ -119,62 +152,87 @@
           background: linear-gradient(135deg, #c8a4f8 0%, #f0a0e0 35%, #9bb8f8 70%, #d0a0ff 100%);
         } */
 
-        /* app icons row inside the screen */
-        
-        /* ── Feature cards ── */
-        .gravity-cards-row {
-          margin-top: 15px;
-          gap: 18px;
-        }
+/* app icons row inside the screen */
 
-        .gravity-card {
-          background: #3a3a3a;
-          border-radius: 16px;
-          padding: 22px 20px 0;
-          flex: 1 1 0;
-          min-width: 0;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
+/* ── Feature cards ── */
+.gravity-cards-row {
+  margin-top: 15px;
+  gap: 18px;
+}
 
-        .gravity-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 40px rgba(0,0,0,0.18);
-        }
+.gravity-card {
+  background: #3a3a3a;
+  border-radius: 16px;
+  padding: 22px 20px 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
 
-        .gravity-card-title {
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: #fff;
-          margin-bottom: 6px;
-          font-family: 'DM Sans', sans-serif;
-        }
+.gravity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
 
-        .gravity-card-desc {
-          font-size: 0.8rem;
-          color: #bbb;
-          font-weight: 300;
-          line-height: 1.5;
-          margin-bottom: 18px;
-        }
+.gravity-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+  font-family: "DM Sans", sans-serif;
+}
 
-        .gravity-card-img {
-          width: calc(100% + 0px);
-          border-radius: 10px 10px 0 0;
-          display: block;
-          object-fit: cover;
-          aspect-ratio: 16/10;
-          margin-top: auto;
-          filter: brightness(0.92);
-        }
+.gravity-card-desc {
+  font-size: 1rem;
+  color: #bbb;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
 
-        @media (max-width: 768px) {
-          .gravity-screen-wrap { padding: 24px 18px 0; }
-          .gravity-cards-row   { flex-direction: column !important; }
-          .gravity-card        { flex: unset; }
-          .gravity-icons-row   { gap: 18px; }
-          .gravity-app-icon .icon-box { width: 44px; height: 44px; }
-        }
-    
+.gravity-card-img {
+  width: calc(100% + 0px);
+  border-radius: 10px 10px 0 0;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/10;
+  margin-top: auto;
+  filter: brightness(0.92);
+}
+
+.gravity-card-video {
+  width: 100%;
+  aspect-ratio: 16/10;
+
+  object-fit: cover;
+  display: block;
+
+  border-radius: 10px 10px 0 0;
+  margin-top: auto;
+
+  filter: brightness(0.92);
+}
+
+@media (max-width: 768px) {
+  .gravity-screen-wrap {
+    padding: 24px 18px 0;
+  }
+  .gravity-cards-row {
+    flex-direction: column !important;
+  }
+  .gravity-card {
+    flex: unset;
+  }
+  .gravity-icons-row {
+    gap: 18px;
+  }
+  .gravity-app-icon .icon-box {
+    width: 44px;
+    height: 44px;
+  }
+}

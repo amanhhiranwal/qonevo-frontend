@@ -1,10 +1,12 @@
+
+
 .scroll-section {
   position: relative;
-
+  background-color: #f0f0ec;
   /* IMPORTANT */
   height: 500vh;
 
-  background: transparent;
+  /* background: transparent; */
 }
 
 .sticky-canvas {
