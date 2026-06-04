@@ -74,14 +74,14 @@ export default function MegaMenuNavbar() {
   //   if (isMobile) {
   //     const navbarOffset = 80;
 
-      top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
-    } else {
-      top =
-        el.getBoundingClientRect().top +
-        window.pageYOffset -
-        window.innerHeight / 2 +
-        el.offsetHeight / 2;
-    }
+  //     top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+  //   } else {
+  //     top =
+  //       el.getBoundingClientRect().top +
+  //       window.pageYOffset -
+  //       window.innerHeight / 2 +
+  //       el.offsetHeight / 2;
+  //   }
 
   //   window.scrollTo({
   //     top,

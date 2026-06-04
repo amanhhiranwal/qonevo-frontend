@@ -35,7 +35,7 @@ export default function MadeForCreation() {
   const timerRef = useRef(null);
   const isAnimatingRef = useRef(false);
   const activeSlotRef = useRef("A");
-  const cycleRef = useRef(0);
+  // const cycleRef = useRef(0);
   const slotARef = useRef(null);
   const slotBRef = useRef(null);
 
@@ -123,6 +123,7 @@ useEffect(() => {
   startTimer();
 }, 400);
   return () => clearInterval(timerRef.current);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
   const handleFeatureClick = (fi) => {
     if (fi === activeFeature || isAnimatingRef.current) return;

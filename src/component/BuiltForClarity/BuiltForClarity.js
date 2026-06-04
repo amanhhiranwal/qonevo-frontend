@@ -135,7 +135,10 @@ const BuiltForClarity = () => {
     startTimer();
 
     return () => clearInterval(timerRef.current);
-  }, [startTimer]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   const handleFeatureClick = (index) => {
     if (
