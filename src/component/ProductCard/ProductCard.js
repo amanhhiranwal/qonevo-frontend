@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import "./ProductCard.css";
-import DetailModal from '../../pages/IFP/DetailModal';
+import DetailModal from '../../pages/IFP/DetailModal.js';
 
-const ProductCard = ({ products }) => {
+const ProductCard = ({ products, variant="default" }) => {
   // const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <section>
-      <div className="product-grid">
+      <div className={`product-grid ${variant}`}>
         {products.map((p) => (
           <div className="product-card_ifp" key={p.id ?? p.name}>  {/* ✅ id fallback name */}
 
@@ -30,17 +30,17 @@ const ProductCard = ({ products }) => {
               )}
             </div>
 
-            <div className="product-info mt-4">
+            <div className="product-info ">
 
               <div className="product-name">
                 {`${p?.name}`}   {/* ✅ name + size */}
               </div>
 
-              <div className="product-spec">
+              <div className="product-spec mb-4">
                 {p?.subheading}              {/* ✅ subheading */}
               </div>
 
-              <div className="product-spec mt-4 mb-4" style={{ color: "#aaa" }}>
+              <div className="product-spec mt-4 mb-4 " style={{ color: "#aaa" }}>
                 {[p?.size, p?.chipset, p?.storage, p?.resolution]
                   .filter(Boolean)
                   .join(" | ")               /* ✅ | as separator */

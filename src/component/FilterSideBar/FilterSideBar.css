@@ -3,18 +3,69 @@
 ======================================== */
 
 .filter-sidebar {
-  width: 240px;
+  /* background-color: #ab8c8c; */
+
+  width: 100%;
+  max-width: 296px;
+
   flex-shrink: 0;
-  padding: 24px;
+
+  padding: 24px 28px;
+  padding-top: 40px;
+
+  border-radius: 16px;
+  
 
   font-family: "Inter", sans-serif;
 
-  /* Sticky so it stays visible while scrolling */
-  position: sticky;
-  top: 24px;
+
+position: relative;
+  /* top: 24px;
+  bottom: 24px; */
+
   align-self: flex-start;
+
+  max-height: calc(100vh - 24px);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-gutter: stable;
+
+
+
+  /* smooth sticky scrolling */
+ 
+
+  /* REMOVE fixed height issues */
+  /* height: auto; */
+
+  /* smaller bottom spacing */
+  padding-bottom: 100px!important;
+   overflow-y: auto;       /* always visible = always at right edge */
+  scrollbar-gutter: stable; 
+
 }
 
+/* Scrollbar */
+.filter-sidebar::-webkit-scrollbar {
+
+  width: 7px;
+}
+
+.filter-sidebar::-webkit-scrollbar-track {
+  border-radius: 10px;
+   margin-top: 16px;
+  margin-bottom: 16px;
+  background: #e6e6e6; /* light gray track */
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+  /* background: #a6a6a6; */
+   background: #aaa5a5; 
+
+  border-radius: 10px;
+}
 /* ========================================
    GROUP
 ======================================== */
@@ -28,7 +79,7 @@
 }
 
 /* ========================================
-   GROUP HEADER — clickable row
+   GROUP HEADER
 ======================================== */
 
 .filter-group-header {
@@ -40,6 +91,7 @@
 
   background: none;
   border: none;
+
   padding: 0;
   margin-bottom: 16px;
 
@@ -49,7 +101,7 @@
 .filter-group-label {
   font-size: 15px;
   font-weight: 600;
-  color: rgba(20, 20, 20, 1);
+  color: #141414;
 
   text-align: left;
 }
@@ -68,22 +120,25 @@
 }
 
 /* ========================================
-   OPTIONS GRID — 2 columns
+   OPTIONS GRID
 ======================================== */
 
 .filter-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 8px;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px 22px;
 }
 
 /* ========================================
-   SINGLE OPTION — label wraps checkbox + text
+   OPTION
 ======================================== */
 
 .filter-option {
   display: flex;
   align-items: flex-start;
+
   gap: 8px;
 
   cursor: pointer;
@@ -94,42 +149,39 @@
 ======================================== */
 
 .filter-checkbox {
-  /* Hide native */
   appearance: none;
   -webkit-appearance: none;
-
-  flex-shrink: 0;
 
   width: 18px;
   height: 18px;
 
-  margin-top: 1px; /* Align with first line of text */
+  flex-shrink: 0;
 
-  border: 1.5px solid rgba(180, 180, 180, 1);
+  margin-top: 1px;
+
+  border: 1.5px solid #b4b4b4;
   border-radius: 4px;
 
   background: #fff;
 
   cursor: pointer;
 
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 
-  /* Centre the checkmark */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Checked state */
 .filter-checkbox:checked {
   background: #1a1a1a;
   border-color: #1a1a1a;
 }
 
-/* Checkmark via pseudo-element */
 .filter-checkbox:checked::after {
   content: "";
-  display: block;
 
   width: 5px;
   height: 9px;
@@ -141,45 +193,90 @@
   transform: rotate(45deg) translate(-1px, -1px);
 }
 
-/* Focus ring */
 .filter-checkbox:focus-visible {
   outline: 2px solid rgba(0, 100, 255, 0.4);
   outline-offset: 2px;
 }
 
 /* ========================================
-   OPTION LABEL TEXT
+   OPTION LABEL
 ======================================== */
 
 .filter-option-label {
   font-size: 13px;
   font-weight: 400;
-  color: rgba(60, 60, 60, 1);
+
   line-height: 1.4;
+
+  color: #3c3c3c;
 }
 
-/* Grey out label when unchecked (matches Figma muted look) */
 .filter-checkbox:not(:checked) ~ .filter-option-label {
-  color: rgba(130, 130, 130, 1);
+  color: #828282;
 }
 
 /* ========================================
-   RESPONSIVE
+   SMALL LAPTOPS
 ======================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .filter-sidebar {
-    width: 100%;
-    position: static;
+    max-width: 260px;
+
+    padding: 20px;
   }
 
   .filter-options {
-    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 16px;
   }
 }
 
-@media (max-width: 480px) {
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 991px) {
+  .filter-sidebar {
+    /* max-width: 240px; */
+    max-width: 100%;
+  }
+
   .filter-options {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    position: static;
+
+    width: 100%;
+    max-width: 100%;
+
+    max-height: unset;
+
+    overflow: visible;
+
+    margin-bottom: 24px;
+  }
+
+  .filter-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+  .filter-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

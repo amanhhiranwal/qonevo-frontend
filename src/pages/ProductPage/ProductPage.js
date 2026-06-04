@@ -111,7 +111,7 @@ const ProductPage = () => {
         <div className="top-container">
           <div className="accuracy-sec">
             <div className="icon">
-              <img src={swipeIcon} alt="Swipe" />
+              <img src={swipeIcon} alt="Swipe" loading="lazy" />
             </div>
             <div className="text">
               <h3>High Touch Point Accuracy</h3>
@@ -123,14 +123,14 @@ const ProductPage = () => {
           </div>
 
           <div className="touch-sec">
-            <img src={touchImg} alt="Touch" />
+            <img src={touchImg} alt="Touch" loading="lazy" />
           </div>
         </div>
 
         <div className="bottom-container">
           <div className="sensitivity-sec">
             <div className="icon">
-              <img src={pointerIcon} alt="Pointer" />
+              <img src={pointerIcon} alt="Pointer" loading="lazy" />
             </div>
             <div className="text">
               <h3>Advanced Pressure Sensitivity</h3>
@@ -143,7 +143,7 @@ const ProductPage = () => {
 
           <div className="microphone-sec">
             <div className="icon">
-              <img src={microphoneIcon} alt="Microphone" />
+              <img src={microphoneIcon} alt="Microphone" loading="lazy" />
             </div>
             <div className="text">
               <h3>Integrated Microphone Array</h3>
@@ -180,7 +180,7 @@ const ProductPage = () => {
         </div>
 
         <div className="bd-img-container">
-          <img src={performanceBgImg} alt="Performance" className="bg-img" />
+          <img src={performanceBgImg} alt="Performance" className="bg-img"  />
         </div>
       </section>
 
@@ -213,8 +213,8 @@ const ProductPage = () => {
                       <img src={slide.img} alt={slide.title} />
                     </div>
                     <div className="text-content-gravity">
-                      <p className="gravity-card-title">{slide.title}</p>
-                      <p className="gravity-card-desc">{slide.desc}</p>
+                      <p className="gravity-card-title-slide">{slide.title}</p>
+                      <p className="gravity-card-desc-slide">{slide.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -228,10 +228,11 @@ const ProductPage = () => {
         <div className="gravity-sub-img">
           <div className="back-img">
             <img src={gravityBgImg} alt="" />
-          </div>
-          <div className="front-img">
+              <div className="front-img">
             <img src={gravityTextImg} alt="" />
           </div>
+          </div>
+        
         </div>
       </section>
 
