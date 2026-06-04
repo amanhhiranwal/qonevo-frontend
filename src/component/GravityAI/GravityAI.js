@@ -70,7 +70,7 @@ export default function GravityAI() {
   muted
   loop
   playsInline
-  preload="auto"
+  preload="none"
 >
   <source src={gravityanimation} type="video/mp4" />
 </video>
@@ -91,6 +91,7 @@ export default function GravityAI() {
   muted
   loop
   playsInline
+  preload="none"
 >
   <source src={f.video} type="video/mp4" />
 </video>

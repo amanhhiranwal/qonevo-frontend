@@ -12,11 +12,8 @@ import logo4 from "../../Assets/testimonial/image 17.png";
 import logo5 from "../../Assets/testimonial/image 18.png";
 import logo6 from "../../Assets/testimonial/image 43.png";
 import logo7 from "../../Assets/testimonial/image 19.png";
-
 import ContactPage from "../../component/contact/ContactPage";
 // import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
-import image1Hover1 from "../../Assets/Frame 48665.png";
-import image1 from "../../Assets/Frame48665_1.png";
 import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas";
 import DetailModal from "./DetailModal";
 import leftImg from "../../Assets/ifp/Property 1=Image01 (1).png";
@@ -24,6 +21,9 @@ import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../../component/ProductCard/ProductCard";
+
+// import prodImg1 from "../../Assets/ProductCard/img1.png";
+// import prodImg2 from "../../Assets/ProductCard/img2.png";
 
 // const products = [
 //   {
@@ -58,10 +58,10 @@ import ProductCard from "../../component/ProductCard/ProductCard";
 //     // price: "₹1,05,999 | ₹89,199",
 //   },
 // ];
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const IFPPage = () => {
   const sizeFilters = ["65", "75", "86", "98", "110"];
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [activeSize, setActiveSize] = useState("65");
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -70,14 +70,470 @@ const IFPPage = () => {
   const limit = 4;
   const navigate = useNavigate();
 
+let data = [
+//   {
+//   id: 1,
+//   name: "Qonevo IFP 65 – Core",
+//   slug: "qonevo-ifp-65-core",
+//   subheading: "Standard performance for classrooms and presentations",
+//   size: "65",
+//   chipset: "CVTE",
+//   storage: "128GB",
+//   resolution: "4K UHD",
+//   google_integration: true,
+//   is_active: true,
+
+//   thumbnail:
+//     prodImg1,
+
+//   images: [
+//     {
+//       id: 101,
+//       product_id: 1,
+//       image_url:
+//         prodImg2,
+//       is_primary: true,
+//       created_at: "2026-05-27T10:00:00.000000Z",
+//     },
+//     {
+//       id: 102,
+//       product_id: 1,
+//       image_url:
+//         prodImg1,
+//       is_primary: false,
+//       created_at: "2026-05-27T10:00:01.000000Z",
+//     },
+//   ],
+
+//   specifications: [
+//     {
+//       category: "Display",
+//       items: [
+//         {
+//           id: 1001,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Size",
+//           spec_value: '65"',
+//         },
+//         {
+//           id: 1002,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Resolution",
+//           spec_value: "3840 × 2160",
+//         },
+//         {
+//           id: 1003,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Brightness",
+//           spec_value: "400 nits",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Touch",
+//       items: [
+//         {
+//           id: 1004,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Type",
+//           spec_value: "Infrared",
+//         },
+//         {
+//           id: 1005,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Points",
+//           spec_value: "20 Points",
+//         },
+//         {
+//           id: 1006,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Response Time",
+//           spec_value: "8 ms",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Audio",
+//       items: [
+//         {
+//           id: 1007,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Speaker Output",
+//           spec_value: "2 × 20W",
+//         },
+//         {
+//           id: 1008,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Microphone",
+//           spec_value: "8 Array Mic",
+//         },
+//       ],
+//     },
+//   ],
+
+//   created_at: "2026-05-27T10:00:00.000000Z",
+//   updated_at: "2026-05-27T10:00:00.000000Z",
+// },
+//   {
+//   id: 1,
+//   name: "Qonevo IFP 65 – Core",
+//   slug: "qonevo-ifp-65-core",
+//   subheading: "Standard performance for classrooms and presentations",
+//   size: "65",
+//   chipset: "CVTE",
+//   storage: "128GB",
+//   resolution: "4K UHD",
+//   google_integration: true,
+//   is_active: true,
+
+//   thumbnail:
+//     prodImg1,
+
+//   images: [
+//     {
+//       id: 101,
+//       product_id: 1,
+//       image_url:
+//         prodImg2,
+//       is_primary: true,
+//       created_at: "2026-05-27T10:00:00.000000Z",
+//     },
+//     {
+//       id: 102,
+//       product_id: 1,
+//       image_url:
+//         prodImg2,
+//       is_primary: false,
+//       created_at: "2026-05-27T10:00:01.000000Z",
+//     },
+//   ],
+
+//   specifications: [
+//     {
+//       category: "Display",
+//       items: [
+//         {
+//           id: 1001,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Size",
+//           spec_value: '65"',
+//         },
+//         {
+//           id: 1002,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Resolution",
+//           spec_value: "3840 × 2160",
+//         },
+//         {
+//           id: 1003,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Brightness",
+//           spec_value: "400 nits",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Touch",
+//       items: [
+//         {
+//           id: 1004,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Type",
+//           spec_value: "Infrared",
+//         },
+//         {
+//           id: 1005,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Points",
+//           spec_value: "20 Points",
+//         },
+//         {
+//           id: 1006,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Response Time",
+//           spec_value: "8 ms",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Audio",
+//       items: [
+//         {
+//           id: 1007,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Speaker Output",
+//           spec_value: "2 × 20W",
+//         },
+//         {
+//           id: 1008,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Microphone",
+//           spec_value: "8 Array Mic",
+//         },
+//       ],
+//     },
+//   ],
+
+//   created_at: "2026-05-27T10:00:00.000000Z",
+//   updated_at: "2026-05-27T10:00:00.000000Z",
+// },
+//   {
+//   id: 1,
+//   name: "Qonevo IFP 65 – Core",
+//   slug: "qonevo-ifp-65-core",
+//   subheading: "Standard performance for classrooms and presentations",
+//   size: "65",
+//   chipset: "CVTE",
+//   storage: "128GB",
+//   resolution: "4K UHD",
+//   google_integration: true,
+//   is_active: true,
+
+//   thumbnail:
+//     prodImg1,
+
+//   images: [
+//     {
+//       id: 101,
+//       product_id: 1,
+//       image_url:
+//         prodImg2,
+//       is_primary: true,
+//       created_at: "2026-05-27T10:00:00.000000Z",
+//     },
+//     {
+//       id: 102,
+//       product_id: 1,
+//       image_url:
+//         prodImg1,
+//       is_primary: false,
+//       created_at: "2026-05-27T10:00:01.000000Z",
+//     },
+//   ],
+
+//   specifications: [
+//     {
+//       category: "Display",
+//       items: [
+//         {
+//           id: 1001,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Size",
+//           spec_value: '65"',
+//         },
+//         {
+//           id: 1002,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Resolution",
+//           spec_value: "3840 × 2160",
+//         },
+//         {
+//           id: 1003,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Brightness",
+//           spec_value: "400 nits",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Touch",
+//       items: [
+//         {
+//           id: 1004,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Type",
+//           spec_value: "Infrared",
+//         },
+//         {
+//           id: 1005,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Points",
+//           spec_value: "20 Points",
+//         },
+//         {
+//           id: 1006,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Response Time",
+//           spec_value: "8 ms",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Audio",
+//       items: [
+//         {
+//           id: 1007,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Speaker Output",
+//           spec_value: "2 × 20W",
+//         },
+//         {
+//           id: 1008,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Microphone",
+//           spec_value: "8 Array Mic",
+//         },
+//       ],
+//     },
+//   ],
+
+//   created_at: "2026-05-27T10:00:00.000000Z",
+//   updated_at: "2026-05-27T10:00:00.000000Z",
+// },
+//   {
+//   id: 1,
+//   name: "Qonevo IFP 65 – Core",
+//   slug: "qonevo-ifp-65-core",
+//   subheading: "Standard performance for classrooms and presentations",
+//   size: "65",
+//   chipset: "CVTE",
+//   storage: "128GB",
+//   resolution: "4K UHD",
+//   google_integration: true,
+//   is_active: true,
+
+//   thumbnail:
+//     prodImg1,
+
+//   images: [
+//     {
+//       id: 101,
+//       product_id: 1,
+//       image_url:
+//         prodImg2,
+//       is_primary: true,
+//       created_at: "2026-05-27T10:00:00.000000Z",
+//     },
+//     {
+//       id: 102,
+//       product_id: 1,
+//       image_url:
+//         prodImg1,
+//       is_primary: false,
+//       created_at: "2026-05-27T10:00:01.000000Z",
+//     },
+//   ],
+
+//   specifications: [
+//     {
+//       category: "Display",
+//       items: [
+//         {
+//           id: 1001,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Size",
+//           spec_value: '65"',
+//         },
+//         {
+//           id: 1002,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Resolution",
+//           spec_value: "3840 × 2160",
+//         },
+//         {
+//           id: 1003,
+//           product_id: 1,
+//           category: "Display",
+//           spec_key: "Brightness",
+//           spec_value: "400 nits",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Touch",
+//       items: [
+//         {
+//           id: 1004,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Type",
+//           spec_value: "Infrared",
+//         },
+//         {
+//           id: 1005,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Touch Points",
+//           spec_value: "20 Points",
+//         },
+//         {
+//           id: 1006,
+//           product_id: 1,
+//           category: "Touch",
+//           spec_key: "Response Time",
+//           spec_value: "8 ms",
+//         },
+//       ],
+//     },
+
+//     {
+//       category: "Audio",
+//       items: [
+//         {
+//           id: 1007,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Speaker Output",
+//           spec_value: "2 × 20W",
+//         },
+//         {
+//           id: 1008,
+//           product_id: 1,
+//           category: "Audio",
+//           spec_key: "Microphone",
+//           spec_value: "8 Array Mic",
+//         },
+//       ],
+//     },
+//   ],
+
+//   created_at: "2026-05-27T10:00:00.000000Z",
+//   updated_at: "2026-05-27T10:00:00.000000Z",
+// },
+ 
+    ];
+
   useEffect(() => {
     const getProducts = async () => {
+
+      setProducts(data);
       try {
         const response = await axios.get(
           `${BASE_URL}/api/v1/products?limit=${limit}`,
-          {
-            timeout: 5000,
-          },
+         
         );
 
         setProducts(response.data || []);
@@ -117,6 +573,8 @@ const IFPPage = () => {
               src={ifpImage}
               alt="Qonevo Interactive Flat Panel"
               className="hero-ifp-image img-fluid d-block"
+              fetchPriority="high"
+              
             />
           </div>
         </div>
@@ -202,7 +660,7 @@ const IFPPage = () => {
           // </div>
 
           <>
-            <ProductCard products={products} />
+            <ProductCard products={products} variant="grid-4" />
             <div className="view-all-wrap">
               <button
                 onClick={() => navigate("/listing-page")}
@@ -241,12 +699,12 @@ const IFPPage = () => {
           Aligned with national standards and innovation-driven initiatives
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img" />
-          <img src={logo3} alt="Startup India" className="cert-img" />
-          <img src={logo4} alt="Make in India" className="cert-img" />
-          <img src={logo5} alt="ISO Certified" className="cert-img" />
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" />
+          <img src={logo1} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
+          <img src={logo2} alt="MSME Ministry" className="cert-img"  loading="lazy"/>
+          <img src={logo3} alt="Startup India" className="cert-img"  loading="lazy"/>
+          <img src={logo4} alt="Make in India" className="cert-img" loading="lazy" />
+          <img src={logo5} alt="ISO Certified" className="cert-img"  loading="lazy"/>
+          <img src={logo7} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
           <img
             src={logo6}
             alt="GeM Government e-Marketplace"

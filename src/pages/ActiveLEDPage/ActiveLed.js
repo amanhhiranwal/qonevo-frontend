@@ -19,8 +19,11 @@ import icon3 from "../../Assets/ActiveLED/icon-3.png";
 import icon4 from "../../Assets/ActiveLED/icon-4.png";
 import icon5 from "../../Assets/ActiveLED/icon-5.png";
 
-import image1 from "../../Assets/Frame48665_1.png";
-import image1Hover1 from "../../Assets/Frame 48665.png";
+// import image1 from "../../Assets/Frame48665_1.png";
+// import image1Hover1 from "../../Assets/Frame 48665.png";
+
+import prodImg1 from "../../Assets/ProductCard/img1.png";
+import prodImg2 from "../../Assets/ProductCard/img2.png";
 
 import DetailModal from "../IFP/DetailModal.js";
 import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces.js";
@@ -30,6 +33,8 @@ import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas.js";
 
 import BuiltForClarity from "../../component/BuiltForClarity/BuiltForClarity.js";
 import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.js";
+
+import ProductCard from "../../component/ProductCard/ProductCard.js";
 
 const features = [
   { image: icon1, desc: "160° Viewing Angle" },
@@ -41,37 +46,459 @@ const features = [
 
 const products = [
   {
-    img: image1,
-    imgHover: image1Hover1,
-    name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
-    specs: "Standard performance for everyday teaching and presentations",
-    info: "4K UHD | 400 nits | 200W * 2",
-  },
+  id: 1,
+  name: "Qonevo IFP 65 – Core",
+  slug: "qonevo-ifp-65-core",
+  subheading: "Standard performance for classrooms and presentations",
+  size: "65",
+  chipset: "CVTE",
+  storage: "128GB",
+  resolution: "4K UHD",
+  google_integration: true,
+  is_active: true,
+
+  thumbnail:
+    prodImg1,
+
+  images: [
+    {
+      id: 101,
+      product_id: 1,
+      image_url:
+        prodImg2,
+      is_primary: true,
+      created_at: "2026-05-27T10:00:00.000000Z",
+    },
+    {
+      id: 102,
+      product_id: 1,
+      image_url:
+        prodImg1,
+      is_primary: false,
+      created_at: "2026-05-27T10:00:01.000000Z",
+    },
+  ],
+
+  specifications: [
+    {
+      category: "Display",
+      items: [
+        {
+          id: 1001,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Size",
+          spec_value: '65"',
+        },
+        {
+          id: 1002,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Resolution",
+          spec_value: "3840 × 2160",
+        },
+        {
+          id: 1003,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Brightness",
+          spec_value: "400 nits",
+        },
+      ],
+    },
+
+    {
+      category: "Touch",
+      items: [
+        {
+          id: 1004,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Type",
+          spec_value: "Infrared",
+        },
+        {
+          id: 1005,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Points",
+          spec_value: "20 Points",
+        },
+        {
+          id: 1006,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Response Time",
+          spec_value: "8 ms",
+        },
+      ],
+    },
+
+    {
+      category: "Audio",
+      items: [
+        {
+          id: 1007,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Speaker Output",
+          spec_value: "2 × 20W",
+        },
+        {
+          id: 1008,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Microphone",
+          spec_value: "8 Array Mic",
+        },
+      ],
+    },
+  ],
+
+  created_at: "2026-05-27T10:00:00.000000Z",
+  updated_at: "2026-05-27T10:00:00.000000Z",
+},
   {
-    img: image1,
-    imgHover: image1Hover1,
-    name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
-    specs: "Faster interaction with enhanced processing power",
-    info: "4K UHD | 400 nits | 200W * 2",
-    // price: "₹1,29,999 | ₹1,10,199",
-  },
+  id: 1,
+  name: "Qonevo IFP 65 – Core",
+  slug: "qonevo-ifp-65-core",
+  subheading: "Standard performance for classrooms and presentations",
+  size: "65",
+  chipset: "CVTE",
+  storage: "128GB",
+  resolution: "4K UHD",
+  google_integration: true,
+  is_active: true,
+
+  thumbnail:
+    prodImg1,
+
+  images: [
+    {
+      id: 101,
+      product_id: 1,
+      image_url:
+        prodImg2,
+      is_primary: true,
+      created_at: "2026-05-27T10:00:00.000000Z",
+    },
+    {
+      id: 102,
+      product_id: 1,
+      image_url:
+        prodImg2,
+      is_primary: false,
+      created_at: "2026-05-27T10:00:01.000000Z",
+    },
+  ],
+
+  specifications: [
+    {
+      category: "Display",
+      items: [
+        {
+          id: 1001,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Size",
+          spec_value: '65"',
+        },
+        {
+          id: 1002,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Resolution",
+          spec_value: "3840 × 2160",
+        },
+        {
+          id: 1003,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Brightness",
+          spec_value: "400 nits",
+        },
+      ],
+    },
+
+    {
+      category: "Touch",
+      items: [
+        {
+          id: 1004,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Type",
+          spec_value: "Infrared",
+        },
+        {
+          id: 1005,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Points",
+          spec_value: "20 Points",
+        },
+        {
+          id: 1006,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Response Time",
+          spec_value: "8 ms",
+        },
+      ],
+    },
+
+    {
+      category: "Audio",
+      items: [
+        {
+          id: 1007,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Speaker Output",
+          spec_value: "2 × 20W",
+        },
+        {
+          id: 1008,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Microphone",
+          spec_value: "8 Array Mic",
+        },
+      ],
+    },
+  ],
+
+  created_at: "2026-05-27T10:00:00.000000Z",
+  updated_at: "2026-05-27T10:00:00.000000Z",
+},
   {
-    img: image1,
-    imgHover: image1Hover1,
-    name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
-    specs: "Standard performance for everyday teaching and presentations",
-    info: "4K UHD | 400 nits | 200W * 2",
-    // price: "₹1,22,999 | ₹1,05,199",
-  },
+  id: 1,
+  name: "Qonevo IFP 65 – Core",
+  slug: "qonevo-ifp-65-core",
+  subheading: "Standard performance for classrooms and presentations",
+  size: "65",
+  chipset: "CVTE",
+  storage: "128GB",
+  resolution: "4K UHD",
+  google_integration: true,
+  is_active: true,
+
+  thumbnail:
+    prodImg1,
+
+  images: [
+    {
+      id: 101,
+      product_id: 1,
+      image_url:
+        prodImg2,
+      is_primary: true,
+      created_at: "2026-05-27T10:00:00.000000Z",
+    },
+    {
+      id: 102,
+      product_id: 1,
+      image_url:
+        prodImg1,
+      is_primary: false,
+      created_at: "2026-05-27T10:00:01.000000Z",
+    },
+  ],
+
+  specifications: [
+    {
+      category: "Display",
+      items: [
+        {
+          id: 1001,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Size",
+          spec_value: '65"',
+        },
+        {
+          id: 1002,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Resolution",
+          spec_value: "3840 × 2160",
+        },
+        {
+          id: 1003,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Brightness",
+          spec_value: "400 nits",
+        },
+      ],
+    },
+
+    {
+      category: "Touch",
+      items: [
+        {
+          id: 1004,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Type",
+          spec_value: "Infrared",
+        },
+        {
+          id: 1005,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Points",
+          spec_value: "20 Points",
+        },
+        {
+          id: 1006,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Response Time",
+          spec_value: "8 ms",
+        },
+      ],
+    },
+
+    {
+      category: "Audio",
+      items: [
+        {
+          id: 1007,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Speaker Output",
+          spec_value: "2 × 20W",
+        },
+        {
+          id: 1008,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Microphone",
+          spec_value: "8 Array Mic",
+        },
+      ],
+    },
+  ],
+
+  created_at: "2026-05-27T10:00:00.000000Z",
+  updated_at: "2026-05-27T10:00:00.000000Z",
+},
   {
-    img: image1,
-    imgHover: image1Hover1,
-    name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
-    specs: "Standard performance for everyday teaching and presentations",
-    info: "4K UHD | 400 nits | 200W * 2",
-    // price: "₹1,05,999 | ₹89,199",
-  },
-];
+  id: 1,
+  name: "Qonevo IFP 65 – Core",
+  slug: "qonevo-ifp-65-core",
+  subheading: "Standard performance for classrooms and presentations",
+  size: "65",
+  chipset: "CVTE",
+  storage: "128GB",
+  resolution: "4K UHD",
+  google_integration: true,
+  is_active: true,
+
+  thumbnail:
+    prodImg1,
+
+  images: [
+    {
+      id: 101,
+      product_id: 1,
+      image_url:
+        prodImg2,
+      is_primary: true,
+      created_at: "2026-05-27T10:00:00.000000Z",
+    },
+    {
+      id: 102,
+      product_id: 1,
+      image_url:
+        prodImg1,
+      is_primary: false,
+      created_at: "2026-05-27T10:00:01.000000Z",
+    },
+  ],
+
+  specifications: [
+    {
+      category: "Display",
+      items: [
+        {
+          id: 1001,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Size",
+          spec_value: '65"',
+        },
+        {
+          id: 1002,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Resolution",
+          spec_value: "3840 × 2160",
+        },
+        {
+          id: 1003,
+          product_id: 1,
+          category: "Display",
+          spec_key: "Brightness",
+          spec_value: "400 nits",
+        },
+      ],
+    },
+
+    {
+      category: "Touch",
+      items: [
+        {
+          id: 1004,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Type",
+          spec_value: "Infrared",
+        },
+        {
+          id: 1005,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Touch Points",
+          spec_value: "20 Points",
+        },
+        {
+          id: 1006,
+          product_id: 1,
+          category: "Touch",
+          spec_key: "Response Time",
+          spec_value: "8 ms",
+        },
+      ],
+    },
+
+    {
+      category: "Audio",
+      items: [
+        {
+          id: 1007,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Speaker Output",
+          spec_value: "2 × 20W",
+        },
+        {
+          id: 1008,
+          product_id: 1,
+          category: "Audio",
+          spec_key: "Microphone",
+          spec_value: "8 Array Mic",
+        },
+      ],
+    },
+  ],
+
+  created_at: "2026-05-27T10:00:00.000000Z",
+  updated_at: "2026-05-27T10:00:00.000000Z",
+},
+ 
+    ];
 
 const ActiveLed = () => {
   const sizeFilters = ["Indoor", "Outdoor"];
@@ -117,35 +544,7 @@ const ActiveLed = () => {
             </button>
           ))}
         </div>
-        <div className="product-grid">
-          {products.map((p, i) => (
-            <div className="product-card_ifp" key={i}>
-              <div className="abstract-art">
-                <img className="img-default" src={p.img} alt={p.name} />
-                {p.imgHover && (
-                  <img className="img-hover" src={p.imgHover} alt={p.name} />
-                )}
-              </div>
-              <div className="product-info mt-4">
-                <div className="product-name">{p.name}</div>
-                <div className="product-spec">{p.specs}</div>
-                <div
-                  className="product-spec mt-4 mb-4"
-                  style={{ color: "#aaa" }}
-                >
-                  {p.info}
-                </div>
-
-                <button
-                  className="btn-view"
-                  onClick={() => setSelectedProduct(p)}
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+       <ProductCard products={products} variant="grid-4"/>
         <div className="view-all-wrap">
           <button className="btn-view-all">View All</button>
         </div>

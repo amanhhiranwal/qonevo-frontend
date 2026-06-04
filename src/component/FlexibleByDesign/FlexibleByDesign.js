@@ -178,6 +178,7 @@ const FlexibleByDesign = () => {
               src={features[0].image}
               alt="feature"
               className="fbd-image"
+              loading="lazy"
             />
 
             <img
@@ -185,6 +186,7 @@ const FlexibleByDesign = () => {
               src=""
               alt="feature"
               className="fbd-image"
+              loading="lazy"
             />
 
           </div>

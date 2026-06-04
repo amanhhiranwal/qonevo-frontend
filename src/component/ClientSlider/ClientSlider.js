@@ -74,7 +74,7 @@ export default function ClientSlider() {
           <div className="swiper-wrapper">
             {clientLogos.map(logo => (
               <div key={logo.id} className="swiper-slide contact-swiper">
-                <img src={logo.image_url} alt="client" />
+                <img src={logo.image_url} alt="client" loading="lazy" />
               </div>
             ))}
           </div>
@@ -88,7 +88,7 @@ export default function ClientSlider() {
           <div className="swiper-wrapper">
             {clientLogos.map(logo => (
               <div key={`c-${logo.id}`} className="swiper-slide contact-swiper">
-                <img src={logo.image_url} alt="client" />
+                <img src={logo.image_url} alt="client"  loading="lazy"/>
               </div>
             ))}
           </div>

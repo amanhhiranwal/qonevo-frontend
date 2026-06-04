@@ -1,10 +1,10 @@
 .main-led-container {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
+  /* background:  #efefef; */
 }
 .led-banner {
   width: 100%;
   /* margin-bottom: 50px; */
-  
   height: 640px;
 }
 
@@ -20,14 +20,14 @@
   margin-top: 44px;
 }
 
-
-.led-banner .led-img-content{
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
+.led-banner .led-img-content {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
-.led-text-content h1,h3 {
+.led-text-content h1,
+h3 {
   font-size: 44px;
   color: var(--Colors-Neutral-100, rgba(245, 245, 245, 1));
   font-weight: 400;
@@ -39,13 +39,12 @@
   line-height: 24px;
   text-align: center;
   color: var(--Colors-Neutral-200, rgba(189, 189, 189, 1));
-
 }
 /* =====================================================
    TRUST SECTION
 ===================================================== */
 
-.certification-sec{
+.certification-sec {
   background: #efefef;
 }
 
@@ -64,11 +63,9 @@
   opacity: 1;
 }
 
-
 .scale-section-led {
   background: #f5f5f5;
   margin-top: 100px;
-
   padding: 80px 40px;
 }
 
@@ -104,11 +101,10 @@
   margin-bottom: 42px;
 }
 
-
 /* Built For Environment Section */
 
-.text-container{
-      width: 100%;
+.text-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,18 +112,17 @@
   margin-top: 44px;
 }
 
-.text-container h2{
-     font-size: 44px;
-     font-weight: 400;
+.text-container h2 {
+  font-size: 44px;
+  font-weight: 400;
 }
 
-.text-container p{
-      font-weight: 500;
+.text-container p {
+  font-weight: 500;
   size: 16px;
   line-height: 24px;
   text-align: center;
 }
-
 
 /* ========================================
    PERFORMANCE SECTION
@@ -197,7 +192,7 @@
 
 .image-container-pf {
   width: 100%;
-   max-width: 1400px;
+  max-width: 1400px;
 
   height: 505px;
 
@@ -287,7 +282,6 @@
 ======================================== */
 
 @media (max-width: 1024px) {
-
   .features-container {
     padding: 0 80px;
     gap: 32px;
@@ -312,7 +306,6 @@
 ======================================== */
 
 @media (max-width: 768px) {
-
   .features-container {
     padding: 0 24px;
 
@@ -364,7 +357,6 @@
 ======================================== */
 
 @media (max-width: 480px) {
-
   .features-container {
     padding: 0 16px;
     gap: 28px;

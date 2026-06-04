@@ -202,6 +202,7 @@ const BuiltForClarity = () => {
               src={features[0].image}
               alt="feature"
               className="clarity-image"
+              loading="lazy"
             />
 
             <img
@@ -209,6 +210,7 @@ const BuiltForClarity = () => {
               src=""
               alt="feature"
               className="clarity-image"
+              loading="lazy"
             />
 
           </div>

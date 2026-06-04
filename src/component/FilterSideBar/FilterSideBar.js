@@ -1,6 +1,6 @@
 
 
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import "./FilterSideBar.css";
 
 /* ========================================
@@ -39,7 +39,7 @@ const FILTER_GROUPS = [
    COMPONENT
 ======================================== */
 
-const FilterSideBar = ({ onFilterChange }) => {
+const FilterSideBar = memo(({ onFilterChange }) => {
   // Track which groups are open
   const [openGroups, setOpenGroups] = useState(
     () => Object.fromEntries(FILTER_GROUPS.map((g) => [g.key, true]))
@@ -77,6 +77,7 @@ const FilterSideBar = ({ onFilterChange }) => {
 
   return (
     <aside className="filter-sidebar">
+      
       {FILTER_GROUPS.map((group, gi) => (
         <div
           key={group.key}
@@ -131,6 +132,6 @@ const FilterSideBar = ({ onFilterChange }) => {
       ))}
     </aside>
   );
-};
+});
 
 export default FilterSideBar;

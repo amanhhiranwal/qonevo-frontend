@@ -11,8 +11,8 @@
 .navbar .container {
   max-width: 100%;
  
-  padding-left: 100px!important;
-  padding-right: 100px;
+   padding-left: clamp(16px, 5vw, 100px)!important;
+  padding-right: clamp(16px, 5vw, 100px);
 }
 
 
@@ -99,6 +99,30 @@
    MEGA MENU
 ===================================================== */
 
+.mega-overlay {
+    position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s ease;
+
+  z-index: 98;
+}
+
+.mega-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mega-menu-content {
+  position: absolute; /* or fixed depending on layout */
+  z-index: 99;
+}
+
 .mega-menu-content {
   position: fixed;
   top: 80px;
@@ -151,6 +175,9 @@
 
   width: clamp(120px, 13vw, 192px) !important;
   height: clamp(162px, 16.5vw, 246px);
+
+   /* width: clamp(120px, 13vw, 172px) !important;
+  height: clamp(162px, 16.5vw, 226px); */
  
   background: #ffffff;
  
@@ -183,11 +210,30 @@
 
 .menu-card img {
   width: 100%;
-  height: clamp(100px, 11vw, 170px);  /* scales with card, max 170px */
+  height: clamp(100px, 11vw, 150px);  /* scales with card, max 170px */
   object-fit: cover;
   display: block;
   margin-inline: auto;
   transition: transform 0.3s ease;
+}
+
+
+.small-image{
+  width: 24px!important;
+  height: 24px!important ;
+  object-fit: contain;
+  margin: auto;
+  transition: transform 0.3s ease!important;
+}
+
+
+.menu-card-head:hover .small-image{
+  /* width: 60px!important;
+  height: 60px !important; */
+  object-fit: contain;
+    
+
+  transform: scale(2.2)!important;
 }
 
 .menu-card-head:hover img {
@@ -413,7 +459,7 @@
     margin-bottom: 20px !important;
   }
  
-  .menu-card-head {
+  /* .menu-card-head { */
     /* width: 100% !important;
  
     height: auto;
@@ -421,10 +467,16 @@
     min-height: 150px;
  
     margin: 0; */
-  }
+  /* } */
    .mega-menu-content.show .row {
   gap: 12px;
  }
+
+  .mega-menu-content .row {
+display: flex !important;
+    flex-wrap: wrap !important;
+
+  }
 }
  
 /* =====================================================

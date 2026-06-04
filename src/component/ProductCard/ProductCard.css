@@ -1,40 +1,60 @@
 .product-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+/* grid-template-columns: repeat(
+  auto-fit,
+  minmax(clamp(180px, 25vw, 295px), 1fr)
+);  */
 
-  gap: 24px;
 
-  max-width: 1280px;
+gap: 16px;
+
+  max-width: 1400px;
+  /* width: 100%; */
 
   margin: 0 auto 40px;
+  align-items: stretch;
 }
 
+
+.product-grid.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* =========================
+   LISTING PAGE → 3 CARDS
+========================= */
+
+.product-grid.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 /* ---------- PRODUCT CARD ---------- */
 
 .product-card_ifp {
   background: #fff;
 
-  border-radius: 16px;
+  border-radius: 12px;
 
   overflow: hidden;
+  /* height: 100%; */
+  width: 100%; /* FIX */
 
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  /* max-width: 295px;  */
 
-  transition:
+  /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07); */
+
+  /* transition:
     transform 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s ease; */
 
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* important */
+  /* max-height: 516px; */
 }
-
-.product-card_ifp:hover {
-  transform: translateY(-8px);
-
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+.product-card_ifp:hover .btn-view {
+  background: #334881;
 }
 
 /* ---------- IMAGE WRAPPER ---------- */
@@ -42,10 +62,11 @@
 .abstract-art {
   position: relative;
 
+  /* width: 179px; */
   overflow: hidden;
+  width: 100%;
 
-  aspect-ratio: 16 / 10;
-
+  aspect-ratio:279 / 290;
   background: #f8f8f8;
 }
 
@@ -57,12 +78,11 @@
 
   inset: 0;
 
-
   width: 100%;
   height: 100%;
 
   object-fit: cover;
-
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -85,11 +105,12 @@
 /* ---------- PRODUCT INFO ---------- */
 
 .product-info {
-  padding: 18px;
+  margin-top: 24px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   flex: 1;
-   /* takes remaining height */
+  /* takes remaining height */
 }
 
 .product-name {
@@ -101,6 +122,7 @@
   line-height: 24px;
 
   color: #131313;
+  padding: 0 8px;
 
   margin-bottom: 6px;
 }
@@ -112,12 +134,12 @@
 
   font-size: 13px;
   line-height: 18px;
+  padding: 0 8px;
 
-  color: #777;
+  color: var(--Colors-Neutral-400, rgba(76, 76, 76, 1));
 
   margin-bottom: 8px;
-    /* margin-top: auto; */
-
+  /* margin-top: auto; */
 }
 
 /* ---------- BUTTON ---------- */
@@ -136,14 +158,74 @@
   font-weight: 500;
 
   cursor: pointer;
-margin-top: auto;
+  margin-top: auto;
   transition:
     background 0.3s ease,
     transform 0.2s ease;
 }
 
-.btn-view:hover {
-  background: #0f2460;
 
-  transform: translateY(-2px);
+/* Desktop & Laptop */
+
+
+/* @media (max-width: 1310px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+    height: auto;
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto 40px;
+  }
+
+  .product-info {
+    margin-top: 24px;
+  }
+
+  .btn-view {
+    min-height: 44px;
+  }
+} */
+
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+    height: auto;
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto 40px;
+  }
+
+  .product-info {
+    margin-top: 15px;
+  }
+
+  .btn-view {
+    min-height: 30px;
+  }
+}
+
+
+/* Tablet */
+@media (max-width: 991px) {
+  .product-grid.grid-4,
+  .product-grid.grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .product-grid.grid-4,
+  .product-grid.grid-3 {
+    grid-template-columns: 1fr;
+  }
 }

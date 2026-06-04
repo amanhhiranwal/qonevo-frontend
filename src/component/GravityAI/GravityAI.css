@@ -180,7 +180,7 @@
 }
 
 .gravity-card-title {
-  font-size: 1.1rem;
+  font-size: 1.1rem!important;
   font-weight: 600;
   color: #fff;
   margin-bottom: 6px;
@@ -188,7 +188,7 @@
 }
 
 .gravity-card-desc {
-  font-size: 1rem;
+  font-size: 0.797rem!important ;
   color: #bbb;
   font-weight: 300;
   line-height: 1.5;

@@ -234,16 +234,17 @@
   padding: 10px;
 }
 
-.gravity-card-title {
+.gravity-card-title-slide {
   color: white;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 500;   
+  line-height: 1.4;
 }
 
-.gravity-card-desc {
+.gravity-card-desc-slide {
   color:  var(--Colors-Neutral-100, rgba(245, 245, 245, 1));
 
-  font-size: 0.87rem;
+  font-size: 0.6rem;
   line-height: 1.2;
   font-weight: 400;
 }

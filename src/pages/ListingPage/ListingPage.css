@@ -1,144 +1,127 @@
-/* =====================================================
-   LISTING PAGE
-===================================================== */
+/* ==========================================
+   BASE
+========================================== */
 
-.listing-container::-webkit-scrollbar {
-  display: none!important;
+* {
+  box-sizing: border-box;
 }
+
 .listing-container {
   background-color: #f5f5f5;
   font-family: "Inter", sans-serif;
-  position: relative;
-  overflow-x: hidden;
-  
+  width: 100%;
 }
 
-/* =====================================================
+/* ==========================================
    BANNER
-===================================================== */
+========================================== */
 
 .listing-banner {
+  height: 570px;
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .listing-banner img {
   width: 100%;
-  display: block;
+  height: 100%;
   object-fit: cover;
 }
 
 .listing-banner-text {
   position: absolute;
-
-  top: 15%;
-  left: 8%;
-
-  width: min(500px, 40%);
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 620px;
   z-index: 2;
+  left: clamp(20px, 5vw, 100px);
 }
 
 .listing-banner-text h1 {
-  font-size: clamp(28px, 5vw, 44px);
-  line-height: 1.2;
+  font-size: 44px;
+  color: #fff;
   font-weight: 400;
-
-  color: rgba(245, 245, 245, 1);
+  line-height: 1.2;
 }
 
 .listing-banner-text p {
   margin-top: 12px;
-
-  font-size: clamp(12px, 2vw, 16px);
-  line-height: 1.6;
-  font-weight: 500;
-
-  color: rgba(189, 189, 189, 1);
+  font-size: 14px;
+  color: #d9d9d9;
 }
 
-/* =====================================================
-   MAIN CONTENT
-===================================================== */
+/* ==========================================
+   CONTENT
+========================================== */
 
 .listing-content {
   width: 100%;
-  min-height: 700px;
-
-  margin: 51px auto;
-
-  padding: 0 104px;
-
-  box-sizing: border-box;
+  max-width: 1700px;
+  padding-left: clamp(16px, 5vw, 100px)!important;
+  padding-right: clamp(16px, 5vw, 100px);
+  margin: 50px auto;
 }
 
-/* =====================================================
+/* ==========================================
    LAYOUT
-===================================================== */
+========================================== */
 
 .listing-layout {
-  width: 100%;
-
-  display: flex;
-  align-items: flex-start;
-
+  display: grid;
+  grid-template-columns: 310px 1fr;
   gap: 24px;
+  align-items: start;
 }
 
-/* =====================================================
+/* ==========================================
    SIDEBAR
-===================================================== */
+========================================== */
 
 .listing-sidebar {
-  width: 280px;
-  min-width: 280px;
-
-  flex-shrink: 0;
-
-  background: #fff;
-
+  position: sticky;
+  top: 100px;
+  background-color: white;
   border-radius: 16px;
-
-  padding: 20px;
-
-  box-sizing: border-box;
+  margin-bottom: 40px;
 }
 
-/* =====================================================
+/* ==========================================
    RIGHT CONTENT
-===================================================== */
+========================================== */
 
 .right-listing-content {
-  flex: 1;
-
   min-width: 0;
-
-  display: flex;
-  flex-direction: column;
+  scroll-behavior: smooth;
 }
 
-/* =====================================================
+/* ==========================================
    LOADER
-===================================================== */
+========================================== */
 
 .products-loader {
   width: 100%;
-  min-height: 500px;
-
+  min-height: 400px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-
-  border: 4px solid #e5e5e5;
+  width: 45px;
+  height: 45px;
+  border: 4px solid #ddd;
   border-top-color: #001654;
-
   border-radius: 50%;
-
   animation: spin 0.8s linear infinite;
+}
+
+.load-more-trigger {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes spin {
@@ -147,365 +130,81 @@
   }
 }
 
-/* =====================================================
-   PRODUCT GRID
-===================================================== */
+/* ==========================================
+   NO DATA
+========================================== */
 
-/* .product-grid {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-
-  gap: 24px;
-} */
-
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
-
-/* .product-card_ifp {
-  background: #fff;
-
-  border-radius: 16px;
-  overflow: hidden;
-
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-
-  display: flex;
-  flex-direction: column;
-
-  height: 100%;
-
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-.product-card_ifp:hover {
-  transform: translateY(-8px);
-
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-} */
-
-/* =====================================================
-   PRODUCT IMAGE
-===================================================== */
-
-/* .abstract-art {
-  position: relative;
-
-  overflow: hidden;
-
-  aspect-ratio: 16 / 10;
-
-  background: #f8f8f8;
-}
-
-.abstract-art .img-default,
-.abstract-art .img-hover {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  transition: transform 0.5s ease;
-}
-
-.abstract-art .img-default {
-  transform: translateX(0%);
-} */
-
-/* .product-card_ifp:hover .img-default {
-  transform: translateX(-100%);
-}
-
-.abstract-art .img-hover {
-  transform: translateX(100%);
-}
-
-.product-card_ifp:hover .img-hover {
-  transform: translateX(0%);
-} */
-
-/* =====================================================
-   PRODUCT INFO
-===================================================== */
-
-/* .product-info {
-  padding: 18px;
-
-  display: flex;
-  flex-direction: column;
-
-  flex: 1;
-}
-
-.product-name {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-
-  color: #131313;
-
-  margin-bottom: 6px;
-}
-
-.product-spec {
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-
-  color: #777;
-
-  margin-bottom: 8px;
-} */
-
-/* =====================================================
-   BUTTON
-===================================================== */
-
-.btn-view {
-  width: 100%;
-  min-height: 44px;
-
-  border: none;
-  border-radius: 8px;
-
-  background: #001654;
-  color: #fff;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  margin-top: auto;
-
-  transition:
-    background 0.3s ease,
-    transform 0.2s ease;
-}
-
-.btn-view:hover {
-  background: #0f2460;
-
-  transform: translateY(-2px);
-}
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 1000;
-}
-
-.modal-box {
-  background: #fff;
-
-  border-radius: 16px;
-
-  padding: 24px;
-
-  max-width: 480px;
-  width: 90%;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 12px;
-}
-
-.modal-box h2 {
-  font-weight: 500;
-  font-size: 18px;
-
-  color: #131313;
-}
-
-.modal-box p {
-  font-size: 14px;
-
-  color: #777;
-}
-
-.no-data{
-  width: 100%;
+.no-data {
   text-align: center;
-  /* margin-top: 50px; */
-  padding: 20px ;
-  font-size: 22px;
-  font-weight: 500;
+  padding: 20px;
+  font-size: 20px;
 }
 
+/* ==========================================
+   RESPONSIVE (UNCHANGED)
+========================================== */
 
-/* =====================================================
-   1280px
-===================================================== */
-
-@media (max-width: 1280px) {
-  .listing-content {
-    padding: 0 40px;
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* =====================================================
-   1024px
-===================================================== */
-
-@media (max-width: 1024px) {
-  .listing-content {
-    padding: 0 28px;
-  }
-
-  .listing-sidebar {
-    width: 240px;
-    min-width: 240px;
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .listing-banner-text {
-    top: 10%;
-    left: 5%;
-
-    width: 45%;
-  }
-
-  .listing-banner-text h1 {
-    font-size: 28px;
-  }
-
-  .listing-banner-text p {
-    font-size: 12px;
-  }
-}
-
-/* =====================================================
-   768px
-===================================================== */
-
-@media (max-width: 768px) {
-  .listing-content {
-    padding: 0 20px;
-
-    margin: 32px auto;
-  }
-
+@media (max-width: 1440px) {
   .listing-layout {
-    flex-direction: column;
+    grid-template-columns: 280px 1fr;
   }
+}
 
-  .listing-sidebar {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .right-listing-content {
-    width: 100%;
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
+@media (max-width: 1200px) {
+  .listing-layout {
+    grid-template-columns: 260px 1fr;
     gap: 18px;
   }
 
-  .product-info {
-    padding: 14px;
-  }
-
-  .listing-banner-text {
-    top: 8%;
-    left: 5%;
-
-    width: 55%;
+  .listing-banner {
+    height: 420px;
   }
 
   .listing-banner-text h1 {
-    font-size: 28px;
+    font-size: 36px;
   }
 
-  .listing-banner-text p {
-    font-size: 11px;
-
-    line-height: 1.5;
+  .listing-banner-text {
+    right: 45%;
   }
 }
 
-/* =====================================================
-   480px
-===================================================== */
-
-@media (max-width: 480px) {
-  .listing-content {
-    padding: 0 16px;
-
-    margin: 24px auto;
-  }
-
-  .product-grid {
+@media (max-width: 992px) {
+  .listing-layout {
     grid-template-columns: 1fr;
-
-    gap: 16px;
+    gap: 20px;
   }
 
-  .product-card_ifp {
-    border-radius: 14px;
+  .listing-sidebar {
+    position: relative;
+    top: 0;
   }
 
-  .product-name {
-    font-size: 15px;
-    line-height: 22px;
-  }
-
-  .product-spec {
-    font-size: 12px;
-    line-height: 17px;
-  }
-
-  .btn-view {
-    min-height: 42px;
-
-    font-size: 13px;
+  .listing-banner {
+    height: 360px;
   }
 
   .listing-banner-text {
-    top: 6%;
-    left: 5%;
+    right: 42%;
+  }
+}
 
-    width: 65%;
+@media (max-width: 768px) {
+  .listing-banner {
+    height: 280px;
   }
 
   .listing-banner-text h1 {
-    font-size: 16px;
-
-    line-height: 1.3;
+    font-size: 29px;
   }
 
-  .listing-banner-text p {
-    font-size: 8px;
+  .listing-banner-text {
+    right: 60%;
+  }
+}
 
-    line-height: 1.4;
+@media (max-width: 480px) {
+  .listing-banner {
+    height: 220px;
   }
 }
