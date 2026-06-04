@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import banner from "../../Assets/ListingPage/banner.png";
 import "./ListingPage.css";
 import axios from "axios";
-import DetailModal from "../IFP/DetailModal";
+// import DetailModal from "../IFP/DetailModal";
 import FilterSideBar from "../../component/FilterSideBar/FilterSideBar";
 import ProductCard from "../../component/ProductCard/ProductCard";
 
@@ -11,7 +11,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
 const ListingPage = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 

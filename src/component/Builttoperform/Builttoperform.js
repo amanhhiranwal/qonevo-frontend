@@ -1,93 +1,158 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
+
 import "./BuiltToPerform.css";
+
 import image1 from "../../Assets/buildtomove/Image01.png";
 import image2 from "../../Assets/buildtomove/Image02.png";
 import image3 from "../../Assets/buildtomove/Image03.png";
 
-// const INTERVAL = 2000;
 const INTERVAL = 4000;
 
 const features = [
-  { title: "4K UHD Display", desc: "Clear visuals and vibrant detail for better visibility and engagement", image: image1 },
-  { title: "Anti-Glare Screen", desc: "Reduced reflections for uninterrupted visibility", image: image2 },
-  { title: "Built-in Camera & Mic", desc: "Clear video and voice without external devices", image: image3 },
+  {
+    title: "4K UHD Display",
+    desc: "Clear visuals and vibrant detail for better visibility and engagement",
+    image: image1,
+  },
+  {
+    title: "Anti-Glare Screen",
+    desc: "Reduced reflections for uninterrupted visibility",
+    image: image2,
+  },
+  {
+    title: "Built-in Camera & Mic",
+    desc: "Clear video and voice without external devices",
+    image: image3,
+  },
 ];
 
 export default function BuiltToPerform() {
   const [activeFeature, setActiveFeature] = useState(0);
+
   const timerRef = useRef(null);
   const isAnimatingRef = useRef(false);
+
   const activeSlotRef = useRef("A");
   const cycleRef = useRef(0);
+
   const slotARef = useRef(null);
   const slotBRef = useRef(null);
 
   const switchTo = (index) => {
     if (isAnimatingRef.current) return;
+
     isAnimatingRef.current = true;
 
     const incoming = features[index].image;
+
     const activeSlot = activeSlotRef.current;
 
-    const outEl = activeSlot === "A" ? slotARef.current : slotBRef.current;
-    const inEl  = activeSlot === "A" ? slotBRef.current : slotARef.current;
+    const outEl =
+      activeSlot === "A"
+        ? slotARef.current
+        : slotBRef.current;
+
+    const inEl =
+      activeSlot === "A"
+        ? slotBRef.current
+        : slotARef.current;
 
     if (!outEl || !inEl) return;
 
     const isBottomUp = cycleRef.current < 2;
-    cycleRef.current = (cycleRef.current + 1) % 3;
+
+    cycleRef.current =
+      (cycleRef.current + 1) % 3;
 
     inEl.querySelector("img").src = incoming;
+
     inEl.style.transition = "none";
-    inEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
+
+    inEl.style.clipPath = isBottomUp
+      ? "inset(100% 0 0 0)"
+      : "inset(0 0 100% 0)";
+
     inEl.style.zIndex = "2";
+
     outEl.style.zIndex = "1";
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // inEl.style.transition = "clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1)";
-        inEl.style.transition = "clip-path 1600ms cubic-bezier(0.76, 0, 0.24, 1)";
-        inEl.style.clipPath = "inset(0% 0 0% 0)";
+        inEl.style.transition =
+          "clip-path 1600ms cubic-bezier(0.76, 0, 0.24, 1)";
+
+        inEl.style.clipPath =
+          "inset(0% 0 0% 0)";
       });
     });
 
     setTimeout(() => {
       outEl.style.transition = "none";
-      outEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
-      activeSlotRef.current = activeSlot === "A" ? "B" : "A";
+
+      outEl.style.clipPath = isBottomUp
+        ? "inset(100% 0 0 0)"
+        : "inset(0 0 100% 0)";
+
+      activeSlotRef.current =
+        activeSlot === "A" ? "B" : "A";
+
       isAnimatingRef.current = false;
     }, 1650);
   };
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
+
     timerRef.current = setInterval(() => {
       setActiveFeature((prev) => {
-        const next = (prev + 1) % features.length;
+        const next =
+          (prev + 1) % features.length;
+
         switchTo(next);
+
         return next;
       });
     }, INTERVAL);
-  };
+  }, []);
 
   useEffect(() => {
     if (slotARef.current) {
-      slotARef.current.style.clipPath = "inset(0% 0 0 0)";
+      slotARef.current.style.clipPath =
+        "inset(0% 0 0 0)";
+
       slotARef.current.style.zIndex = "1";
     }
+
     if (slotBRef.current) {
-      slotBRef.current.style.clipPath = "inset(100% 0 0 0)";
+      slotBRef.current.style.clipPath =
+        "inset(100% 0 0 0)";
+
       slotBRef.current.style.zIndex = "2";
     }
+
     startTimer();
+
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [startTimer]);
 
   const handleFeatureClick = (fi) => {
-    if (fi === activeFeature || isAnimatingRef.current) return;
+    if (
+      fi === activeFeature ||
+      isAnimatingRef.current
+    )
+      return;
+
     clearInterval(timerRef.current);
+
     setActiveFeature(fi);
+
     switchTo(fi);
+
     startTimer();
   };
 
@@ -96,34 +161,74 @@ export default function BuiltToPerform() {
       <div className="container-fluid px-0">
         <div className="row g-0 align-items-center">
 
-<div className="col-lg-4 col-md-5 btp-content-col">            <h2 className="btp-headline">Built to Perform</h2>
+          <div className="col-lg-4 col-md-5 btp-content-col">
+
+            <h2 className="btp-headline">
+              Built to Perform
+            </h2>
+
             <p className="btp-subtext">
-              Designed for smooth multitasking and fast, consistent performance.
+              Designed for smooth multitasking
+              and fast, consistent performance.
             </p>
+
             <div className="btp-feature-list">
               {features.map((f, i) => (
                 <div
                   key={i}
-                  className={`btp-feature-item${activeFeature === i ? " active" : ""}`}
-                  onClick={() => handleFeatureClick(i)}
+                  className={`btp-feature-item${
+                    activeFeature === i
+                      ? " active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleFeatureClick(i)
+                  }
                 >
                   <div style={{ width: "100%" }}>
-                    <div className="btp-feature-title">{f.title}</div>
-                    <p className="btp-feature-desc">{f.desc}</p>
+
+                    <div className="btp-feature-title">
+                      {f.title}
+                    </div>
+
+                    <p className="btp-feature-desc">
+                      {f.desc}
+                    </p>
+
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-<div className="col-lg-8 col-md-7 btp-images-col">            <div className="btp-monitor-wrapper">
+          <div className="col-lg-8 col-md-7 btp-images-col">
+
+            <div className="btp-monitor-wrapper">
+
               <div className="btp-screen-container">
-                <div ref={slotARef} className="btp-slot">
-                  <img src={features[0].image} alt="feature A" className="btp-screen-img" />
+
+                <div
+                  ref={slotARef}
+                  className="btp-slot"
+                >
+                  <img
+                    src={features[0].image}
+                    alt="feature A"
+                    className="btp-screen-img"
+                  />
                 </div>
-                <div ref={slotBRef} className="btp-slot">
-                  <img src="" alt="feature B" className="btp-screen-img" />
+
+                <div
+                  ref={slotBRef}
+                  className="btp-slot"
+                >
+                  <img
+                    src=""
+                    alt="feature B"
+                    className="btp-screen-img"
+                  />
                 </div>
+
               </div>
             </div>
           </div>

@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import "../../component/Builttoperform/BuiltToPerform.css";
 import image1 from "../../Assets/madeforcreation/Image04 (2).png";
 import image2 from "../../Assets/madeforcreation/Image05.png";
 import image3 from "../../Assets/madeforcreation/Image06.png";
 
 // const INTERVAL = 2000;
-;
 
 const INTERVAL = 4000;
 
@@ -61,16 +65,20 @@ export default function MadeForCreation() {
     }, 1650);
   };
 
-  const startTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setActiveFeature((prev) => {
-        const next = (prev + 1) % features.length;
-        switchTo(next);
-        return next;
-      });
-    }, INTERVAL);
-  };
+const startTimer = useCallback(() => {
+  clearInterval(timerRef.current);
+
+  timerRef.current = setInterval(() => {
+    setActiveFeature((prev) => {
+      const next =
+        (prev + 1) % features.length;
+
+      switchTo(next);
+
+      return next;
+    });
+  }, INTERVAL);
+}, []);
 
   useEffect(() => {
     if (slotARef.current) {
@@ -83,7 +91,7 @@ export default function MadeForCreation() {
     }
     startTimer();
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [startTimer]);
 
   const handleFeatureClick = (fi) => {
     if (fi === activeFeature || isAnimatingRef.current) return;
