@@ -9,7 +9,6 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import ActiveLed from './pages/ActiveLEDPage/ActiveLed';
 import SupportPage from './pages/SupportPage/SupportPage';
 import ListingPage from './pages/ListingPage/ListingPage';
-import NavBarAnimation from './component/NavBarAnimation/NavBarAnimation';
 
 
 

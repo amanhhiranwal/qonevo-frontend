@@ -142,7 +142,8 @@ const isBottomUp = index !== 0;
   startTimer();
 }, 400);
     return () => clearInterval(timerRef.current);
-  }, [startTimer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   
 
