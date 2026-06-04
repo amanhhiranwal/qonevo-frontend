@@ -1,8 +1,5 @@
 import React, { useState , useEffect} from "react";
 
-// import img1 from "../../Assets/ifp/thumbnail-img.png";
-// import img2 from "../../Assets/ifp/thumbnail-img2.png";
-// import img3 from "../../Assets/ifp/thumbnail-img3.png";
 
 import "./DetailModal.css";
 
@@ -11,7 +8,7 @@ import "./DetailModal.css";
 const DetailModal = ({ isOpen, product, onClose }) => {
      
 
-
+console.log(product?.resolution);
   const [activeImage, setActiveImage] = useState(null);
 
   useEffect(() => {
@@ -145,7 +142,7 @@ const specificationData = product.specifications.map((group) => ({
 
           {/* MAIN IMAGE */}
           <div className="preview-image">
-            <img src={activeImage} alt="Product" />
+            <img src={activeImage} alt="Product" loading="lazy"/>
           </div>
 
           {/* THUMBNAILS */}
@@ -159,7 +156,7 @@ const specificationData = product.specifications.map((group) => ({
                 }`}
                 onClick={() => setActiveImage(img)}
               >
-                <img src={img} alt={`Thumbnail ${index + 1}`} />
+                <img src={img} alt={`Thumbnail ${index + 1}`} loading="lazy" />
               </div>
             ))}
 

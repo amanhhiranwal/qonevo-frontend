@@ -64,7 +64,7 @@ export default function ScrollVideo() {
             ref={videoRef}
             muted
             playsInline
-            preload="auto"
+            preload="none"
             style={{
               width: "100%",
               height: "100%",

@@ -237,7 +237,7 @@ body {
 } */
 
 /* ---------- IMAGE WRAPPER ---------- */
-
+/* 
 .abstract-art {
   position: relative;
 
@@ -246,7 +246,7 @@ body {
   aspect-ratio: 16 / 10;
 
   background: #f8f8f8;
-}
+} */
 
 /* ---------- IMAGE SLIDE EFFECT ---------- */
 
@@ -317,7 +317,7 @@ body {
 
 /* ---------- BUTTON ---------- */
 
-.btn-view {
+/* .btn-view {
   width: 100%;
   min-height: 44px;
 
@@ -341,7 +341,7 @@ margin-top: auto;
   background: #0f2460;
 
   transform: translateY(-2px);
-}
+} */
 
 /* ---------- VIEW ALL ---------- */
 
@@ -381,7 +381,7 @@ margin-top: auto;
 .trusted-section {
   /* background: #efefef; */
   background-color: #efefef !important;
-}
+padding-top: clamp(60px, 10vw, 148px) !important;}
 
 .cert-img {
   height: 60px;

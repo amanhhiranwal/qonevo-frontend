@@ -71,6 +71,7 @@ export default function ClientCarousel() {
               objectFit: 'fit',
             }}
             className='w-full'
+            loading='lazy'
           />
         ))}
       </div>

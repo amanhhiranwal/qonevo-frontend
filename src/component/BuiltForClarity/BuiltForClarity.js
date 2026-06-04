@@ -135,7 +135,10 @@ const BuiltForClarity = () => {
     startTimer();
 
     return () => clearInterval(timerRef.current);
-  }, [startTimer]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   const handleFeatureClick = (index) => {
     if (
@@ -206,6 +209,7 @@ const BuiltForClarity = () => {
               src={features[0].image}
               alt="feature"
               className="clarity-image"
+              loading="lazy"
             />
 
             <img
@@ -213,6 +217,7 @@ const BuiltForClarity = () => {
               src=""
               alt="feature"
               className="clarity-image"
+              loading="lazy"
             />
 
           </div>

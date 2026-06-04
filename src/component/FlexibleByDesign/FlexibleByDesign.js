@@ -148,7 +148,8 @@ const startTimer = useCallback(() => {
     startTimer();
 
     return () => clearInterval(timerRef.current);
-  }, [startTimer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /* =========================================
      FEATURE CLICK
@@ -183,6 +184,7 @@ const startTimer = useCallback(() => {
               src={features[0].image}
               alt="feature"
               className="fbd-image"
+              loading="lazy"
             />
 
             <img
@@ -190,6 +192,7 @@ const startTimer = useCallback(() => {
               src=""
               alt="feature"
               className="fbd-image"
+              loading="lazy"
             />
 
           </div>

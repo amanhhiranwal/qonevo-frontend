@@ -7,59 +7,53 @@ import logo from "../../Assets/logo.svg";
 // import ksd from "../../Assets/ksd.png";
 // import pc from "../../Assets/pc.png";
 
-
-import img1 from "../../Assets/DisplayNav/image1.png"
-import img2 from "../../Assets/DisplayNav/image2'.png"
-import img3 from "../../Assets/DisplayNav/image3.png"
-import img4 from "../../Assets/DisplayNav/image4.png"
-import img5 from "../../Assets/DisplayNav/image5.png"
-import icon from "../../Assets/DisplayNav/icon.png"
-
-
-
-
+import img1 from "../../Assets/DisplayNav/image1.png";
+import img2 from "../../Assets/DisplayNav/image2'.png";
+import img3 from "../../Assets/DisplayNav/image3.png";
+import img4 from "../../Assets/DisplayNav/image4.png";
+import img5 from "../../Assets/DisplayNav/image5.png";
+import icon from "../../Assets/DisplayNav/icon.png";
 
 // import addons from "../../Assets/addons.png";
 // import ald from "../../Assets/ald.png";
 import pdfImg from "../../Assets/pdf.png";
-import "../NavBarAnimation/NavBarAnimation.css"
+import "../NavBarAnimation/NavBarAnimation.css";
 import { Link } from "react-router-dom";
 
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
-  const showTimeoutRef = useRef(null); 
+  const showTimeoutRef = useRef(null);
 
-    // const [visibleMenu, setVisibleMenu] = useState(null); // controls "show" class
+  // const [visibleMenu, setVisibleMenu] = useState(null); 
 
-  const timeOutRef = useRef(null)
+  const timeOutRef = useRef(null);
 
   // const handleMouseEnter = (menu) => {
   //   if (window.innerWidth > 991) {
   //     clearTimeout(timeOutRef.current);
   //     setOpenMenu(menu);
-  //     setVisibleMenu(menu); 
+  //     setVisibleMenu(menu);
   //   }
   // };
 
   const handleMouseEnter = (menu) => {
-  if (window.innerWidth > 991) {
-    clearTimeout(timeOutRef.current);
-    clearTimeout(showTimeoutRef.current);
-    setOpenMenu(menu);
-    showTimeoutRef.current = setTimeout(() => {
-      // setVisibleMenu(menu);
-    }, 20);
-  }
-};
+    if (window.innerWidth > 991) {
+      clearTimeout(timeOutRef.current);
+      clearTimeout(showTimeoutRef.current);
+      setOpenMenu(menu);
+      showTimeoutRef.current = setTimeout(() => {
+        // setVisibleMenu(menu);
+      }, 20);
+    }
+  };
 
   const handleMouseLeave = () => {
-
     if (window.innerWidth > 991) {
-   // setVisibleMenu(null); // removes "show" → starts fade out
-    timeOutRef.current = setTimeout(() => {
-      setOpenMenu(null); // unmount only after fade completes (match your transition duration)
-    }, 400);
-  }
+      // setVisibleMenu(null); // removes "show" → starts fade out
+      timeOutRef.current = setTimeout(() => {
+        setOpenMenu(null); // unmount only after fade completes (match your transition duration)
+      }, 400);
+    }
   };
 
   const handleMobileToggle = (menu) => {
@@ -80,10 +74,7 @@ export default function MegaMenuNavbar() {
   //   if (isMobile) {
   //     const navbarOffset = 80;
 
-  //     top =
-  //       el.getBoundingClientRect().top +
-  //       window.pageYOffset -
-  //       navbarOffset;
+  //     top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
   //   } else {
   //     top =
   //       el.getBoundingClientRect().top +
@@ -140,7 +131,7 @@ export default function MegaMenuNavbar() {
       img: img4,
       text: "Active LED Display",
       // link: "/active-led",
-      link:"/"
+      link: "/",
     },
     {
       img: img5,
@@ -160,11 +151,7 @@ export default function MegaMenuNavbar() {
         <div className="container">
           {/* Logo */}
           <Link to="/" className="navbar-brand">
-            <img
-              src={logo}
-              alt="Logo"
-              className="navbar-logo me-2"
-            />
+            <img src={logo} alt="Logo" className="navbar-logo me-2" />
           </Link>
 
           {/* Mobile Toggle */}
@@ -181,10 +168,7 @@ export default function MegaMenuNavbar() {
           </button>
 
           {/* Navbar Content */}
-          <div
-            className="collapse navbar-collapse"
-            id="navbarContent"
-          >
+          <div className="collapse navbar-collapse" id="navbarContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {/* Display */}
               <li
@@ -197,26 +181,20 @@ export default function MegaMenuNavbar() {
                   className="nav-link btn btn-link nav-btn"
                   onClick={() => handleMobileToggle("display")}
                 >
-                  Display
+                  Products
                 </button>
               </li>
 
               {/* Solutions */}
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="nav-link btn btn-link nav-btn"
-                >
+                <button type="button" className="nav-link btn btn-link nav-btn">
                   Solutions
                 </button>
               </li>
 
               {/* Services */}
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="nav-link btn btn-link nav-btn"
-                >
+                <button type="button" className="nav-link btn btn-link nav-btn">
                   Services
                 </button>
               </li>
@@ -233,30 +211,21 @@ export default function MegaMenuNavbar() {
 
               {/* About */}
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="nav-link btn btn-link nav-btn"
-                >
+                <button type="button" className="nav-link btn btn-link nav-btn">
                   About
                 </button>
               </li>
 
               {/* Support */}
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="nav-link btn btn-link nav-btn"
-                >
+                <button type="button" className="nav-link btn btn-link nav-btn">
                   Support
                 </button>
               </li>
 
-               {/* Contact Us */}
+              {/* Contact Us */}
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="nav-link btn btn-link nav-btn"
-                >
+                <button type="button" className="nav-link btn btn-link nav-btn">
                   Contact Us
                 </button>
               </li>
@@ -279,8 +248,8 @@ export default function MegaMenuNavbar() {
 
             {/* Right Side */}
             {/* <ul className="navbar-nav ms-auto mb-2 mb-lg-0"> */}
-              {/* Search */}
-              {/* <li className="nav-item">
+            {/* Search */}
+            {/* <li className="nav-item">
                 <button
                   type="button"
                   className="nav-link btn btn-link nav-btn"
@@ -290,8 +259,8 @@ export default function MegaMenuNavbar() {
                 </button>
               </li> */}
 
-              {/* Contact */}
-              {/* <li className="nav-item">
+            {/* Contact */}
+            {/* <li className="nav-item">
                 <button
                   className="btn btn-submit"
                   onClick={scrollToContact}
@@ -317,10 +286,7 @@ export default function MegaMenuNavbar() {
 
           <div className="row g-3">
             {technicalItems.map((item, i) => (
-              <div
-                key={i}
-                className="col-md-2 col-6 menu-card-head"
-              >
+              <div key={i} className="col-md-2 col-6 menu-card-head">
                 <a
                   href={item.pdf || "/"}
                   target="_blank"
@@ -344,47 +310,44 @@ export default function MegaMenuNavbar() {
       </div>
 
       {/* Display Mega Menu */}
-      
 
- <div
-        className={`mega-menu-content ${
-          openMenu === "display" ? "show" : ""
-        }`}
-        onMouseEnter={() => handleMouseEnter("display")}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="container-fluid  megamenu py-5">
-          <h5 className="mb-4">Display</h5>
+      <div className={`mega-overlay ${openMenu === "display" ? "show" : ""}`}>
+        <div
+          className={`mega-menu-content ${openMenu === "display" ? "show" : ""}`}
+          onMouseEnter={() => handleMouseEnter("display")}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="container-fluid  megamenu py-5">
+            {/* <h5 className="mb-4">Products</h5> */}
 
-<div className="row g-3">
-  {displayItems.map((item, i) => {
-    const isLast = i === displayItems.length - 1;
+            <div className="row g-3">
+              {displayItems.map((item, i) => {
+                const isLast = i === displayItems.length - 1;
 
-    return (
-      <div key={i} className="w-auto flex-start col-sm-1">
-        <div className="menu-card-head p-2">
-          <Link
-            to={item.link || "/"}
-            className="menu-card text-center p-1 text-decoration-none"
-          >
-            <img
-              src={item.img}
-              alt={item.text}
-              className="img-fluid mb-2"
-              style={isLast ? { width: "56px", height: "56px", objectFit: "contain", margin: "auto"} : {}}
-            />
-            <p className="mb-2 text-dark mt-auto">{item.text}</p>
-          </Link>
+                return (
+                  <div key={i} className="w-auto flex-start col-sm-1">
+                    <div className="menu-card-head p-2">
+                      <Link
+                        to={item.link || "/"}
+                        className="menu-card text-center p-1 text-decoration-none"
+                      >
+                        <img
+                          src={item.img}
+                          alt={item.text}
+                          className={`img-fluid mb-2 menu-image ${
+                            isLast ? "small-image" : ""
+                          }`}
+                        />
+                        <p className="mb-2 text-dark mt-auto">{item.text}</p>
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    );
-  })}
-</div>
-        </div>
-      </div>
-
-      
-     
     </>
   );
 }

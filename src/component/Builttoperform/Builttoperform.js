@@ -38,72 +38,58 @@ export default function BuiltToPerform() {
   const isAnimatingRef = useRef(false);
 
   const activeSlotRef = useRef("A");
-  const cycleRef = useRef(0);
-
   const slotARef = useRef(null);
   const slotBRef = useRef(null);
 
-  const switchTo = (index) => {
-    if (isAnimatingRef.current) return;
 
-    isAnimatingRef.current = true;
 
-    const incoming = features[index].image;
+ const switchTo = async (index, currentIndex) => {
+  if (isAnimatingRef.current) return;
 
-    const activeSlot = activeSlotRef.current;
+  // Preload image before animating to avoid blank frame
+  await new Promise((resolve) => {
+    const img = new Image();
+    img.onload = resolve;
+    img.onerror = resolve; // don't block if image fails
+    img.src = features[index].image;
+  });
 
-    const outEl =
-      activeSlot === "A"
-        ? slotARef.current
-        : slotBRef.current;
+  isAnimatingRef.current = true;
 
-    const inEl =
-      activeSlot === "A"
-        ? slotBRef.current
-        : slotARef.current;
+  const incoming = features[index].image;
+  const activeSlot = activeSlotRef.current;
 
-    if (!outEl || !inEl) return;
+  const outEl = activeSlot === "A" ? slotARef.current : slotBRef.current;
+  const inEl = activeSlot === "A" ? slotBRef.current : slotARef.current;
 
-    const isBottomUp = cycleRef.current < 2;
+  if (!outEl || !inEl) {
+    isAnimatingRef.current = false;
+    return;
+  }
 
-    cycleRef.current =
-      (cycleRef.current + 1) % 3;
+const isBottomUp = index !== 0;
 
-    inEl.querySelector("img").src = incoming;
+  inEl.querySelector("img").src = incoming;
+  inEl.style.transition = "none";
+  inEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
+  inEl.style.zIndex = "2";
+  outEl.style.zIndex = "1";
 
-    inEl.style.transition = "none";
-
-    inEl.style.clipPath = isBottomUp
-      ? "inset(100% 0 0 0)"
-      : "inset(0 0 100% 0)";
-
-    inEl.style.zIndex = "2";
-
-    outEl.style.zIndex = "1";
-
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        inEl.style.transition =
-          "clip-path 1600ms cubic-bezier(0.76, 0, 0.24, 1)";
-
-        inEl.style.clipPath =
-          "inset(0% 0 0% 0)";
-      });
+      inEl.style.transition = "clip-path 1600ms cubic-bezier(0.76, 0, 0.24, 1)";
+      inEl.style.clipPath = "inset(0% 0 0% 0)";
     });
+  });
 
-    setTimeout(() => {
-      outEl.style.transition = "none";
+  setTimeout(() => {
+    outEl.style.transition = "none";
+    outEl.style.clipPath = isBottomUp ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)";
+    activeSlotRef.current = activeSlot === "A" ? "B" : "A";
+    isAnimatingRef.current = false;
+  }, 1650);
+};
 
-      outEl.style.clipPath = isBottomUp
-        ? "inset(100% 0 0 0)"
-        : "inset(0 0 100% 0)";
-
-      activeSlotRef.current =
-        activeSlot === "A" ? "B" : "A";
-
-      isAnimatingRef.current = false;
-    }, 1650);
-  };
 
   const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -120,12 +106,29 @@ export default function BuiltToPerform() {
     }, INTERVAL);
   }, []);
 
+  // useEffect(() => {
+  //   if (slotARef.current) {
+  //     slotARef.current.style.clipPath = "inset(0% 0 0 0)";
+  //     slotARef.current.style.zIndex = "1";
+  //   }
+  //   if (slotBRef.current) {
+  //     slotBRef.current.style.clipPath = "inset(100% 0 0 0)";
+  //     slotBRef.current.style.zIndex = "2";
+  //   }
+  //   startTimer();
+  //   return () => clearInterval(timerRef.current);
+  // }, []);
+
+
+
   useEffect(() => {
+    // Promote slots to their own GPU layers immediately on mount
     if (slotARef.current) {
       slotARef.current.style.clipPath =
         "inset(0% 0 0 0)";
 
       slotARef.current.style.zIndex = "1";
+      slotARef.current.style.willChange = "clip-path";
     }
 
     if (slotBRef.current) {
@@ -133,12 +136,16 @@ export default function BuiltToPerform() {
         "inset(100% 0 0 0)";
 
       slotBRef.current.style.zIndex = "2";
+      slotBRef.current.style.willChange = "clip-path";
     }
-
-    startTimer();
-
+     setTimeout(() => {
+  startTimer();
+}, 400);
     return () => clearInterval(timerRef.current);
-  }, [startTimer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  
 
   const handleFeatureClick = (fi) => {
     if (
@@ -156,22 +163,27 @@ export default function BuiltToPerform() {
     startTimer();
   };
 
+    useEffect(() => {
+    features.forEach((feature) => {
+      const img = new Image();
+      img.src = feature.image;
+    });
+  }, []);
   return (
     <section className="btp-section">
       <div className="container-fluid px-0">
-        <div className="row g-0 align-items-center">
-
-          <div className="col-lg-4 col-md-5 btp-content-col">
-
-            <h2 className="btp-headline">
-              Built to Perform
-            </h2>
-
-            <p className="btp-subtext">
-              Designed for smooth multitasking
-              and fast, consistent performance.
-            </p>
-
+        <div className="row g-0 align-items-stretch">
+          <div className="col-xl-4 col-lg-5
+ col-md-5 btp-content-col">
+            {" "}
+            <div className="btp-static-header">
+              <h2 className="btp-headline">Built to Perform</h2>
+              <div className="btp-feature-desc-wrapper"></div>
+              <p className="btp-subtext">
+                Designed for smooth multitasking and fast, consistent
+                performance.
+              </p>
+            </div>
             <div className="btp-feature-list">
               {features.map((f, i) => (
                 <div
@@ -186,55 +198,41 @@ export default function BuiltToPerform() {
                   }
                 >
                   <div style={{ width: "100%" }}>
-
-                    <div className="btp-feature-title">
-                      {f.title}
+                    <div className="btp-feature-title">{f.title}</div>
+                    <div className="btp-feature-desc-wrapper">
+                      <p className="btp-feature-desc">{f.desc}</p>
                     </div>
-
-                    <p className="btp-feature-desc">
-                      {f.desc}
-                    </p>
-
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="col-lg-8 col-md-7 btp-images-col">
-
+          <div className="col-xl-8 col-lg-7 col-md-7 btp-images-col">
+            {" "}
             <div className="btp-monitor-wrapper">
-
               <div className="btp-screen-container">
-
-                <div
-                  ref={slotARef}
-                  className="btp-slot"
-                >
+                <div ref={slotARef} className="btp-slot">
                   <img
                     src={features[0].image}
                     alt="feature A"
                     className="btp-screen-img"
+                    
                   />
                 </div>
-
-                <div
-                  ref={slotBRef}
-                  className="btp-slot"
-                >
-                  <img
-                    src=""
-                    alt="feature B"
-                    className="btp-screen-img"
+                <div ref={slotBRef} className="btp-slot">
+                  <img src="" alt="feature B" className="btp-screen-img" 
+                  
                   />
                 </div>
 
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
+
+
