@@ -62,17 +62,17 @@ export default function MegaMenuNavbar() {
     }
   };
 
-  const scrollToContact = () => {
-    const el = document.getElementById("contact-section");
+  // const scrollToContact = () => {
+  //   const el = document.getElementById("contact-section");
 
-    if (!el) return;
+  //   if (!el) return;
 
-    const isMobile = window.innerWidth < 768;
+  //   const isMobile = window.innerWidth < 768;
 
-    let top;
+  //   let top;
 
-    if (isMobile) {
-      const navbarOffset = 80;
+  //   if (isMobile) {
+  //     const navbarOffset = 80;
 
       top = el.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
     } else {
@@ -83,11 +83,11 @@ export default function MegaMenuNavbar() {
         el.offsetHeight / 2;
     }
 
-    window.scrollTo({
-      top,
-      behavior: "smooth",
-    });
-  };
+  //   window.scrollTo({
+  //     top,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   useEffect(() => {
     const navbar = document.querySelector(".navbar.fixed-top");

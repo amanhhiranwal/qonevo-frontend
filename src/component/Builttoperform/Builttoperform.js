@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
+
 import "./BuiltToPerform.css";
+
 import image1 from "../../Assets/buildtomove/Image01.png";
 import image2 from "../../Assets/buildtomove/Image02.png";
 import image3 from "../../Assets/buildtomove/Image03.png";
 
-// const INTERVAL = 2000;
 const INTERVAL = 4000;
 
 const features = [
@@ -27,8 +33,10 @@ const features = [
 
 export default function BuiltToPerform() {
   const [activeFeature, setActiveFeature] = useState(0);
+
   const timerRef = useRef(null);
   const isAnimatingRef = useRef(false);
+
   const activeSlotRef = useRef("A");
   const slotARef = useRef(null);
   const slotBRef = useRef(null);
@@ -83,16 +91,20 @@ const isBottomUp = index !== 0;
 };
 
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
+
     timerRef.current = setInterval(() => {
       setActiveFeature((prev) => {
-        const next = (prev + 1) % features.length;
+        const next =
+          (prev + 1) % features.length;
+
         switchTo(next);
+
         return next;
       });
     }, INTERVAL);
-  };
+  }, []);
 
   // useEffect(() => {
   //   if (slotARef.current) {
@@ -112,12 +124,17 @@ const isBottomUp = index !== 0;
   useEffect(() => {
     // Promote slots to their own GPU layers immediately on mount
     if (slotARef.current) {
-      slotARef.current.style.clipPath = "inset(0% 0 0 0)";
+      slotARef.current.style.clipPath =
+        "inset(0% 0 0 0)";
+
       slotARef.current.style.zIndex = "1";
       slotARef.current.style.willChange = "clip-path";
     }
+
     if (slotBRef.current) {
-      slotBRef.current.style.clipPath = "inset(100% 0 0 0)";
+      slotBRef.current.style.clipPath =
+        "inset(100% 0 0 0)";
+
       slotBRef.current.style.zIndex = "2";
       slotBRef.current.style.willChange = "clip-path";
     }
@@ -125,15 +142,23 @@ const isBottomUp = index !== 0;
   startTimer();
 }, 400);
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [startTimer]);
 
   
 
   const handleFeatureClick = (fi) => {
-    if (fi === activeFeature || isAnimatingRef.current) return;
+    if (
+      fi === activeFeature ||
+      isAnimatingRef.current
+    )
+      return;
+
     clearInterval(timerRef.current);
+
     setActiveFeature(fi);
+
     switchTo(fi);
+
     startTimer();
   };
 
@@ -162,8 +187,14 @@ const isBottomUp = index !== 0;
               {features.map((f, i) => (
                 <div
                   key={i}
-                  className={`btp-feature-item${activeFeature === i ? " active" : ""}`}
-                  onClick={() => handleFeatureClick(i)}
+                  className={`btp-feature-item${
+                    activeFeature === i
+                      ? " active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleFeatureClick(i)
+                  }
                 >
                   <div style={{ width: "100%" }}>
                     <div className="btp-feature-title">{f.title}</div>
@@ -193,6 +224,7 @@ const isBottomUp = index !== 0;
                   
                   />
                 </div>
+
               </div>
             </div>
           </div>

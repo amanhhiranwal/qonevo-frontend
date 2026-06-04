@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+
 import "./BuiltForClarity.css";
 
 import image1 from "../../Assets/BuildForClarity/image2.png";
@@ -57,7 +63,6 @@ const BuiltForClarity = () => {
 
     if (!outEl || !inEl) return;
 
-    /* New image starts from TOP */
     inEl.src = incoming;
 
     inEl.style.transition = "none";
@@ -76,7 +81,8 @@ const BuiltForClarity = () => {
 
         const duration = "1400ms";
 
-        inEl.style.transition = `transform ${duration} ${easing}`;
+        inEl.style.transition =
+          `transform ${duration} ${easing}`;
 
         inEl.style.transform =
           "translate3d(0,0,0)";
@@ -96,7 +102,7 @@ const BuiltForClarity = () => {
     }, 1450);
   };
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
 
     timerRef.current = setInterval(() => {
@@ -109,7 +115,7 @@ const BuiltForClarity = () => {
         return next;
       });
     }, INTERVAL);
-  };
+  }, []);
 
   useEffect(() => {
     if (slotARef.current) {
@@ -129,7 +135,7 @@ const BuiltForClarity = () => {
     startTimer();
 
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [startTimer]);
 
   const handleFeatureClick = (index) => {
     if (
@@ -151,7 +157,6 @@ const BuiltForClarity = () => {
     <section className="clarity-section">
       <div className="clarity-wrapper">
 
-        {/* LEFT CONTENT */}
         <div className="clarity-left-container">
 
           <h2 className="clarity-heading">
@@ -192,7 +197,6 @@ const BuiltForClarity = () => {
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
         <div className="clarity-right-container">
 
           <div className="clarity-image-wrapper">

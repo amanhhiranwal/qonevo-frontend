@@ -67,7 +67,6 @@ const IFPPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const limit = 4;
   const navigate = useNavigate();
 
 let data = [
@@ -545,7 +544,7 @@ let data = [
     };
 
     getProducts();
-  }, [limit]);
+  }, []);
 
   return (
     <>
@@ -600,65 +599,9 @@ let data = [
           <div className="products-loader">
             <div className="loader"></div>
           </div>
-        ) : products.length === 0 ? ( // ← empty state
+        ) : products.length === 0 ? ( 
           <p className="no-data">No Data Found...</p>
         ) : (
-          // <div className="product-grid">
-
-          //   {products.map((p) => (
-          //     <div className="product-card_ifp" key={p.id ?? p.name}>
-
-          //       <div className="abstract-art">
-
-          //         <img
-          //           className="img-default"
-          //           src={p.thumbnail}
-          //           alt={p.name}
-          //           loading="lazy"
-          //         />
-
-          //         {p.images?.[1]?.image_url && (
-          //           <img
-          //             className="img-hover"
-          //             src={p.images[1].image_url}
-          //             alt={p.name}
-          //             loading="lazy"
-          //           />
-          //         )}
-
-          //       </div>
-
-          //       <div className="product-info mt-4">
-
-          //         <div className="product-name">
-          //          {`${p.name} ${p.size}"`}
-          //         </div>
-
-          //         <div className="product-spec">
-          //           {p?.subheading}
-          //         </div>
-
-          //         <div
-          //           className="product-spec mt-4 mb-4"
-          //           style={{ color: "#aaa" }}
-          //         >
-          //           {p?.size | p?.chipset | p?.storage | p?.resolution || "Default : 4K UHD | 400 nits | 200W * 2"}
-          //         </div>
-
-          //         <button
-          //           className="btn-view"
-          //           onClick={() => setSelectedProduct(p)}
-          //         >
-          //           View Details
-          //         </button>
-
-          //       </div>
-
-          //     </div>
-          //   ))}
-
-          // </div>
-
           <>
             <ProductCard products={products} variant="grid-4" />
             <div className="view-all-wrap">

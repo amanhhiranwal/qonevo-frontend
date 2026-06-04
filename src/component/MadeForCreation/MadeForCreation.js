@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import "../../component/Builttoperform/BuiltToPerform.css";
 import image1 from "../../Assets/madeforcreation/Image04 (2).png";
 import image2 from "../../Assets/madeforcreation/Image05.png";
@@ -75,16 +80,20 @@ const isBottomUp = index !== 0;
     }, 1650);
   };
 
-  const startTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setActiveFeature((prev) => {
-        const next = (prev + 1) % features.length;
-        switchTo(next);
-        return next;
-      });
-    }, INTERVAL);
-  };
+const startTimer = useCallback(() => {
+  clearInterval(timerRef.current);
+
+  timerRef.current = setInterval(() => {
+    setActiveFeature((prev) => {
+      const next =
+        (prev + 1) % features.length;
+
+      switchTo(next);
+
+      return next;
+    });
+  }, INTERVAL);
+}, []);
 
   // useEffect(() => {
   //   if (slotARef.current) {

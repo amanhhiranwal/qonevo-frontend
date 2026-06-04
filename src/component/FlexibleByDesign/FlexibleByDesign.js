@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import "./FlexibleByDesign.css";
 
 import image1 from "../../Assets/FlexibleByDesign/image1.png";
@@ -106,20 +111,20 @@ const FlexibleByDesign = () => {
      TIMER
   ========================================= */
 
-  const startTimer = () => {
-    clearInterval(timerRef.current);
+const startTimer = useCallback(() => {
+  clearInterval(timerRef.current);
 
-    timerRef.current = setInterval(() => {
-      setActiveFeature((prev) => {
-        const next =
-          (prev + 1) % features.length;
+  timerRef.current = setInterval(() => {
+    setActiveFeature((prev) => {
+      const next =
+        (prev + 1) % features.length;
 
-        switchTo(next);
+      switchTo(next);
 
-        return next;
-      });
-    }, INTERVAL);
-  };
+      return next;
+    });
+  }, INTERVAL);
+}, []);
 
   /* =========================================
      INITIAL SETUP
@@ -143,7 +148,7 @@ const FlexibleByDesign = () => {
     startTimer();
 
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [startTimer]);
 
   /* =========================================
      FEATURE CLICK
