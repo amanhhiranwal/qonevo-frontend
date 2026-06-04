@@ -7,9 +7,11 @@ const Footer = () => {
       <div className="container py-5">
         <div className="row gy-4">
           <div className="col-12 col-lg-4 company-info">
-            <h6 className="fw-bold mb-3 text-uppercase">
-              Qonevo Technologies Private Limited
+            <h6 className="fw-bold mb-1  text-uppercase">
+              Synergy global Private Limited 
+ 
             </h6>
+            <p className="mb-3">(Formally Known as Qonevo Technologies Pvt Ltd.)</p>
             <p className="mb-2">
               <span className="fw-bold">CIN:</span> 72200UP2021PTC156318
             </p>
