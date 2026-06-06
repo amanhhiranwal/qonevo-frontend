@@ -11,7 +11,7 @@ import image1 from "../../Assets/BuildForClarity/image2.png";
 import image2 from "../../Assets/BuildForClarity/image3.png";
 import image3 from "../../Assets/BuildForClarity/image1.png";
 
-const INTERVAL = 3000;
+const INTERVAL = 5000;
 
 const features = [
   {
@@ -42,65 +42,134 @@ const BuiltForClarity = () => {
 
   const activeSlotRef = useRef("A");
 
+  // const switchTo = (index) => {
+  //   if (isAnimatingRef.current) return;
+
+  //   isAnimatingRef.current = true;
+
+  //   const incoming = features[index].image;
+
+  //   const activeSlot = activeSlotRef.current;
+
+  //   const outEl =
+  //     activeSlot === "A"
+  //       ? slotARef.current
+  //       : slotBRef.current;
+
+  //   const inEl =
+  //     activeSlot === "A"
+  //       ? slotBRef.current
+  //       : slotARef.current;
+
+  //   if (!outEl || !inEl) return;
+
+  //   inEl.src = incoming;
+
+  //   inEl.style.transition = "none";
+  //   inEl.style.transform =
+  //     "translate3d(0,-100%,0)";
+  //   inEl.style.zIndex = "2";
+
+  //   outEl.style.zIndex = "1";
+
+  //   inEl.getBoundingClientRect();
+
+  //   requestAnimationFrame(() => {
+  //     requestAnimationFrame(() => {
+  //       const easing =
+  //         "cubic-bezier(0.22, 1, 0.36, 1)";
+
+  //       const duration = "1400ms";
+
+  //       inEl.style.transition =
+  //         `transform ${duration} ${easing}`;
+
+  //       inEl.style.transform =
+  //         "translate3d(0,0,0)";
+  //     });
+  //   });
+
+  //   setTimeout(() => {
+  //     outEl.style.transition = "none";
+
+  //     outEl.style.transform =
+  //       "translate3d(0,0,0)";
+
+  //     activeSlotRef.current =
+  //       activeSlot === "A" ? "B" : "A";
+
+  //     isAnimatingRef.current = false;
+  //   }, 1450);
+  // };
+
   const switchTo = (index) => {
-    if (isAnimatingRef.current) return;
+  if (isAnimatingRef.current) return;
 
-    isAnimatingRef.current = true;
+  isAnimatingRef.current = true;
 
-    const incoming = features[index].image;
+  const incoming = features[index].image;
 
-    const activeSlot = activeSlotRef.current;
+  const activeSlot = activeSlotRef.current;
 
-    const outEl =
-      activeSlot === "A"
-        ? slotARef.current
-        : slotBRef.current;
+  const outEl =
+    activeSlot === "A"
+      ? slotARef.current
+      : slotBRef.current;
 
-    const inEl =
-      activeSlot === "A"
-        ? slotBRef.current
-        : slotARef.current;
+  const inEl =
+    activeSlot === "A"
+      ? slotBRef.current
+      : slotARef.current;
 
-    if (!outEl || !inEl) return;
+  if (!outEl || !inEl) return;
 
-    inEl.src = incoming;
+  const isBottomUp = index !== 0;
 
-    inEl.style.transition = "none";
-    inEl.style.transform =
-      "translate3d(0,-100%,0)";
-    inEl.style.zIndex = "2";
+  /* UPDATE IMAGE */
 
-    outEl.style.zIndex = "1";
+  inEl.querySelector("img").src = incoming;
 
-    inEl.getBoundingClientRect();
+  /* RESET */
 
+  inEl.style.transition = "none";
+
+  inEl.style.clipPath = isBottomUp
+    ? "inset(100% 0 0 0)"
+    : "inset(0 0 100% 0)";
+
+  inEl.style.zIndex = "3";
+
+  outEl.style.zIndex = "2";
+
+  /* FORCE PAINT */
+
+  inEl.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const easing =
-          "cubic-bezier(0.22, 1, 0.36, 1)";
+      inEl.style.transition =
+        "clip-path 2200ms cubic-bezier(0.76, 0, 0.24, 1)";
 
-        const duration = "1400ms";
-
-        inEl.style.transition =
-          `transform ${duration} ${easing}`;
-
-        inEl.style.transform =
-          "translate3d(0,0,0)";
-      });
+      inEl.style.clipPath =
+        "inset(0% 0 0% 0)";
     });
+  });
 
-    setTimeout(() => {
-      outEl.style.transition = "none";
+  setTimeout(() => {
+    outEl.style.transition = "none";
 
-      outEl.style.transform =
-        "translate3d(0,0,0)";
+    outEl.style.clipPath =
+      "inset(0% 0 0% 0)";
 
-      activeSlotRef.current =
-        activeSlot === "A" ? "B" : "A";
+    activeSlotRef.current =
+      activeSlot === "A"
+        ? "B"
+        : "A";
 
-      isAnimatingRef.current = false;
-    }, 1450);
-  };
+    isAnimatingRef.current = false;
+  }, 2250);
+};
+
 
   const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -117,28 +186,50 @@ const BuiltForClarity = () => {
     }, INTERVAL);
   }, []);
 
+  // useEffect(() => {
+  //   if (slotARef.current) {
+  //     slotARef.current.style.transform =
+  //       "translate3d(0,0,0)";
+
+  //     slotARef.current.style.zIndex = "1";
+  //   }
+
+  //   if (slotBRef.current) {
+  //     slotBRef.current.style.transform =
+  //       "translate3d(0,-100%,0)";
+
+  //     slotBRef.current.style.zIndex = "2";
+  //   }
+
+  //   startTimer();
+
+  //   return () => clearInterval(timerRef.current);
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+
   useEffect(() => {
-    if (slotARef.current) {
-      slotARef.current.style.transform =
-        "translate3d(0,0,0)";
+  if (slotARef.current) {
+    slotARef.current.style.clipPath =
+      "inset(0% 0 0% 0)";
 
-      slotARef.current.style.zIndex = "1";
-    }
+    slotARef.current.style.zIndex = "2";
+  }
 
-    if (slotBRef.current) {
-      slotBRef.current.style.transform =
-        "translate3d(0,-100%,0)";
+  if (slotBRef.current) {
+    slotBRef.current.style.clipPath =
+      "inset(100% 0 0 0)";
 
-      slotBRef.current.style.zIndex = "2";
-    }
+    slotBRef.current.style.zIndex = "1";
+  }
 
-    startTimer();
+  startTimer();
 
-    return () => clearInterval(timerRef.current);
+  return () => clearInterval(timerRef.current);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const handleFeatureClick = (index) => {
     if (
@@ -178,12 +269,27 @@ const BuiltForClarity = () => {
                 className={`clarity-feature-item ${
                   activeFeature === index
                     ? "active"
-                    : ""
+                    : "inactive"
                 }`}
                 onClick={() =>
                   handleFeatureClick(index)
                 }
               >
+
+                  <div className="clarity-bar">
+
+    {activeFeature === index && (
+      <div
+        key={activeFeature}
+        className="clarity-bar-fill"
+        style={{
+          animationDuration: `${INTERVAL}ms`,
+        }}
+      />
+    )}
+
+  </div>
+                
                 <div className="clarity-feature-content">
 
                   <h4 className="clarity-feature-title">
@@ -204,7 +310,7 @@ const BuiltForClarity = () => {
 
           <div className="clarity-image-wrapper">
 
-            <img
+            {/* <img
               ref={slotARef}
               src={features[0].image}
               alt="feature"
@@ -218,7 +324,27 @@ const BuiltForClarity = () => {
               alt="feature"
               className="clarity-image"
               loading="lazy"
-            />
+            /> */}
+
+                <div ref={slotARef} className="bfc-image-slot">
+  <img
+    src={features[0].image}
+    alt="feature"
+    className="clarity-image"
+    loading="eager"
+    decoding="async"
+  />
+</div>
+
+<div ref={slotBRef} className="bfc-image-slot">
+  <img
+    src={features[1].image}
+    alt="feature"
+    className="clarity-image"
+    loading="eager"
+    decoding="async"
+  />
+</div>
 
           </div>
         </div>

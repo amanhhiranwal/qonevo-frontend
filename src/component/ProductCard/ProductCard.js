@@ -10,6 +10,7 @@ const ProductCard = ({ products, variant="default" }) => {
   return (
     <section>
       <div className={`product-grid ${variant}`}>
+        
         {products.map((p) => (
           <div className="product-card_ifp" key={p.id ?? p.name}>  {/* ✅ id fallback name */}
 
@@ -54,6 +55,7 @@ const ProductCard = ({ products, variant="default" }) => {
             </div>
           </div>
         ))}
+
       </div>
 
       <DetailModal
