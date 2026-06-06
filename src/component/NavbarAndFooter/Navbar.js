@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
 
-import logo from "../../Assets/logo.svg";
+// import logo from "../../Assets/logo.svg";
+import logo from "../../Assets/Synergy-Qonevo-logo.png"
 // import ifp from "../../Assets/ifp.svg";
 // import ads from "../../Assets/ads.png";
 // import ksd from "../../Assets/ksd.png";
@@ -281,7 +282,7 @@ export default function MegaMenuNavbar() {
         onMouseEnter={() => handleMouseEnter("technical")}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="container megamenu py-5">
+        <div className="container megamenu py-5 sm:py-10">
           <h5 className="mb-4">Technical Specification</h5>
 
           <div className="row g-3">
@@ -325,7 +326,7 @@ export default function MegaMenuNavbar() {
                 const isLast = i === displayItems.length - 1;
 
                 return (
-                  <div key={i} className="w-auto flex-start col-sm-1">
+                  <div key={i} className="w-auto flex-start  col-sm-1">
                     <div className="menu-card-head p-2">
                       <Link
                         to={item.link || "/"}

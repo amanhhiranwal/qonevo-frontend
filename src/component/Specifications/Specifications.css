@@ -146,6 +146,7 @@
 .specs-row {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 /* Thin separator between rows within a card */
