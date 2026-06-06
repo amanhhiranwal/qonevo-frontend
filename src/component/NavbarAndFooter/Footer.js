@@ -11,7 +11,7 @@ const Footer = () => {
               Synergy global Private Limited 
  
             </h6>
-            <p className="mb-3">Formally Known as Qonevo Technologies Pvt Ltd.</p>
+            <p className="mb-3">(Formally Known as Qonevo Technologies Pvt Ltd.)</p>
             <p className="mb-2">
               <span className="fw-bold">CIN:</span> 72200UP2021PTC156318
             </p>
