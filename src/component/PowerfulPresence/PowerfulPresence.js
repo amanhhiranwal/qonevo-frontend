@@ -6,7 +6,7 @@ import overlayImg from "../../Assets/product-page/presence-overlay-img.png";
 import leftArrow from "../../Assets/product-page/left-arrow.svg";
 import rightArrow from "../../Assets/product-page/right-arrow.svg";
 
-const EDGE_OFFSET_PX = 194;
+// const EDGE_OFFSET_PX = 194;
 
 
 // AFTER — returns different px based on container width
@@ -29,14 +29,43 @@ const PowerfulPresence = () => {
      CLAMP HELPERS
   ======================================== */
 
-  const getMinMax = useCallback(() => {
-    if (!containerRef.current) return { min: 0, max: 100 };
-    const { width } = containerRef.current.getBoundingClientRect();
-    const min = (EDGE_OFFSET_PX / width) * 100;
-    const max = 100 - min;
-    return { min, max };
-  }, []);
+//   const getMinMax = useCallback(() => {
+//     if (!containerRef.current) return { min: 0, max: 100 };
+//     const { width } = containerRef.current.getBoundingClientRect();
+//     // const min = (EDGE_OFFSET_PX / width) * 100;
+//     const edgeOffset = getEdgeOffsetPx(width);
+// const min = (edgeOffset / width) * 100;
+//     const max = 100 - min;
+//     return { min, max };
+//   }, []);
 
+const getMinMax = useCallback(() => {
+  if (!containerRef.current) {
+    return { min: 2, max: 98 };
+  }
+
+  const width =
+    containerRef.current.getBoundingClientRect().width;
+
+  let padding;
+
+  if (width >= 1400) {
+    padding = 10;
+  } else if (width >= 1024) {
+    padding = 8;
+  } else if (width >= 768) {
+    padding = 4;
+  } else if (width >= 480) {
+    padding = 1.5;
+  } else {
+    padding = 0.5;
+  }
+
+  return {
+    min: padding,
+    max: 100 - padding,
+  };
+}, []);
   const clamp = useCallback(
     (value) => {
       const { min, max } = getMinMax();
@@ -61,14 +90,18 @@ const PowerfulPresence = () => {
   useEffect(() => {
     const measure = () => {
       if (!containerRef.current) return;
-      const { width } = containerRef.current.getBoundingClientRect();
-      applyPosition((EDGE_OFFSET_PX / width) * 100);
+      // const { width } = containerRef.current.getBoundingClientRect();
+      // applyPosition((EDGE_OFFSET_PX / width) * 100);
+     const { min } = getMinMax();
+applyPosition(min);
+      
     };
 
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [applyPosition]);
+    
+  }, [getMinMax, applyPosition]);
 
   /* ========================================
      DERIVED STATE

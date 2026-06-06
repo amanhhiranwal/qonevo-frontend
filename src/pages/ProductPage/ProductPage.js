@@ -97,11 +97,12 @@ const ProductPage = () => {
     <div>
       {/* HERO SECTION */}
       <section className="hero-sec">
-        <div className="overlay-text">
+      
+        <div className="hero-img-container">
+            <div className="overlay-text">
           <h2>The Smart Classroom. Reimagined.</h2>
           <p>Qonevo Interactive Flat Panel | Limitless Interactive</p>
         </div>
-        <div className="hero-img-container">
           <img src={banner} alt="Qonevo Interactive Flat Panel" />
         </div>
       </section>
@@ -219,6 +220,7 @@ const ProductPage = () => {
                   </div>
                 ))}
               </div>
+               <div className="slider-fade-right"></div>
             </div>
 
             <button className="gravity-arrow" onClick={next}>›</button>

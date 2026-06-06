@@ -449,7 +449,8 @@
   }
  
   .megamenu {
-    padding-top: 10px !important;
+    /* padding-top: 10px !important; */
+    padding-top:5rem !important ;
     padding-bottom: 10px !important;
   }
  
@@ -470,6 +471,7 @@
   /* } */
    .mega-menu-content.show .row {
   gap: 12px;
+  padding-top: 20px;
  }
 
   .mega-menu-content .row {
@@ -525,7 +527,7 @@ display: flex !important;
 
  
   .menu-card p {
-    font-size: 13px;
+    font-size: 11px;
     line-height: 20px;
   }
 
@@ -556,7 +558,7 @@ display: flex !important;
   }
  
   .menu-card-head {
-    /* min-height: 135px; */
+    min-height: 135px;
   }
  
   .menu-card img {

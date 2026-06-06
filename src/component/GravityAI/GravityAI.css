@@ -188,7 +188,9 @@
 }
 
 .gravity-card-desc {
-  font-size: 0.797rem!important ;
+  /* font-size: 0.797rem!important ; */
+    font-size: 0.97rem!important;
+
   color: #bbb;
   font-weight: 300;
   line-height: 1.5;

@@ -8,8 +8,8 @@
 
 .megamenu {
   opacity: 0;
-  padding: 0 100px!important;
-}
+  padding-left: clamp(16px, 5vw, 100px)!important;
+  padding-right: clamp(16px, 5vw, 100px);}
 
 .mega-menu-content.show .megamenu {
   animation: megaFadeIn 0.3s ease forwards;
