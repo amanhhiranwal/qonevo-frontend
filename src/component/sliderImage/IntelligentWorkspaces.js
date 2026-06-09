@@ -1,9 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./intelligentWorkspace.css";
 
-
-export default function IntelligentWorkspaces({image1,
-  image2}) {
+export default function IntelligentWorkspaces({ image1, image2 }) {
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef(null);
@@ -16,16 +14,24 @@ export default function IntelligentWorkspaces({image1,
     setSliderPos(pct);
   }, []);
 
-  const onMouseDown = (e) => { e.preventDefault(); setIsDragging(true); };
-  const onMouseMove = useCallback((e) => { if (isDragging) updateSlider(e.clientX); }, [isDragging, updateSlider]);
-  const onMouseUp   = useCallback(() => setIsDragging(false), []);
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+  const onMouseMove = useCallback(
+    (e) => {
+      if (isDragging) updateSlider(e.clientX);
+    },
+    [isDragging, updateSlider],
+  );
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
 
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup",   onMouseUp);
+    window.addEventListener("mouseup", onMouseUp);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup",   onMouseUp);
+      window.removeEventListener("mouseup", onMouseUp);
     };
   }, [onMouseMove, onMouseUp]);
 
@@ -37,9 +43,12 @@ export default function IntelligentWorkspaces({image1,
           className="iw-compare"
           style={{ "--pos": `${sliderPos}%` }}
           onMouseDown={onMouseDown}
-          onTouchStart={(e) => { setIsDragging(true); updateSlider(e.touches[0].clientX); }}
-          onTouchMove={(e)  => updateSlider(e.touches[0].clientX)}
-          onTouchEnd={()    => setIsDragging(false)}
+          onTouchStart={(e) => {
+            setIsDragging(true);
+            updateSlider(e.touches[0].clientX);
+          }}
+          onTouchMove={(e) => updateSlider(e.touches[0].clientX)}
+          onTouchEnd={() => setIsDragging(false)}
         >
           {/* RIGHT — Smart Classroom (Image 2) */}
           <img
@@ -66,13 +75,18 @@ export default function IntelligentWorkspaces({image1,
             style={{ left: `${sliderPos}%` }}
             onMouseDown={onMouseDown}
           >
-            <svg viewBox="0 0 28 28" fill="none" stroke="#1a2340" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 28 28"
+              fill="none"
+              stroke="#1a2340"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polyline points="11,7 5,14 11,21" />
               <polyline points="17,7 23,14 17,21" />
             </svg>
           </div>
-
-        
         </div>
       </div>
     </>

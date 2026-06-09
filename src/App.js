@@ -24,7 +24,6 @@ function App() {
         <Route path="/active-led" element={<ActiveLed/>}/>
         <Route path="/support" element={<SupportPage/>}/>
         <Route path="/listing-page" element={<ListingPage/>}/>
-        
 
       </Routes>
 
