@@ -121,12 +121,14 @@ export default function MegaMenuNavbar() {
     {
       img: img2,
       text: "Advertising Display & Signage",
-      link: "/advertising-display",
+      // link: "/advertising-display",
+      link: "/",
     },
     {
       img: img3,
       text: "Kiosk & Smart Display",
-      link: "/kiosk-display",
+      // link: "/kiosk-display",
+      link: "/",
     },
     {
       img: img4,
@@ -137,12 +139,14 @@ export default function MegaMenuNavbar() {
     {
       img: img5,
       text: "All-In-One PC & OPS",
-      link: "/all-in-one-pc",
+      // link: "/all-in-one-pc",
+      link: "/",
     },
     {
       img: icon,
       text: "Accessories & Add-ons",
-      link: "/accessories",
+      // link: "/accessories",
+      link: "/",
     },
   ];
 

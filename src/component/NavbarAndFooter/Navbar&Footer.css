@@ -17,7 +17,10 @@
   font-family: "Montserrat", sans-serif;
   width: 590px;
 }
-
+.footer-section{
+       margin-left: clamp(16px, 5vw, 100px)!important;
+  margin-right: clamp(16px, 5vw, 100px)!important;
+}
 .top-footer,
 .middle-footer {
   margin-bottom: 100px;
@@ -29,8 +32,9 @@
 
   background-color: #efefef;
   padding: 3rem 5rem !important;
-  border-bottom-right-radius: 22px;
-  border-bottom-left-radius: 22px;
+  /* border-bottom-right-radius: 22px;
+  border-bottom-left-radius: 22px; */
+  border-radius: 22px;
   margin-bottom: 1rem;
   margin-top: 2.2rem;
 }

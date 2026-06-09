@@ -54,7 +54,8 @@
   color: #e41346 !important;
 }
 .navbar-nav{
-  gap: 50px;
+  /* gap: 50px; */
+  gap: 38px;
 }
 .navbar-nav .nav-item {
   margin-left: 1rem;

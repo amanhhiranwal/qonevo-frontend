@@ -116,7 +116,7 @@ const ContactPage = () => {
         <div className={`toast-box ${toast.type}`}>{toast.message}</div>
       )}
 
-      <section className="contact-section container" id="contact-section">
+      <section className="contact-section" id="contact-section">
         <div className="contact-wrapper col-12 mx-auto">
           <div className="text-center contact-text mb-4">
             <div className="section-headings py-2 mt-2">
