@@ -21,6 +21,7 @@ import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../../component/ProductCard/ProductCard";
+import PageLayout from "../../layouts/PageLayout";
 
 // import prodImg1 from "../../Assets/ProductCard/img1.png";
 // import prodImg2 from "../../Assets/ProductCard/img2.png";
@@ -550,7 +551,7 @@ const IFPPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="ifp-page">
       <section className="hero">
         {/* White curved stage */}
         <div className="hero-curve" />
@@ -663,7 +664,8 @@ const IFPPage = () => {
           <ContactPage />
         </section>
       </section>
-    </>
+      <PageLayout/>
+    </div>
   );
   
 };

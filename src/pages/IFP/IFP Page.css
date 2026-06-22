@@ -20,6 +20,10 @@ body {
   overflow-x: hidden;
 }
 
+.ifp-page{
+  background-color: #f5f5f5;
+}
+
 /* =====================================================
    HERO SECTION
 ===================================================== */
@@ -379,8 +383,11 @@ margin-top: auto;
 ===================================================== */
 
 .trusted-section {
-  /* background: #efefef; */
-  background-color: #efefef !important;
+  /* background: #ffffff; */
+  background-color: var(--Colors-Neutral-100, rgba(245, 245, 245, 1));
+;
+  /* background-color: #efefef !important; */
+  /* background-color: white; */
 padding-top: clamp(60px, 10vw, 148px) !important;}
 
 .cert-img {

@@ -35,6 +35,7 @@ import BuiltForClarity from "../../component/BuiltForClarity/BuiltForClarity.js"
 import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.js";
 
 import ProductCard from "../../component/ProductCard/ProductCard.js";
+import PageLayout from "../../layouts/PageLayout.jsx";
 
 const features = [
   { image: icon1, desc: "160° Viewing Angle" },
@@ -627,6 +628,7 @@ const ActiveLed = () => {
       <section className="lets-connect">
         <ContactPage />
       </section>
+      <PageLayout/>
     </div>
   );
 };

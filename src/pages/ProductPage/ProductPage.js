@@ -15,7 +15,7 @@ import gravityImg2 from "../../Assets/product-page/product-pg-gravity/Image-1.pn
 import gravityImg3 from "../../Assets/product-page/product-pg-gravity/Image.png";
 import gravityImg4 from "../../Assets/product-page/product-pg-gravity/image-2.png"
 
-
+import  PageLayout from "../../layouts/PageLayout.jsx"
 import ScImage from "../../Assets/product-page/smart-classroom/Image01.jpg";
 import PowerfulPresence from "../../component/PowerfulPresence/PowerfulPresence";
 import Specifications from "../../component/Specifications/Specifications";
@@ -312,6 +312,7 @@ const ProductPage = () => {
 
       <PowerfulPresence />
       <Specifications />
+      <PageLayout/>
     </div>
   );
 };

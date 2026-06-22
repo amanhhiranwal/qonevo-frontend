@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
+import { useNavigate } from "react-router-dom";
+
+
 
 // import logo from "../../Assets/logo.svg";
 import logo from "../../Assets/Synergy-Qonevo-logo.png"
@@ -24,6 +27,7 @@ import { Link } from "react-router-dom";
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const showTimeoutRef = useRef(null);
+  const navigate = useNavigate();
 
   // const [visibleMenu, setVisibleMenu] = useState(null); 
 
@@ -223,7 +227,7 @@ export default function MegaMenuNavbar() {
 
               {/* Support */}
               <li className="nav-item">
-                <button type="button" className="nav-link btn btn-link nav-btn">
+                <button type="button"  onClick={()=>navigate("/support")}  className="nav-link btn btn-link nav-btn">
                   Support
                 </button>
               </li>
