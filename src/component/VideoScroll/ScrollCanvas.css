@@ -2,7 +2,8 @@
 
 .scroll-section {
   position: relative;
-  background-color: #f0f0ec;
+  /* background-color: #f0f0ec; */
+  background-color: #f5f5f5;
   /* IMPORTANT */
   height: 500vh;
 

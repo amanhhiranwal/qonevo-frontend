@@ -62,7 +62,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/" className="text-dark text-decoration-none d-block">
+                <a href="/support" className="text-dark text-decoration-none d-block">
                   Support
                 </a>
               </li>
@@ -154,10 +154,10 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer-bottom bg-light border-top py-3">
-        <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+      <div className="footer-bottom border-top py-3">
+        <div className=" d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
           <div className="mb-2 mb-md-0">
-            <span className="fw-bold me-2">Socials:</span>
+            <span className="fw-bold me-2 footer-socials-heading">Socials:</span>
             <a
               href="https://www.linkedin.com/company/qonevo-technologies-private-limited/?originalSubdomain=in"
               className="text-dark fs-6 me-3"
@@ -173,15 +173,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <span className="fw-bold">Sales:</span>
+            <span className="fw-semibold footer-email">Sales E-mail:</span>
             <a
               href="mailto:business@qonevo.in"
-              className="text-dark text-decoration-none"
-            >
-              business@qonevo.in
+              className="text-dark text-decoration-none footer-email"
+            >   business@qonevo.in
             </a>
-            {/* <span className="fw-bold ms-4">Support:</span> */}
-            {/* <a href="mailto:support@qonevo.in" className="text-dark text-decoration-none">support@qonevo.in</a> */}
+            <span className="fw-semibold ms-4 footer-email">Support E-mail:</span>
+            <a href="mailto:support@qonevo.in" className="text-dark text-decoration-none footer-email">   support@qonevo.in</a>
           </div>
         </div>
       </div>
