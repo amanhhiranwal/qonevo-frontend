@@ -3,7 +3,7 @@ import "./Navbar&Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-white borde r-top">
+    <footer className="footer borde r-top">
       <div className="footer-section py-5">
         <div className="row gy-4">
           <div className="col-12 col-lg-4 company-info">

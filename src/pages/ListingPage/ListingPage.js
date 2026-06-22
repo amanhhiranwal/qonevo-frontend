@@ -5,6 +5,7 @@ import axios from "axios";
 // import DetailModal from "../IFP/DetailModal";
 import FilterSideBar from "../../component/FilterSideBar/FilterSideBar";
 import ProductCard from "../../component/ProductCard/ProductCard.js";
+import PageLayout from "../../layouts/PageLayout.jsx";
 
 // import prodImg1 from "../../Assets/ProductCard/img1.png";
 // import prodImg2 from "../../Assets/ProductCard/img2.png";
@@ -1752,6 +1753,7 @@ useEffect(() => {
   }, [visibleCount, products.length]);
 
   return (
+    <PageLayout className="listing-container">
     <div className="listing-container">
       <div className="listing-banner">
         <img src={banner} alt="Listing Page" />
@@ -1791,6 +1793,7 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    </PageLayout>
   );
 };
 
