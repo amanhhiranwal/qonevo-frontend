@@ -10,12 +10,14 @@ import adson from '../../Assets/ProductSliderImage/add-ons.png'
 // import TabImageSlide from '../../component/ImageCarsoul/TabImageSlider';
 import ContactPage from '../../component/contact/ContactPage';
 import ClientCarousel from '../../component/ClientCarsoul/ClientCarsoul';
+import PageLayout from '../../layouts/PageLayout';
 
 
 
 const HomePage = () => {
   return (
       <>
+      <PageLayout className="">
       <ProductSlider/>
       {/* {{-- Interactive Flat Panel --}} */}
 <section className="info-section">
@@ -191,6 +193,7 @@ const HomePage = () => {
 <ContactPage/>
 </contact>
 {/* <ClientSlider/> */}
+</PageLayout>
       </>
   )
 }
