@@ -9,7 +9,7 @@ import "./FilterSideBar.css";
 
 const FILTER_GROUPS = [
   {
-    key: "sizes",
+    key: "size",
     label: "Sizes",
     options: ["65\"", "75\"", "86\"", "96\"", "110\""],
   },
@@ -29,7 +29,7 @@ const FILTER_GROUPS = [
     options: ["AI Whiteboard (Gravity AI)", "NFC Enabled"],
   },
   {
-    key: "googleIntegration",
+    key: "google_integration",
     label: "Google Integration",
     options: ["EDLA Certified"],
   },
@@ -56,24 +56,47 @@ const FilterSideBar = memo(({ onFilterChange }) => {
   };
 
   /* ── Toggle a checkbox ── */
+  // const toggleOption = (groupKey, option) => {
+  //   setSelected((prev) => {
+  //     const next = new Set(prev[groupKey]);
+  //     next.has(option) ? next.delete(option) : next.add(option);
+  //     const updated = { ...prev, [groupKey]: next };
+
+  //     // Notify parent if needed
+  //     if (onFilterChange) {
+  //       onFilterChange(
+  //         Object.fromEntries(
+  //           Object.entries(updated).map(([k, v]) => [k, [...v]])
+  //         )
+  //       );
+  //     }
+
+  //     return updated;
+  //   });
+  // };
+
   const toggleOption = (groupKey, option) => {
-    setSelected((prev) => {
-      const next = new Set(prev[groupKey]);
-      next.has(option) ? next.delete(option) : next.add(option);
-      const updated = { ...prev, [groupKey]: next };
+  setSelected((prev) => {
+    const next = new Set(prev[groupKey]);
+    next.has(option) ? next.delete(option) : next.add(option);
+    const updated = { ...prev, [groupKey]: next };
 
-      // Notify parent if needed
-      if (onFilterChange) {
-        onFilterChange(
-          Object.fromEntries(
-            Object.entries(updated).map(([k, v]) => [k, [...v]])
-          )
-        );
-      }
+    if (onFilterChange) {
+      const mapped = Object.fromEntries(
+        Object.entries(updated).map(([k, v]) => {
+          // Convert "EDLA Certified" label → actual boolean true
+          if (k === "google_integration") {
+            return [k, [...v].map(() => true)];
+          }
+          return [k, [...v]];
+        })
+      );
+      onFilterChange(mapped);
+    }
 
-      return updated;
-    });
-  };
+    return updated;
+  });
+};
 
   return (
     <aside className="filter-sidebar">

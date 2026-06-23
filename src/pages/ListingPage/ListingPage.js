@@ -29,7 +29,7 @@ const ListingPage = () => {
     chipset: [],
     storage: [],
     smartFeatures: [],
-    googleIntegeration: [],
+    google_integration: [],
   });
 
   const handleFilterChange = (updatedFilters) => {
@@ -1688,10 +1688,261 @@ const ListingPage = () => {
   //   },
   // ];
 
+
+  // let data = [ 
+  //   {
+  //       "id": 24,
+  //       "name": "Clip[4k UHD Webcam]",
+  //       "product_type": "CAMERA",
+  //       "slug": "clip4k-uhd-webcam",
+  //       "subheading": "",
+  //       // "size": "65\"",
+  //       "size": "",
+  //       "chipset": "311D2",
+  //       "storage": "8GB + 128GB",
+  //       "resolution": "",
+  //       "google_integration": false,
+  //       "is_active": true,
+  //       "specifications": [
+  //           {
+  //               "category": "Camera",
+  //               "items": [
+  //                   {
+  //                       "id": 253,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Model",
+  //                       "spec_value": "JX1700US"
+  //                   },
+  //                   {
+  //                       "id": 254,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Megapixel",
+  //                       "spec_value": "8.29MP"
+  //                   },
+  //                   {
+  //                       "id": 255,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "PTZ \u0026 Auto Focus",
+  //                       "spec_value": "Yes"
+  //                   },
+  //                   {
+  //                       "id": 256,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Microphone",
+  //                       "spec_value": "Yes"
+  //                   },
+  //                   {
+  //                       "id": 257,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "HDMI",
+  //                       "spec_value": "Yes"
+  //                   },
+  //                   {
+  //                       "id": 258,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "USB",
+  //                       "spec_value": "Yes"
+  //                   },
+  //                   {
+  //                       "id": 259,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Digital Zoom",
+  //                       "spec_value": "8x"
+  //                   },
+  //                   {
+  //                       "id": 260,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Weight",
+  //                       "spec_value": "0.5kg"
+  //                   },
+  //                   {
+  //                       "id": 261,
+  //                       "product_id": 24,
+  //                       "category": "Camera",
+  //                       "spec_key": "Operating Systems",
+  //                       "spec_value": "Windows 7, 8.1, 10\r\nor higher versions,\r\nmacOS 10.10 or\r\nhigher versions,\r\nGoogle chromebook\r\n76.0.3809.136 or\r\nhigher versions,\r\nLinux[requires UVC\r\nsupport], Android"
+  //                   }
+  //               ]
+  //           }
+  //       ],
+  //       "created_at": "2026-06-23T05:00:49.636071Z",
+  //       "updated_at": "2026-06-23T05:00:49.636071Z"
+  //   },
+  //   {
+  //       "id": 23,
+  //       "name": "CVTE 311D2(CPX)",
+  //       "slug": "cvte-311d2cpx",
+  //       "subheading": "",
+  //       "size": "",
+  //       "chipset": "",
+  //       "storage": "",
+  //       "resolution": "",
+  //       "google_integration": true,
+  //       "is_active": true,
+  //       "specifications": [
+  //           {
+  //               "category": "Touch",
+  //               "items": [
+  //                   {
+  //                       "id": 241,
+  //                       "product_id": 23,
+  //                       "category": "Touch",
+  //                       "spec_key": "Touch Type",
+  //                       "spec_value": "Infrared"
+  //                   },
+  //                   {
+  //                       "id": 242,
+  //                       "product_id": 23,
+  //                       "category": "Touch",
+  //                       "spec_key": "Touch Count",
+  //                       "spec_value": "40 Points"
+  //                   },
+  //                   {
+  //                       "id": 243,
+  //                       "product_id": 23,
+  //                       "category": "Touch",
+  //                       "spec_key": "Touch Accuracy",
+  //                       "spec_value": "±1mm"
+  //                   },
+  //                   {
+  //                       "id": 244,
+  //                       "product_id": 23,
+  //                       "category": "Touch",
+  //                       "spec_key": "Response Time",
+  //                       "spec_value": "≤ 4 MS"
+  //                   }
+  //               ]
+  //           },
+  //           {
+  //               "category": "Display",
+  //               "items": [
+  //                   {
+  //                       "id": 235,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Size",
+  //                       "spec_value": "110\""
+  //                   },
+  //                   {
+  //                       "id": 236,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Technology",
+  //                       "spec_value": "DLED"
+  //                   },
+  //                   {
+  //                       "id": 237,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Resolution Ratio",
+  //                       "spec_value": "3840*2160"
+  //                   },
+  //                   {
+  //                       "id": 238,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Refresh Rate",
+  //                       "spec_value": "60 HZ"
+  //                   },
+  //                   {
+  //                       "id": 239,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Luminance",
+  //                       "spec_value": "500 nits"
+  //                   },
+  //                   {
+  //                       "id": 240,
+  //                       "product_id": 23,
+  //                       "category": "Display",
+  //                       "spec_key": "Viewing Angle",
+  //                       "spec_value": "178°(H/V)"
+  //                   }
+  //               ]
+  //           },
+  //           {
+  //               "category": "Input/Output",
+  //               "items": [
+  //                   {
+  //                       "id": 245,
+  //                       "product_id": 23,
+  //                       "category": "Input/Output",
+  //                       "spec_key": "Speakers",
+  //                       "spec_value": "2 x 20W"
+  //                   },
+  //                   {
+  //                       "id": 246,
+  //                       "product_id": 23,
+  //                       "category": "Input/Output",
+  //                       "spec_key": "Microphone",
+  //                       "spec_value": "8 Array Mic"
+  //                   },
+  //                   {
+  //                       "id": 247,
+  //                       "product_id": 23,
+  //                       "category": "Input/Output",
+  //                       "spec_key": "Camera",
+  //                       "spec_value": "48MP AI Camera"
+  //                   },
+  //                   {
+  //                       "id": 248,
+  //                       "product_id": 23,
+  //                       "category": "Input/Output",
+  //                       "spec_key": "Interface",
+  //                       "spec_value": "HDMI-In, HDMI-Out, USB 3.0, USB 2.0, USB-C, Touch-USB, LAN, Mic In, Audio Out, SPDIF, RS232"
+  //                   }
+  //               ]
+  //           },
+  //           {
+  //               "category": "Package",
+  //               "items": [
+  //                   {
+  //                       "id": 249,
+  //                       "product_id": 23,
+  //                       "category": "Package",
+  //                       "spec_key": "Net Weight",
+  //                       "spec_value": "110kg"
+  //                   },
+  //                   {
+  //                       "id": 250,
+  //                       "product_id": 23,
+  //                       "category": "Package",
+  //                       "spec_key": "Gross Weight",
+  //                       "spec_value": "144kg"
+  //                   },
+  //                   {
+  //                       "id": 251,
+  //                       "product_id": 23,
+  //                       "category": "Package",
+  //                       "spec_key": "Bare Machine Size",
+  //                       "spec_value": "2500*1474*96mm"
+  //                   },
+  //                   {
+  //                       "id": 252,
+  //                       "product_id": 23,
+  //                       "category": "Package",
+  //                       "spec_key": "Package Size",
+  //                       "spec_value": "2667*1644*230mm"
+  //                   }
+  //               ]
+  //           }
+  //       ],
+  //       "created_at": "2026-06-15T13:03:45.296518Z",
+  //       "updated_at": "2026-06-23T05:18:40.360394Z"
+  //   }]
   useEffect(() => {
     const getProducts = async () => {
       try {
-       
+      
+      //  setAllProducts(data); 
 
        
         const response = await axios.get(`${BASE_URL}/api/v1/products`);
@@ -1710,13 +1961,40 @@ const ListingPage = () => {
 
 
 useEffect(() => {
-  setProducts(allProducts.filter((p) => (
-    (!filters.sizes?.length        || filters.sizes.includes(p.size))          &&
-    (!filters.chipset?.length      || filters.chipset.includes(p.chipset))     &&
-    (!filters.storage?.length      || filters.storage.includes(p.storage))     &&
-    (!filters.smartFeatures?.length|| p.smartFeatures?.some(f => filters.smartFeatures.includes(f))) &&
-    (!filters.googleIntegration?.length || p.googleIntegration === true)
-  )));
+  setProducts(
+    allProducts.filter((p) => {
+     const sizeOk = (() => {
+  if (!filters.size?.length) return true;
+
+  // Dig into specifications to find the Display > Size spec
+  const sizeSpec = p.specifications
+    ?.flatMap((s) => s.items)
+    ?.find((item) => item.spec_key === "Size");
+
+  if (!sizeSpec) return false;
+
+  return filters.size.includes(sizeSpec.spec_value); // e.g. "110\""
+})();
+
+      const chipsetOk =
+        !filters.chipset?.length ||
+        (p.chipset && filters.chipset.includes(p.chipset));
+
+      const storageOk =
+        !filters.storage?.length ||
+        (p.storage && filters.storage.includes(p.storage));
+
+      const smartFeaturesOk =
+        !filters.smartFeatures?.length ||
+        p.smartFeatures?.some((f) => filters.smartFeatures.includes(f));
+
+    const googleOk =
+  !filters.google_integration?.length ||
+  filters.google_integration.includes(p.google_integration); // true === true ✅
+
+      return sizeOk && chipsetOk && storageOk && smartFeaturesOk && googleOk;
+    })
+  );
 }, [filters, allProducts]);
 
 
