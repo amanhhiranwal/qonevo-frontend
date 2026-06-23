@@ -101,7 +101,7 @@ const filteredProducts = products.filter((product) => {
   
 
   return (
-    <div className="support-main-container">
+    <PageLayout className="support-main-container">
       <div className="support-banner">
         <img src={Banner} alt="" />
       </div>
@@ -222,8 +222,8 @@ const filteredProducts = products.filter((product) => {
       <div className="contact">
         <ContactPage />
       </div>
-     <PageLayout/>
-    </div>
+    
+    </PageLayout>
    
   );
 };

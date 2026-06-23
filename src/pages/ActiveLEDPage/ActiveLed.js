@@ -508,7 +508,7 @@ const ActiveLed = () => {
   const [activeSize, setActiveSize] = useState("Indoor");
 
   return (
-    <div className="main-led-container">
+    <PageLayout className="main-led-container">
       <section className="led-banner">
         <div className="led-text-content">
           <h1>Active LED Displays</h1>
@@ -628,8 +628,8 @@ const ActiveLed = () => {
       <section className="lets-connect">
         <ContactPage />
       </section>
-      <PageLayout/>
-    </div>
+      
+    </PageLayout>
   );
 };
 
