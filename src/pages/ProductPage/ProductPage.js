@@ -94,7 +94,7 @@ const ProductPage = () => {
   }, [transition]);
 
   return (
-    <div>
+    <PageLayout>
       {/* HERO SECTION */}
       <section className="hero-sec">
       
@@ -312,8 +312,8 @@ const ProductPage = () => {
 
       <PowerfulPresence />
       <Specifications />
-      <PageLayout/>
-    </div>
+      
+    </PageLayout>
   );
 };
 

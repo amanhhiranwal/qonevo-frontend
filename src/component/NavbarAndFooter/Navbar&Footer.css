@@ -7,7 +7,8 @@
 
 /* Footer content area */
 .footer-section {
-margin-top: clamp(80px, 10vw, 148px) !important;
+/* margin-top: clamp(80px, 10vw, 100px) !important; */
+margin-top: clamp(80px, 8vw, 100px) !important;
   background: transparent !important;
 
   /* background: #fff; */
