@@ -328,7 +328,7 @@ const getOffset = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (isManualScrolling.current) return;
-           if (searchTerm.trim()) return; 
+          //  if (searchTerm.trim()) return; 
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -338,7 +338,7 @@ const getOffset = () => {
       },
       {
         rootMargin: `-${offset}px 0px -40% 0px`,
-        threshold: 0.2,
+        threshold: 0,
       },
     );
 

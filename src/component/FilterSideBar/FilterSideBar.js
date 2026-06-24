@@ -13,10 +13,21 @@ const FILTER_GROUPS = [
     label: "Sizes",
     options: ["65\"", "75\"", "86\"", "96\"", "110\""],
   },
+  // {
+  //   key: "chipset",
+  //   label: "Chipset",
+  //   options: ["9679", "V100", "311D2", "3576"],
+  // },
+
   {
-    key: "chipset",
-    label: "Chipset",
-    options: ["9679", "V100", "311D2", "3576"],
+    key:"processor",
+    label:"Processor",
+    options:["4 core", "8 core"]
+  },
+    {
+    key:"processor_speed",
+    label:"Processor Speed",
+    options:["1.2", "2.4"]
   },
   {
     key: "storage",
@@ -24,15 +35,15 @@ const FILTER_GROUPS = [
     options: ["8GB + 128GB", "16GB + 256GB"],
   },
   {
-    key: "smartFeatures",
+    key: "smart_features",
     label: "Smart Features",
-    options: ["AI Whiteboard (Gravity AI)", "NFC Enabled"],
+    options: ["NFC", "EDLA"],
   },
-  {
-    key: "google_integration",
-    label: "Google Integration",
-    options: ["EDLA Certified"],
-  },
+  // {
+  //   key: "google_integration",
+  //   label: "Google Integration",
+  //   options: ["EDLA Certified"],
+  // },
 ];
 
 /* ========================================
