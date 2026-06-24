@@ -535,7 +535,7 @@ const IFPPage = () => {
       // setProducts(data);
       try {
         const response = await axios.get(
-          `${BASE_URL}/api/v1/products?limit=${limit}`,
+          `${BASE_URL}/api/v1/products?limit=${limit}&type=ifp`,
          
         );
 
