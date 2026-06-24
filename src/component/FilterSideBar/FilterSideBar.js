@@ -9,14 +9,25 @@ import "./FilterSideBar.css";
 
 const FILTER_GROUPS = [
   {
-    key: "sizes",
+    key: "size",
     label: "Sizes",
     options: ["65\"", "75\"", "86\"", "96\"", "110\""],
   },
+  // {
+  //   key: "chipset",
+  //   label: "Chipset",
+  //   options: ["9679", "V100", "311D2", "3576"],
+  // },
+
   {
-    key: "chipset",
-    label: "Chipset",
-    options: ["9679", "V100", "311D2", "3576"],
+    key:"processor",
+    label:"Processor",
+    options:["4 core", "8 core"]
+  },
+    {
+    key:"processor_speed",
+    label:"Processor Speed",
+    options:["1.2", "2.4"]
   },
   {
     key: "storage",
@@ -24,15 +35,15 @@ const FILTER_GROUPS = [
     options: ["8GB + 128GB", "16GB + 256GB"],
   },
   {
-    key: "smartFeatures",
+    key: "smart_features",
     label: "Smart Features",
-    options: ["AI Whiteboard (Gravity AI)", "NFC Enabled"],
+    options: ["NFC", "EDLA"],
   },
-  {
-    key: "googleIntegration",
-    label: "Google Integration",
-    options: ["EDLA Certified"],
-  },
+  // {
+  //   key: "google_integration",
+  //   label: "Google Integration",
+  //   options: ["EDLA Certified"],
+  // },
 ];
 
 /* ========================================
@@ -56,24 +67,47 @@ const FilterSideBar = memo(({ onFilterChange }) => {
   };
 
   /* ── Toggle a checkbox ── */
+  // const toggleOption = (groupKey, option) => {
+  //   setSelected((prev) => {
+  //     const next = new Set(prev[groupKey]);
+  //     next.has(option) ? next.delete(option) : next.add(option);
+  //     const updated = { ...prev, [groupKey]: next };
+
+  //     // Notify parent if needed
+  //     if (onFilterChange) {
+  //       onFilterChange(
+  //         Object.fromEntries(
+  //           Object.entries(updated).map(([k, v]) => [k, [...v]])
+  //         )
+  //       );
+  //     }
+
+  //     return updated;
+  //   });
+  // };
+
   const toggleOption = (groupKey, option) => {
-    setSelected((prev) => {
-      const next = new Set(prev[groupKey]);
-      next.has(option) ? next.delete(option) : next.add(option);
-      const updated = { ...prev, [groupKey]: next };
+  setSelected((prev) => {
+    const next = new Set(prev[groupKey]);
+    next.has(option) ? next.delete(option) : next.add(option);
+    const updated = { ...prev, [groupKey]: next };
 
-      // Notify parent if needed
-      if (onFilterChange) {
-        onFilterChange(
-          Object.fromEntries(
-            Object.entries(updated).map(([k, v]) => [k, [...v]])
-          )
-        );
-      }
+    if (onFilterChange) {
+      const mapped = Object.fromEntries(
+        Object.entries(updated).map(([k, v]) => {
+          // Convert "EDLA Certified" label → actual boolean true
+          if (k === "google_integration") {
+            return [k, [...v].map(() => true)];
+          }
+          return [k, [...v]];
+        })
+      );
+      onFilterChange(mapped);
+    }
 
-      return updated;
-    });
-  };
+    return updated;
+  });
+};
 
   return (
     <aside className="filter-sidebar">

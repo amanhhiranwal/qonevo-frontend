@@ -35,6 +35,7 @@ import BuiltForClarity from "../../component/BuiltForClarity/BuiltForClarity.js"
 import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.js";
 
 import ProductCard from "../../component/ProductCard/ProductCard.js";
+import PageLayout from "../../layouts/PageLayout.jsx";
 
 const features = [
   { image: icon1, desc: "160° Viewing Angle" },
@@ -507,7 +508,7 @@ const ActiveLed = () => {
   const [activeSize, setActiveSize] = useState("Indoor");
 
   return (
-    <div className="main-led-container">
+    <PageLayout className="main-led-container">
       <section className="led-banner">
         <div className="led-text-content">
           <h1>Active LED Displays</h1>
@@ -627,7 +628,8 @@ const ActiveLed = () => {
       <section className="lets-connect">
         <ContactPage />
       </section>
-    </div>
+      
+    </PageLayout>
   );
 };
 

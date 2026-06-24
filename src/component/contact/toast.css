@@ -20,6 +20,10 @@
   background-color: #dc3545; /* Red */
 }
 
+.contact-section{
+     margin-left: clamp(16px, 5vw, 100px)!important;
+  margin-right: clamp(16px, 5vw, 100px)!important;
+}
 @keyframes fadeInOut {
   0% {
     opacity: 0;
