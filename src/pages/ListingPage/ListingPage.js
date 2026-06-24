@@ -300,7 +300,7 @@ const ListingPage = () => {
       try {
         //  setAllProducts(data);
 
-        const response = await axios.get(`${BASE_URL}/api/v1/products`);
+        const response = await axios.get(`${BASE_URL}/api/v1/products&type=ifp`);
 
         setProducts(response.data);
         setAllProducts(response.data);
