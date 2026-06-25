@@ -16,7 +16,7 @@ import img2 from "../../Assets/DisplayNav/image2'.png";
 import img3 from "../../Assets/DisplayNav/image3.png";
 import img5 from "../../Assets/DisplayNav/image4.png";
 import img4 from "../../Assets/DisplayNav/image5.png";
-import icon from "../../Assets/DisplayNav/icon.png";
+// import icon from "../../Assets/DisplayNav/icon.png";
 import videoConfrencing from "../../Assets/DisplayNav/VideoConfrencingSolutions.png";
 
 // import addons from "../../Assets/addons.png";
@@ -338,7 +338,7 @@ export default function MegaMenuNavbar() {
 
             <div className="row g-3">
               {displayItems.map((item, i) => {
-                const isLast = i === displayItems.length - 1;
+                // const isLast = i === displayItems.length - 1;
 
                 return (
                   <div key={i} className="w-auto flex-start col-sm-1">
