@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
+import { useNavigate } from "react-router-dom";
+
+
 
 // import logo from "../../Assets/logo.svg";
 import logo from "../../Assets/Synergy-Qonevo-logo.png"
@@ -11,8 +14,8 @@ import logo from "../../Assets/Synergy-Qonevo-logo.png"
 import img1 from "../../Assets/DisplayNav/image1.png";
 import img2 from "../../Assets/DisplayNav/image2'.png";
 import img3 from "../../Assets/DisplayNav/image3.png";
-import img4 from "../../Assets/DisplayNav/image4.png";
-import img5 from "../../Assets/DisplayNav/image5.png";
+import img5 from "../../Assets/DisplayNav/image4.png";
+import img4 from "../../Assets/DisplayNav/image5.png";
 import icon from "../../Assets/DisplayNav/icon.png";
 
 // import addons from "../../Assets/addons.png";
@@ -24,6 +27,7 @@ import { Link } from "react-router-dom";
 export default function MegaMenuNavbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const showTimeoutRef = useRef(null);
+  const navigate = useNavigate();
 
   // const [visibleMenu, setVisibleMenu] = useState(null); 
 
@@ -223,7 +227,7 @@ export default function MegaMenuNavbar() {
 
               {/* Support */}
               <li className="nav-item">
-                <button type="button" className="nav-link btn btn-link nav-btn">
+                <button type="button"  onClick={()=>navigate("/support")}  className="nav-link btn btn-link nav-btn">
                   Support
                 </button>
               </li>

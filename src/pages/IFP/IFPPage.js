@@ -21,37 +21,38 @@ import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../../component/ProductCard/ProductCard";
+import PageLayout from "../../layouts/PageLayout";
 
 // import prodImg1 from "../../Assets/ProductCard/img1.png";
 // import prodImg2 from "../../Assets/ProductCard/img2.png";
 
 // const products = [
 //   {
-//     img: image1,
-//     imgHover: image1Hover1,
+//     img: prodImg1,
+//     imgHover: prodImg1,
 //     name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
 //     specs: "Standard performance for everyday teaching and presentations",
 //     info: "4K UHD | 400 nits | 200W * 2",
 //   },
 //   {
-//     img: image1,
-//     imgHover: image1Hover1,
+//     img: prodImg2,
+//     imgHover: prodImg1,
 //     name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
 //     specs: "Faster interaction with enhanced processing power",
 //     info: "4K UHD | 400 nits | 200W * 2",
 //     // price: "₹1,29,999 | ₹1,10,199",
 //   },
 //   {
-//     img: image1,
-//     imgHover: image1Hover1,
+//     img: prodImg1,
+//     imgHover: prodImg2,
 //     name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
 //     specs: "Standard performance for everyday teaching and presentations",
 //     info: "4K UHD | 400 nits | 200W * 2",
 //     // price: "₹1,22,999 | ₹1,05,199",
 //   },
 //   {
-//     img: image1,
-//     imgHover: image1Hover1,
+//     img: prodImg1,
+//     imgHover: prodImg2,
 //     name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
 //     specs: "Standard performance for everyday teaching and presentations",
 //     info: "4K UHD | 400 nits | 200W * 2",
@@ -534,7 +535,7 @@ const IFPPage = () => {
       // setProducts(data);
       try {
         const response = await axios.get(
-          `${BASE_URL}/api/v1/products?limit=${limit}`,
+          `${BASE_URL}/api/v1/products?limit=${limit}&type=ifp`,
          
         );
 
@@ -550,7 +551,7 @@ const IFPPage = () => {
   }, []);
 
   return (
-    <>
+    <PageLayout className="ifp-page">
       <section className="hero">
         {/* White curved stage */}
         <div className="hero-curve" />
@@ -609,7 +610,8 @@ const IFPPage = () => {
             <ProductCard products={products} variant="grid-4" />
             <div className="view-all-wrap">
               <button
-                onClick={() => navigate("/listing-page")}
+
+                onClick={() => {window.scrollTo(0, 0); navigate("/listing-page")}}
                 className="btn-view-all"
               >
                 View All
@@ -663,7 +665,8 @@ const IFPPage = () => {
           <ContactPage />
         </section>
       </section>
-    </>
+      
+    </PageLayout>
   );
   
 };

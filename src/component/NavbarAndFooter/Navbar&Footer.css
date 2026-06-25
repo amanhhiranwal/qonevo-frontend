@@ -7,19 +7,50 @@
 
 /* Footer content area */
 .footer-section {
+/* margin-top: clamp(80px, 10vw, 100px) !important; */
+margin-top: clamp(80px, 8vw, 100px) !important;
   background: transparent !important;
+
+  /* background: #fff; */
+  /* background-color: transparent!important; */
   color: #000;
 }
 
 /* Footer bottom bar */
-.footer-bottom {
+/* .footer-bottom {
   background: transparent !important;
-}
+} */
+
 
 /* Keep spacing */
 .footer-section {
   margin-left: clamp(16px, 5vw, 100px) !important;
   margin-right: clamp(16px, 5vw, 100px) !important;
+}
+.footer-bottom{
+  padding-left: clamp(16px, 5vw, 100px)!important;
+  padding-right: clamp(16px, 5vw, 100px);
+  /* background-color:var(--Colors-Neutral-Alpha-Dark-5, rgba(163, 160, 160, 0.051))!important; */
+  background-color: #e9e9e9
+;
+}
+.footer-heading h2 {
+  font-size: 44px;
+  line-height: 58px;
+  font-weight: 600;
+  color: #131313;
+  font-family: "Montserrat", sans-serif;
+  width: 590px;
+}
+.footer-section{
+       margin-left: clamp(16px, 5vw, 100px)!important;
+  margin-right: clamp(16px, 5vw, 100px)!important;
+}
+.top-footer,
+.middle-footer {
+  margin-bottom: 100px;
+  justify-content: space-between;
+
 }
 
 /* Optional: inherit text color from page if needed */
@@ -167,6 +198,9 @@ li a {
   color: #e41346 !important;
 }
 
+.footer-email, .footer-socials-heading{
+  font-size: 14px;
+}
 @media only screen and (min-width: 992px) and (max-width: 1367px) {
   .quick-links h6,
   ul li a,
