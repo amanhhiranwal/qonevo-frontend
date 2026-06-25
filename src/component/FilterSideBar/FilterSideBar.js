@@ -22,12 +22,13 @@ const FILTER_GROUPS = [
   {
     key:"processor",
     label:"Processor",
-    options:["4 core", "8 core"]
+    // options:["4 core", "8 core"]
+     options:["Quad core", "Octa core"]
   },
     {
     key:"processor_speed",
     label:"Processor Speed",
-    options:["1.2", "2.4"]
+    options:["1.2 GHZ", "2.4 GHZ"]
   },
   {
     key: "storage",
