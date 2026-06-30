@@ -19,7 +19,7 @@ import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorksp
 import GravityAI             from "../../component/GravityAI/GravityAI";
 import BuiltToPerform        from "../../component/Builttoperform/Builttoperform";
 import MadeForCreation       from "../../component/MadeForCreation/MadeForCreation";
-import ScrollCanvas          from "../../component/VideoScroll/ScrollCanvas";
+// import ScrollCanvas          from "../../component/VideoScroll/ScrollCanvas";
 import ContactPage           from "../../component/contact/ContactPage";
 import ProductCard           from "../../component/ProductCard/ProductCard";
 import DetailModal           from "./DetailModal";
