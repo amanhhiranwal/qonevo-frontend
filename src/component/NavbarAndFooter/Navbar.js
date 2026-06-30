@@ -16,7 +16,8 @@ import img2 from "../../Assets/DisplayNav/image2'.png";
 import img3 from "../../Assets/DisplayNav/image3.png";
 import img5 from "../../Assets/DisplayNav/image4.png";
 import img4 from "../../Assets/DisplayNav/image5.png";
-import icon from "../../Assets/DisplayNav/icon.png";
+// import icon from "../../Assets/DisplayNav/icon.png";
+import videoConfrencing from "../../Assets/DisplayNav/VideoConfrencingSolutions.png";
 
 // import addons from "../../Assets/addons.png";
 // import ald from "../../Assets/ald.png";
@@ -147,11 +148,17 @@ export default function MegaMenuNavbar() {
       link: "/",
     },
     {
-      img: icon,
-      text: "Accessories & Add-ons",
-      // link: "/accessories",
+      img: videoConfrencing,
+      text: "Video Confrencing Solutions",
+      // link: "/all-in-one-pc",
       link: "/",
     },
+    // {
+    //   img: icon,
+    //   text: "Accessories & Add-ons",
+    //   // link: "/accessories",
+    //   link: "/",
+    // },
   ];
 
   return (
@@ -331,10 +338,10 @@ export default function MegaMenuNavbar() {
 
             <div className="row g-3">
               {displayItems.map((item, i) => {
-                const isLast = i === displayItems.length - 1;
+                // const isLast = i === displayItems.length - 1;
 
                 return (
-                  <div key={i} className="w-auto flex-start  col-sm-1">
+                  <div key={i} className="w-auto flex-start col-sm-1">
                     <div className="menu-card-head p-2">
                       <Link
                         to={item.link || "/"}
@@ -343,9 +350,10 @@ export default function MegaMenuNavbar() {
                         <img
                           src={item.img}
                           alt={item.text}
-                          className={`img-fluid mb-2 menu-image ${
-                            isLast ? "small-image" : ""
-                          }`}
+                          className="img-fluid mb-2 menu-image"
+                          // className={`img-fluid mb-2 menu-image ${
+                          //   isLast ? "small-image" : ""
+                          // }`}
                         />
                         <p className="mb-2 text-dark mt-auto">{item.text}</p>
                       </Link>

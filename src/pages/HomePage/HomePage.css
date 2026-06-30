@@ -23,7 +23,8 @@
 .btn-discover {
     display: inline-block;
     margin-top: 20px;
-    background-color: #ff6f61;
+    /* background-color: #ff6f61; */
+    background-color: #163e5a;
     color: #fff;
     padding: 10px 25px;
     border-radius: 30px;
@@ -671,4 +672,12 @@
     background-color: #001654ac;
     color: white;
 
+}
+
+.client-carousel{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.montserrat{
+    padding-bottom: 1%;
 }

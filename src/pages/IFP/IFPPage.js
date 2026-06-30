@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./IFP Page.css";
+
+// ── Assets ────────────────────────────────────────────────────────────────────
 import ifpImage from "../../Assets/ifp/IFP.png";
-import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces";
-import GravityAI from "../../component/GravityAI/GravityAI";
-import BuiltToPerform from "../../component/Builttoperform/Builttoperform";
-import MadeForCreation from "../../component/MadeForCreation/MadeForCreation";
+import leftImg  from "../../Assets/ifp/Property 1=Image01 (1).png";
+import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
+
 import logo1 from "../../Assets/testimonial/Google apps_01(2) 1.png";
 import logo2 from "../../Assets/testimonial/Mask group 2.png";
 import logo3 from "../../Assets/testimonial/Mask group.png";
@@ -12,607 +13,208 @@ import logo4 from "../../Assets/testimonial/image 17.png";
 import logo5 from "../../Assets/testimonial/image 18.png";
 import logo6 from "../../Assets/testimonial/image 43.png";
 import logo7 from "../../Assets/testimonial/image 19.png";
-import ContactPage from "../../component/contact/ContactPage";
-// import ScrollVideo from "../../component/VideoScroll/ScrollVideo";
-import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas";
-import DetailModal from "./DetailModal";
-import leftImg from "../../Assets/ifp/Property 1=Image01 (1).png";
-import rightImg from "../../Assets/ifp/Property 1=Image02 (1).png";
-import axios from "axios";
+
+// ── Components ────────────────────────────────────────────────────────────────
+import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces";
+import GravityAI             from "../../component/GravityAI/GravityAI";
+import BuiltToPerform        from "../../component/Builttoperform/Builttoperform";
+import MadeForCreation       from "../../component/MadeForCreation/MadeForCreation";
+import ScrollCanvas          from "../../component/VideoScroll/ScrollCanvas";
+import ContactPage           from "../../component/contact/ContactPage";
+import ProductCard           from "../../component/ProductCard/ProductCard";
+import DetailModal           from "./DetailModal";
+import PageLayout            from "../../layouts/PageLayout";
+
+import axios           from "axios";
 import { useNavigate } from "react-router-dom";
-import ProductCard from "../../component/ProductCard/ProductCard";
-import PageLayout from "../../layouts/PageLayout";
 
-// import prodImg1 from "../../Assets/ProductCard/img1.png";
-// import prodImg2 from "../../Assets/ProductCard/img2.png";
+// ── Constants ─────────────────────────────────────────────────────────────────
+const BASE_URL   = process.env.REACT_APP_BASE_URL;
+const LOOKAHEAD  = 2; // pages to pre-generate ahead of current
 
-// const products = [
-//   {
-//     img: prodImg1,
-//     imgHover: prodImg1,
-//     name: "Qonevo IFP 65 – Core – 8/128 (CVTE | 9679)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//   },
-//   {
-//     img: prodImg2,
-//     imgHover: prodImg1,
-//     name: "Qonevo IFP 65 – Plus – 8/128 (Lango | V100)",
-//     specs: "Faster interaction with enhanced processing power",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,29,999 | ₹1,10,199",
-//   },
-//   {
-//     img: prodImg1,
-//     imgHover: prodImg2,
-//     name: "Qonevo IFP 65 – Pro – 8/128 (KTC | 311D2)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,22,999 | ₹1,05,199",
-//   },
-//   {
-//     img: prodImg1,
-//     imgHover: prodImg2,
-//     name: "Qonevo IFP 65 – Core – 16/128 (CVTE | 3576)",
-//     specs: "Standard performance for everyday teaching and presentations",
-//     info: "4K UHD | 400 nits | 200W * 2",
-//     // price: "₹1,05,999 | ₹89,199",
-//   },
-// ];
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
+const getItemsPerPage = () => {
+  if (window.innerWidth < 768)  return 1;
+  if (window.innerWidth < 1200) return 2;
+  return 4;
+};
 
+// ── Static fallback data (used while API is commented out) ────────────────────
+
+
+// ── Pure helper ───────────────────────────────────────────────────────────────
+// Appends `count` new pages to `existingPages`, starting at logical page index
+// `fromPage`. Items are drawn from `allItems` with wrap-around (% length).
+const generatePages = (existingPages, allItems, fromPage, count) => {
+  const n        = allItems.length;
+  const newPages = [...existingPages];
+
+  for (let p = fromPage; p < fromPage + count; p++) {
+    const page = [];
+    for (let i = 0; i < ITEMS_PER_PAGE; i++) {
+      const globalIndex = p * ITEMS_PER_PAGE + i;
+      page.push(allItems[globalIndex % n]);
+    }
+    newPages.push(page);
+  }
+
+  return newPages;
+};
+
+// ── Module-level constant (after helper so ITEMS_PER_PAGE is defined) ─────────
+const ITEMS_PER_PAGE = getItemsPerPage();
+
+// =============================================================================
+// IFPPage Component
+// =============================================================================
 const IFPPage = () => {
-  const sizeFilters = ["65", "75", "86", "98", "110"];
-
-  const [activeSize, setActiveSize] = useState("65");
+  // ── State ──────────────────────────────────────────────────────────────────
+  const [products, setProducts]               = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading]                 = useState(true);
+  const [currentPage, setCurrentPage]         = useState(0);
+  const [pages, setPages]                     = useState([]);
+
   const navigate = useNavigate();
-  const limit = 4;
 
-// let data = [
-//   {
-//   id: 1,
-//   name: "Qonevo IFP 65 – Core",
-//   slug: "qonevo-ifp-65-core",
-//   subheading: "Standard performance for classrooms and presentations",
-//   size: "65",
-//   chipset: "CVTE",
-//   storage: "128GB",
-//   resolution: "4K UHD",
-//   google_integration: true,
-//   is_active: true,
-
-//   thumbnail:
-//     prodImg1,
-
-//   images: [
-//     {
-//       id: 101,
-//       product_id: 1,
-//       image_url:
-//         prodImg2,
-//       is_primary: true,
-//       created_at: "2026-05-27T10:00:00.000000Z",
-//     },
-//     {
-//       id: 102,
-//       product_id: 1,
-//       image_url:
-//         prodImg1,
-//       is_primary: false,
-//       created_at: "2026-05-27T10:00:01.000000Z",
-//     },
-//   ],
-
-//   specifications: [
-//     {
-//       category: "Display",
-//       items: [
-//         {
-//           id: 1001,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Size",
-//           spec_value: '65"',
-//         },
-//         {
-//           id: 1002,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Resolution",
-//           spec_value: "3840 × 2160",
-//         },
-//         {
-//           id: 1003,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Brightness",
-//           spec_value: "400 nits",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Touch",
-//       items: [
-//         {
-//           id: 1004,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Type",
-//           spec_value: "Infrared",
-//         },
-//         {
-//           id: 1005,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Points",
-//           spec_value: "20 Points",
-//         },
-//         {
-//           id: 1006,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Response Time",
-//           spec_value: "8 ms",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Audio",
-//       items: [
-//         {
-//           id: 1007,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Speaker Output",
-//           spec_value: "2 × 20W",
-//         },
-//         {
-//           id: 1008,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Microphone",
-//           spec_value: "8 Array Mic",
-//         },
-//       ],
-//     },
-//   ],
-
-//   created_at: "2026-05-27T10:00:00.000000Z",
-//   updated_at: "2026-05-27T10:00:00.000000Z",
-// },
-//   {
-//   id: 1,
-//   name: "Qonevo IFP 65 – Core",
-//   slug: "qonevo-ifp-65-core",
-//   subheading: "Standard performance for classrooms and presentations",
-//   size: "65",
-//   chipset: "CVTE",
-//   storage: "128GB",
-//   resolution: "4K UHD",
-//   google_integration: true,
-//   is_active: true,
-
-//   thumbnail:
-//     prodImg1,
-
-//   images: [
-//     {
-//       id: 101,
-//       product_id: 1,
-//       image_url:
-//         prodImg2,
-//       is_primary: true,
-//       created_at: "2026-05-27T10:00:00.000000Z",
-//     },
-//     {
-//       id: 102,
-//       product_id: 1,
-//       image_url:
-//         prodImg2,
-//       is_primary: false,
-//       created_at: "2026-05-27T10:00:01.000000Z",
-//     },
-//   ],
-
-//   specifications: [
-//     {
-//       category: "Display",
-//       items: [
-//         {
-//           id: 1001,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Size",
-//           spec_value: '65"',
-//         },
-//         {
-//           id: 1002,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Resolution",
-//           spec_value: "3840 × 2160",
-//         },
-//         {
-//           id: 1003,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Brightness",
-//           spec_value: "400 nits",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Touch",
-//       items: [
-//         {
-//           id: 1004,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Type",
-//           spec_value: "Infrared",
-//         },
-//         {
-//           id: 1005,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Points",
-//           spec_value: "20 Points",
-//         },
-//         {
-//           id: 1006,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Response Time",
-//           spec_value: "8 ms",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Audio",
-//       items: [
-//         {
-//           id: 1007,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Speaker Output",
-//           spec_value: "2 × 20W",
-//         },
-//         {
-//           id: 1008,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Microphone",
-//           spec_value: "8 Array Mic",
-//         },
-//       ],
-//     },
-//   ],
-
-//   created_at: "2026-05-27T10:00:00.000000Z",
-//   updated_at: "2026-05-27T10:00:00.000000Z",
-// },
-//   {
-//   id: 1,
-//   name: "Qonevo IFP 65 – Core",
-//   slug: "qonevo-ifp-65-core",
-//   subheading: "Standard performance for classrooms and presentations",
-//   size: "65",
-//   chipset: "CVTE",
-//   storage: "128GB",
-//   resolution: "4K UHD",
-//   google_integration: true,
-//   is_active: true,
-
-//   thumbnail:
-//     prodImg1,
-
-//   images: [
-//     {
-//       id: 101,
-//       product_id: 1,
-//       image_url:
-//         prodImg2,
-//       is_primary: true,
-//       created_at: "2026-05-27T10:00:00.000000Z",
-//     },
-//     {
-//       id: 102,
-//       product_id: 1,
-//       image_url:
-//         prodImg1,
-//       is_primary: false,
-//       created_at: "2026-05-27T10:00:01.000000Z",
-//     },
-//   ],
-
-//   specifications: [
-//     {
-//       category: "Display",
-//       items: [
-//         {
-//           id: 1001,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Size",
-//           spec_value: '65"',
-//         },
-//         {
-//           id: 1002,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Resolution",
-//           spec_value: "3840 × 2160",
-//         },
-//         {
-//           id: 1003,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Brightness",
-//           spec_value: "400 nits",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Touch",
-//       items: [
-//         {
-//           id: 1004,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Type",
-//           spec_value: "Infrared",
-//         },
-//         {
-//           id: 1005,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Points",
-//           spec_value: "20 Points",
-//         },
-//         {
-//           id: 1006,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Response Time",
-//           spec_value: "8 ms",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Audio",
-//       items: [
-//         {
-//           id: 1007,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Speaker Output",
-//           spec_value: "2 × 20W",
-//         },
-//         {
-//           id: 1008,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Microphone",
-//           spec_value: "8 Array Mic",
-//         },
-//       ],
-//     },
-//   ],
-
-//   created_at: "2026-05-27T10:00:00.000000Z",
-//   updated_at: "2026-05-27T10:00:00.000000Z",
-// },
-//   {
-//   id: 1,
-//   name: "Qonevo IFP 65 – Core",
-//   slug: "qonevo-ifp-65-core",
-//   subheading: "Standard performance for classrooms and presentations",
-//   size: "65",
-//   chipset: "CVTE",
-//   storage: "128GB",
-//   resolution: "4K UHD",
-//   google_integration: true,
-//   is_active: true,
-
-//   thumbnail:
-//     prodImg1,
-
-//   images: [
-//     {
-//       id: 101,
-//       product_id: 1,
-//       image_url:
-//         prodImg2,
-//       is_primary: true,
-//       created_at: "2026-05-27T10:00:00.000000Z",
-//     },
-//     {
-//       id: 102,
-//       product_id: 1,
-//       image_url:
-//         prodImg1,
-//       is_primary: false,
-//       created_at: "2026-05-27T10:00:01.000000Z",
-//     },
-//   ],
-
-//   specifications: [
-//     {
-//       category: "Display",
-//       items: [
-//         {
-//           id: 1001,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Size",
-//           spec_value: '65"',
-//         },
-//         {
-//           id: 1002,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Resolution",
-//           spec_value: "3840 × 2160",
-//         },
-//         {
-//           id: 1003,
-//           product_id: 1,
-//           category: "Display",
-//           spec_key: "Brightness",
-//           spec_value: "400 nits",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Touch",
-//       items: [
-//         {
-//           id: 1004,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Type",
-//           spec_value: "Infrared",
-//         },
-//         {
-//           id: 1005,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Touch Points",
-//           spec_value: "20 Points",
-//         },
-//         {
-//           id: 1006,
-//           product_id: 1,
-//           category: "Touch",
-//           spec_key: "Response Time",
-//           spec_value: "8 ms",
-//         },
-//       ],
-//     },
-
-//     {
-//       category: "Audio",
-//       items: [
-//         {
-//           id: 1007,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Speaker Output",
-//           spec_value: "2 × 20W",
-//         },
-//         {
-//           id: 1008,
-//           product_id: 1,
-//           category: "Audio",
-//           spec_key: "Microphone",
-//           spec_value: "8 Array Mic",
-//         },
-//       ],
-//     },
-//   ],
-
-//   created_at: "2026-05-27T10:00:00.000000Z",
-//   updated_at: "2026-05-27T10:00:00.000000Z",
-// },
- 
-    
-
-// ];
-
+  // ── Seed pages whenever the products list changes ──────────────────────────
   useEffect(() => {
-    const getProducts = async () => {
+    if (products.length === 0) return;
+    setPages(generatePages([], products, 0, LOOKAHEAD + 1));
+    setCurrentPage(0);
+  }, [products]);
 
-      // setProducts(data);
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/api/v1/products?limit=${limit}&type=ifp`,
-         
-        );
+  // ── Navigation ─────────────────────────────────────────────────────────────
+  const nextProducts = () => {
+    const nextPage = currentPage + 1;
 
-        setProducts(response.data || []);
-      } catch (error) {
-        console.log("API Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Pre-generate more pages before we run out
+    if (nextPage + LOOKAHEAD >= pages.length) {
+      setPages((prev) =>
+        generatePages(prev, products, prev.length, LOOKAHEAD + 1)
+      );
+    }
 
-    getProducts();
+    setCurrentPage(nextPage);
+  };
+
+  const prevProducts = () => {
+    if (currentPage > 0) setCurrentPage((prev) => prev - 1);
+  };
+
+  // ── Data fetch ─────────────────────────────────────────────────────────────
+  useEffect(() => {
+    loadData();
   }, []);
 
+  const loadData = async () => {
+    try {
+      setLoading(true);
+
+      const productsRes = await axios.get(`${BASE_URL}/api/v1/products?type=ifp`);
+      const allData = productsRes.data || [];
+      setProducts(allData);
+
+      // ── Static fallback ────────────────────────────────────────────────────
+
+    } catch (error) {
+      console.error("IFPPage — loadData error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <PageLayout className="ifp-page">
+
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="hero">
-        {/* White curved stage */}
         <div className="hero-curve" />
 
-        {/* ── Content ── */}
         <div className="hero-content w-100 d-flex flex-column align-items-center">
-          {/* Heading */}
           <h1 className="hero-title text-white text-center">
             The Smart Classroom. Reimagined.
           </h1>
 
-          {/* Sub-heading */}
           <p className="hero-sub d-flex align-items-center justify-content-center gap-3 text-center mb-4">
             <span>Qonevo Interactive Flat Panel</span>
             <span className="hero-sub-divider" />
             <span>Limitless Interactive</span>
           </p>
 
-          {/* IFP Monitor Image */}
-          <div className="hero-monitor-wrap mx-auto ">
+          <div className="hero-monitor-wrap mx-auto">
             <img
               src={ifpImage}
               alt="Qonevo Interactive Flat Panel"
               className="hero-ifp-image img-fluid d-block"
               fetchPriority="high"
-              
             />
           </div>
         </div>
       </section>
+
+      {/* ── Product Carousel ──────────────────────────────────────────────── */}
       <section className="scale-section">
         <h2 className="section-title">Scale Without Limits</h2>
         <p className="section-sub">
           Multiple sizes. Same powerful core. Choose your perfect fit.
         </p>
-        <div className="size-filters">
-          {sizeFilters.map((s) => (
-            <button
-              key={s}
-              className={`size-btn${activeSize === s ? " active" : ""} sizeButton`}
-              onClick={() => setActiveSize(s)}
-            >
-              {s}"
-            </button>
-          ))}
-        </div>
 
         {loading ? (
           <div className="products-loader">
-            <div className="loader"></div>
+            <div className="loader" />
           </div>
-        ) : products.length === 0 ? ( 
+        ) : products.length === 0 ? (
           <p className="no-data">No Data Found...</p>
         ) : (
           <>
-            <ProductCard products={products} variant="grid-4" />
+            <div className="products-slider-ifp">
+
+              <button
+                className="slider-arrow-ifp left"
+                onClick={prevProducts}
+                disabled={currentPage === 0}
+              >
+                &#10094;
+              </button>
+
+              <div className="products-window-ifp">
+                <div
+                  className="products-track-ifp"
+                  style={{
+                    transform:  `translateX(-${currentPage * 100}%)`,
+                    transition: "transform 0.4s ease",
+                  }}
+                >
+                  {pages.map((page, index) => (
+                    <div className="page-ifp" key={index}>
+                      <ProductCard
+                        products={page}
+                        variant="grid-4"
+                        setSelectedProduct={setSelectedProduct}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* next is never disabled — carousel is infinite */}
+              <button
+                className="slider-arrow-ifp right"
+                onClick={nextProducts}
+              >
+                &#10095;
+              </button>
+
+            </div>
+
             <div className="view-all-wrap">
               <button
-
-                onClick={() => {window.scrollTo(0, 0); navigate("/listing-page")}}
                 className="btn-view-all"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  navigate("/listing-page");
+                }}
               >
                 View All
               </button>
@@ -620,55 +222,41 @@ const IFPPage = () => {
           </>
         )}
       </section>
+
+      {/* ── Detail Modal ──────────────────────────────────────────────────── */}
       <DetailModal
         isOpen={!!selectedProduct}
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
-      <section>
-        <IntelligentWorkspaces image1={rightImg} image2={leftImg} />
-      </section>
-      <section>
-        <GravityAI />
-      </section>
-      <section>
-        {/* <ScrollVideo /> */}
-        <ScrollCanvas />
-      </section>
-      <section>
-        <BuiltToPerform />
-      </section>
-      <section>
-        <MadeForCreation />
-      </section>
+
+      {/* ── Feature Sections ──────────────────────────────────────────────── */}
+      <IntelligentWorkspaces image1={rightImg} image2={leftImg} />
+      <GravityAI />
+      {/* <ScrollCanvas /> */}
+      <BuiltToPerform />
+      <MadeForCreation />
+
+      {/* ── Trust / Certification Logos ───────────────────────────────────── */}
       <section className="scale-section trusted-section">
         <h2 className="section-title">Trusted. Recognized. Certified.</h2>
         <p className="section-sub">
           Aligned with national standards and innovation-driven initiatives
         </p>
+
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img"  loading="lazy"/>
-          <img src={logo3} alt="Startup India" className="cert-img"  loading="lazy"/>
-          <img src={logo4} alt="Make in India" className="cert-img" loading="lazy" />
-          <img src={logo5} alt="ISO Certified" className="cert-img"  loading="lazy"/>
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
-          <img
-            src={logo6}
-            alt="GeM Government e-Marketplace"
-            className="cert-img"
-          />
+          {[logo1, logo2, logo3, logo4, logo5, logo7, logo6].map((logo, i) => (
+            <img key={i} src={logo} className="cert-img" alt="cert" loading="lazy" />
+          ))}
         </div>
       </section>
-      <section>
-        <section id="contact">
-          <ContactPage />
-        </section>
+
+      {/* ── Contact ───────────────────────────────────────────────────────── */}
+      <section id="contact">
+        <ContactPage />
       </section>
-      
     </PageLayout>
   );
-  
 };
 
 export default IFPPage;
