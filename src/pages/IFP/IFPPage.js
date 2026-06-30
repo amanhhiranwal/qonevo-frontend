@@ -233,7 +233,7 @@ const IFPPage = () => {
       {/* ── Feature Sections ──────────────────────────────────────────────── */}
       <IntelligentWorkspaces image1={rightImg} image2={leftImg} />
       <GravityAI />
-      <ScrollCanvas />
+      {/* <ScrollCanvas /> */}
       <BuiltToPerform />
       <MadeForCreation />
 
