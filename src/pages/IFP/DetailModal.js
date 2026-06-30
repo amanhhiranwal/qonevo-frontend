@@ -1,4 +1,5 @@
 import React, { useState , useEffect} from "react";
+import { createPortal } from "react-dom";
 
 
 import "./DetailModal.css";
@@ -23,101 +24,6 @@ console.log(product?.resolution);
 
 
 
-
-  // if (!isOpen) return null;
-
-
-//   const specificationData = [
-//   {
-//     title: "Specifications",
-
-//     rows: [
-//       {
-//         label: "Technology",
-//         value: "CVTE/Lango/KTC",
-//       },
-
-//       {
-//         label: "Chipset",
-//         value: "9679/V100/311D2/3576",
-//       },
-
-//       {
-//         label: "Storage",
-//         value: "8GB + 128GB/16GB + 256GB",
-//       },
-
-//       {
-//         label: "Color",
-//         value: "Silver/Black",
-//       },
-
-//       {
-//         label: "Protection panel",
-//         value: "4mm Anti glare tempered glass",
-//       },
-
-//       {
-//         label: "Installation method",
-//         value: "Mobile stand/wall mount",
-//       },
-//     ],
-//   },
-
-//   {
-//     title: "Liquid Crystal Display Panel",
-
-//     rows: [
-//       {
-//         label: "Screen scale",
-//         value: "16:9",
-//       },
-
-//       {
-//         label: "Display brand",
-//         value: "BOE/CSOT",
-//       },
-
-//       {
-//         label: "Display color",
-//         value: "1.07B(8-bit+FRC)",
-//       },
-
-//       {
-//         label: "Resolution ratio",
-//         value: "3840×2160",
-//       },
-
-//       {
-//         label: "Refresh rate",
-//         value: "60Hz",
-//       },
-//     ],
-//   },
-//   {
-//     title:"Infrared Touch Screen", 
-//     rows:[
-//     {  label: "Infrared touch"
-//       , value: "40 points" 
-//     },
-    
-//     {  label: "Touch accuracy"
-//       , value: "±1mm" 
-//     },
-//     {
-//       label:"Response time",
-//       value:"≤10ms"
-//     },
-//     {
-//       label:"Touch lifespan",
-//       value:"≥50 million times"   
-//     }
-
-//     ]
-//   }
-// ];
-
-
 const specificationData = product.specifications.map((group) => ({
   title: group.category,
   rows: group.items.map((item) => ({
@@ -125,7 +31,7 @@ const specificationData = product.specifications.map((group) => ({
     value: item.spec_value,
   })),
 }));
-  return (
+  return createPortal(
 
     <div className="modal-overlay" onClick={onClose}>
 
@@ -237,7 +143,8 @@ const specificationData = product.specifications.map((group) => ({
 
       </div>
 
-    </div>
+    </div>,
+    document.body
   );
 };
 
