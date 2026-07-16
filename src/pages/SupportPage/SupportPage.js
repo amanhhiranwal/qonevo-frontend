@@ -27,7 +27,7 @@ import "../ActiveLEDPage/ActiceLed.css";
 import ContactPage from "../../component/contact/ContactPage";
 import PreviousTicketsModal from "../../component/Support/PreviousTicketsModal";
 import FAQSearch from "../../component/FAQSearch/FAQSearch";
-import {levenshtein, tokenize} from "../../component/FAQSearch/searchUtils"
+import { levenshtein, tokenize } from "../../component/FAQSearch/searchUtils";
 import PageLayout from "../../layouts/PageLayout";
 
 const features = [
@@ -83,27 +83,26 @@ const products = [
 const SupportPage = () => {
   const [showTicketModal, setShowTicketModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-const queryTokens = tokenize(searchTerm);
+  const queryTokens = tokenize(searchTerm);
 
-const filteredProducts = products.filter((product) => {
-  if (!queryTokens.length) return true;
+  const filteredProducts = products.filter((product) => {
+    if (!queryTokens.length) return true;
 
-  const productTokens = tokenize(product.desc);
+    const productTokens = tokenize(product.desc);
 
-  return queryTokens.some((queryWord) =>
-    productTokens.some(
-      (productWord) =>
-        productWord.includes(queryWord) ||
-        levenshtein(queryWord, productWord) <= 2
-    )
-  );
-});
-  
+    return queryTokens.some((queryWord) =>
+      productTokens.some(
+        (productWord) =>
+          productWord.includes(queryWord) ||
+          levenshtein(queryWord, productWord) <= 2,
+      ),
+    );
+  });
 
   return (
     <PageLayout className="support-main-container">
       <div className="support-banner">
-        <img src={Banner} alt="" />
+        <img fetchPriority="high" src={Banner} alt="" />
       </div>
 
       <div className="sw-delay">
@@ -120,7 +119,13 @@ const filteredProducts = products.filter((product) => {
           {features.map((item, index) => (
             <div className="features-item" key={index}>
               <div className="features-icon">
-                <img src={item.image} alt={item.desc} />
+                <img
+                  height={item.image.height}
+                  width={item.image.width}
+                  loading="lazy"
+                  src={item.image}
+                  alt={item.desc}
+                />
               </div>
 
               <div className="features-text">
@@ -134,20 +139,20 @@ const filteredProducts = products.filter((product) => {
           <p>
             Need to check the previous case?{" "}
             <span>
-             <button
-      type="button"
-      className="check-case-link"
-      onClick={() => setShowTicketModal(true)}
-    >
-      Check your case
-    </button>
+              <button
+                type="button"
+                className="check-case-link"
+                onClick={() => setShowTicketModal(true)}
+              >
+                Check your case
+              </button>
             </span>
           </p>
-
-
         </div>
 
-        {showTicketModal && <PreviousTicketsModal onClose={() => setShowTicketModal(false) }/>}
+        {showTicketModal && (
+          <PreviousTicketsModal onClose={() => setShowTicketModal(false)} />
+        )}
       </div>
 
       <div className="search-prod-by-name">
@@ -164,40 +169,45 @@ const filteredProducts = products.filter((product) => {
             <img src={searchIcon} alt="search" />
           </button>
         </div> */}
-         <FAQSearch
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
+        <FAQSearch
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-      <div className="search-products">
-  {filteredProducts.length > 0 ? (
-    filteredProducts.map((item, index) => (
-      <div className="prod-item" key={index}>
-        <div className="prod-img">
-          <img src={item.image} alt={item.desc} />
+        <div className="search-products">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((item, index) => (
+              <div className="prod-item" key={index}>
+                <div className="prod-img">
+                  <img
+                   
+                    loading="lazy"
+                    src={item.image}
+                    alt={item.desc}
+                  />
+                </div>
+
+                <div className="prod-text">
+                  <p>{item.desc}</p>
+                </div>
+
+                <div className="hover-content">
+                  <a href={`${item.route}?section=${item.sectionId1}`}>
+                    {item.hoverContent1}
+                  </a>
+
+                  <a href={`${item.route}?section=${item.sectionId2}`}>
+                    {item.hoverContent2}
+                  </a>
+
+                  <a href={item.route}>View All Support</a>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No data found</p>
+          )}
         </div>
-
-        <div className="prod-text">
-          <p>{item.desc}</p>
-        </div>
-
-<div className="hover-content">
-  <a href={`${item.route}?section=${item.sectionId1}`}>
-    {item.hoverContent1}
-  </a>
-
-  <a href={`${item.route}?section=${item.sectionId2}`}>
-    {item.hoverContent2}
-  </a>
-
-  <a href={item.route}>View All Support</a>
-</div>
-      </div>
-    ))
-  ) : (
-    <p>No data found</p>
-  )}
-</div>
       </div>
 
       <section className="certification-sec scale-section">
@@ -206,14 +216,45 @@ const filteredProducts = products.filter((product) => {
           Aligned with national standards and innovation-driven initiatives
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img" />
-          <img src={logo3} alt="Startup India" className="cert-img" />
-          <img src={logo4} alt="Make in India" className="cert-img" />
-          <img src={logo5} alt="ISO Certified" className="cert-img" />
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" />
+          <img
+            src={logo1}
+            alt="Google EDLA Certified"
+            loading="lazy"
+            className="cert-img"
+          />
+          <img
+            src={logo2}
+            alt="MSME Ministry"
+            loading="lazy"
+            className="cert-img"
+          />
+          <img
+            src={logo3}
+            alt="Startup India"
+            loading="lazy"
+            className="cert-img"
+          />
+          <img
+            src={logo4}
+            alt="Make in India"
+            loading="lazy"
+            className="cert-img"
+          />
+          <img
+            src={logo5}
+            alt="ISO Certified"
+            loading="lazy"
+            className="cert-img"
+          />
+          <img
+            src={logo7}
+            alt="Google EDLA Certified"
+            loading="lazy"
+            className="cert-img"
+          />
           <img
             src={logo6}
+            loading="lazy"
             alt="GeM Government e-Marketplace"
             className="cert-img"
           />
@@ -222,9 +263,7 @@ const filteredProducts = products.filter((product) => {
       <div className="contact">
         <ContactPage />
       </div>
-    
     </PageLayout>
-   
   );
 };
 

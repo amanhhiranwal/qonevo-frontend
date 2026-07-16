@@ -144,6 +144,8 @@ const IFPPage = () => {
 
           <div className="hero-monitor-wrap mx-auto">
             <img
+            height={ifpImage.height}
+            width={ifpImage.width}
               src={ifpImage}
               alt="Qonevo Interactive Flat Panel"
               className="hero-ifp-image img-fluid d-block"
@@ -246,7 +248,7 @@ const IFPPage = () => {
 
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
           {[logo1, logo2, logo3, logo4, logo5, logo7, logo6].map((logo, i) => (
-            <img key={i} src={logo} className="cert-img" alt="cert" loading="lazy" />
+            <img height={logo.height} width={logo.width} key={i} src={logo} className="cert-img" alt="cert" loading="lazy" />
           ))}
         </div>
       </section>

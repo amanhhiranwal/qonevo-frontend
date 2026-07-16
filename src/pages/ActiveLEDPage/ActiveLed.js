@@ -520,7 +520,7 @@ const ActiveLed = () => {
         </div>
 
         <div className="led-img-content">
-          <img src={Banner} alt="" />
+          <img fetchPriority="high" src={Banner} alt="" />
         </div>
       </section>
       <section className="built-for-env">
@@ -571,6 +571,7 @@ const ActiveLed = () => {
           {/* IMAGE */}
           <div className="image-container-pf">
             <img
+            loading="lazy"
               src={performanceBanner}
               alt="LED display performance showcase"
             />
@@ -581,7 +582,7 @@ const ActiveLed = () => {
             {features.map((item, index) => (
               <div className="features-item" key={index}>
                 <div className="features-icon">
-                  <img src={item.image} alt={item.desc} />
+                  <img loading="lazy" src={item.image} alt={item.desc} />
                 </div>
 
                 <div className="features-text">
@@ -611,16 +612,17 @@ const ActiveLed = () => {
           Aligned with national standards and innovation-driven initiatives
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img" />
-          <img src={logo3} alt="Startup India" className="cert-img" />
-          <img src={logo4} alt="Make in India" className="cert-img" />
-          <img src={logo5} alt="ISO Certified" className="cert-img" />
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" />
+          <img src={logo1} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
+          <img src={logo2} alt="MSME Ministry" className="cert-img"  loading="lazy"/>
+          <img src={logo3} alt="Startup India" className="cert-img" loading="lazy" />
+          <img src={logo4} alt="Make in India" className="cert-img" loading="lazy"/>
+          <img src={logo5} alt="ISO Certified" className="cert-img" loading="lazy"/>
+          <img src={logo7} alt="Google EDLA Certified" className="cert-img"  loading="lazy"/>
           <img
             src={logo6}
             alt="GeM Government e-Marketplace"
             className="cert-img"
+            loading="lazy"
           />
         </div>
       </section>

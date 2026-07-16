@@ -135,6 +135,8 @@ export default function ProductSlider() {
             <img
               src={slide.image_url}
               alt={slide.title}
+              height={slide.image_url.height}
+              width={slide.image_url.width}
               className="slide-image"
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}

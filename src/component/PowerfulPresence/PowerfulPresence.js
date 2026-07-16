@@ -311,7 +311,7 @@ applyPosition(min);
         >
           {/* RIGHT IMAGE — always full width, sits behind */}
           <div className="right-image-wrapper">
-            <img src={baseImg} alt="Black Finish" draggable={false} />
+            <img src={baseImg} alt="Black Finish" draggable={false} loading="lazy" />
           </div>
 
           {/* LEFT IMAGE — clipped to slider position */}
@@ -319,7 +319,7 @@ applyPosition(min);
             className="left-image-wrapper"
             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
           >
-            <img src={overlayImg} alt="Silver Finish" draggable={false} />
+            <img src={overlayImg} alt="Silver Finish" draggable={false} loading="lazy" />
           </div>
 
           {/* DIVIDER + BAR */}
@@ -339,6 +339,7 @@ applyPosition(min);
                 alt=""
                 className={`chevron-icon ${showRight ? "chevron-visible" : "chevron-hidden"}`}
                 draggable={false}
+                loading="lazy"
               />
 
               {/* Left arrow — visible when at right side */}
@@ -347,6 +348,7 @@ applyPosition(min);
                 alt=""
                 className={`chevron-icon ${!showRight ? "chevron-visible" : "chevron-hidden"}`}
                 draggable={false}
+                loading="lazy"
               />
 
             </div>

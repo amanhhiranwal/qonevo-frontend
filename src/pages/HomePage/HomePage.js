@@ -38,7 +38,7 @@ const HomePage = () => {
             </p>
             <a href="/" className="btn-discover">Discover</a>
         </div>
-        <img src={ifp} alt="Product Showcase" className="info-section-image"/>
+        <img height={ifp.height} width={ifp.width} src={ifp} alt="Product Showcase" className="info-section-image"/>
     </div>
 </section>
 
@@ -63,8 +63,8 @@ const HomePage = () => {
                         </p>
                         <a href="/" className="btn-discover">Discover</a>
                     </div> */}
-                    <img src={adsdisplay} alt="Product Showcase"
-                        className="info-section-image"/>
+                    <img src={adsdisplay} height={adsdisplay.height} width={adsdisplay.width} alt="Product Showcase"
+                        className="info-section-image" loading='lazy'/>
                    
                     {/* <div className="marker display-marker-left">
                         <span className="marker-line"></span>
@@ -94,7 +94,7 @@ const HomePage = () => {
                         </p>
                         <a href="/" className="btn-discover">Discover</a>
                     </div>
-                    <img src={kiosk} alt="Product Showcase" className="info-section-image"/>
+                    <img src={kiosk} height={kiosk.height} width={kiosk.width} alt="Product Showcase" className="info-section-image" loading='lazy'/>
                 </div>
                
                 {/* <div className="dual-marker dual-marker-right vertical">
@@ -122,7 +122,7 @@ const HomePage = () => {
             </p>
             <a href="/" className="btn-discover">Discover</a>
         </div>
-        <img src={activeled} alt="Product Showcase" className="info-section-image"/>
+        <img src={activeled} height={activeled.height} width={activeled.width} alt="Product Showcase" className="info-section-image" loading='lazy'/>
     </div>
 </section>
 
@@ -139,8 +139,8 @@ const HomePage = () => {
                         <p className="section-subtitle">Power that drives every display.</p>
                         <a href="/" className="btn-discover">Discover</a>
                     </div>
-                    <img src={pcops} alt="Product Showcase"
-                        className="info-section-image"/>
+                    <img src={pcops} height={pcops.height} width={pcops.width} alt="Product Showcase"
+                        className="info-section-image" loading='lazy'/>
                 </div>
                 {/* <!-- LEFT Vertical Marker --> */}
                 <div className="dual-marker dual-marker-left vertical">
@@ -162,8 +162,8 @@ const HomePage = () => {
                         <p className="section-subtitle">Smart pens, stands, cameras - made for perfection.</p>
                         <a href="/" className="btn-discover">Discover</a>
                     </div>
-                    <img src={adson} alt="Product Showcase"
-                        className="info-section-image"/>
+                    <img src={adson} height={adson.height} width={adson.width} alt="Product Showcase"
+                        className="info-section-image" loading='lazy'/>
                 </div>
                 {/* <!-- RIGHT Vertical Marker --> */}
                 <div className="dual-marker dual-marker-right vertical">

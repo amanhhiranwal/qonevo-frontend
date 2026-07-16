@@ -53,17 +53,23 @@ export default function IntelligentWorkspaces({ image1, image2 }) {
           {/* RIGHT — Smart Classroom (Image 2) */}
           <img
             className="iw-img-right"
+            height={image1.height}
+            width={image1.width}
             src={image1}
             alt="The Smart Classroom – Reimagined"
             draggable={false}
+            loading="lazy"
           />
 
           {/* LEFT — Intelligent Workspaces (Image 1) */}
           <img
+          height={image2.height}
+          width={image2.width}
             className="iw-img-left"
             src={image2}
             alt="Intelligent Workspaces"
             draggable={false}
+            loading="lazy"
           />
 
           {/* Divider */}

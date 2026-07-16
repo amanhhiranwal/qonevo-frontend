@@ -98,6 +98,8 @@ const ProductCard = ({ products = [], variant = "default" }) => {
                 }`}
               >
                 <img
+                height={p?.thumbnail.height}
+                width={p?.thumbnail.width}
                   className="img-default"
                   src={p?.thumbnail}
                   alt={p?.name}
