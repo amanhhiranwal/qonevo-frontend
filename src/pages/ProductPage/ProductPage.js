@@ -103,7 +103,7 @@ const ProductPage = () => {
           <h2>The Smart Classroom. Reimagined.</h2>
           <p>Qonevo Interactive Flat Panel | Limitless Interactive</p>
         </div>
-          <img src={banner} alt="Qonevo Interactive Flat Panel" />
+          <img src={banner} alt="Qonevo Interactive Flat Panel"  fetchPriority="high"/>
         </div>
       </section>
 
@@ -181,7 +181,7 @@ const ProductPage = () => {
         </div>
 
         <div className="bd-img-container">
-          <img src={performanceBgImg} alt="Performance" className="bg-img"  />
+          <img src={performanceBgImg} alt="Performance" className="bg-img"  loading="lazy"/>
         </div>
       </section>
 
@@ -211,7 +211,7 @@ const ProductPage = () => {
                 {duplicatedSlides.map((slide, i) => (
                   <div className="gravity-card-1" key={i}>
                     <div className="gravity-card-img">
-                      <img src={slide.img} alt={slide.title} />
+                      <img src={slide.img} alt={slide.title} loading="lazy" />
                     </div>
                     <div className="text-content-gravity">
                       <p className="gravity-card-title-slide">{slide.title}</p>
@@ -229,9 +229,9 @@ const ProductPage = () => {
 
         <div className="gravity-sub-img">
           <div className="back-img">
-            <img src={gravityBgImg} alt="" />
+            <img src={gravityBgImg} alt="" loading="lazy" />
               <div className="front-img">
-            <img src={gravityTextImg} alt="" />
+            <img src={gravityTextImg} alt="" loading="lazy" />
           </div>
           </div>
         
@@ -249,7 +249,7 @@ const ProductPage = () => {
           <div className="card-container">
             <div className="card-item">
               <div className="card-logo">
-                <img src={speedIcon} alt="Speed" />
+                <img src={speedIcon} alt="Speed" loading="lazy"/>
               </div>
               <div className="text-container-sc">
                 <h3 className="card-heading">Fast Processing</h3>
@@ -262,7 +262,7 @@ const ProductPage = () => {
 
             <div className="card-item">
               <div className="card-logo">
-                <img src={speedIcon} alt="Speed" />
+                <img src={speedIcon} alt="Speed"/>
               </div>
               <div className="text-container-sc">
                 <h3 className="card-heading">Easy Connectivity</h3>

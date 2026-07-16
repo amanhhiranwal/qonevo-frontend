@@ -61,6 +61,8 @@ export default function ClientCarousel() {
       >
         {doubled.map((src, i) => (
           <img
+          height={src.height}
+          width={src.width}
             key={i}
             src={src}
             alt={`client-${i}`}

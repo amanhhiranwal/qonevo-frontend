@@ -457,7 +457,7 @@ if (topSectionId) {
   return (
     <PageLayout className="support-main-container">
       <div className="support-banner">
-        <img src={Banner} alt="" />
+        <img src={Banner} alt="" fetchPriority="high" />
       </div>
 
       <div className="sw-delay">
@@ -473,7 +473,7 @@ if (topSectionId) {
           {features.map((item, index) => (
             <div className="features-item" key={index}>
               <div className="features-icon">
-                <img src={item.image} alt={item.desc} />
+                <img loading="lazy" src={item.image} alt={item.desc} />
               </div>
               <div className="features-text-sp">
                 <p>{item.desc}</p>
@@ -584,10 +584,10 @@ if (topSectionId) {
               <div className="features-icon">
                 {item.href ? (
                   <a href={item.href}>
-                    <img src={item.image} alt={item.title} />
+                    <img src={item.image} alt={item.title} loading="lazy" />
                   </a>
                 ) : (
-                  <img src={item.image} alt={item.title} />
+                  <img src={item.image} alt={item.title} loading="lazy"/>
                 )}
               </div>
               <div className="features-text">
@@ -605,13 +605,13 @@ if (topSectionId) {
           Aligned with national standards and innovation-driven initiatives
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img" />
-          <img src={logo3} alt="Startup India" className="cert-img" />
-          <img src={logo4} alt="Make in India" className="cert-img" />
-          <img src={logo5} alt="ISO Certified" className="cert-img" />
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" />
-          <img src={logo6} alt="GeM Government e-Marketplace" className="cert-img" />
+          <img src={logo1} loading="lazy" alt="Google EDLA Certified" className="cert-img" />
+          <img src={logo2} loading="lazy" alt="MSME Ministry" className="cert-img" />
+          <img src={logo3} loading="lazy" alt="Startup India" className="cert-img" />
+          <img src={logo4} loading="lazy" alt="Make in India" className="cert-img" />
+          <img src={logo5} loading="lazy" alt="ISO Certified" className="cert-img" />
+          <img src={logo7} loading="lazy" alt="Google EDLA Certified" className="cert-img" />
+          <img src={logo6} loading="lazy" alt="GeM Government e-Marketplace" className="cert-img" />
         </div>
       </section>
 

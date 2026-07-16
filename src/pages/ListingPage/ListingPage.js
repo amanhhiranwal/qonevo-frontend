@@ -199,7 +199,7 @@ const ListingPage = () => {
     <PageLayout className="listing-container">
       <div className="listing-container">
         <div className="listing-banner">
-          <img src={banner} alt="Listing Page" />
+          <img height={banner.height} width={banner.width} src={banner} alt="Listing Page" fetchPriority="high" />
 
           <div className="listing-banner-text">
             <h1>The Smart Classroom. Reimagined.</h1>

@@ -214,14 +214,17 @@ const isBottomUp = index !== 0;
               <div className="btp-screen-container">
                 <div ref={slotARef} className="btp-slot">
                   <img
+                  height={features[0].image.height}
+                  width={features[0].image.width}
                     src={features[0].image}
                     alt="feature A"
                     className="btp-screen-img"
+                    loading="lazy"
                     
                   />
                 </div>
                 <div ref={slotBRef} className="btp-slot">
-                  <img src="" alt="feature B" className="btp-screen-img" 
+                  <img src="" alt="feature B" className="btp-screen-img" loading="lazy" 
                   
                   />
                 </div>

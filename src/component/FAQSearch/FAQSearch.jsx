@@ -18,7 +18,7 @@ const FAQSearch = ({
       />
 
       <button className="search-btn" type="button">
-        <img src={searchIcon} alt="search" />
+        <img loading="lazy" src={searchIcon} alt="search" />
       </button>
     </div>
   );
