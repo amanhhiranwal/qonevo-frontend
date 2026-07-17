@@ -48,7 +48,7 @@ const specificationData = product.specifications.map((group) => ({
 
           {/* MAIN IMAGE */}
           <div className="preview-image">
-            <img height={activeImage.height} width={activeImage.width} src={activeImage} alt="Product" loading="lazy"/>
+            <img  src={activeImage} alt="Product" loading="lazy"/>
           </div>
 
           {/* THUMBNAILS */}
@@ -62,7 +62,7 @@ const specificationData = product.specifications.map((group) => ({
                 }`}
                 onClick={() => setActiveImage(img)}
               >
-                <img height={img.height} width={img.width} src={img} alt={`Thumbnail ${index + 1}`} loading="lazy" />
+                <img  src={img} alt={`Thumbnail ${index + 1}`} loading="lazy" />
               </div>
             ))}
 
