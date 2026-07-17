@@ -122,7 +122,7 @@ const ProductCard = ({ products = [], variant = "default" }) => {
                 </div>
 
                 <div className="product-spec mb-4">
-                  {p?.subheading}
+                  Qonevo Interactive Flat Panels
                 </div>
 
                 <div
