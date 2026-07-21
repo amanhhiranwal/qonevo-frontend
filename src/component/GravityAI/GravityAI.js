@@ -65,12 +65,14 @@ export default function GravityAI() {
 
 
       <video
+      asp
   className="gravity-gif"
   autoPlay
   muted
   loop
   playsInline
   preload="none"
+  
 >
   <source src={gravityanimation} type="video/mp4" />
 </video>

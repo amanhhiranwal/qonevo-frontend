@@ -98,6 +98,8 @@ const ProductCard = ({ products = [], variant = "default" }) => {
                 }`}
               >
                 <img
+                height={p?.thumbnail.height}
+                width={p?.thumbnail.width}
                   className="img-default"
                   src={p?.thumbnail}
                   alt={p?.name}
@@ -120,7 +122,7 @@ const ProductCard = ({ products = [], variant = "default" }) => {
                 </div>
 
                 <div className="product-spec mb-4">
-                  {p?.subheading}
+                  Qonevo Interactive Flat Panels 
                 </div>
 
                 <div

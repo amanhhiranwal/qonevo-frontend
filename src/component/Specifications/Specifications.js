@@ -82,7 +82,7 @@ const Specifications = () => {
             className={`specs-col-size ${activeSize === i ? "is-active" : ""}`}
             onClick={() => setActiveSize(activeSize === i ? null : i)}
           >
-            <img src={size.img} alt={size.label} className="specs-thumb" />
+            <img src={size.img} alt={size.label} className="specs-thumb" loading="lazy"/>
             <span className="specs-size-label">{size.label}</span>
           </button>
         ))}

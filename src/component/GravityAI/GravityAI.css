@@ -86,6 +86,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  aspect-ratio: 16/9;
 }
 
 /* newly added css  start*/
