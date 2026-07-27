@@ -134,6 +134,10 @@ const specificationData = product.specifications.map((group) => ({
            <button
                   className="get-quote-btn"
                  disabled={true}
+                  style={{
+                opacity:  0.5,
+                cursor:"not-allowed",
+              }}
                 >
                   Get Quote
                 </button>
