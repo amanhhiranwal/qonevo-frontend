@@ -130,7 +130,7 @@ const specificationData = product.specifications.map((group) => ({
          </div>
 
 
-        <div>
+        <div className="buttons-product-cta">
            <button
                   className="get-quote-btn"
                  disabled
