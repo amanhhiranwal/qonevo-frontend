@@ -133,9 +133,14 @@ const specificationData = product.specifications.map((group) => ({
         <div>
            <button
                   className="get-quote-btn"
-                 
+                 disabled
                 >
                   Get Quote
+                </button>
+                <button
+                  className="get-quote-btn"
+                >
+                  Download Brochure
                 </button>
         </div>
 
