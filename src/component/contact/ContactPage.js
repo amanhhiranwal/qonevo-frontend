@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../NavbarAndFooter/Navbar&Footer.css";
 import axios from "axios";
 import "./toast.css"; // 👈 Create this file
-
+import QonevoBrochure from "../../Assets/QonevoBrochure.pdf"
 const ContactPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -102,8 +102,8 @@ const ContactPage = () => {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/Qonevo Brochure.pdf";
-    link.download = "Qonevo Brochure.pdf";
+    link.href = QonevoBrochure;
+    link.download = "Qonevo-Brochure.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
