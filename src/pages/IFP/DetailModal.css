@@ -13,6 +13,10 @@
   animation: overlayFadeIn 0.3s ease forwards;
 }
 
+.buttons-product-cta{
+  display: flex;
+  gap: 6px;
+}
 @keyframes overlayFadeIn {
   from {
     opacity: 0;
