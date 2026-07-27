@@ -15,7 +15,7 @@
 
 .buttons-product-cta{
   display: flex;
-  gap: 6px;
+  gap: 10px;
 }
 @keyframes overlayFadeIn {
   from {
