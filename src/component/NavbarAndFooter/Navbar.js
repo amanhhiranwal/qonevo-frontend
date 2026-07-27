@@ -226,11 +226,11 @@ export default function MegaMenuNavbar() {
               </li> */}
 
               {/* About */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <button type="button" className="nav-link btn btn-link nav-btn">
                   About
                 </button>
-              </li>
+              </li> */}
 
               {/* Support */}
               <li className="nav-item">

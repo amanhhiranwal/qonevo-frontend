@@ -36,7 +36,7 @@ const HomePage = () => {
             <p className="section-subtitle">
                 Smarter. Sharper. Seamlessly connected.
             </p>
-            <a href="/" className="btn-discover">Discover</a>
+            <a href="/IFP" className="btn-discover">Discover</a>
         </div>
         <img height={ifp.height} width={ifp.width} src={ifp} alt="Product Showcase" className="info-section-image"/>
     </div>
@@ -54,7 +54,7 @@ const HomePage = () => {
                         <p className="section-subtitle">
                            Stand tall. Stay visible.
                         </p>
-                        <a href="/" className="btn-discover">Discover</a>
+                        <a href="/IFP" className="btn-discover">Discover</a>
                     </div>
                     {/* <div className="section-headings py-5 product-card-head">
                         <h2 className="section-title">Advertising Display & Signage</h2>
@@ -92,7 +92,7 @@ const HomePage = () => {
                         <p className="section-subtitle">
                             Smarter self-service, reimagined.
                         </p>
-                        <a href="/" className="btn-discover">Discover</a>
+                        <a href="/IFP" className="btn-discover">Discover</a>
                     </div>
                     <img src={kiosk} height={kiosk.height} width={kiosk.width} alt="Product Showcase" className="info-section-image" loading='lazy'/>
                 </div>
@@ -120,7 +120,7 @@ const HomePage = () => {
             <p className="section-subtitle">
                 Brilliance that breaks through daylight.
             </p>
-            <a href="/" className="btn-discover">Discover</a>
+            <a href="/IFP" className="btn-discover">Discover</a>
         </div>
         <img src={activeled} height={activeled.height} width={activeled.width} alt="Product Showcase" className="info-section-image" loading='lazy'/>
     </div>
@@ -137,7 +137,7 @@ const HomePage = () => {
                     <div className="section-headings product-card-head">
                         <h2 className="section-title">All-In-One PC & OPS</h2>
                         <p className="section-subtitle">Power that drives every display.</p>
-                        <a href="/" className="btn-discover">Discover</a>
+                        <a href="/IFP" className="btn-discover">Discover</a>
                     </div>
                     <img src={pcops} height={pcops.height} width={pcops.width} alt="Product Showcase"
                         className="info-section-image" loading='lazy'/>
@@ -160,7 +160,7 @@ const HomePage = () => {
                     <div className="section-headings product-card-head">
                         <h2 className="section-title">Accessories & Add-ons</h2>
                         <p className="section-subtitle">Smart pens, stands, cameras - made for perfection.</p>
-                        <a href="/" className="btn-discover">Discover</a>
+                        <a href="/IFP" className="btn-discover">Discover</a>
                     </div>
                     <img src={adson} height={adson.height} width={adson.width} alt="Product Showcase"
                         className="info-section-image" loading='lazy'/>
