@@ -124,6 +124,10 @@
   overflow: hidden;
 }
 
+.colorMe{
+  color: #001654 !important;
+}
+
 .preview-image img {
   width: 90%;
 

@@ -10,7 +10,7 @@
 //   return (
 //     <section>
 //       <div className={`product-grid ${variant}`}>
-        
+
 //         {products.map((p) => (
 //           <div className="product-card_ifp" key={p.id ?? p.name}>  {/* ✅ id fallback name */}
 
@@ -69,15 +69,11 @@
 
 // export default ProductCard;
 
-
-
-import React, { useState } from "react";
-// import { useNavigate } from 'react-router-dom';
+import React, { useState, memo } from "react";
 import "./ProductCard.css";
 import DetailModal from "../../pages/IFP/DetailModal.js";
 
-const ProductCard = ({ products = [], variant = "default" }) => {
-  // const navigate = useNavigate();
+const ProductCard = memo(({ products = [], variant = "default" }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
@@ -88,56 +84,35 @@ const ProductCard = ({ products = [], variant = "default" }) => {
           const hasHoverImage = Boolean(hoverImage);
 
           return (
-            <div
-              className="product-card_ifp"
-              key={p?.id ?? p?.name}
-            >
+            <div className="product-card_ifp" key={p?.id ?? p?.name}>
               <div
-                className={`abstract-art ${
-                  hasHoverImage ? "has-hover" : ""
-                }`}
+                className={`abstract-art ${hasHoverImage ? "has-hover" : ""}`}
               >
                 <img
-                height={p?.thumbnail.height}
-                width={p?.thumbnail.width}
                   className="img-default"
                   src={p?.thumbnail}
-                  alt={p?.name}
+                  alt={p?.name || "Product Image"}
                   loading="lazy"
+                  decoding="async"
                 />
-
-                {/* {hasHoverImage && (
-                  <img
-                    className="img-hover"
-                    src={hoverImage}
-                    alt={p?.name}
-                    loading="lazy"
-                  />
-                )} */}
               </div>
 
               <div className="product-info">
-                <div className="product-name">
-                  {p?.name}
-                </div>
+                <div className="product-name">{p?.name}</div>
 
                 <div className="product-spec mb-4">
-                  Qonevo Interactive Flat Panels 
+                  {p?.subheading?.trim()
+                    ? "Qonevo Interactive Flat Panels"
+                    : ""}
                 </div>
 
                 <div
                   className="product-spec mt-4 mb-4"
                   style={{ color: "#aaa" }}
                 >
-                  {[
-                    p?.size,
-                    p?.chipset,
-                    p?.storage,
-                    p?.resolution,
-                  ]
+                  {[p?.size, p?.chipset, p?.storage, p?.resolution]
                     .filter(Boolean)
-                    .join(" | ") ||
-                    "Default : 4K UHD | 400 nits | 200W * 2"}
+                    .join(" | ") || "Default : 4K UHD | 400 nits | 200W * 2"}
                 </div>
 
                 <button
@@ -159,6 +134,6 @@ const ProductCard = ({ products = [], variant = "default" }) => {
       />
     </section>
   );
-};
+});
 
 export default ProductCard;

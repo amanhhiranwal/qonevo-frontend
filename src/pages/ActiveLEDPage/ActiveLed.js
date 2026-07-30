@@ -27,6 +27,7 @@ import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.
 import PageLayout from "../../layouts/PageLayout.jsx";
 import ProductCard from "../../component/ProductCard/ProductCard.js";
 import DetailModal from "../IFP/DetailModal.js";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   { image: icon1, desc: "160° Viewing Angle" },
@@ -52,7 +53,7 @@ const ActiveLed = () => {
         // setLoading(true);
         const type = activeSize === "Indoor" ? "INDOOR_LED" : "OUTDOOR_LED";
         const response = await axios.get(
-          `${BASE_URL}/api/v1/products?type=${type}&limit=4`
+          `${BASE_URL}/api/v1/products?type=${type}&limit=4`,
         );
         setProducts(response.data || []);
       } catch (error) {
@@ -65,6 +66,13 @@ const ActiveLed = () => {
 
     fetchProducts();
   }, [activeSize]);
+
+  const navigate = useNavigate();
+
+
+  function redirectFunction() {
+    navigate("/listing-page-Led");
+  }
 
   return (
     <PageLayout className="main-led-container">
@@ -101,7 +109,9 @@ const ActiveLed = () => {
         </div>
         <ProductCard products={products} variant="grid-4" />
         <div className="view-all-wrap">
-          <button href="" className="btn-view-all">View All</button>
+          <button onClick={redirectFunction} className="btn-view-all">
+            View All
+          </button>
         </div>
       </section>
 
@@ -161,12 +171,42 @@ const ActiveLed = () => {
           Aligned with national standards and innovation-driven initiatives
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap gap-5 px-4">
-          <img src={logo1} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
-          <img src={logo2} alt="MSME Ministry" className="cert-img" loading="lazy" />
-          <img src={logo3} alt="Startup India" className="cert-img" loading="lazy" />
-          <img src={logo4} alt="Make in India" className="cert-img" loading="lazy" />
-          <img src={logo5} alt="ISO Certified" className="cert-img" loading="lazy" />
-          <img src={logo7} alt="Google EDLA Certified" className="cert-img" loading="lazy" />
+          <img
+            src={logo1}
+            alt="Google EDLA Certified"
+            className="cert-img"
+            loading="lazy"
+          />
+          <img
+            src={logo2}
+            alt="MSME Ministry"
+            className="cert-img"
+            loading="lazy"
+          />
+          <img
+            src={logo3}
+            alt="Startup India"
+            className="cert-img"
+            loading="lazy"
+          />
+          <img
+            src={logo4}
+            alt="Make in India"
+            className="cert-img"
+            loading="lazy"
+          />
+          <img
+            src={logo5}
+            alt="ISO Certified"
+            className="cert-img"
+            loading="lazy"
+          />
+          <img
+            src={logo7}
+            alt="Google EDLA Certified"
+            className="cert-img"
+            loading="lazy"
+          />
           <img
             src={logo6}
             alt="GeM Government e-Marketplace"
