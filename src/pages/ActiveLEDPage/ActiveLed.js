@@ -595,7 +595,8 @@ const ActiveLed = () => {
       </section>
 
       <section>
-        {/* <ScrollCanvas /> */}
+        {/* commented */}
+        {/* <ScrollCanvas/>  */}
       </section>
       <section className="build-for-clarity">
         <BuiltForClarity />
