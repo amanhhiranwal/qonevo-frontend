@@ -29,7 +29,7 @@ import DetailModal from "../IFP/DetailModal.js";
 import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces.js";
 
 import performanceBanner from "../../Assets/ActiveLED/performance-banner.png";
-import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas.js";
+// import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas.js";
 
 import BuiltForClarity from "../../component/BuiltForClarity/BuiltForClarity.js";
 import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.js";
@@ -595,7 +595,7 @@ const ActiveLed = () => {
       </section>
 
       <section>
-        <ScrollCanvas />
+        {/* <ScrollCanvas /> */}
       </section>
       <section className="build-for-clarity">
         <BuiltForClarity />
