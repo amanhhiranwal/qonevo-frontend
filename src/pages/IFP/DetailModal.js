@@ -30,6 +30,8 @@ const DetailModal = ({ isOpen, product, onClose }) => {
   const deadZone = (specificationData[0].rows[0]);
   const deadZones = (specificationData[0].rows[1]);
 
+  console.log(deadZone.label)
+
 
 function handleDownload() {
   const link = document.createElement("a");
@@ -84,12 +86,12 @@ function handleDownload() {
           {/* FEATURE ROW */}
           <div className="feature-row">
             <div className="feature-box">
-              <h3>{product?.resolution !== product?.resolution ? "" : deadZone?.label }</h3>
-              <p>{product?.resolution !== product?.resolution ? "" : deadZone?.value }</p>
+              <h3 className="colorMe">{deadZone?.label }</h3>
+              <p>{deadZone?.value }</p>
             </div>
 
             <div className="feature-box">
-              <h3>{deadZones?.label }</h3>
+              <h3 className="colorMe">{deadZones?.label }</h3>
               <p>{deadZones?.value}</p>
             </div>
           </div>
