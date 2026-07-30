@@ -29,7 +29,7 @@ import DetailModal from "../IFP/DetailModal.js";
 import IntelligentWorkspaces from "../../component/sliderImage/IntelligentWorkspaces.js";
 
 import performanceBanner from "../../Assets/ActiveLED/performance-banner.png";
-import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas.js";
+// import ScrollCanvas from "../../component/VideoScroll/ScrollCanvas.js";
 
 import BuiltForClarity from "../../component/BuiltForClarity/BuiltForClarity.js";
 import FlexibleByDesign from "../../component/FlexibleByDesign/FlexibleByDesign.js";
@@ -529,7 +529,7 @@ const ActiveLed = () => {
             <p>Precision-built indoor and outdoor solutions.</p>
         </div>   */}
       </section>
-      <section className="scale-section-led">
+      {/* <section className="scale-section-led">
         <h2 className="section-title">Built for Every Environment</h2>
         <p className="section-sub">
           Precision-built indoor and outdoor solutions.
@@ -554,7 +554,7 @@ const ActiveLed = () => {
         isOpen={!!selectedProduct}
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
-      />
+      /> */}
       <section className="indoor-outdoor">
         <IntelligentWorkspaces image1={rightBanner} image2={leftBanner} />
       </section>
@@ -595,7 +595,8 @@ const ActiveLed = () => {
       </section>
 
       <section>
-        <ScrollCanvas />
+        {/* commented */}
+        {/* <ScrollCanvas/>  */}
       </section>
       <section className="build-for-clarity">
         <BuiltForClarity />
