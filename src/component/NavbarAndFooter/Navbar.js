@@ -138,8 +138,8 @@ export default function MegaMenuNavbar() {
     {
       img: img4,
       text: "Active LED Display",
-      // link: "/active-led",
-      link: "/",
+      link: "/active-led",
+      // link: "/",
     },
     {
       img: img5,
