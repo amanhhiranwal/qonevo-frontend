@@ -138,8 +138,8 @@ export default function MegaMenuNavbar() {
     {
       img: img4,
       text: "Active LED Display",
-      // link: "/active-led",
-      link: "/",
+      link: "/active-led",
+      // link: "/",
     },
     {
       img: img5,
@@ -240,11 +240,11 @@ export default function MegaMenuNavbar() {
               </li>
 
               {/* Contact Us */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <button type="button" className="nav-link btn btn-link nav-btn">
                   Contact Us
                 </button>
-              </li>
+              </li> */}
 
               {/* Technical Specification */}
               {/* <li

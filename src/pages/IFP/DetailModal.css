@@ -13,6 +13,10 @@
   animation: overlayFadeIn 0.3s ease forwards;
 }
 
+.buttons-product-cta{
+  display: flex;
+  gap: 10px;
+}
 @keyframes overlayFadeIn {
   from {
     opacity: 0;
@@ -118,6 +122,10 @@
   align-items: center;
 
   overflow: hidden;
+}
+
+.colorMe{
+  color: #001654 !important;
 }
 
 .preview-image img {
