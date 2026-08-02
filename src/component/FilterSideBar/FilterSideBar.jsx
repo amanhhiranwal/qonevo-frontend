@@ -10,18 +10,43 @@ const FilterSideBar = memo(({ onFilterChange, filterOptions = {} }) => {
   const FILTER_GROUPS = useMemo(
     () => [
       {
+        key: "type",
+        label: "Panel Type",
+        options: filterOptions?.ledTypes || [],
+      },
+      {
+        key: "pixel_pitch",
+        label: "Pixel Pitch (mm)",
+        options: [...(filterOptions?.pixelPitches || [])].sort((a, b) => {
+          const numA = parseFloat(a.replace(/[^0-9.]/g, ""));
+          const numB = parseFloat(b.replace(/[^0-9.]/g, ""));
+          if (!isNaN(numA) && !isNaN(numB)) {
+            return numA - numB;
+          }
+          return a.localeCompare(b);
+        }),
+      },
+      {
+        key: "brightness",
+        label: "Brightness",
+        options: filterOptions?.brightness || [],
+      },
+      {
+        key: "refresh_rate",
+        label: "Refresh Rate",
+        options: filterOptions?.refreshRates || [],
+      },
+      {
         key: "size",
         label: "Sizes",
         options: [...(filterOptions?.sizes || [])].sort((a, b) => {
           const numA = parseFloat(a);
           const numB = parseFloat(b);
 
-          // If both values start with numbers (e.g. "32", "43", "55 inch")
           if (!isNaN(numA) && !isNaN(numB)) {
             return numA - numB;
           }
 
-          // Fallback for non-numeric values
           return a.localeCompare(b);
         }),
       },

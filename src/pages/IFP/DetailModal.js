@@ -27,6 +27,11 @@ const DetailModal = ({ isOpen, product, onClose }) => {
     })),
   }));
 
+  const deadZone = (specificationData[0].rows[0]);
+  const deadZones = (specificationData[0].rows[1]);
+
+  console.log(deadZone.label)
+
 
 function handleDownload() {
   const link = document.createElement("a");
@@ -72,20 +77,22 @@ function handleDownload() {
           </h2>
 
           <p className="subtitle">
-            {product.subheading ||
-              `Standard performance for everyday teaching and presentations`}
+            {product.subheading !== "" ? "Standard performance for everyday teaching and presentations" : ""
+            // ||
+              // `Standard performance for everyday teaching and presentations`
+              }
           </p>
 
           {/* FEATURE ROW */}
           <div className="feature-row">
             <div className="feature-box">
-              <h3>{product?.resolution}</h3>
-              <p>Resolution</p>
+              <h3 className="colorMe">{deadZone?.label }</h3>
+              <p>{deadZone?.value }</p>
             </div>
 
             <div className="feature-box">
-              <h3>20 Points</h3>
-              <p>Multi-Touch</p>
+              <h3 className="colorMe">{deadZones?.label }</h3>
+              <p>{deadZones?.value}</p>
             </div>
           </div>
 

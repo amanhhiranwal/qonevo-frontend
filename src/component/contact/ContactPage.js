@@ -82,9 +82,10 @@ const ContactPage = () => {
       helpMessage: message,
     };
 
+    const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
     try {
       await axios.post(
-        "https://api.qonevo.co.in/api/v1/contact/create-contact",
+        `${BASE_URL}/api/v1/contact/create-contact`,
         payload
       );
 
