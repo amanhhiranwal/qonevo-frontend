@@ -122,6 +122,13 @@ export default function MegaMenuNavbar() {
       img: img1,
       text: "Interactive Flat Panel",
       link: "/ifp",
+    }
+    ,
+    {
+      img: img4,
+      text: "Active LED Display",
+      link: "/active-led",
+      // link: "/",
     },
     {
       img: img2,
@@ -134,12 +141,6 @@ export default function MegaMenuNavbar() {
       text: "Kiosk & Smart Display",
       // link: "/kiosk-display",
       link: "/",
-    },
-    {
-      img: img4,
-      text: "Active LED Display",
-      link: "/active-led",
-      // link: "/",
     },
     {
       img: img5,
