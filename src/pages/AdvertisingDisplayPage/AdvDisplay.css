@@ -1,0 +1,15 @@
+.adv-main-page{
+    background-color: #f5f5f5;
+}
+
+.bv-hero-section {
+    width: 100%;
+    overflow: hidden;
+}
+
+.bv-hero-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

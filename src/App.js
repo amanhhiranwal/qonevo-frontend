@@ -44,6 +44,7 @@ import ActiveLed from './pages/ActiveLEDPage/ActiveLed';
 import SupportPage from './pages/SupportPage/SupportPage';
 import ListingPage from './pages/ListingPage/ListingPage';
 import SupportList from './pages/SupportPage/SupportList';
+import AdvDisplay from "./pages/AdvertisingDisplayPage/AdvDisplay";
 // import Navbar from './component/NavbarAndFooter/Navbar';
 // import Footer from './component/NavbarAndFooter/Footer';
 
@@ -63,6 +64,7 @@ function App() {
         <Route path="/support" element={<SupportPage/>}/>
         <Route path="/support/ifp" element={<SupportList/>}/>
         <Route path="/listing-page" element={<ListingPage/>}/>
+        <Route path="/advertising-display" element={<AdvDisplay/>}/>
                 
 
 

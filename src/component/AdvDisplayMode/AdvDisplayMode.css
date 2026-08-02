@@ -1,0 +1,566 @@
+/* ============================================================
+   Advertising Display section — page-level layout
+   ============================================================ */
+
+.adv-main-sec {
+  width: 100%;
+  padding: 56px 64px;
+  overflow: hidden;
+}
+
+.adv-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ============================================================
+   LEFT — heading + accordion sidebar
+   ============================================================ */
+.adv-mockup-scale {
+  position: relative;
+  margin-left: auto;
+  zoom: var(--adv-scale);
+}
+.adv-heading {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.adv-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--Colors-Neutral-400, rgba(76, 76, 76, 1));
+  margin: 0 0 32px;
+}
+
+.adv-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adv-feature-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid #e6e8ec;
+  background: #ffffff;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    padding 0.4s ease;
+}
+
+.adv-feature-card:hover:not(.adv-feature-active) {
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.adv-feature-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.adv-feature-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #0f172a;
+  transition: color 0.4s ease;
+}
+.adv-feature-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.adv-feature-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(19, 19, 19, 1);
+  transition: color 0.4s ease;
+}
+
+/* Accordion reveal via the grid-rows 0fr -> 1fr trick: animates to
+   auto-height smoothly with no JS measuring. */
+.adv-feature-desc-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s ease;
+}
+
+.adv-feature-desc {
+  overflow: hidden;
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  min-height: 0;
+}
+
+.adv-feature-active {
+  background: #0b1e4d;
+  border-color: #0b1e4d;
+  padding: 22px 24px;
+}
+.adv-feature-active .adv-feature-icon,
+.adv-feature-active .adv-feature-title {
+  color: #ffffff;
+}
+.adv-feature-active .adv-feature-desc-wrap {
+  grid-template-rows: 1fr;
+  margin-top: 6px;
+}
+
+/* ============================================================
+   RIGHT — device mockups
+   Frame position/size for the active feature is driven by inline
+   styles from the JS `layout` object (see advDisplayData.js), so
+   this CSS intentionally does NOT set top/right/left/width/height
+   on the frame wrappers — only what inline styles can't do:
+   z-index, overflow, and the transition that animates between
+   layouts. Only the images stacked inside each "…-screen" wrapper
+   crossfade between demo content.
+   ============================================================ */
+
+.adv-right {
+  position: relative;
+}
+.adv-mockup-scale {
+  position: relative;
+  /* width: 1000px; */
+  /* height: 840px; */
+  margin-left: auto;
+  zoom: var(--adv-scale);
+}
+/* Sized so every device fits without clipping: the kiosk needs
+   room to extend well below the display, and the phone needs
+   room to float separately, lower and to the left. All children
+   below are positioned with `top`, anchored from the display at
+   top:0 — never `bottom` — so the math stays predictable
+   regardless of wrapper height. */
+.adv-mockup-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: clamp(550px, 60vw, 840px);
+  margin-left: auto;
+}
+.adv-display-group {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- Big display ---- */
+.adv-display-frame {
+  position: absolute;
+  z-index: 2;
+  transition:
+    top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    right 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.adv-display-device {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+/* Screen area inside the frame PNG */
+.adv-display-screen {
+  position: relative;
+  top: 3.8%;
+  left: 3.6%;
+  width: 93.8%;
+  height: 93.6%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ---- Kiosk ---- */
+.adv-kiosk-frame {
+  position: absolute;
+  z-index: 3;
+  transition:
+    top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    right 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.adv-kiosk-device {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 3;
+}
+
+.adv-kiosk-screen {
+  position: relative;
+  top: 7%;
+  left: 7%;
+  width: 86%;
+  height: 65%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* ---- Mobile ---- */
+.adv-mobile-frame {
+  position: absolute;
+  top: 470px;
+  left: 60px;
+  width: 155px;
+  height: 318px;
+  z-index: 4;
+  overflow: visible; /* lets the signal pulse extend outside the frame */
+  transition:
+    top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    left 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.adv-mobile-frame.adv-mobile-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.adv-mobile-frame.adv-mobile-hidden {
+  opacity: 0;
+  transform: translateY(24px) scale(0.94);
+  pointer-events: none;
+}
+
+.adv-mobile-device {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.adv-mobile-screen {
+  position: absolute;
+  top: 2%;
+  left: 3.1%;
+  width: 92.72%;
+  height: 95.9%;
+  overflow: hidden;
+  border-radius: 21px;
+  z-index: 1;
+}
+
+/* ---- Crossfading demo images (shared by all three devices) ---- */
+.adv-display-screen img,
+.adv-kiosk-screen img,
+.adv-mobile-screen img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.adv-screen-img.adv-img-active {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 2;
+}
+
+.adv-screen-img.adv-img-leaving {
+  opacity: 0;
+  transform: translateY(12px);
+  z-index: 1;
+}
+
+/* ---- Timing-switch progress bar ---- */
+.adv-progress-track {
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  z-index: 20;
+}
+.adv-kiosk-screen .adv-progress-track {
+  left: 5%;
+  width: 90%;
+  bottom: 16px;
+  height: 4px;
+}
+.adv-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  transform-origin: left;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width;
+}
+
+/* ---- "Content pushed" signal pulse near the phone ---- */
+.adv-signal-pulse {
+  position: absolute;
+  left: 86%;
+  top: -70px;
+  width: 90px;
+  height: 90px;
+  transform: rotate(-1deg);
+  overflow: visible;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.wave {
+  fill: none;
+  stroke: rgba(0, 22, 84, 1);
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: radio 1.2s linear infinite;
+}
+.wave1 {
+  animation-delay: 0s;
+}
+.wave2 {
+  animation-delay: 0.2s;
+}
+.wave3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes radio {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   Headline block beneath the mockup
+   Position (top/left) is set inline from JS per feature; this CSS
+   only handles what inline styles don't: max-width, z-index,
+   transition, and the fade-up entrance animation.
+   ============================================================ */
+
+.adv-headline-block {
+  position: absolute;
+  max-width: 420px;
+  left: 0;
+  top: calc(100% + 24px);
+  z-index: 4;
+  transition:
+    top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    left 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.adv-headline-enter {
+  animation: adv-fade-up 0.5s ease both;
+}
+@keyframes adv-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.adv-subicon img {
+  height: 100%;
+  width: 100%;
+}
+
+.adv-subicon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  color: #0b1e4d;
+  margin-bottom: 14px;
+}
+.adv-subicon-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.adv-update-text,
+.adv-update-sub-text {
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: #0f172a;
+  line-height: 1.15;
+  margin: 0;
+}
+.adv-update-sub-text {
+  font-size: 2rem;
+}
+
+/* ---- Split-screen quadrant sub-icon ----
+   Fills in 1 -> 2 -> 3 -> 4 as splitStep changes. */
+.adv-subicon-piece {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}.adv-subicon-img {
+  width: 90px;
+  height: auto;
+  display: block;
+
+  animation: usbBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes usbBlink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35; /* adjust to taste */
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.adv-subicon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+}
+.adv-subicon-cell {
+  background: #e2e8f0;
+  border-radius: 3px;
+  transition: background 0.4s ease;
+}
+.adv-subicon-grid[data-step="1"] .adv-cell-1 {
+  background: #0b1e4d;
+}
+.adv-subicon-grid[data-step="2"] .adv-cell-1,
+.adv-subicon-grid[data-step="2"] .adv-cell-2 {
+  background: #0b1e4d;
+}
+.adv-subicon-grid[data-step="3"] .adv-cell-1,
+.adv-subicon-grid[data-step="3"] .adv-cell-2,
+.adv-subicon-grid[data-step="3"] .adv-cell-3 {
+  background: #0b1e4d;
+}
+.adv-subicon-grid[data-step="4"] .adv-cell-1,
+.adv-subicon-grid[data-step="4"] .adv-cell-2,
+.adv-subicon-grid[data-step="4"] .adv-cell-3,
+.adv-subicon-grid[data-step="4"] .adv-cell-4 {
+  background: #0b1e4d;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1020px) {
+  .adv-container {
+    grid-template-columns: 1fr;
+  }
+  .adv-mockup-wrap {
+    margin: 40px auto 0;
+    max-width: 700px;
+    height: 620px;
+  }
+  .adv-display-frame {
+    width: 560px;
+  }
+  .adv-kiosk-frame {
+    top: 188px;
+    right: 24px;
+    width: 164px;
+  }
+  .adv-mobile-frame {
+    top: 376px;
+    left: 48px;
+    width: 124px;
+  }
+  .adv-headline-block {
+    top: 512px;
+    left: 196px;
+  }
+}
+
+@media (max-width: 640px) {
+  .adv-main-sec {
+    padding: 56px 20px;
+  }
+  .adv-heading {
+    font-size: 1.9rem;
+  }
+  .adv-mockup-wrap {
+    height: 460px;
+  }
+  .adv-display-frame {
+    width: 100%;
+  }
+  .adv-kiosk-frame {
+    top: 140px;
+    right: 16px;
+    width: 120px;
+  }
+  .adv-mobile-frame {
+    top: 280px;
+    left: 24px;
+    width: 90px;
+  }
+  .adv-headline-block {
+    top: 380px;
+    left: 140px;
+  }
+  .adv-update-text {
+    font-size: 1.5rem;
+  }
+}
