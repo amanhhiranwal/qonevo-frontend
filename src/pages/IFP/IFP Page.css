@@ -405,13 +405,15 @@ margin-top: auto;
 }
 
 .btn-view-all {
+  display: inline-block;
+  text-decoration: none;
   padding: 12px 38px;
 
   border: none;
   border-radius: 10px;
 
   background: #001654;
-  color: #fff;
+  color: #ffffff !important;
 
   font-size: 14px;
   font-weight: 500;
@@ -425,7 +427,8 @@ margin-top: auto;
 
 .btn-view-all:hover {
   background: #0f2460;
-
+  color: #ffffff !important;
+  text-decoration: none;
   transform: translateY(-2px);
 }
 
