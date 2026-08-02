@@ -9,6 +9,9 @@ const SupportPage = lazy(() => import("./pages/SupportPage/SupportPage"));
 const ListingPage = lazy(() => import("./pages/ListingPage/ListingPage"));
 const SupportList = lazy(() => import("./pages/SupportPage/SupportList"));
 const ListLed = lazy(() => import("./pages/ListLEDs/ListLed"));
+const AdvDisplay = lazy(() =>
+  import("./pages/AdvertisingDisplayPage/AdvDisplay")
+);
 
 const PageLoader = () => (
   <div
@@ -36,6 +39,10 @@ function App() {
           <Route path="/support/ifp" element={<SupportList />} />
           <Route path="/listing-page" element={<ListingPage />} />
           <Route path="/listing-page-Led" element={<ListLed />} />
+          <Route
+            path="/advertising-display"
+            element={<AdvDisplay />}
+          />
         </Routes>
       </Suspense>
     </div>
