@@ -3,6 +3,7 @@
   /* background: #f5f4f1; */
   /* background-color: #efefef; */
   background-color: #f5f5f5;
+margin-bottom: clamp(40px, 6.94vw, 100px);
 } /* ========================================= WRAPPER ========================================= */
 .fbd-wrapper {
   display: flex;

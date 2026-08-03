@@ -23,82 +23,80 @@ export default function BrilliantVisuals() {
 
   // Drives everything: cycles this tab's own images one by one, then
   // advances to the next tab only after the last image's turn is done.
-const runSequence = useCallback(() => {
-  clearSequence();
+  const runSequence = useCallback(() => {
+    clearSequence();
 
-  const feature = SIGNAGE_FEATURES[activeIndexRef.current];
-  const images = feature.images || [];
+    const feature = SIGNAGE_FEATURES[activeIndexRef.current];
+    const images = feature.images || [];
 
-  setImageIndex(0);
+    setImageIndex(0);
 
-  const imageCount = Math.max(images.length, 1);
+    const imageCount = Math.max(images.length, 1);
 
-  // Change image every IMAGE_INTERVAL
-  for (let i = 1; i < imageCount; i++) {
+    // Change image every IMAGE_INTERVAL
+    for (let i = 1; i < imageCount; i++) {
+      timeoutsRef.current.push(
+        setTimeout(() => {
+          setImageIndex(i);
+        }, i * IMAGE_INTERVAL),
+      );
+    }
+
+    // Move to next tab after all images have been shown
     timeoutsRef.current.push(
       setTimeout(() => {
-        setImageIndex(i);
-      }, i * IMAGE_INTERVAL)
+        setActiveIndex((prev) => (prev + 1) % SIGNAGE_FEATURES.length);
+      }, imageCount * IMAGE_INTERVAL),
     );
-  }
+  }, [clearSequence]);
 
-  // Move to next tab after all images have been shown
-  timeoutsRef.current.push(
-    setTimeout(() => {
-      setActiveIndex(prev => (prev + 1) % SIGNAGE_FEATURES.length);
-    }, imageCount * IMAGE_INTERVAL)
-  );
+  useEffect(() => {
+    if (isPaused) return;
 
-}, [clearSequence]);
-
-useEffect(() => {
-  if (isPaused) return;
-
-  runSequence();
-
-  return () => {
-    clearSequence();
-  };
-}, [activeIndex, isPaused, runSequence, clearSequence]);
-
-const handleSelect = (index) => {
-  if (index === activeIndexRef.current) return;
-
-  clearSequence();
-   setIsPaused(false);  
-
-  activeIndexRef.current = index;
-  setImageIndex(0);
-  setActiveIndex(index);
-
-  setTimeout(() => {
     runSequence();
-  }, 0);
-};
+
+    return () => {
+      clearSequence();
+    };
+  }, [activeIndex, isPaused, runSequence, clearSequence]);
+
+  const handleSelect = (index) => {
+    if (index === activeIndexRef.current) return;
+
+    clearSequence();
+    setIsPaused(false);
+
+    activeIndexRef.current = index;
+    setImageIndex(0);
+    setActiveIndex(index);
+
+    setTimeout(() => {
+      runSequence();
+    }, 0);
+  };
   const layout = FEATURE_LAYOUTS[activeIndex];
   const headingPosition = layout.heading;
 
   return (
     <section className="bv-section">
       <div className="bv-left">
-        <div className="bv-left-visuals">
-            
-        </div>
+        <div className="bv-left-visuals"></div>
         <div
           className="bv-device"
           // style={{
           //   transform: `translate(${layout.device.x}%, ${layout.device.y}%) scale(${layout.device.scale})`,
           // }}
           style={{
-    "--bv-dx": layout.device.x,
-    "--bv-dy": layout.device.y,
-    "--bv-dscale": layout.device.scale,
-  }}
+            "--bv-dx": layout.device.x,
+            "--bv-dy": layout.device.y,
+            "--bv-dscale": layout.device.scale,
+          }}
         >
           <div className="bv-device-screen">
             {SIGNAGE_FEATURES.map((f, i) => {
               const isActiveTab = i === activeIndex;
-              const animClass = f.imageAnimation === "reveal" ? "reveal" : "fade";
+              const animClass =
+                f.imageAnimation === "reveal" ? "reveal" : "fade";
 
               return (
                 <div
@@ -128,22 +126,22 @@ const handleSelect = (index) => {
           </div>
 
           <img src={DEVICE_FRAME} alt="" className="bv-device-frame" />
-<div className="bv-device-popup-layer">
-  {SIGNAGE_FEATURES.map((f, i) =>
-    f.popup ? (
-      <div
-        key={f.id}
-        className={`bv-device-popup${i === activeIndex ? " active" : ""}`}
-      >
-        <img
-          src={f.popup.image}
-          alt=""
-          className="bv-device-popup-image"
-        />
-      </div>
-    ) : null
-  )}
-</div>
+          <div className="bv-device-popup-layer">
+            {SIGNAGE_FEATURES.map((f, i) =>
+              f.popup ? (
+                <div
+                  key={f.id}
+                  className={`bv-device-popup${i === activeIndex ? " active" : ""}`}
+                >
+                  <img
+                    src={f.popup.image}
+                    alt=""
+                    className="bv-device-popup-image"
+                  />
+                </div>
+              ) : null,
+            )}
+          </div>
         </div>
 
         <div
@@ -153,15 +151,19 @@ const handleSelect = (index) => {
           //   transform: `translate(${headingPosition.x}%, ${headingPosition.y}%)`,
           // }}
           style={{
-    "--bv-hx": headingPosition.x,
-    "--bv-hy": headingPosition.y,
-  }}
+            "--bv-hx": headingPosition.x,
+            "--bv-hy": headingPosition.y,
+          }}
         >
           {SIGNAGE_FEATURES.map((f, i) => (
             <h2
               key={f.id}
               className={`bv-heading${
-                i === activeIndex ? " active" : i < activeIndex ? " exit-up" : " exit-down"
+                i === activeIndex
+                  ? " active"
+                  : i < activeIndex
+                    ? " exit-up"
+                    : " exit-down"
               }`}
             >
               {f.heading[0]}
@@ -185,8 +187,8 @@ const handleSelect = (index) => {
           className="bv-accordion"
           role="tablist"
           aria-label="Signage features"
-        //   onMouseEnter={() => setIsPaused(true)}
-        //   onMouseLeave={() => setIsPaused(false)}
+          //   onMouseEnter={() => setIsPaused(true)}
+          //   onMouseLeave={() => setIsPaused(false)}
         >
           {SIGNAGE_FEATURES.map((f, i) => {
             const active = i === activeIndex;
