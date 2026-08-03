@@ -134,7 +134,7 @@ export default function MegaMenuNavbar() {
       img: img2,
       text: "Advertising Display & Signage",
       // link: "/advertising-display",
-      link: "/",
+      link: "/advertising-display",
     },
     {
       img: img3,

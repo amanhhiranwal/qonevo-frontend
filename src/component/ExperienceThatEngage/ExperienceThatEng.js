@@ -56,7 +56,7 @@ export default function ExperienceThatEng() {
             <div className="eng-content">
               <h3>{data[2].heading}</h3>
               <p>{data[2].desc}</p>
-                               <button className="eng-btn-hover">Click me</button>
+                               <button className="eng-btn-hover">View Details</button>
 
             </div>
           </div>
