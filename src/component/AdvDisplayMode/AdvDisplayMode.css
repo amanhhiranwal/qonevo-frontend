@@ -12,7 +12,12 @@
   max-width: 1440px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.65fr 1.35fr;
+  /* grid-template-columns: 0.65fr 1.35fr; */
+  grid-template-columns:
+minmax(320px,0.75fr)
+minmax(600px,1.25fr);
+
+gap:40px;
   gap: 60px;
   align-items: start;
 }
@@ -23,10 +28,13 @@
 .adv-mockup-scale {
   position: relative;
   margin-left: auto;
-  zoom: var(--adv-scale);
+  /* zoom: var(--adv-scale); */
+    position: relative;
+  transform: scale(var(--adv-scale,1));
+  transform-origin: right top;
 }
 .adv-heading {
-  font-size: 2.2rem;
+font-size:clamp(1.8rem,2.5vw,2.2rem);
   font-weight: 600;
   color: #0f172a;
   margin: 0 0 8px;
@@ -75,11 +83,24 @@
 
 .adv-feature-icon {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: clamp(18px, 2vw, 22px);
+  height: clamp(18px, 2vw, 22px);
   color: #0f172a;
   transition: color 0.4s ease;
 }
+
+.adv-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.25s ease;
+}
+
+.adv-feature-active .adv-feature-icon .adv-icon-img {
+  filter: brightness(0) invert(1);
+}
+
 .adv-feature-icon svg {
   width: 100%;
   height: 100%;
@@ -150,12 +171,19 @@
    below are positioned with `top`, anchored from the display at
    top:0 — never `bottom` — so the math stays predictable
    regardless of wrapper height. */
-.adv-mockup-wrap {
+/* .adv-mockup-wrap {
   position: relative;
   width: 100%;
   max-width: 1000px;
   height: clamp(550px, 60vw, 840px);
   margin-left: auto;
+} */
+
+.adv-mockup-wrap {
+  position: relative;
+  width: min(100%, 1100px);
+  aspect-ratio: 1.15 / 1;
+  height: auto;
 }
 .adv-display-group {
   position: absolute;
@@ -226,19 +254,18 @@
 /* ---- Mobile ---- */
 .adv-mobile-frame {
   position: absolute;
-  top: 470px;
+  /* top: 470px;
   left: 60px;
   width: 155px;
-  height: 318px;
+  height: 318px; */
   z-index: 4;
   overflow: visible; /* lets the signal pulse extend outside the frame */
-  transition:
-    top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    left 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.5s ease,
-    transform 0.5s ease;
+ transition:
+ top .9s ease,
+ left .9s ease,
+ width .9s ease,
+ height .9s ease,
+ opacity .5s ease;
 }
 
 .adv-mobile-frame.adv-mobile-visible {
@@ -379,6 +406,60 @@
     opacity: 0;
   }
 }
+.adv-usb-black-bg {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 1;
+}
+
+.adv-usb-image {
+  opacity: 0;
+  transform: scale(1);
+  animation: usbImageReveal 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}/* Split-screen tab: incoming image resolves out of a blur instead of
+   sliding in; outgoing image dissolves into blur as it's replaced */
+/* Split-screen tab: image emerges from depth — starts smaller,
+   heavily blurred, and dim, then resolves forward into full focus.
+   No slide in any direction — purely a depth/focus pull. */
+/* Split-screen tab: image emerges from depth — starts smaller,
+   heavily blurred, and dim, then resolves forward into full focus.
+   Chained selectors below deliberately out-specificity the base
+   .adv-display-screen img rule so translateY never applies here. */
+/* Split-screen tab: pure dissolve — old image fades out while new
+   one fades in, same position, same size, nothing moves. */
+.adv-screen-img.adv-split-image {
+  transform: none;
+  filter: none;
+  transition: opacity 1.1s ease-in-out;
+}
+
+.adv-screen-img.adv-split-image.adv-img-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.adv-screen-img.adv-split-image.adv-img-leaving {
+  opacity: 0;
+  z-index: 1;
+}
+/* Timing-switch tab: simple, slow opacity crossfade — no motion,
+   no scale, no blur. Just a smooth fade between images. */
+.adv-screen-img.adv-timing-image {
+  transform: none;
+  filter: none;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.adv-screen-img.adv-timing-image.adv-img-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.adv-screen-img.adv-timing-image.adv-img-leaving {
+  opacity: 0;
+  z-index: 1;
+}
 
 /* ============================================================
    Headline block beneath the mockup
@@ -397,7 +478,9 @@
     top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
     left 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
+.adv-headline-block .adv-update-text{
+ font-size: clamp(24px, 5vw, 32px);
+}
 .adv-headline-enter {
   animation: adv-fade-up 0.5s ease both;
 }
@@ -515,17 +598,17 @@
     height: 620px;
   }
   .adv-display-frame {
-    width: 560px;
+    /* width: 560px; */
   }
   .adv-kiosk-frame {
-    top: 188px;
+    /* top: 188px;
     right: 24px;
-    width: 164px;
+    width: 164px; */
   }
   .adv-mobile-frame {
-    top: 376px;
+    /* top: 376px;
     left: 48px;
-    width: 124px;
+    width: 124px; */
   }
   .adv-headline-block {
     top: 512px;

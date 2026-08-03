@@ -48,15 +48,22 @@ import Tab5KioskImage5 from "../../Assets/AdvDisplay/Vertical Anim 5.5.png";
 
 import { AnimatedAngleIcon } from "./AnimatedDegreeIcon";
 import { AnimatedSplitIcon } from "./AnimatedSplitIcon";
-import plugIcon from "../../Assets/AdvDisplay/plugIcon.png"
 
+//------------------------------- tab icons -----------------------------
+import plugIcon from "../../Assets/AdvDisplay/plugIcon.png";
+import remoteIcon from "../../Assets/AdvDisplay/icons/remoteIcon.svg";
+import AngleIcon from "../../Assets/AdvDisplay/icons/AngleIcon.svg";
 
+import SplitIcon from "../../Assets/AdvDisplay/icons/splitIcon.svg";
+
+import TimingIcon from "../../Assets/AdvDisplay/icons/timingIcon.svg";
+import PlugTabIcon from "../../Assets/AdvDisplay/icons/plugIcon.svg";
 
 const FEATURE_LAYOUTS = {
   "remote-publishing": {
     display: {
-      top: "clamp(-80px, -5.6vw, -80px)", // preserved
-      right: "clamp(-110px, -8vw, -170px)", // desktop stays at -170px, smaller screens move towards -70px
+      top: "clamp(-84px, -5.6vw, -80px)", // preserved
+      right: "clamp(-90px, -8vw, -200px)", // desktop stays at -170px, smaller screens move towards -70px
       width: "clamp(520px, 54vw, 780px)",
       height: "clamp(303px, 31.5vw, 455px)",
     },
@@ -77,79 +84,74 @@ const FEATURE_LAYOUTS = {
     },
 
     headline: {
-      top: "clamp(520px, 45vw, 640px)",
-      left: "clamp(185px, 16vw, 245px)",
+      top: "clamp(420px, 45vw, 630px)",
+      left: "clamp(165px, 16vw, 245px)",
     },
   },
 
-  default: {
-    display: {
-      top: "clamp(70px, 7vw, 100px)", // preserved
-      right: "clamp(20px, 5vw, 50px)", // slightly more centered on smaller screens
-      width: "clamp(520px, 54vw, 780px)",
-      height: "clamp(303px, 31.5vw, 455px)",
-    },
+  // default: {
+  //   display: {
+  //     top: "clamp(70px, 7vw, 100px)", // preserved
+  //     right: "clamp(20px, 5vw, 50px)", // slightly more centered on smaller screens
+  //     width: "clamp(520px, 54vw, 780px)",
+  //     height: "clamp(303px, 31.5vw, 455px)",
+  //   },
 
-    kiosk: {
-      top: "clamp(245px, 21vw, 300px)",
-      // right: "clamp(28px, 3.5vw, 60px)",
-      right: "clamp(0px, 1.5vw, 5px)",
-      width: "clamp(130px, 13.2vw, 190px)",
-      height: "clamp(315px, 31.9vw, 460px)",
-    },
+  //   kiosk: {
+  //     top: "clamp(245px, 21vw, 300px)",
+  //     // right: "clamp(28px, 3.5vw, 60px)",
+  //     right: "clamp(0px, 1.5vw, 5px)",
+  //     width: "clamp(130px, 13.2vw, 190px)",
+  //     height: "clamp(315px, 31.9vw, 460px)",
+  //   },
 
-    mobile: {
-      show: false,
-      top: "clamp(390px, 33vw, 470px)",
-      left: "clamp(40px, 4vw, 60px)",
-      width: "clamp(105px, 10.8vw, 155px)",
-      height: "clamp(215px, 22vw, 318px)",
-    },
+  //   mobile: {
+  //     show: false,
+  //     top: "clamp(390px, 33vw, 470px)",
+  //     left: "clamp(40px, 4vw, 60px)",
+  //     width: "clamp(105px, 10.8vw, 155px)",
+  //     height: "clamp(215px, 22vw, 318px)",
+  //   },
 
-    headline: {
-      top: "clamp(450px, 40vw, 560px)",
-      // left: "clamp(100px, 4vw, 60px)",
-      left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
-    },
+  //   headline: {
+  //     top: "clamp(450px, 40vw, 560px)",
+  //     // left: "clamp(100px, 4vw, 60px)",
+  //     left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
+  //   },
+  // },
+default: {
+  display: {
+    top: "clamp(0px, 5vw, 10px)",
+    right: "clamp(20px, 5vw, 50px)",
+    width: "clamp(520px, 54vw, 780px)",
+    height: "clamp(303px, 31.5vw, 455px)",
   },
+
+  kiosk: {
+    top: "clamp(200px, 18vw, 260px)",
+    right: "clamp(20px, 1.5vw, 40px)",
+    width: "clamp(130px, 13.2vw, 190px)",
+    height: "clamp(315px, 31.9vw, 460px)",
+  },
+
+  mobile: {
+    show: false,
+
+    top: "clamp(350px, 30vw, 420px)",
+    left: "clamp(40px, 4vw, 60px)",
+    width: "clamp(105px, 10.8vw, 155px)",
+    height: "clamp(215px, 22vw, 318px)",
+  },
+
+  headline: {
+    top: "clamp(350px, 36vw, 480px)",
+    left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
+  },
+},
 };
 const getLayout = (id) => FEATURE_LAYOUTS[id] || FEATURE_LAYOUTS.default;
 
-const IconRemote = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-    <rect x="2" y="4" width="14" height="10" rx="1.5" />
-    <path d="M6 18h6M9 14v4" />
-    <path d="M18 8l4-2v9l-4-2" />
-  </svg>
-);
 const SubIconAngle = () => <AnimatedAngleIcon />;
-
-const IconAngle = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-    <rect x="3" y="6" width="18" height="12" rx="2" />
-    <path d="M7 6v12M17 6v12" />
-  </svg>
-);
-const IconUsb = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-    <path d="M12 3v8" />
-    <circle cx="12" cy="4.5" r="1.2" fill="currentColor" stroke="none" />
-    <path d="M9 8h6l1.5 3H7.5L9 8z" />
-    <path d="M12 11v6M9 20h6" />
-  </svg>
-);
-const IconSplit = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-    <rect x="3" y="5" width="18" height="14" rx="1.5" />
-    <path d="M12 5v14" />
-  </svg>
-);
-const IconTimer = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-    <circle cx="12" cy="13" r="7" />
-    <path d="M12 9v4l2.5 2.5M10 2h4" />
-  </svg>
-);
 
 const frameStyle = ({ top, right, left, width, height }) => ({
   top,
@@ -161,13 +163,14 @@ const frameStyle = ({ top, right, left, width, height }) => ({
 const advFeatures = [
   {
     id: "remote-publishing",
-    icon: <IconRemote />,
+    icon: <img src={remoteIcon} alt="" className="adv-icon-img" />,
     title: "Remote Publishing",
     desc: "Update and manage display content remotely, enabling quick deployment of advertisements and information across connected screens.",
     subIcon: null,
     headline: "Update Content",
     subheadline: "in Real Time",
     showPulse: true,
+    duration: 2500,
     demos: [
       { screen: BigScreen1, kiosk: KisokScreen1, phone: MobileScreen1 },
       { screen: BigScreen2, kiosk: KisokScreen2, phone: MobileScreen2 },
@@ -177,35 +180,38 @@ const advFeatures = [
   },
   {
     id: "viewing-angle",
-    icon: <IconAngle />,
+    icon: <img src={AngleIcon} alt="" className="adv-icon-img" />,
     title: "178° Wide Viewing Angle",
     desc: "Delivers clear and consistent visuals from wide viewing positions, ensuring excellent visibility for audiences from different angles.",
     subIcon: <SubIconAngle />,
     headline: "Maximum Visibility",
     subheadline: "across every view",
     showPulse: false,
+    duration: 2500,
     demos: [{ screen: Tab2ScreenImage, kiosk: Tab2KioskImage }],
   },
   {
     id: "usb",
-    icon: <IconUsb />,
+    icon: <img src={PlugTabIcon} alt="" className="adv-icon-img" />,
     title: "USB Plug & Play",
     desc: "Play images, videos, and presentations directly from a USB drive without requiring additional software or complex setup.",
     subIcon: <img src={plugIcon} alt="" className="adv-subicon-img" />,
     headline: "Instant Playback",
     subheadline: "in seconds",
     showPulse: false,
+    duration: 2500,
     demos: [{ screen: Tab3ScreenImage, phone: Tab3KioskImage }],
   },
   {
     id: "split-screen",
-    icon: <IconSplit />,
+    icon: <img src={SplitIcon} alt="" className="adv-icon-img" />,
     title: "Smart Split Screen Display",
     desc: "Display multiple types of content simultaneously using customizable screen partitions for advertisements, announcements, videos, or images.",
     subIcon: "split",
     headline: "One Screen",
     subheadline: "Multiple Possibilities",
     showPulse: false,
+    duration: 5000,
     demos: [
       { screen: Tab4ScreenImage1, kiosk: Tab4KioskImage1 },
       { screen: Tab4ScreenImage2, kiosk: Tab4KioskImage2 },
@@ -215,12 +221,13 @@ const advFeatures = [
   },
   {
     id: "timing-switch",
-    icon: <IconTimer />,
+    icon: <img src={TimingIcon} alt="" className="adv-icon-img" />,
     title: "Timing Switch",
     desc: "Schedule automatic power on/off and content playback times to simplify daily operation and improve energy efficiency.",
     headline: "Automate",
     subheadline: "Your Display Schedule",
     showPulse: false,
+    duration: 8000,
     demos: [
       { screen: Tab5ScreenImage1, kiosk: Tab5KioskImage1 },
       { screen: Tab5ScreenImage2, kiosk: Tab5KioskImage2 },
@@ -230,7 +237,6 @@ const advFeatures = [
     ],
   },
 ];
-
 
 export {
   BigScreenFrame,
