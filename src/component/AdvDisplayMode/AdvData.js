@@ -170,7 +170,7 @@ const advFeatures = [
     headline: "Update Content",
     subheadline: "in Real Time",
     showPulse: true,
-    duration: 2500,
+    duration: 5000,
     demos: [
       { screen: BigScreen1, kiosk: KisokScreen1, phone: MobileScreen1 },
       { screen: BigScreen2, kiosk: KisokScreen2, phone: MobileScreen2 },
@@ -211,7 +211,7 @@ const advFeatures = [
     headline: "One Screen",
     subheadline: "Multiple Possibilities",
     showPulse: false,
-    duration: 5000,
+    duration: 6000,
     demos: [
       { screen: Tab4ScreenImage1, kiosk: Tab4KioskImage1 },
       { screen: Tab4ScreenImage2, kiosk: Tab4KioskImage2 },
@@ -227,7 +227,7 @@ const advFeatures = [
     headline: "Automate",
     subheadline: "Your Display Schedule",
     showPulse: false,
-    duration: 8000,
+    duration: 7000,
     demos: [
       { screen: Tab5ScreenImage1, kiosk: Tab5KioskImage1 },
       { screen: Tab5ScreenImage2, kiosk: Tab5KioskImage2 },
