@@ -14,41 +14,46 @@ export default function BrilliantVisuals() {
 
   const timeoutsRef = useRef([]);
   const activeIndexRef = useRef(activeIndex);
+  
   activeIndexRef.current = activeIndex;
+  const prevImageIndexRef = useRef(null); 
 
   const clearSequence = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
   }, []);
+  
 
   // Drives everything: cycles this tab's own images one by one, then
   // advances to the next tab only after the last image's turn is done.
-  const runSequence = useCallback(() => {
-    clearSequence();
+const runSequence = useCallback(() => {
+  clearSequence();
 
-    const feature = SIGNAGE_FEATURES[activeIndexRef.current];
-    const images = feature.images || [];
+  const feature = SIGNAGE_FEATURES[activeIndexRef.current];
+  const images = feature.images || [];
 
-    setImageIndex(0);
+  prevImageIndexRef.current = null; // reset — fresh tab, no "previous" yet
+  setImageIndex(0);
 
-    const imageCount = Math.max(images.length, 1);
+  const imageCount = Math.max(images.length, 1);
 
-    // Change image every IMAGE_INTERVAL
-    for (let i = 1; i < imageCount; i++) {
-      timeoutsRef.current.push(
-        setTimeout(() => {
-          setImageIndex(i);
-        }, i * IMAGE_INTERVAL),
-      );
-    }
-
-    // Move to next tab after all images have been shown
+  for (let i = 1; i < imageCount; i++) {
     timeoutsRef.current.push(
       setTimeout(() => {
-        setActiveIndex((prev) => (prev + 1) % SIGNAGE_FEATURES.length);
-      }, imageCount * IMAGE_INTERVAL),
+        setImageIndex((prevIdx) => {
+          prevImageIndexRef.current = prevIdx; // capture the real previous
+          return i;
+        });
+      }, i * IMAGE_INTERVAL),
     );
-  }, [clearSequence]);
+  }
+
+  timeoutsRef.current.push(
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % SIGNAGE_FEATURES.length);
+    }, imageCount * IMAGE_INTERVAL),
+  );
+}, [clearSequence]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -103,16 +108,28 @@ export default function BrilliantVisuals() {
                   key={f.id}
                   className={`bv-tab-image-stack${isActiveTab ? " active" : ""}`}
                 >
-                  {f.images.map((src, j) => (
-                    <img
-                      key={j}
-                      src={src}
-                      alt={f.title}
-                      className={`bv-device-image ${animClass}${
-                        isActiveTab && j === imageIndex ? " active" : ""
-                      }`}
-                    />
-                  ))}
+               {f.images.map((src, j) => {
+  const isActiveImg = isActiveTab && j === imageIndex;
+  const isRealTransition = prevImageIndexRef.current !== null;
+  const isPrev =
+    isActiveTab && isRealTransition && j === prevImageIndexRef.current;
+
+  let stateClass = "";
+  if (isActiveImg) {
+    stateClass =
+      animClass === "reveal" && !isRealTransition ? " initial" : " active";
+  }
+  if (isPrev) stateClass += " previous";
+
+  return (
+    <img
+      key={j}
+      src={src}
+      alt={f.title}
+      className={`bv-device-image ${animClass}${stateClass}`}
+    />
+  );
+})}
 
                   {f.shine && isActiveTab && (
                     <div

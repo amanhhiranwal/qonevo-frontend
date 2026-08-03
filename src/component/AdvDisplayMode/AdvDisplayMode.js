@@ -12,7 +12,6 @@ import {
   advFeatures,
 } from "./AdvData";
 
-
 const SignalPulse = () => (
   <svg className="adv-signal-pulse" viewBox="0 0 120 120">
     <g>
@@ -24,25 +23,41 @@ const SignalPulse = () => (
 );
 
 // How long a feature stays active before auto-advancing, keyed by its demo count
-const FEATURE_DURATION_BY_DEMO_COUNT = {
-  1: 5000,
-  2: 7000,
-};
+// const FEATURE_DURATION_BY_DEMO_COUNT = {
+//   1: 5000,
+//   2: 7000,
+// };
 const DEFAULT_FEATURE_DURATION = 12000;
-const IMAGE_INTERVAL = 2500; // how often the demo image crossfades
+// const IMAGE_INTERVAL = 2500; 
 
 // Shared crossfading image stack for the display/kiosk/mobile screens; getSrc picks the right asset field per device
-function DemoImages({ demos, activeImage, prevImage, keyPrefix, getSrc }) {
+function DemoImages({
+  demos,
+  activeImage,
+  prevImage,
+  keyPrefix,
+  getSrc,
+  featureId,
+}) {
   return demos.map((demo, i) => {
     let stateClass = "";
-    if (i === activeImage) stateClass = " adv-img-active";
-    else if (i === prevImage) stateClass = " adv-img-leaving";
+
+    if (i === activeImage) {
+      stateClass = " adv-img-active";
+    } else if (i === prevImage) {
+      stateClass = " adv-img-leaving";
+    }
+
     return (
       <img
         key={`${keyPrefix}-${i}`}
         src={getSrc(demo)}
         alt=""
-        className={`adv-screen-img${stateClass}`}
+        className={`adv-screen-img${stateClass}${
+          featureId === "usb" ? " adv-usb-image" : ""
+        }${featureId === "split-screen" ? " adv-split-image" : ""}${
+    featureId === "timing-switch" ? " adv-timing-image" : ""
+  }`}
       />
     );
   });
@@ -60,16 +75,15 @@ export default function AdvDisplayMode() {
   const current = advFeatures[activeFeature];
   const layout = getLayout(current.id); // drives all frame positions/sizes
 
-  const startFeatureTimer = useCallback(() => {
-    clearInterval(featureTimerRef.current);
-    const demoCount = advFeatures[activeFeature].demos.length;
-    const duration =
-      FEATURE_DURATION_BY_DEMO_COUNT[demoCount] ?? DEFAULT_FEATURE_DURATION;
+const startFeatureTimer = useCallback(() => {
+  clearInterval(featureTimerRef.current);
+  const feature = advFeatures[activeFeature];
+  const duration = feature.duration ?? DEFAULT_FEATURE_DURATION;
 
-    featureTimerRef.current = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % advFeatures.length);
-    }, duration);
-  }, [activeFeature]);
+  featureTimerRef.current = setInterval(() => {
+    setActiveFeature((prev) => (prev + 1) % advFeatures.length);
+  }, duration);
+}, [activeFeature]);
 
   useEffect(() => {
     startFeatureTimer();
@@ -77,25 +91,28 @@ export default function AdvDisplayMode() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFeature, startFeatureTimer]);
 
-  useEffect(() => {
-    setActiveImage(0);
-    setPrevImage(null);
-    setSplitStep(1);
-    clearInterval(imageTimerRef.current);
+useEffect(() => {
+  setActiveImage(0);
+  setPrevImage(null);
+  setSplitStep(1);
+  clearInterval(imageTimerRef.current);
 
-    const demoCount = current.demos.length;
-    if (demoCount > 1) {
-      imageTimerRef.current = setInterval(() => {
-        setActiveImage((prev) => {
-          setPrevImage(prev);
-          return (prev + 1) % demoCount;
-        });
-        setSplitStep((prev) => (prev % 4) + 1);
-      }, IMAGE_INTERVAL);
-    }
-    return () => clearInterval(imageTimerRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFeature]);
+  const demoCount = current.demos.length;
+  const duration = current.duration ?? DEFAULT_FEATURE_DURATION;
+  const imgInterval = duration / demoCount;
+
+  if (demoCount > 1) {
+    imageTimerRef.current = setInterval(() => {
+      setActiveImage((prev) => {
+        setPrevImage(prev);
+        return (prev + 1) % demoCount;
+      });
+      setSplitStep((prev) => (prev % 4) + 1);
+    }, imgInterval);
+  }
+  return () => clearInterval(imageTimerRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [activeFeature]);
 
   const handleSelectFeature = (index) => {
     if (index === activeFeature) return;
@@ -155,21 +172,26 @@ export default function AdvDisplayMode() {
                     alt="Big Screen"
                   />
                   <div className="adv-display-screen">
+                    {current.id === "usb" && (
+                      <div className="adv-usb-black-bg" />
+                    )}
+
                     <DemoImages
                       demos={current.demos}
                       activeImage={activeImage}
                       prevImage={prevImage}
                       keyPrefix={current.id}
                       getSrc={(demo) => demo.screen}
+                      featureId={current.id}
                     />
-                    {current.id === "timing-switch" && (
-                      <div className="adv-progress-track">
-                        <div
-                          className="adv-progress-fill"
-                          style={{ width: `${progress}%` }}
-                        />
-                      </div>
-                    )}
+                     {current.id === "timing-switch" && (
+    <div className="adv-progress-track">
+      <div
+        className="adv-progress-fill"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  )}
                   </div>
                 </div>
                 <div
@@ -203,21 +225,24 @@ export default function AdvDisplayMode() {
                   alt="Kiosk Frame"
                 />
                 <div className="adv-kiosk-screen">
+                  {current.id === "usb" && <div className="adv-usb-black-bg" />}
+
                   <DemoImages
                     demos={current.demos}
                     activeImage={activeImage}
                     prevImage={prevImage}
                     keyPrefix={`${current.id}-kiosk`}
                     getSrc={(demo) => demo.kiosk || demo.phone}
+                    featureId={current.id}
                   />
-                  {current.id === "timing-switch" && (
-                    <div className="adv-progress-track">
-                      <div
-                        className="adv-progress-fill"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                  )}
+                   {current.id === "timing-switch" && (
+    <div className="adv-progress-track">
+      <div
+        className="adv-progress-fill"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  )}
                 </div>
               </div>
 
@@ -238,6 +263,7 @@ export default function AdvDisplayMode() {
                     prevImage={prevImage}
                     keyPrefix={`${current.id}-phone`}
                     getSrc={(demo) => demo.phone || demo.screen}
+                    featureId={current.id}
                   />
                 </div>
                 <SignalPulse />
