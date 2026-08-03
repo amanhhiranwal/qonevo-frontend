@@ -28,7 +28,7 @@ const SignalPulse = () => (
 //   2: 7000,
 // };
 const DEFAULT_FEATURE_DURATION = 12000;
-// const IMAGE_INTERVAL = 2500; 
+// const IMAGE_INTERVAL = 2500;
 
 // Shared crossfading image stack for the display/kiosk/mobile screens; getSrc picks the right asset field per device
 function DemoImages({
@@ -38,6 +38,7 @@ function DemoImages({
   keyPrefix,
   getSrc,
   featureId,
+  usbAnimate,
 }) {
   return demos.map((demo, i) => {
     let stateClass = "";
@@ -53,11 +54,11 @@ function DemoImages({
         key={`${keyPrefix}-${i}`}
         src={getSrc(demo)}
         alt=""
-        className={`adv-screen-img${stateClass}${
-          featureId === "usb" ? " adv-usb-image" : ""
-        }${featureId === "split-screen" ? " adv-split-image" : ""}${
-    featureId === "timing-switch" ? " adv-timing-image" : ""
-  }`}
+        className={`adv-screen-img${stateClass}
+${featureId === "usb" ? " adv-usb-image" : ""}
+${featureId === "usb" && usbAnimate ? " adv-usb-animate" : ""}
+${featureId === "split-screen" ? " adv-split-image" : ""}
+${featureId === "timing-switch" ? " adv-timing-image" : ""}`}
       />
     );
   });
@@ -71,19 +72,28 @@ export default function AdvDisplayMode() {
 
   const featureTimerRef = useRef(null);
   const imageTimerRef = useRef(null);
-
+  const [usbAnimate, setUsbAnimate] = useState(false);
   const current = advFeatures[activeFeature];
   const layout = getLayout(current.id); // drives all frame positions/sizes
+  useEffect(() => {
+    if (current.id === "usb") {
+      setUsbAnimate(false);
 
-const startFeatureTimer = useCallback(() => {
-  clearInterval(featureTimerRef.current);
-  const feature = advFeatures[activeFeature];
-  const duration = feature.duration ?? DEFAULT_FEATURE_DURATION;
+      requestAnimationFrame(() => {
+        setUsbAnimate(true);
+      });
+    }
+  }, [current.id]);
 
-  featureTimerRef.current = setInterval(() => {
-    setActiveFeature((prev) => (prev + 1) % advFeatures.length);
-  }, duration);
-}, [activeFeature]);
+  const startFeatureTimer = useCallback(() => {
+    clearInterval(featureTimerRef.current);
+    const feature = advFeatures[activeFeature];
+    const duration = feature.duration ?? DEFAULT_FEATURE_DURATION;
+
+    featureTimerRef.current = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % advFeatures.length);
+    }, duration);
+  }, [activeFeature]);
 
   useEffect(() => {
     startFeatureTimer();
@@ -91,28 +101,28 @@ const startFeatureTimer = useCallback(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFeature, startFeatureTimer]);
 
-useEffect(() => {
-  setActiveImage(0);
-  setPrevImage(null);
-  setSplitStep(1);
-  clearInterval(imageTimerRef.current);
+  useEffect(() => {
+    setActiveImage(0);
+    setPrevImage(null);
+    setSplitStep(1);
+    clearInterval(imageTimerRef.current);
 
-  const demoCount = current.demos.length;
-  const duration = current.duration ?? DEFAULT_FEATURE_DURATION;
-  const imgInterval = duration / demoCount;
+    const demoCount = current.demos.length;
+    const duration = current.duration ?? DEFAULT_FEATURE_DURATION;
+    const imgInterval = duration / demoCount;
 
-  if (demoCount > 1) {
-    imageTimerRef.current = setInterval(() => {
-      setActiveImage((prev) => {
-        setPrevImage(prev);
-        return (prev + 1) % demoCount;
-      });
-      setSplitStep((prev) => (prev % 4) + 1);
-    }, imgInterval);
-  }
-  return () => clearInterval(imageTimerRef.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [activeFeature]);
+    if (demoCount > 1) {
+      imageTimerRef.current = setInterval(() => {
+        setActiveImage((prev) => {
+          setPrevImage(prev);
+          return (prev + 1) % demoCount;
+        });
+        setSplitStep((prev) => (prev % 4) + 1);
+      }, imgInterval);
+    }
+    return () => clearInterval(imageTimerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFeature]);
 
   const handleSelectFeature = (index) => {
     if (index === activeFeature) return;
@@ -177,21 +187,28 @@ useEffect(() => {
                     )}
 
                     <DemoImages
+                      // demos={current.demos}
+                      // activeImage={activeImage}
+                      // prevImage={prevImage}
+                      // keyPrefix={current.id}
+                      // getSrc={(demo) => demo.screen}
+                      // featureId={current.id}
                       demos={current.demos}
                       activeImage={activeImage}
                       prevImage={prevImage}
                       keyPrefix={current.id}
                       getSrc={(demo) => demo.screen}
                       featureId={current.id}
+                      usbAnimate={usbAnimate}
                     />
-                     {current.id === "timing-switch" && (
-    <div className="adv-progress-track">
-      <div
-        className="adv-progress-fill"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  )}
+                    {current.id === "timing-switch" && (
+                      <div className="adv-progress-track">
+                        <div
+                          className="adv-progress-fill"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div
@@ -234,15 +251,16 @@ useEffect(() => {
                     keyPrefix={`${current.id}-kiosk`}
                     getSrc={(demo) => demo.kiosk || demo.phone}
                     featureId={current.id}
+                    usbAnimate={usbAnimate}
                   />
-                   {current.id === "timing-switch" && (
-    <div className="adv-progress-track">
-      <div
-        className="adv-progress-fill"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  )}
+                  {current.id === "timing-switch" && (
+                    <div className="adv-progress-track">
+                      <div
+                        className="adv-progress-fill"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 
