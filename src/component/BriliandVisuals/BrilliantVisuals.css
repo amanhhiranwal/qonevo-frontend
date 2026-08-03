@@ -51,8 +51,7 @@
   transform-origin: center center;
   will-change: transform;
   transition: transform 900ms var(--bv-ease);
-  transform:
-    translate(
+  transform: translate(
       calc(var(--bv-dx, 0) * var(--bv-displace, 1) * 1%),
       calc(var(--bv-dy, 0) * var(--bv-displace, 1) * 1%)
     )
@@ -140,7 +139,10 @@
   position: absolute;
   top: 10%;
   left: 20%;
-  width: min(320px, 90%); /* was fixed 320px — this also stops it overflowing on narrow phones */
+  width: min(
+    320px,
+    90%
+  ); /* was fixed 320px — this also stops it overflowing on narrow phones */
   text-align: left;
   min-height: 130px;
   overflow: hidden;
@@ -197,72 +199,88 @@
 .bv-screen-shine {
   position: absolute;
   top: -20%;
-  left: -30%;
-
-  width: 18%;
+  left: -20%;              /* starting position, now driven by keyframes below */
+  width: 6px;
   height: 140%;
 
-  background: linear-gradient(
-    100deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.15) 42%,
-    rgba(255, 255, 255, 0.95) 50%,
-    rgba(255, 255, 255, 0.15) 58%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  transform: rotate(18deg); /* rotation only — travel now comes from `left` */
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
 
-  /* soften the top/bottom edges so it looks like a reflection, not a bar */
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0%,
-    black 25%,
-    black 75%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
   mask-image: linear-gradient(
     to bottom,
     transparent 0%,
-    black 25%,
-    black 75%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
 
-  transform: rotate(18deg) translateX(-500%);
-  pointer-events: none;
-  z-index: 10;
+  animation: bv-screen-shine 1.8s cubic-bezier(0.3, 0, 0.15, 1) forwards;
+}
 
-  filter: blur(1.5px);
-mix-blend-mode: soft-light;
-  opacity: 0;
-  animation: bv-screen-shine 2.2s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+.bv-screen-shine::before {
+  content: "";
+  position: absolute;
+  inset: -30% -400%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  filter: blur(5px);
+  mix-blend-mode: screen;
+}
+
+.bv-screen-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.4) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: blur(0.3px) drop-shadow(0 0 4px rgba(255, 255, 255, 0.9));
+  mix-blend-mode: screen;
 }
 
 @keyframes bv-screen-shine {
   0% {
-    transform: rotate(18deg) translateX(-500%);
+    left: -20%;
     opacity: 0;
   }
-  15% {
-    opacity: 0.8;
+  12% {
+    opacity: 0.9;
+  }
+  30% {
+    opacity: 1;
   }
   50% {
     opacity: 1;
   }
-  85% {
+  70% {
+    opacity: 1;
+  }
+  88% {
     opacity: 0.8;
   }
   100% {
-    transform: rotate(18deg) translateX(700%);
+    left: 120%;
     opacity: 0;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .bv-screen-shine {
-    display: none;
-  }
-}
-
 /* image chanfing animation */
 /* wraps each tab's own image array; only the active tab's stack is visible */
 .bv-tab-image-stack {
@@ -274,11 +292,11 @@ mix-blend-mode: soft-light;
   z-index: 0;
 }
 .bv-device-popup-image {
-  width: 100%;              /* Add */
-  height: 100%;             /* Add */
-  display: block;           /* Add */
-  object-fit: cover;        /* or contain if you don't want cropping */
-  border-radius: inherit;   /* Optional */
+  width: 100%; /* Add */
+  height: 100%; /* Add */
+  display: block; /* Add */
+  object-fit: cover; /* or contain if you don't want cropping */
+  border-radius: inherit; /* Optional */
 }
 
 .bv-tab-image-stack.active {
@@ -448,7 +466,6 @@ mix-blend-mode: soft-light;
   height: 100%;
 }
 
-
 .bv-accordion-title {
   font-size: clamp(13px, 1.4vw, 15px);
   font-weight: 500;
@@ -518,7 +535,7 @@ mix-blend-mode: soft-light;
 @media (max-width: 1180px) {
   .bv-section {
     /* --bv-gap: clamp(28px, 4vw, 56px); */
-     --bv-gap: clamp(28px, 4vw, 56px);
+    --bv-gap: clamp(28px, 4vw, 56px);
     --bv-displace: 0.65;
   }
 }
@@ -528,9 +545,9 @@ mix-blend-mode: soft-light;
   .bv-section {
     /* flex-direction: column;
     align-items: center; */
-     flex-direction: column;
+    flex-direction: column;
     align-items: center;
-    --bv-displace: 0; 
+    --bv-displace: 0;
   }
 
   .bv-left {
@@ -544,13 +561,13 @@ mix-blend-mode: soft-light;
 
   .bv-heading-stack {
     /* text-align: center; */
-    position: static;      /* was absolute — this is what caused the overlap */
+    position: static; /* was absolute — this is what caused the overlap */
     top: auto;
     left: auto;
     width: 100%;
     max-width: 420px;
-    margin: 20px auto 0;   /* clean gap below the device instead of floating on it */
-    transform: none;       /* kill the displacement transform entirely at this size */
+    margin: 20px auto 0; /* clean gap below the device instead of floating on it */
+    transform: none; /* kill the displacement transform entirely at this size */
     text-align: center;
   }
 
@@ -588,7 +605,7 @@ mix-blend-mode: soft-light;
 @media (max-width: 680px) {
   .bv-section {
     /* --bv-gap: 28px; */
-     --bv-gap: 28px;
+    --bv-gap: 28px;
     --bv-displace: 0;
   }
 
