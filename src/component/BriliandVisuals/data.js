@@ -58,9 +58,9 @@ export const SIGNAGE_FEATURES = [
   },
   {
     id: "commercial-grade-battery",
-    title: "Commercial Grade Battery",
+    title: "2K & 4K Ultra HD Display",
     description:
-      "Ensures stable and reliable power backup for uninterrupted operation during temporary power interruptions.",
+      "Deliver stunning clarity, vibrant colors, and exceptional detail with 2K and 4K Ultra HD resolution, ensuring every image, video, and message stands out with remarkable visual impact.",
     heading: ["Power That", "Keeps You Going"],
     images: [Tab3Image1], // single image, unchanged behavior
     popup: { image: Tab1PopupImage },

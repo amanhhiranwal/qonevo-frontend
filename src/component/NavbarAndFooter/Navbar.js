@@ -142,18 +142,18 @@ export default function MegaMenuNavbar() {
       // link: "/kiosk-display",
       link: "/",
     },
-    {
-      img: img5,
-      text: "All-In-One PC & OPS",
-      // link: "/all-in-one-pc",
-      link: "/",
-    },
-    {
-      img: videoConfrencing,
-      text: "Video Confrencing Solutions",
-      // link: "/all-in-one-pc",
-      link: "/",
-    },
+    // {
+    //   img: img5,
+    //   text: "All-In-One PC & OPS",
+    //   // link: "/all-in-one-pc",
+    //   link: "/",
+    // },
+    // {
+    //   img: videoConfrencing,
+    //   text: "Video Confrencing Solutions",
+    //   // link: "/all-in-one-pc",
+    //   link: "/",
+    // },
     // {
     //   img: icon,
     //   text: "Accessories & Add-ons",
