@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import banner from "../../Assets/ListingPage/banner.png";
+import banner from "../../Assets/BannerLEDProducts.png";
 import "../ListingPage/ListingPage.css";
 import axios from "axios";
 import ProductCard from "../../component/ProductCard/ProductCard.js";
