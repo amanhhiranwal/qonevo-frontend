@@ -58,7 +58,9 @@ function DemoImages({
 ${featureId === "usb" ? " adv-usb-image" : ""}
 ${featureId === "usb" && usbAnimate ? " adv-usb-animate" : ""}
 ${featureId === "split-screen" ? " adv-split-image" : ""}
-${featureId === "timing-switch" ? " adv-timing-image" : ""}`}
+${featureId === "timing-switch" ? " adv-timing-image" : ""}${featureId === "remote-publishing" ? " adv-remote-image" : ""}
+`}
+
       />
     );
   });

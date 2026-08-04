@@ -64,7 +64,7 @@ const FEATURE_LAYOUTS = {
     display: {
       // top: "clamp(-84px, -5.6vw, -80px)",
       // marginRight:"-20px",
-       top: "clamp(-84px, -5.6vw, -80px)",
+      top: "clamp(-84px, -5.6vw, -80px)",
       right: "clamp(-90px, -8vw, -170px)", // desktop stays at -170px, smaller screens move towards -70px
       width: "clamp(520px, 54vw, 780px)",
       height: "clamp(303px, 31.5vw, 455px)",
@@ -121,35 +121,36 @@ const FEATURE_LAYOUTS = {
   //     left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
   //   },
   // },
-default: {
-  display: {
-    top: "clamp(0px, 5vw, 10px)",
-    right: "clamp(20px, 5vw, 50px)",
-    width: "clamp(520px, 54vw, 780px)",
-    height: "clamp(303px, 31.5vw, 455px)",
-  },
+  default: {
+    display: {
+top: "clamp(-20px, 3vw, -10px)",
+      right: "clamp(20px, 5vw, 50px)",
+      width: "clamp(520px, 54vw, 780px)",
+      height: "clamp(303px, 31.5vw, 455px)",
+    },
 
-  kiosk: {
-    top: "clamp(200px, 18vw, 260px)",
-    right: "clamp(20px, 1.5vw, 40px)",
-    width: "clamp(130px, 13.2vw, 190px)",
-    height: "clamp(315px, 31.9vw, 460px)",
-  },
+    kiosk: {
+      top: "clamp(200px, 18vw, 260px)",
+      right: "clamp(20px, 1.5vw, 40px)",
+      width: "clamp(130px, 13.2vw, 190px)",
+      height: "clamp(315px, 31.9vw, 460px)",
+    },
 
-  mobile: {
-    show: false,
+    mobile: {
+      show: false,
 
-    top: "clamp(350px, 30vw, 420px)",
-    left: "clamp(40px, 4vw, 60px)",
-    width: "clamp(105px, 10.8vw, 155px)",
-    height: "clamp(215px, 22vw, 318px)",
-  },
+      top: "clamp(350px, 30vw, 420px)",
+      left: "clamp(40px, 4vw, 60px)",
+      width: "clamp(105px, 10.8vw, 155px)",
+      height: "clamp(215px, 22vw, 318px)",
+    },
 
-  headline: {
-    top: "clamp(350px, 36vw, 480px)",
-    left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
+    headline: {
+      // top: "clamp(350px, 36vw, 480px)",
+        top: "clamp(330px, 34vw, 460px)",
+      left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
+    },
   },
-},
 };
 const getLayout = (id) => FEATURE_LAYOUTS[id] || FEATURE_LAYOUTS.default;
 
@@ -172,7 +173,7 @@ const advFeatures = [
     headline: "Update Content",
     subheadline: "in Real Time",
     showPulse: true,
-    duration: 5000,
+    duration: 6400,
     demos: [
       { screen: BigScreen1, kiosk: KisokScreen1, phone: MobileScreen1 },
       { screen: BigScreen2, kiosk: KisokScreen2, phone: MobileScreen2 },
