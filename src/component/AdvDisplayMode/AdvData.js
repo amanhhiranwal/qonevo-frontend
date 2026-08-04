@@ -62,7 +62,9 @@ import PlugTabIcon from "../../Assets/AdvDisplay/icons/plugIcon.svg";
 const FEATURE_LAYOUTS = {
   "remote-publishing": {
     display: {
-      top: "clamp(-84px, -5.6vw, -80px)", // preserved
+      // top: "clamp(-84px, -5.6vw, -80px)",
+      // marginRight:"-20px",
+       top: "clamp(-84px, -5.6vw, -80px)",
       right: "clamp(-90px, -8vw, -170px)", // desktop stays at -170px, smaller screens move towards -70px
       width: "clamp(520px, 54vw, 780px)",
       height: "clamp(303px, 31.5vw, 455px)",
