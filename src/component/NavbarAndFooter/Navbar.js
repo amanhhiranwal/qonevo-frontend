@@ -14,10 +14,10 @@ import logo from "../../Assets/Synergy-Qonevo-logo.png"
 import img1 from "../../Assets/DisplayNav/image1.png";
 import img2 from "../../Assets/DisplayNav/image2'.png";
 import img3 from "../../Assets/DisplayNav/image3.png";
-import img5 from "../../Assets/DisplayNav/image4.png";
+// import img5 from "../../Assets/DisplayNav/image4.png";
 import img4 from "../../Assets/DisplayNav/image5.png";
 // import icon from "../../Assets/DisplayNav/icon.png";
-import videoConfrencing from "../../Assets/DisplayNav/VideoConfrencingSolutions.png";
+// import videoConfrencing from "../../Assets/DisplayNav/VideoConfrencingSolutions.png";
 
 // import addons from "../../Assets/addons.png";
 // import ald from "../../Assets/ald.png";

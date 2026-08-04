@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import "./AdvDisplayMode.css";
+import {motion} from "framer-motion";
+import "./AdvDisplayMode.css"
+
 
 export const AnimatedAngleIcon = () => (
   <motion.svg
