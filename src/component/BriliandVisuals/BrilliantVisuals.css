@@ -453,6 +453,7 @@ box-shadow: none;
   margin: 0 0 clamp(10px, 1.6vw, 16px);
   font-size: clamp(24px, 2.6vw, 32px);
   font-weight: 700;
+  color: #001654;
 }
 
 .bv-subtitle {
