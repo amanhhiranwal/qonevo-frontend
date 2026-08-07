@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdvDisplayMode.css";
 
-// ---------------- Device frame assets ----------------
 import {
   BigScreenFrame,
   KioskFrame,
@@ -11,6 +10,8 @@ import {
   frameStyle,
   advFeatures,
 } from "./AdvData";
+
+const DEFAULT_FEATURE_DURATION = 12000;
 
 const SignalPulse = () => (
   <svg className="adv-signal-pulse" viewBox="0 0 120 120">
@@ -22,15 +23,6 @@ const SignalPulse = () => (
   </svg>
 );
 
-// How long a feature stays active before auto-advancing, keyed by its demo count
-// const FEATURE_DURATION_BY_DEMO_COUNT = {
-//   1: 5000,
-//   2: 7000,
-// };
-const DEFAULT_FEATURE_DURATION = 12000;
-// const IMAGE_INTERVAL = 2500;
-
-// Shared crossfading image stack for the display/kiosk/mobile screens; getSrc picks the right asset field per device
 function DemoImages({
   demos,
   activeImage,
@@ -38,29 +30,34 @@ function DemoImages({
   keyPrefix,
   getSrc,
   featureId,
-  usbAnimate,
+  usbAnimate = false,
 }) {
-  return demos.map((demo, i) => {
-    let stateClass = "";
+  return demos.map((demo, index) => {
+    const stateClass =
+      index === activeImage
+        ? "adv-img-active"
+        : index === prevImage
+          ? "adv-img-leaving"
+          : "";
 
-    if (i === activeImage) {
-      stateClass = " adv-img-active";
-    } else if (i === prevImage) {
-      stateClass = " adv-img-leaving";
-    }
+    const featureClasses = [
+      "adv-screen-img",
+      stateClass,
+      featureId === "usb" && "adv-usb-image",
+      featureId === "usb" && usbAnimate && "adv-usb-animate",
+      featureId === "split-screen" && "adv-split-image",
+      featureId === "timing-switch" && "adv-timing-image",
+      featureId === "remote-publishing" && "adv-remote-image",
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     return (
       <img
-        key={`${keyPrefix}-${i}`}
+        key={`${keyPrefix}-${index}`}
         src={getSrc(demo)}
         alt=""
-        className={`adv-screen-img${stateClass}
-${featureId === "usb" ? " adv-usb-image" : ""}
-${featureId === "usb" && usbAnimate ? " adv-usb-animate" : ""}
-${featureId === "split-screen" ? " adv-split-image" : ""}
-${featureId === "timing-switch" ? " adv-timing-image" : ""}${featureId === "remote-publishing" ? " adv-remote-image" : ""}
-`}
-
+        className={featureClasses}
       />
     );
   });
@@ -71,73 +68,68 @@ export default function AdvDisplayMode() {
   const [activeImage, setActiveImage] = useState(0);
   const [prevImage, setPrevImage] = useState(null);
   const [splitStep, setSplitStep] = useState(1);
-
-  const featureTimerRef = useRef(null);
-  const imageTimerRef = useRef(null);
   const [usbAnimate, setUsbAnimate] = useState(false);
-  const current = advFeatures[activeFeature];
-  const layout = getLayout(current.id); // drives all frame positions/sizes
-  useEffect(() => {
-    if (current.id === "usb") {
-      setUsbAnimate(false);
 
-      requestAnimationFrame(() => {
-        setUsbAnimate(true);
-      });
+  const current = advFeatures[activeFeature] || advFeatures[0];
+  const layout = getLayout(current.id);
+  const demoCount = current.demos.length;
+  const featureDuration = current.duration ?? DEFAULT_FEATURE_DURATION;
+  const progress = ((activeImage + 1) / demoCount) * 100;
+
+  useEffect(() => {
+    if (current.id !== "usb") {
+      setUsbAnimate(false);
+      return undefined;
     }
+
+    setUsbAnimate(false);
+    const animationFrame = requestAnimationFrame(() => {
+      setUsbAnimate(true);
+    });
+
+    return () => cancelAnimationFrame(animationFrame);
   }, [current.id]);
 
-  const startFeatureTimer = useCallback(() => {
-    clearInterval(featureTimerRef.current);
-    const feature = advFeatures[activeFeature];
-    const duration = feature.duration ?? DEFAULT_FEATURE_DURATION;
-
-    featureTimerRef.current = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % advFeatures.length);
-    }, duration);
-  }, [activeFeature]);
-
   useEffect(() => {
-    startFeatureTimer();
-    return () => clearInterval(featureTimerRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFeature, startFeatureTimer]);
+    const featureTimer = setInterval(() => {
+      setActiveFeature((previousFeature) =>
+        (previousFeature + 1) % advFeatures.length,
+      );
+    }, featureDuration);
+
+    return () => clearInterval(featureTimer);
+  }, [activeFeature, featureDuration]);
 
   useEffect(() => {
     setActiveImage(0);
     setPrevImage(null);
     setSplitStep(1);
-    clearInterval(imageTimerRef.current);
 
-    const demoCount = current.demos.length;
-    const duration = current.duration ?? DEFAULT_FEATURE_DURATION;
-    const imgInterval = duration / demoCount;
-
-    if (demoCount > 1) {
-      imageTimerRef.current = setInterval(() => {
-        setActiveImage((prev) => {
-          setPrevImage(prev);
-          return (prev + 1) % demoCount;
-        });
-        setSplitStep((prev) => (prev % 4) + 1);
-      }, imgInterval);
+    if (demoCount <= 1) {
+      return undefined;
     }
-    return () => clearInterval(imageTimerRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFeature]);
+
+    const imageInterval = featureDuration / demoCount;
+    const imageTimer = setInterval(() => {
+      setActiveImage((previousImage) => {
+        setPrevImage(previousImage);
+        return (previousImage + 1) % demoCount;
+      });
+      setSplitStep((previousStep) => (previousStep % 4) + 1);
+    }, imageInterval);
+
+    return () => clearInterval(imageTimer);
+  }, [activeFeature, demoCount, featureDuration]);
 
   const handleSelectFeature = (index) => {
-    if (index === activeFeature) return;
-    setActiveFeature(index);
-    startFeatureTimer();
+    if (index !== activeFeature) {
+      setActiveFeature(index);
+    }
   };
-
-  const progress = ((activeImage + 1) / current.demos.length) * 100;
 
   return (
     <div className="adv-main-sec">
       <div className="adv-container">
-        {/* LEFT: accordion sidebar */}
         <div className="adv-left">
           <h2 className="adv-heading">Advertising Display</h2>
           <p className="adv-subtitle">
@@ -145,21 +137,30 @@ export default function AdvDisplayMode() {
           </p>
 
           <div className="adv-features">
-            {advFeatures.map((feature, i) => {
-              const isActive = i === activeFeature;
+            {advFeatures.map((feature, index) => {
+              const isActive = index === activeFeature;
+              const descriptionId = `adv-feature-desc-${feature.id}`;
+
               return (
                 <button
                   key={feature.id}
                   type="button"
-                  className={`adv-feature-card${isActive ? " adv-feature-active" : ""}`}
-                  onClick={() => handleSelectFeature(i)}
+                  className={`adv-feature-card${
+                    isActive ? " adv-feature-active" : ""
+                  }`}
+                  onClick={() => handleSelectFeature(index)}
                   aria-expanded={isActive}
+                  aria-controls={descriptionId}
                 >
                   <span className="adv-feature-row">
                     <span className="adv-feature-icon">{feature.icon}</span>
                     <span className="adv-feature-title">{feature.title}</span>
                   </span>
-                  <span className="adv-feature-desc-wrap">
+
+                  <span
+                    id={descriptionId}
+                    className="adv-feature-desc-wrap"
+                  >
                     <span className="adv-feature-desc">{feature.desc}</span>
                   </span>
                 </button>
@@ -168,33 +169,29 @@ export default function AdvDisplayMode() {
           </div>
         </div>
 
-        {/* RIGHT: device mockups (big display, kiosk, mobile) */}
         <div className="adv-right">
           <div className="adv-mockup-scale">
-            <div className="adv-mockup-wrap">
-              {/* ---- Big display ---- */}
+            <div
+              className="adv-mockup-wrap"
+              data-adv-feature={current.id}
+            >
               <div className="adv-display-group">
                 <div
                   className="adv-display-frame"
-                  style={frameStyle(layout.display)}
+                  style={{ ...frameStyle(layout.display) }}
                 >
                   <img
                     className="adv-display-device"
                     src={BigScreenFrame}
                     alt="Big Screen"
                   />
+
                   <div className="adv-display-screen">
                     {current.id === "usb" && (
                       <div className="adv-usb-black-bg" />
                     )}
 
                     <DemoImages
-                      // demos={current.demos}
-                      // activeImage={activeImage}
-                      // prevImage={prevImage}
-                      // keyPrefix={current.id}
-                      // getSrc={(demo) => demo.screen}
-                      // featureId={current.id}
                       demos={current.demos}
                       activeImage={activeImage}
                       prevImage={prevImage}
@@ -203,6 +200,7 @@ export default function AdvDisplayMode() {
                       featureId={current.id}
                       usbAnimate={usbAnimate}
                     />
+
                     {current.id === "timing-switch" && (
                       <div className="adv-progress-track">
                         <div
@@ -213,19 +211,17 @@ export default function AdvDisplayMode() {
                     )}
                   </div>
                 </div>
+
                 <div
                   key={current.id}
                   className="adv-headline-block adv-headline-enter"
-                  style={{
-                    top: layout.headline.top,
-                    left: layout.headline.left,
-                  }}
+                  style={frameStyle(layout.headline)}
                 >
-                  {current.subIcon === "split" ? (
-                    <AnimatedSplitIcon step={splitStep} />
-                  ) : current.subIcon ? (
+                  {/* subIcon hidden in headline for USB (shown on TV + kiosk instead) */}
+                  {current.id !== "usb" && current.subIcon ? (
                     <span className="adv-subicon">{current.subIcon}</span>
                   ) : null}
+
                   <h3 className="adv-update-text">
                     {current.headline}
                     <br />
@@ -236,15 +232,33 @@ export default function AdvDisplayMode() {
                 </div>
               </div>
 
-              {/* ---- Kiosk ---- */}
-              <div className="adv-kiosk-frame" style={frameStyle(layout.kiosk)}>
+              {/* USB overlay icon — centered on top of TV (display) */}
+              {current.id === "usb" && current.subIcon && (
+                <div
+                  key="usb-overlay-display"
+                  className="adv-usb-overlay-icon"
+                  style={frameStyle(layout.display)}
+                >
+                  <div className="adv-usb-overlay-icon-inner">
+                    {current.subIcon}
+                  </div>
+                </div>
+              )}
+
+              <div
+                className="adv-kiosk-frame"
+                style={frameStyle(layout.kiosk)}
+              >
                 <img
                   src={KioskFrame}
                   className="adv-kiosk-device"
                   alt="Kiosk Frame"
                 />
+
                 <div className="adv-kiosk-screen">
-                  {current.id === "usb" && <div className="adv-usb-black-bg" />}
+                  {current.id === "usb" && (
+                    <div className="adv-usb-black-bg" />
+                  )}
 
                   <DemoImages
                     demos={current.demos}
@@ -255,6 +269,7 @@ export default function AdvDisplayMode() {
                     featureId={current.id}
                     usbAnimate={usbAnimate}
                   />
+
                   {current.id === "timing-switch" && (
                     <div className="adv-progress-track">
                       <div
@@ -266,9 +281,25 @@ export default function AdvDisplayMode() {
                 </div>
               </div>
 
-              {/* ---- Mobile: always mounted so it fades in/out instead of snapping on feature change ---- */}
+              {/* USB overlay icon — centered on top of Kiosk */}
+              {current.id === "usb" && current.subIcon && (
+                <div
+                  key="usb-overlay-kiosk"
+                  className="adv-usb-overlay-icon adv-usb-overlay-kiosk"
+                  style={frameStyle(layout.kiosk)}
+                >
+                  <div className="adv-usb-overlay-icon-inner">
+                    {current.subIcon}
+                  </div>
+                </div>
+              )}
+
               <div
-                className={`adv-mobile-frame${layout.mobile.show ? " adv-mobile-visible" : " adv-mobile-hidden"}`}
+                className={`adv-mobile-frame${
+                  layout.mobile.show
+                    ? " adv-mobile-visible"
+                    : " adv-mobile-hidden"
+                }`}
                 style={frameStyle(layout.mobile)}
               >
                 <img
@@ -276,6 +307,7 @@ export default function AdvDisplayMode() {
                   className="adv-mobile-device"
                   alt="Mobile Frame"
                 />
+
                 <div className="adv-mobile-screen">
                   <DemoImages
                     demos={current.demos}
@@ -284,9 +316,11 @@ export default function AdvDisplayMode() {
                     keyPrefix={`${current.id}-phone`}
                     getSrc={(demo) => demo.phone || demo.screen}
                     featureId={current.id}
+                    usbAnimate={usbAnimate}
                   />
                 </div>
-                <SignalPulse />
+
+                {current.showPulse && <SignalPulse />}
               </div>
             </div>
           </div>
