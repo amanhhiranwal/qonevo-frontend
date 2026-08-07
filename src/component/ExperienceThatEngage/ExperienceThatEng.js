@@ -5,61 +5,69 @@ import LargeImg from "../../Assets/BrilliantVisuals/ExperienceImg1.png";
 import SmallImg1 from "../../Assets/BrilliantVisuals/ExperienceImg2.png";
 import SmallImg2 from "../../Assets/BrilliantVisuals/ExperienceImg3.png";
 
-const data = [
+const experienceItems = [
   {
+    id: "wall-of-attention",
     heading: "Wall of attention",
     desc: "Made for larger stories",
     image: SmallImg1,
   },
   {
+    id: "beacon-of-engagement",
     heading: "Beacon of engagement",
     desc: "Always within sight",
     image: SmallImg2,
   },
   {
+    id: "stand-out-naturally",
     heading: "Stand Out Naturally",
     desc: "Built for attention",
     image: LargeImg,
   },
 ];
 
-export default function ExperienceThatEng() {
+function ExperienceCard({ item, isLarge = false }) {
   return (
-    <section className="exp-eng-sec">
+    <article className={`eng-card${isLarge ? " eng-card-large" : ""}`}>
+      <img
+        className="eng-card-image"
+        src={item.image}
+        alt={item.heading}
+        loading="lazy"
+      />
+
+      <div className="eng-content">
+        <h3>{item.heading}</h3>
+        <p>{item.desc}</p>
+        <button type="button" className="eng-btn-hover">
+          View Details
+        </button>
+      </div>
+    </article>
+  );
+}
+
+export default function ExperienceThatEng() {
+  const [firstCard, secondCard, largeCard] = experienceItems;
+
+  return (
+    <section
+      className="exp-eng-sec"
+      aria-labelledby="experiences-that-engage-title"
+    >
       <div className="eng-heading-container">
-        <h2>Experiences That Engage</h2>
+        <h2 id="experiences-that-engage-title">Experiences That Engage</h2>
         <p>Limitless Impact</p>
       </div>
 
       <div className="eng-main-container">
-        {/* First Row */}
         <div className="eng-row-1">
-          {data.slice(0, 2).map((item, index) => (
-            <div className="eng-card" key={index}>
-              <img src={item.image} alt={item.heading} />
-
-              <div className="eng-content">
-                <h3>{item.heading}</h3>
-                <p>{item.desc}</p>
-                 <button className="eng-btn-hover">View Details</button>
-              </div>
-              
-            </div>
-          ))}
+          <ExperienceCard item={firstCard} />
+          <ExperienceCard item={secondCard} />
         </div>
 
-        {/* Second Row */}
         <div className="eng-row-2">
-          <div className="eng-card large">
-            <img src={data[2].image} alt={data[2].heading} />
-
-            <div className="eng-content">
-              <h3>{data[2].heading}</h3>
-              <p>{data[2].desc}</p>
-                               <button className="eng-btn-hover">View Details</button>
-
-            </div>
-          </div>
+          <ExperienceCard item={largeCard} isLarge />
         </div>
       </div>
     </section>

@@ -531,6 +531,10 @@ margin-bottom: clamp(40px, 8vw, 100px);
 .faq-question {
   width: 100%;
   cursor: pointer;
+  
+}
+.faq-question h3{
+   color: black;
 }
 
 .faq-item h3 {

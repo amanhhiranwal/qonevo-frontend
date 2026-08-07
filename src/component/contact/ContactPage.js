@@ -10,6 +10,7 @@ const ContactPage = () => {
   const [company, setCompany] = useState("");
   const [website, setWebsite] = useState("");
   const [message, setMessage] = useState("");
+  
 
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
 

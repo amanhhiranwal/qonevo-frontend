@@ -2,7 +2,11 @@ import BigScreenFrame from "../../Assets/AdvDisplay/Big Screen Frame.png";
 import KioskFrame from "../../Assets/AdvDisplay/Kiosk Frame.png";
 import MobileFrame from "../../Assets/AdvDisplay/Mobile Frame.png";
 
-// ---------------- Feature 1: Remote Publishing ----------------
+// ---------------------------------------------------------------------------
+// Demo artwork
+//---------------------------------------------------------------------------
+
+// Remote publishing
 import MobileScreen1 from "../../Assets/AdvDisplay/Mobile Screen 1.png";
 import MobileScreen2 from "../../Assets/AdvDisplay/Mobile Screen 2.png";
 import MobileScreen3 from "../../Assets/AdvDisplay/Mobile Screen 3.png";
@@ -11,20 +15,20 @@ import BigScreen1 from "../../Assets/AdvDisplay/Big Screen 1.png";
 import BigScreen2 from "../../Assets/AdvDisplay/Big Screen 2.png";
 import BigScreen3 from "../../Assets/AdvDisplay/Big Screen 3.png";
 import BigScreen4 from "../../Assets/AdvDisplay/Big Screen 4.png";
-import KisokScreen1 from "../../Assets/AdvDisplay/Vertical Screen 1.png";
-import KisokScreen2 from "../../Assets/AdvDisplay/Vertical Screen 2.png";
-import KisokScreen3 from "../../Assets/AdvDisplay/Vertical Screen 3.png";
-import KisokScreen4 from "../../Assets/AdvDisplay/Vertical Screen 4.png";
+import KioskScreen1 from "../../Assets/AdvDisplay/Vertical Screen 1.png";
+import KioskScreen2 from "../../Assets/AdvDisplay/Vertical Screen 2.png";
+import KioskScreen3 from "../../Assets/AdvDisplay/Vertical Screen 3.png";
+import KioskScreen4 from "../../Assets/AdvDisplay/Vertical Screen 4.png";
 
-// ---------------- Feature 2: 178° Viewing Angle ----------------
+// 178 degree viewing angle
 import Tab2ScreenImage from "../../Assets/AdvDisplay/Horizontal Anim 2.png";
 import Tab2KioskImage from "../../Assets/AdvDisplay/Vertical Anim 2.png";
 
-// ---------------- Feature 3: USB Plug & Play ----------------
+// USB plug and play
 import Tab3ScreenImage from "../../Assets/AdvDisplay/Horizontal Anim 3.png";
 import Tab3KioskImage from "../../Assets/AdvDisplay/Vertical Anim 3.png";
 
-// ---------------- Feature 4: Smart Split Screen ----------------
+// Smart split screen
 import Tab4ScreenImage1 from "../../Assets/AdvDisplay/Horizontal Anim 4.1.png";
 import Tab4ScreenImage2 from "../../Assets/AdvDisplay/Horizontal Anim 4.2.png";
 import Tab4ScreenImage3 from "../../Assets/AdvDisplay/Horizontal Anim 4.3.png";
@@ -34,7 +38,7 @@ import Tab4KioskImage2 from "../../Assets/AdvDisplay/Vertical Anim 4.2.png";
 import Tab4KioskImage3 from "../../Assets/AdvDisplay/Vertical Anim 4.3.png";
 import Tab4KioskImage4 from "../../Assets/AdvDisplay/Vertical Anim 4.4.png";
 
-// ---------------- Feature 5: Timing Switch ----------------
+// Timing switch
 import Tab5ScreenImage1 from "../../Assets/AdvDisplay/Horizontal Anim 5.1.png";
 import Tab5ScreenImage2 from "../../Assets/AdvDisplay/Horizontal Anim 5.2.png";
 import Tab5ScreenImage3 from "../../Assets/AdvDisplay/Horizontal Anim 5.3.png";
@@ -49,120 +53,103 @@ import Tab5KioskImage5 from "../../Assets/AdvDisplay/Vertical Anim 5.5.png";
 import { AnimatedAngleIcon } from "./AnimatedDegreeIcon";
 import { AnimatedSplitIcon } from "./AnimatedSplitIcon";
 
-//------------------------------- tab icons -----------------------------
-import plugIcon from "../../Assets/AdvDisplay/plugIcon.png";
-import remoteIcon from "../../Assets/AdvDisplay/icons/remoteIcon.svg";
+// Feature icons
+import plugIcon from "../../Assets/AdvDisplay/plugIcon.svg";
+import remoteIcon from "../../Assets/AdvDisplay/icons/remote_pub.svg";
 import AngleIcon from "../../Assets/AdvDisplay/icons/AngleIcon.svg";
-
 import SplitIcon from "../../Assets/AdvDisplay/icons/splitIcon.svg";
-
 import TimingIcon from "../../Assets/AdvDisplay/icons/timingIcon.svg";
 import PlugTabIcon from "../../Assets/AdvDisplay/icons/plugIcon.svg";
 
+// ---------------------------------------------------------------------------
+// Fluid mockup layouts
+// ---------------------------------------------------------------------------
+//
+// The artwork is positioned on a 1.15:1 responsive canvas. These values are
+// percentages of that canvas rather than viewport pixels. This preserves the
+// 1440px composition while allowing the complete group to scale on laptops,
+// tablets, and phones. Smaller breakpoints in AdvDisplayMode.css adjust only
+// the few negative offsets that could otherwise leave artwork outside the
+// available canvas.
+//
 const FEATURE_LAYOUTS = {
   "remote-publishing": {
     display: {
-      // top: "clamp(-84px, -5.6vw, -80px)",
-      // marginRight:"-20px",
-      top: "clamp(-84px, -5.6vw, -80px)",
-      right: "clamp(-90px, -8vw, -170px)", // desktop stays at -170px, smaller screens move towards -70px
-      width: "clamp(520px, 54vw, 780px)",
-      height: "clamp(303px, 31.5vw, 455px)",
+      top: "-22.2%",
+      right: "-15%", 
+      width: "100%",
+      height: "64.1%",
+      clipPath: "inset(20% 20% 0% 0%)",
     },
-
     kiosk: {
-      top: "clamp(190px, 16.8vw, 235px)",
-      right: "clamp(16px, 2vw, 30px)",
-      width: "clamp(140px, 14.2vw, 205px)",
-      height: "clamp(338px, 34.4vw, 496px)",
+      top: "18.7%",
+      right: "3.8%",
+      width: "26.3%",
+      height: "73.1%",
     },
-
     mobile: {
       show: true,
-      top: "clamp(340px, 30vw, 420px)",
-      left: "clamp(40px, 4vw, 60px)",
-      width: "clamp(105px, 10.8vw, 155px)",
-      height: "clamp(215px, 22vw, 318px)",
+      top: "48.4%",
+      left: "7.7%",
+      width: "19.9%",
+      height: "46.9%",
     },
-
     headline: {
-      top: "clamp(420px, 45vw, 630px)",
-      left: "clamp(165px, 16vw, 245px)",
+      top: "73.9%",
+      left: "31.4%",
     },
   },
 
-  // default: {
-  //   display: {
-  //     top: "clamp(70px, 7vw, 100px)", // preserved
-  //     right: "clamp(20px, 5vw, 50px)", // slightly more centered on smaller screens
-  //     width: "clamp(520px, 54vw, 780px)",
-  //     height: "clamp(303px, 31.5vw, 455px)",
-  //   },
-
-  //   kiosk: {
-  //     top: "clamp(245px, 21vw, 300px)",
-  //     // right: "clamp(28px, 3.5vw, 60px)",
-  //     right: "clamp(0px, 1.5vw, 5px)",
-  //     width: "clamp(130px, 13.2vw, 190px)",
-  //     height: "clamp(315px, 31.9vw, 460px)",
-  //   },
-
-  //   mobile: {
-  //     show: false,
-  //     top: "clamp(390px, 33vw, 470px)",
-  //     left: "clamp(40px, 4vw, 60px)",
-  //     width: "clamp(105px, 10.8vw, 155px)",
-  //     height: "clamp(215px, 22vw, 318px)",
-  //   },
-
-  //   headline: {
-  //     top: "clamp(450px, 40vw, 560px)",
-  //     // left: "clamp(100px, 4vw, 60px)",
-  //     left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
-  //   },
-  // },
   default: {
     display: {
-top: "clamp(-20px, 3vw, -10px)",
-      right: "clamp(20px, 5vw, 50px)",
-      width: "clamp(520px, 54vw, 780px)",
-      height: "clamp(303px, 31.5vw, 455px)",
+      top: "-1.5%",
+      right: "2.6%",
+      width: "100%",
+      height: "67.1%",
     },
-
     kiosk: {
-      top: "clamp(200px, 18vw, 260px)",
-      right: "clamp(20px, 1.5vw, 40px)",
-      width: "clamp(130px, 13.2vw, 190px)",
-      height: "clamp(315px, 31.9vw, 460px)",
+      top: "31.3%",
+      right: "-5.1%",
+      width: "24.4%",
+      height: "67.8%",
     },
-
     mobile: {
       show: false,
-
-      top: "clamp(350px, 30vw, 420px)",
-      left: "clamp(40px, 4vw, 60px)",
-      width: "clamp(105px, 10.8vw, 155px)",
-      height: "clamp(215px, 22vw, 318px)",
+      top: "61.9%",
+      left: "7.7%",
+      width: "19.9%",
+      height: "46.9%",
     },
-
     headline: {
-      // top: "clamp(350px, 36vw, 480px)",
-        top: "clamp(330px, 34vw, 460px)",
-      left: "calc(100% - clamp(20px, 5vw, 50px) - clamp(520px, 54vw, 780px))",
+      top: "67.8%",
+      left: "-1.64%",
     },
   },
 };
-const getLayout = (id) => FEATURE_LAYOUTS[id] || FEATURE_LAYOUTS.default;
+
+const getLayout = (featureId) =>
+  FEATURE_LAYOUTS[featureId] || FEATURE_LAYOUTS.default;
+
+/*
+  Put layout values into custom properties instead of inline top/left/right
+  declarations. This lets responsive CSS override an offset when necessary,
+  without JavaScript measuring the viewport or changing the animation states.
+*/
+const frameStyle = ({ top, right, bottom, left, width, height }) => {
+  const style = {};
+
+  if (top != null) style["--adv-top"] = top;
+  if (right != null) style["--adv-right"] = right;
+  if (bottom != null) style["--adv-bottom"] = bottom;
+  if (left != null) style["--adv-left"] = left;
+  if (width != null) style["--adv-width"] = width;
+  if (height != null) style["--adv-height"] = height;
+
+  return style;
+};
 
 const SubIconAngle = () => <AnimatedAngleIcon />;
 
-const frameStyle = ({ top, right, left, width, height }) => ({
-  top,
-  right,
-  left,
-  width,
-  height,
-});
 const advFeatures = [
   {
     id: "remote-publishing",
@@ -175,10 +162,10 @@ const advFeatures = [
     showPulse: true,
     duration: 6400,
     demos: [
-      { screen: BigScreen1, kiosk: KisokScreen1, phone: MobileScreen1 },
-      { screen: BigScreen2, kiosk: KisokScreen2, phone: MobileScreen2 },
-      { screen: BigScreen3, kiosk: KisokScreen3, phone: MobileScreen3 },
-      { screen: BigScreen4, kiosk: KisokScreen4, phone: MobileScreen4 },
+      { screen: BigScreen1, kiosk: KioskScreen1, phone: MobileScreen1 },
+      { screen: BigScreen2, kiosk: KioskScreen2, phone: MobileScreen2 },
+      { screen: BigScreen3, kiosk: KioskScreen3, phone: MobileScreen3 },
+      { screen: BigScreen4, kiosk: KioskScreen4, phone: MobileScreen4 },
     ],
   },
   {
@@ -210,7 +197,7 @@ const advFeatures = [
     icon: <img src={SplitIcon} alt="" className="adv-icon-img" />,
     title: "Smart Split Screen Display",
     desc: "Display multiple types of content simultaneously using customizable screen partitions for advertisements, announcements, videos, or images.",
-    subIcon: "split",
+    subIcon: "",
     headline: "One Screen",
     subheadline: "Multiple Possibilities",
     showPulse: false,
@@ -227,6 +214,7 @@ const advFeatures = [
     icon: <img src={TimingIcon} alt="" className="adv-icon-img" />,
     title: "Timing Switch",
     desc: "Schedule automatic power on/off and content playback times to simplify daily operation and improve energy efficiency.",
+    subIcon: null,
     headline: "Automate",
     subheadline: "Your Display Schedule",
     showPulse: false,

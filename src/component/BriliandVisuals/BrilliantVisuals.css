@@ -1,14 +1,11 @@
+/* BrilliantVisuals.css */
+
 .bv-section {
-  /* --bv-gap: clamp(32px, 5vw, 150px);
-  --bv-pad-x: clamp(20px, 5vw, 64px);
-  --bv-pad-y: clamp(40px, 6vw, 80px);
-  --bv-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --bv-navy: #1b2a63; */
   --bv-gap: clamp(32px, 5vw, 150px);
   --bv-pad-x: clamp(20px, 5vw, 64px);
   --bv-pad-y: clamp(40px, 6vw, 80px);
   --bv-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --bv-navy: #1b2a63;
+  --bv-navy: #001654;
   --bv-displace: 1;
 
   display: flex;
@@ -31,23 +28,21 @@
   flex: 1 1 420px;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-}
-.bv-left-visual {
-  position: relative;
-  width: 100%;
-  transform-origin: top left;
 }
 
-/* device scales fluidly between a mobile floor and desktop ceiling */
-.bv-device {
+/*
+ * Stage wrapper: holds the device AND heading side-by-side.
+ * The whole stage translates together so the heading always
+ * stays vertically centred on the device.
+ */
+.bv-left-stage {
   position: relative;
-  width: clamp(180px, 32vw, 390px);
-  max-width: 100%;
-  margin: 0 auto;
-  aspect-ratio: 340 / 690;
+  display: flex;
+  align-items: center;     /* ← vertical centering of heading to device */
+  gap: 0;                  /* heading offset is handled by its own transform */
   transform-origin: center center;
   will-change: transform;
   transition: transform 900ms var(--bv-ease);
@@ -56,6 +51,15 @@
       calc(var(--bv-dy, 0) * var(--bv-displace, 1) * 1%)
     )
     scale(var(--bv-dscale, 1));
+}
+
+/* device scales fluidly between a mobile floor and desktop ceiling */
+.bv-device {
+  position: relative;
+  width: clamp(180px, 32vw, 390px);
+  max-width: 100%;
+  flex-shrink: 0;
+  aspect-ratio: 340 / 600;
 }
 
 .bv-device-frame {
@@ -70,19 +74,13 @@
 
 .bv-device-screen {
   position: absolute;
-  /* top: 2px;
-    left: 42px;
-    right: 43px;
-    bottom: 295px; */
   top: 0.3%;
   left: 12.65%;
   right: 12.65%;
   bottom: 37%;
-
   overflow: hidden;
   border-radius: 10px;
   z-index: 1;
-
   background: #000;
 }
 
@@ -93,56 +91,17 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.03);
-  transition:
-    opacity 1.1s var(--bv-ease),
-    transform 1.4s var(--bv-ease);
-  will-change: opacity, transform;
 }
 
-.bv-device-image.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* heading crossfade stack */
-/* .bv-heading-stack {
- position: relative;
-  margin-top: clamp(28px, 4vw, 56px);
-  width: 100%;
-  min-height: clamp(70px, 9vw, 130px);
-  text-align: left;
-  overflow: hidden;
-   transition:
-        transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change: transform;
-} */
+/* ---------- Heading stack: vertically centred by flexbox, offset by CSS vars ---------- */
 .bv-heading-stack {
-  /* position: absolute;
-
-  top: 10%;
-  left: 20%;
-
-  width: 320px;
-
-  transform: translate(260px, -50%);
-
-  text-align: left;
-
-  min-height: 130px;
-  overflow: hidden;
-
-  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-
-  will-change: transform; */
   position: absolute;
-  top: 10%;
-  left: 20%;
-  width: min(
-    320px,
-    90%
-  ); /* was fixed 320px — this also stops it overflowing on narrow phones */
+  /*
+   * Because the stage uses align-items:center the heading is already
+   * vertically centred on the device.  We only apply the per-tab
+   * nudge via CSS custom properties — no hardcoded top/left.
+   */
+  width: min(320px, 90%);
   text-align: left;
   min-height: 130px;
   overflow: hidden;
@@ -163,11 +122,8 @@
   font-size: clamp(14px, 3.2vw, 22px);
   line-height: 1.15;
   font-weight: 600;
-  /* color: #1a1a1a; */
   color: var(--Colors-Secondary-Alpha-50, rgba(0, 22, 84, 0.5));
-
   opacity: 0;
-  /* incoming heading rises into place from below */
   transform: translateY(36px);
   transition:
     opacity 0.7s var(--bv-ease),
@@ -192,19 +148,13 @@
   transform: translateY(16px);
 }
 
-/* shine animation */
-
 /* ---------- Screen Shine ---------- */
 .bv-screen-shine {
   position: absolute;
-  /* Stretches to match the full height of the parent card */
   top: -50%;
   bottom: -50%;
   left: -100%;
-
-  /* Scales dynamically to a percentage of the parent card's width */
-  width: 27%; 
-
+  width: 27%;
   transform: rotate(25deg);
   pointer-events: none;
   z-index: 10;
@@ -226,41 +176,35 @@
     transparent 100%
   );
 
-  animation: bv-screen-shine 2.2s cubic-bezier(.22,1,.36,1) forwards;
+  animation: bv-screen-shine 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* soft glass bloom */
 .bv-screen-shine::before {
   content: "";
   position: absolute;
-  inset: -50% -100%; 
-
+  inset: -50% -100%;
   background: radial-gradient(
     ellipse at center,
-    rgba(255,255,255,0.2) 0%,
-    rgba(255,255,255,0.08) 40%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
     transparent 70%
   );
-
   filter: blur(50px);
   mix-blend-mode: screen;
 }
 
-/* premium glass reflection */
 .bv-screen-shine::after {
   content: "";
   position: absolute;
   inset: 0;
-
   background: linear-gradient(
     100deg,
     transparent 20%,
-    rgba(255,255,255,0.05) 40%,
-    rgba(255,255,255,0.35) 50%,
-    rgba(255,255,255,0.05) 60%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.05) 60%,
     transparent 80%
   );
-
   filter: blur(8px);
   mix-blend-mode: screen;
 }
@@ -277,13 +221,12 @@
     opacity: 0.6;
   }
   100% {
-    left: 150%; /* Pushes completely past the right edge of any wide container */
+    left: 150%;
     opacity: 0;
   }
 }
 
-/* image chanfing animation */
-/* wraps each tab's own image array; only the active tab's stack is visible */
+/* ---------- Tab image stacks ---------- */
 .bv-tab-image-stack {
   position: absolute;
   inset: 0;
@@ -292,13 +235,6 @@
   pointer-events: none;
   z-index: 0;
 }
-.bv-device-popup-image {
-  width: 100%; /* Add */
-  height: 100%; /* Add */
-  display: block; /* Add */
-  object-fit: cover; /* or contain if you don't want cropping */
-  /* border-radius: inherit;  */
-}
 
 .bv-tab-image-stack.active {
   opacity: 1;
@@ -306,16 +242,7 @@
   z-index: 2;
 }
 
-.bv-device-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-}
-
-/* fade variant — used by tabs 1, 2, 3 */
+/* fade variant — tabs 1, 2, 3 */
 .bv-device-image.fade {
   transform: scale(1.03);
   transition:
@@ -329,18 +256,15 @@
   transform: scale(1);
 }
 
-/* reveal variant — bottom-up wipe + zoom settle, used by tab 4 */
-/* Rain & Sun Protection premium transition */
-
+/* reveal variant — bottom-up wipe + zoom settle, tab 4 */
 .bv-device-image.reveal {
   position: absolute;
   inset: 0;
   opacity: 0;
-  clip-path: inset(100% 0 0 0); /* fully hidden by default */
+  clip-path: inset(100% 0 0 0);
   will-change: clip-path, transform;
 }
 
-/* First image before any transition has happened — just sits there, no animation */
 .bv-device-image.reveal.initial {
   opacity: 1;
   clip-path: inset(0 0 0 0);
@@ -348,8 +272,6 @@
   animation: none;
 }
 
-/* Old image, once superseded — stays completely still underneath the wipe */
-/* Old image, once superseded — zooms out slowly as it gets covered by the wipe */
 .bv-device-image.reveal.previous {
   opacity: 1;
   clip-path: inset(0 0 0 0);
@@ -366,8 +288,6 @@
   }
 }
 
-/* New image wipes in from the bottom edge upward, settling from a
-   slight zoom-in down to normal size as the wipe completes */
 .bv-device-image.reveal.active {
   opacity: 1;
   z-index: 2;
@@ -384,40 +304,34 @@
     transform: scale(1);
   }
 }
+
+/* ---------- Popup layer ---------- */
 .bv-device-popup-layer {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
   background: transparent;
-border: none;
-box-shadow: none;
-  
+  border: none;
+  box-shadow: none;
 }
 
 .bv-device-popup {
   position: absolute;
   top: -8%;
   right: -12%;
-  padding: 4px;   
+  padding: 4px;
   width: 42%;
   aspect-ratio: 1 / 1;
-
-  /* Remove the extra card styling */
-  /* background: transparent; */
-  /* padding: 0; */
   border: none;
   border-radius: 0;
   box-shadow: none;
   overflow: visible;
-
   opacity: 0;
   transform: scale(0.85) translateY(10px);
-
   transition:
     opacity 0.6s var(--bv-ease),
     transform 1.8s var(--bv-ease);
-
   transition-delay: 0s;
   will-change: transform, opacity;
 }
@@ -432,10 +346,7 @@ box-shadow: none;
   display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  /* Prevent CSS from creating another card */
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -451,8 +362,9 @@ box-shadow: none;
 
 .bv-title {
   margin: 0 0 clamp(10px, 1.6vw, 16px);
-  font-size: clamp(24px, 2.6vw, 32px);
-  font-weight: 700;
+  font-size: clamp(1.75rem, 2.4vw, 2.75rem);
+  font-weight: 400;
+  color: #001654;
 }
 
 .bv-subtitle {
@@ -474,10 +386,10 @@ box-shadow: none;
   width: 100%;
   text-align: left;
   border: 1px solid #e3e3e8;
-  background: #fff;
+  background: #0016541a;
   border-radius: 10px;
   padding: clamp(14px, 1.8vw, 18px) clamp(16px, 2vw, 20px);
-  min-height: 44px; /* keeps a comfortable touch target at every size */
+  min-height: 44px;
   cursor: pointer;
   color: inherit;
   font: inherit;
@@ -510,8 +422,9 @@ box-shadow: none;
   height: clamp(18px, 2vw, 22px);
   flex-shrink: 0;
 }
+
 .bv-icon img {
-    width: 100%;
+  width: 100%;
   height: 100%;
   display: block;
   transition: filter 0.25s ease;
@@ -547,7 +460,8 @@ box-shadow: none;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
 }
-/* autoplay progress bar along the bottom edge of the active item */
+
+/* ---------- Progress bar ---------- */
 .bv-progress-track {
   position: absolute;
   left: 0;
@@ -578,7 +492,8 @@ box-shadow: none;
 
 /* ================= BREAKPOINTS ================= */
 
-/* Ultra-wide: stop the fluid clamps from ballooning past a comfortable cap */
+/* ================= BREAKPOINTS ================= */
+
 @media (min-width: 1600px) {
   .bv-section {
     --bv-pad-x: 64px;
@@ -586,20 +501,38 @@ box-shadow: none;
   }
 }
 
-/* Large laptop / small desktop: tighten gap a bit before stacking */
-@media (max-width: 1180px) {
-  .bv-section {
-    /* --bv-gap: clamp(28px, 4vw, 56px); */
-    --bv-gap: clamp(28px, 4vw, 56px);
-    --bv-displace: 0.65;
-  }
-}
 
-/* Tablet: stack left/right, center the device, keep accordion full width */
+
+/* @media (max-width: 1000px) {
+  .bv-section {
+    --bv-displace: 0.15;
+  }
+
+  .bv-device {
+    width: clamp(170px, 24vw, 260px);
+  }
+
+  .bv-left-stage {
+    gap: clamp(24px, 3.5vw, 40px);
+  }
+
+  .bv-heading-stack {
+    width: min(180px, 32vw);
+  }
+
+  .bv-heading {
+    font-size: clamp(12px, 2vw, 17px);
+  }
+
+  .bv-section[data-active-index="0"] .bv-heading-stack { left: -70px; }
+  .bv-section[data-active-index="1"] .bv-heading-stack { left: -80px; }
+  .bv-section[data-active-index="2"] .bv-heading-stack { left: -40px; }
+  .bv-section[data-active-index="3"] .bv-heading-stack { left: -30px; }
+} */
+/* ── END NEW ── */
+
 @media (max-width: 900px) {
   .bv-section {
-    /* flex-direction: column;
-    align-items: center; */
     flex-direction: column;
     align-items: center;
     --bv-displace: 0;
@@ -610,19 +543,22 @@ box-shadow: none;
     text-align: center;
   }
 
+  .bv-left-stage {
+    flex-direction: column;
+    align-items: center;
+    transform: none;
+  }
+
   .bv-device {
     width: clamp(220px, 44vw, 320px);
   }
 
   .bv-heading-stack {
-    /* text-align: center; */
-    position: static; /* was absolute — this is what caused the overlap */
-    top: auto;
-    left: auto;
+    position: static;
     width: 100%;
     max-width: 420px;
-    margin: 20px auto 0; /* clean gap below the device instead of floating on it */
-    transform: none; /* kill the displacement transform entirely at this size */
+    margin: 20px auto 0;
+    transform: none;
     text-align: center;
   }
 
@@ -656,10 +592,8 @@ box-shadow: none;
   }
 }
 
-/* Large phone / small tablet: start tightening before the mobile step */
 @media (max-width: 680px) {
   .bv-section {
-    /* --bv-gap: 28px; */
     --bv-gap: 28px;
     --bv-displace: 0;
   }
@@ -673,7 +607,6 @@ box-shadow: none;
   }
 }
 
-/* Mobile: reduce padding/gap further, shrink device more aggressively */
 @media (max-width: 560px) {
   .bv-section {
     --bv-pad-x: 16px;
@@ -695,7 +628,6 @@ box-shadow: none;
   }
 }
 
-/* Standard phones: give the accordion a little more focus, tighten body copy */
 @media (max-width: 480px) {
   .bv-section {
     --bv-pad-x: 14px;
@@ -730,7 +662,6 @@ box-shadow: none;
   }
 }
 
-/* Very small phones */
 @media (max-width: 360px) {
   .bv-device {
     width: 55vw;
@@ -741,7 +672,6 @@ box-shadow: none;
   }
 }
 
-/* Very narrow / older small devices (e.g. iPhone SE, folded phones) */
 @media (max-width: 320px) {
   .bv-section {
     --bv-pad-x: 12px;
@@ -756,8 +686,7 @@ box-shadow: none;
   }
 }
 
-/* Short / landscape viewports (phones rotated, small laptops): tame vertical rhythm */
-@media (max-height: 480px) and (max-width: 900px) {
+/* @media (max-height: 480px) and (max-width: 900px) {
   .bv-section {
     --bv-pad-y: 20px;
     --bv-gap: 20px;
@@ -781,9 +710,8 @@ box-shadow: none;
   .bv-heading {
     font-size: clamp(16px, 3vh, 22px);
   }
-}
-
-/* Respect reduced-motion preference: keep state changes, drop the motion */
+} */
+/* 
 @media (prefers-reduced-motion: reduce) {
   .bv-device-image,
   .bv-heading,
@@ -793,4 +721,4 @@ box-shadow: none;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-}
+} */
